@@ -19,18 +19,15 @@ class SignIn extends Component {
   loginClickHandler = () => {
     const { id, password } = this.state;
     fetch("http://localhost:8080/api/member/"+this.state.id, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        password,
-      }),
+      }
+      
     })
       .then((res) => res.json())
       .then((res) => console.log(res))
-      .then(this.props.history.push('/qna-board'));
+      .then(this.props.history.push('/main-board'));
   }; 
 
   render() {
