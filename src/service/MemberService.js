@@ -1,16 +1,19 @@
-import axios from 'axios';
+import axios from 'axios'; 
 
-const MEMBER_API_BASE_URL = "http://localhost:8080/api/member";
+const MEMBER_API_BASE_URL = "http://localhost:8080/api/member"; 
 
-class MemberService {
+class MemberService{
+    
 
-    createMember(member) {
-        return axios.post(MEMBER_API_BASE_URL, member);
+    createMember(member) { //회원가입
+        return axios.post("http://localhost:8080/api/join", member);
     }
 
-    getOneMemberFromUserId(id) {
-        return axios.get(MEMBER_API_BASE_URL + "?id=" + id)
+    getOneMember(userid) { //로그인 id 가져오기
+        return axios.post(MEMBER_API_BASE_URL + "/" + userid);
     }
+
+    
 }
 
 export default new MemberService();

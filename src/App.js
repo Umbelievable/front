@@ -10,6 +10,8 @@ import SearchBoardComponent from './components/SearchBoardComponent';
 import JoinMemberComponent from './components/member/JoinMemberComponent';
 import PhotoBoardComponent from './components/PhotoBoardComponent';
 import AdminBoardComponent from './components/AdminBoardComponent';
+import MenuBoardComponent from './components/MenuBoardComponent';
+import NavBarComponent from './components/NavBarComponent';
 import CustomerServiceBoardComponent from './components/CustomerServiceBoardComponent';
 
 
@@ -18,6 +20,7 @@ function App() {
     <div> 
       <Router>
         <HeaderComponent/>
+        <NavBarComponent/>
             <Switch>
               <Route path = "/" exact component = {MainBoardComponent}></Route>
               <Route path = "/main-board" exact component = {MainBoardComponent}></Route>
@@ -28,8 +31,10 @@ function App() {
               <Route path = "/member-join" component = {JoinMemberComponent}></Route>
               <Route path = "/photo-board" component = {PhotoBoardComponent}></Route>
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>
-              <Route path = "/admin-board" exact component = {AdminBoardComponent}></Route>
-            </Switch>
+              <Route path = "/admin-board" component = {AdminBoardComponent}></Route>
+              <Route path = "/menu-board" component = {MenuBoardComponent}></Route>
+              
+              </Switch>
         <FooterComponent/>
       </Router>
     </div>

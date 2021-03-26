@@ -2,13 +2,15 @@ import { findAllByDisplayValue } from '@testing-library/dom';
 import React, { Component } from 'react';
 import {Navbar, Nav, Form, FormControl, Button, Modal, NavDropdown, Sidebar} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-
+import SignIn from "./SignIn";
+import CategoryService from '../service/CategoryService';
 
 
 class HeaderComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            categories: [],
             searchType:'all',
             searchKeyword:'',
             isModalOpen:false
@@ -19,6 +21,13 @@ class HeaderComponent extends Component {
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
 
     }
+
+    componentDidMount() {
+      CategoryService.getCategory().then((res) => {
+          this.setState({ 
+            categories: res.data});
+      });
+  }
     
     changeTypeHandler = (event) => {
         this.setState({searchType: event.target.value});
@@ -30,7 +39,15 @@ class HeaderComponent extends Component {
 
     changeModalHandler = (event) => {
         this.setState({isModalOpen: !this.state.isModalOpen,});
-      }
+    }
+
+    openModal = (event) => {
+      this.setState({ isModalOpen: true });
+    }
+  
+    closeModal = (event) => {
+      this.setState({ isModalOpen: false });
+    }
 
     searchBoard(searchType, searchKeyword){
         this.props.history.push(`/search-board?searchType=${searchType}&searchKeyword=${searchKeyword}`);
@@ -47,37 +64,11 @@ class HeaderComponent extends Component {
 
     render() {
         return (
-        <div class="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>
-            {this.state.isModalOpen && (
-                <Modal show={true} animation={false}>
-                    <Modal.Header closeButton onClick={this.changeModalHandler}>
-                      <Modal.Title>Enter your User ID and Password</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <Form>
-                        <Form.Group controlId="formGroupId">
-                          <Form.Label>User ID</Form.Label>
-                          <Form.Control type="text" placeholder="User Id" />
-                        </Form.Group>
-                        <Form.Group controlId="formGroupPassword">
-                          <Form.Label>Password</Form.Label>
-                          <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-                      </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={this.changeModalHandler} >
-                        Close
-                      </Button>
-                      <Button variant="success" onClick={this.changeModalHandler} >
-                        Login
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>                                   
-            )}                
-                <div class="btn_wrap text-right">
-                    <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>
-                    <button class="btn btn-primary waves-effect waves-light" onClick={this.changeModalHandler}>LOGIN</button>
+        <div class="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
+          <div class="btn_wrap text-right">
+              <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>
+              <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>
+              <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			    </div>
 			    <div class="text-center">
 				    <h1 class="page-title" onClick = {this.goToList}>DZBZ</h1>
@@ -103,24 +94,7 @@ class HeaderComponent extends Component {
 	      </div>
 			    </div>
 
-        <div class="pos-f-t">
-          <nav class="navbar navbar-light bg-light" style={{margin:"0px 0px 0px 0px"}}>
-          <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <a class="nav-link" href="/photo-board">Photo</a>
-          <a class="nav-link" href="/qna-board">Q&amp;A</a>
-          <a class="nav-link" href="/cs-board">Customer Service</a>
-
-          </nav>
-          <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-              <h4 class="text-white">Collapsed content</h4>
-              <span class="text-muted">Toggleable via the navbar brand.</span>
-            </div>
-          </div>
-        </div>
+        
 		</div>
         );
     }
