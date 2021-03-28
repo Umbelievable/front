@@ -1,38 +1,87 @@
 import React, { Component } from "react";
-import {Navbar, Nav, Form, FormControl, Button, Modal, NavDropdown, Sidebar} from 'react-bootstrap';
+import {Navbar, Nav, FormControl, Button, Modal, NavDropdown, Sidebar} from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import BoardService from '../service/MemberService';
 import { withRouter } from 'react-router-dom';
+import MemberService from "../service/MemberService";
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 
+const required = value => {
+  if (!value) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        This field is required!
+      </div>
+    );
+  }
+};
 
 class SignIn extends Component {
-  state = {
-    id: "",
-    password: ""
-  };
+  constructor(props) {
+    super(props);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
 
-  loginHandler = (e) => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }; 
+    this.state = {
+      username: "",
+      password: "",
+      loading: false,
+      message: ""
+    };
+  }
 
-  loginClickHandler = () => {
-    const { id, password } = this.state;
-    fetch("http://localhost:8080/api/member/"+this.state.id, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id,
-        password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
-      .then(this.props.history.push('/qna-board'));
-  }; 
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value
+    });
+  }
 
+  onChangePassword(e) {
+    this.setState({
+      password: e.target.value
+    });
+  }
+
+  handleLogin(e) {
+    e.preventDefault();
+
+    this.setState({
+      message: "",
+      loading: true
+    });
+
+    this.form.validateAll();
+
+    if (this.checkBtn.context._errors.length === 0) {
+      MemberService.login(this.state.username, this.state.password).then(
+        () => {
+          this.props.history.push("/main-board");
+          window.location.reload();
+        },
+        error => {
+          const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          this.setState({
+            loading: false,
+            message: resMessage
+          });
+        }
+      );
+    } else {
+      this.setState({
+        loading: false
+      });
+    }
+  }
+   
+  
   render() {
     const { isOpen, close } = this.props;   //아까 버튼에서 props로 가져온것
     return (
@@ -44,25 +93,65 @@ class SignIn extends Component {
                       <Modal.Title>Enter your User ID and Password</Modal.Title>
                     </Modal.Header>
                     <Modal.Body onClick={isOpen}>
-                      <Form>
-                        <Form.Group controlId="formGroupId">
-                          <Form.Label>User ID</Form.Label>
-                          <Form.Control name="id" onChange={this.loginHandler} type="text" placeholder="User Id" />
-                        </Form.Group>
-                        <Form.Group controlId="formGroupPassword">
-                          <Form.Label>Password</Form.Label>
-                          <Form.Control name="password" onChange={this.loginHandler} type="password" placeholder="Password" />
-                        </Form.Group>
-                      </Form>
+                    <Form
+            onSubmit={this.handleLogin}
+            ref={c => {
+              this.form = c;
+            }}
+          >
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <Input
+                type="text"
+                className="form-control"
+                name="username"
+                value={this.state.username}
+                onChange={this.onChangeUsername}
+                validations={[required]}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <Input
+                type="password"
+                className="form-control"
+                name="password"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+                validations={[required]}
+              />
+            </div>
+
+            <div className="form-group">
+              <button
+                className="btn btn-primary btn-block"
+                disabled={this.state.loading}
+              >
+                {this.state.loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                <span>Login</span>
+              </button>
+            </div>
+
+            {this.state.message && (
+              <div className="form-group">
+                <div className="alert alert-danger" role="alert">
+                  {this.state.message}
+                </div>
+              </div>
+            )}
+            <CheckButton
+              style={{ display: "none" }}
+              ref={c => {
+                this.checkBtn = c;
+              }}
+            />
+          </Form>
+                      
                     </Modal.Body>
-                    <Modal.Footer>
-                      <Button variant="secondary" onClick={close} >
-                        Close
-                      </Button>
-                      <Button variant="success" onClick={this.loginClickHandler} >
-                        Login
-                      </Button>
-                    </Modal.Footer>
+                    
                   </Modal>                              
 
           </div>
