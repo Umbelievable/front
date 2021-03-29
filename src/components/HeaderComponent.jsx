@@ -4,6 +4,7 @@ import {Navbar, Nav, Form, FormControl, Button, Modal, NavDropdown, Sidebar} fro
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 import CategoryService from '../service/CategoryService';
+import MemberService from '../service/MemberService';
 
 
 class HeaderComponent extends Component {
@@ -13,8 +14,8 @@ class HeaderComponent extends Component {
             categories: [],
             searchType:'all',
             searchKeyword:'',
-            isModalOpen:false
-
+            isModalOpen:false,
+            currentUser: { username: "" }
         }
         this.joinMember = this.joinMember.bind(this);
         this.changeTypeHandler = this.changeTypeHandler.bind(this);
@@ -23,11 +24,22 @@ class HeaderComponent extends Component {
     }
 
     componentDidMount() {
-      CategoryService.getCategory().then((res) => {
+        const currentUser = MemberService.getCurrentUser();
+        
+        if (!currentUser){
+            this.setState({ currentUser: "guest", userReady: false });
+        }
+        else{
+            this.setState({ currentUser: currentUser, userReady: true });
+        } 
+        
+        
+  
+        CategoryService.getCategory().then((res) => {
           this.setState({ 
             categories: res.data});
-      });
-  }
+        });
+    }
     
     changeTypeHandler = (event) => {
         this.setState({searchType: event.target.value});
@@ -62,12 +74,28 @@ class HeaderComponent extends Component {
         this.props.history.push('/member-join');
     }
 
+    logOut() {
+        MemberService.logout();
+        window.location.replace('/main-board');
+    }
+
     render() {
+        const { currentUser } = this.state;
         return (
         <div class="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
           <div class="btn_wrap text-right">
-              <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>
-              <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>
+          {!this.state.userReady && (
+              <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
+         {this.state.userReady && (
+             <button class="btn btn-primary waves-effect waves-light" >{currentUser.username}님의 my page</button>)}
+        
+          {!this.state.userReady && (
+              <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
+        {this.state.userReady && (
+              <button class="btn btn-primary waves-effect waves-light" onClick={this.logOut}>LOGOUT</button>)}
+              
+              
+              
               <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			    </div>
 			    <div class="text-center">
