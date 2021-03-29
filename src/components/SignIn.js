@@ -44,8 +44,24 @@ class SignIn extends Component {
     });
   }
 
+<<<<<<< HEAD
   handleLogin(e) {
     e.preventDefault();
+=======
+  loginClickHandler = () => {
+    const { id, password } = this.state;
+    fetch("http://localhost:8080/api/member/"+this.state.id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+      
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res))
+      .then(this.props.history.push('/main-board'));
+  }; 
+>>>>>>> d7fd3cd452c44065e04c289ba47068fae6bc2be0
 
     this.setState({
       message: "",
