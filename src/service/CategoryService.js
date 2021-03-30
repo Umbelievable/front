@@ -8,6 +8,7 @@ class CategoryService {
     getCategory() {
         return axios.get(CATEGORY_API_BASE_URL);
     }
+    
 
 }
 

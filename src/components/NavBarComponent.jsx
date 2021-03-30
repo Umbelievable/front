@@ -10,6 +10,7 @@ class NavBarComponent extends Component {
         super(props)
         this.state = {
             categories: []
+
         }
         this.myFunction = this.myFunction.bind(this);
     }
@@ -57,19 +58,20 @@ class NavBarComponent extends Component {
 
                 </nav>
                 <div class="collapse" id="navbarToggleExternalContent">
-                    <div class="bg-dark p-4">
+                    <div class="bg-dark p-4">                        
                     <Nav defaultActiveKey="/home" className="flex-column">
                     {
                         this.state.categories.map(
                         category => 
-                            <div key = {category.category_no}>
-                            <Nav.Link href={`/menu-board?`+category.url}>{category.category_no}</Nav.Link>    
-                            </div>
+                            <li key = {category.category_no}>
+                                <Nav.Link style={{display:'inline-block'},{padding:"14px 20px 0px 20px"}}  href={`/menu-board?`+category.url}>{category.category_no}</Nav.Link>
+                                <div style={{display:'inline-block'},{padding:"14px 20px 0px 20px"}}>dddd</div>
+                            </li>                      
                         )
                     }
                     </Nav>
+                    </div>
                 </div>
-            </div>
             </div>
         );
     }

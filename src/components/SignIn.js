@@ -44,24 +44,8 @@ class SignIn extends Component {
     });
   }
 
-<<<<<<< HEAD
   handleLogin(e) {
     e.preventDefault();
-=======
-  loginClickHandler = () => {
-    const { id, password } = this.state;
-    fetch("http://localhost:8080/api/member/"+this.state.id, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-      
-    })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
-      .then(this.props.history.push('/main-board'));
-  }; 
->>>>>>> d7fd3cd452c44065e04c289ba47068fae6bc2be0
 
     this.setState({
       message: "",
@@ -104,72 +88,59 @@ class SignIn extends Component {
       <>
         {isOpen ? (  
           <div onClick={close}>
-              <Modal show={true} animation={false}>
-                    <Modal.Header closeButton onClick={this.changeModalHandler}>
-                      <Modal.Title>Enter your User ID and Password</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body onClick={isOpen}>
-                    <Form
-            onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <Input
-                type="text"
-                className="form-control"
-                name="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <Input
-                type="password"
-                className="form-control"
-                name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="form-group">
-              <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
-            </div>
-
-            {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
+            <Modal show={true} animation={false}>
+              <Modal.Header closeButton onClick={this.changeModalHandler}>
+                <Modal.Title>Enter your User ID and Password</Modal.Title>
+              </Modal.Header>
+              <Modal.Body onClick={isOpen}>
+                <Form onSubmit={this.handleLogin} ref={c => {this.form = c;}}>
+                <div className="form-group">
+                  <label htmlFor="username">Username</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    validations={[required]}
+                  />
                 </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-                      
-                    </Modal.Body>
-                    
-                  </Modal>                              
 
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <Input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                    validations={[required]}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <button
+                    className="btn btn-primary btn-block"
+                    disabled={this.state.loading}
+                  >
+                    {this.state.loading && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Login</span>
+                  </button>
+                </div>
+
+                {this.state.message && (
+                  <div className="form-group">
+                    <div className="alert alert-danger" role="alert">
+                      {this.state.message}
+                    </div>
+                  </div>
+                )}
+              <CheckButton style={{ display: "none" }} ref={c => {this.checkBtn = c;}}/>
+                </Form>                 
+              </Modal.Body>        
+            </Modal>                              
           </div>
         ) : null}
       </>
