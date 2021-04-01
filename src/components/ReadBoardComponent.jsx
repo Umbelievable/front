@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
 import CommentService from '../service/CommentService';
+import MemberService from '../service/MemberService';
 
 class ReadBoardComponent extends Component {
     constructor(props) {
@@ -13,8 +14,9 @@ class ReadBoardComponent extends Component {
             content:'',
             writer:'',
             comments: [],
-            isModalOpen:false,
-            newComment:''
+            isModify:false,
+            newComment:'',
+            currentUser: { username: "" }
         }
 
         this.changeContentHandler = this.changeContentHandler.bind(this);
@@ -32,7 +34,7 @@ class ReadBoardComponent extends Component {
     }
 
     changeModalHandler = (event) => {
-      this.setState({isModalOpen: !this.state.isModalOpen,});
+      this.setState({isModify: !this.state.isModify,});
     }
 
     createComment = (event) => {
@@ -40,7 +42,7 @@ class ReadBoardComponent extends Component {
       let comment = {
           boardIdx: this.state.idx,
           content: this.state.content,
-          writer: "example",
+          writer: this.state.currentUser.username,
       };
       console.log("comment => "+ JSON.stringify(comment));
 
@@ -54,7 +56,7 @@ class ReadBoardComponent extends Component {
       let comment = {
           boardIdx: this.state.idx,
           content: this.state.newComment,
-          writer: "example",
+          writer: this.state.currentUser.username,
       };
       console.log("comment => "+ JSON.stringify(comment));
 
@@ -65,6 +67,8 @@ class ReadBoardComponent extends Component {
     }
 
     componentDidMount() {
+      const currentUser = MemberService.getCurrentUser();
+      this.setState({ currentUser: currentUser, userReady: true });
         BoardService.getOneBoard(this.state.idx).then( res => {
             this.setState({board: res.data});
         });
@@ -179,28 +183,31 @@ class ReadBoardComponent extends Component {
                            </div>
                         </div>
                         <ul class="notice-list">
-                           {
+                           { 
                            this.state.comments.map(
                               comment =>
-                              <li key = {comment.idx}>
+                              <li key = {comment.idx}>  
                                  <span class="name">{comment.writer}</span>
 
-                                 {!this.state.isModalOpen && (
+                                 {!this.state.isModify && ( //수정 안하면 원래 댓글 내용 보여주고
                                     <span class="desc">{comment.content}</span>
                                  )}
 
-                                 {this.state.isModalOpen && (
+                                 {this.state.isModify && ( //수정 중이면 플레이스 홀더로 원래 댓글 내용 띄워주고 입력 받기
                                     <input type="text" class="form-control" style={{width:"1000px"}} onChange={this.changeCommentContentHandler} placeholder={comment.content}/>
                                  )}
 
                                  <span class="time">{comment.insertTime}</span>
-                                 <button type="button" class="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.idx, comment.idx)} ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
-                                 
-                                 {!this.state.isModalOpen && (
+
+                                 {(this.state.currentUser.username == comment.writer) &&( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
+                                    <button type="button" class="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.idx, comment.idx)} ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
+                                 )}
+                                                               
+                                 {!this.state.isModify && (this.state.currentUser.username == comment.writer) && ( // 수정 중 아니면 수정 버튼 띄우고
                                  <button type="button" class="btn btn-xs btn-circle" onClick={this.changeModalHandler} style={{right: "55px"}}><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
                                  )}
 
-                                 {this.state.isModalOpen && (
+                                 {this.state.isModify && ( // 수정 중이면 수정 완료 버튼 띄우기
                                  <button type="button" class="btn btn-xs btn-circle" onClick={() => this.updateComment(comment.idx)} style={{right: "55px"}}><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
                                  )}
 
