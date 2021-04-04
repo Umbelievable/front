@@ -77,7 +77,7 @@ class ReadBoardComponent extends Component {
         });
     }
 
-    goToList() {
+    goToList() { // qna로 가는 함수
         this.props.history.push('/qna-board');
     }
 
