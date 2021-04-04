@@ -87,7 +87,7 @@ class HeaderComponent extends Component {
           {!this.state.userReady && (
               <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
          {this.state.userReady && (
-             <button class="btn btn-primary waves-effect waves-light" >{currentUser.username}님의 my page</button>)}
+             <button class="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.username}님의 my page</button>)}
         
           {!this.state.userReady && (
               <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}

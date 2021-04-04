@@ -1477,3 +1477,21 @@ textarea.form-control {
   top: 0;
   width: 100%;
 }
+
+.mybtn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.active,
+.mybtn:hover {
+  color: rgb(162, 231, 98);
+}

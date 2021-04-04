@@ -12,6 +12,7 @@ import PhotoBoardComponent from './components/PhotoBoardComponent';
 import AdminBoardComponent from './components/AdminBoardComponent';
 import MenuBoardComponent from './components/MenuBoardComponent';
 import NavBarComponent from './components/NavBarComponent';
+import MyPageBoardComponent from './components/MyPageBoardComponent';
 import CustomerServiceBoardComponent from './components/CustomerServiceBoardComponent';
 
 
@@ -33,6 +34,7 @@ function App() {
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>
               <Route path = "/admin-board" component = {AdminBoardComponent}></Route>
               <Route path = "/menu-board" component = {MenuBoardComponent}></Route>
+              <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
               
               </Switch>
         <FooterComponent/>

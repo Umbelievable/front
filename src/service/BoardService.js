@@ -27,7 +27,7 @@ class BoardService {
     }
     
     searchBoards(searchType, searchKeyword){
-        return axios.get(BOARD_API_BASE_URL + "/search", { headers: authHeader() },{params:{type:searchType, keyword:searchKeyword}});
+        return axios.get(BOARD_API_BASE_URL + "/search?type=" + searchType + "&keyword=" + searchKeyword, { headers: authHeader() });
     }
 }
 
