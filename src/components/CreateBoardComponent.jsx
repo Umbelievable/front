@@ -1,64 +1,40 @@
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
 import FileService from '../service/FileService';
+import MemberService from '../service/MemberService';
 
 class CreateBoardComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            idx: this.props.match.params.idx, 
-            noticeYn: false,
-            secretYn: false,
-            title: '',
-            writer: '',
-            content: '',
+            qboardNo: this.props.match.params.qboardNo, 
+            qboardTitle: '',
+            qboardWriter: MemberService.getCurrentUser().username,
+            qboardContent: '',
+            qboardFileUrl: '',
             file: null
         }
 
-        this.changeNoticeHandler = this.changeNoticeHandler.bind(this);
-        this.changeSecretHandler = this.changeSecretHandler.bind(this);
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
-        this.changeWriterHandler = this.changeWriterHandler.bind(this);
         this.changeContentHandler = this.changeContentHandler.bind(this);
         this.createBoard = this.createBoard.bind(this);
         
     }
 
-    changeNoticeHandler = (event) => {
-        const target = event.target;
-        const value = target.name === 'noticeYn' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
-
-    changeSecretHandler = (event) => {
-        const target = event.target;
-        const value = target.name === 'secretYn' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
-        });
-    }
     changeTitleHandler = (event) => {
-        this.setState({title: event.target.value});
-    }
-
-    changeWriterHandler = (event) => {
-        this.setState({writer: event.target.value});
+        this.setState({qboardTitle: event.target.value});
     }
 
     changeContentHandler = (event) => {
-        this.setState({content: event.target.value});
+        this.setState({qboardContent: event.target.value});
     }
 
     //--file upload--//
     changeFileHandler = (event) => {
-        this.setState({ file: event.target.files[0]});
+        this.setState({ file: event.target.files[0]}); //파일 데이터 넣고
+        this.setState({ qboardFileUrl: event.target.files[0].name}); // Board 객체에 fileUrl 값 넣기
+
     }
 
     fileUpload = async function (file) {
@@ -82,11 +58,10 @@ class CreateBoardComponent extends Component {
         event.preventDefault();
     
         let board = {
-            noticeYn: this.state.noticeYn,
-            secretYn: this.state.secretYn,
-            title: this.state.title,
-            writer: this.state.writer,
-            content: this.state.content
+            qboardTitle: this.state.qboardTitle,
+            qboardWriter: this.state.qboardWriter,
+            qboardContent: this.state.qboardContent,
+            qboardFileUrl: this.state.qboardFileUrl
         };
         console.log("board => "+ JSON.stringify(board));
 
@@ -100,13 +75,15 @@ class CreateBoardComponent extends Component {
         //--file upload--//
 
 
-        if (this.state.idx === '_create') {
+        if (this.state.qboardNo === '_create') { // 새로 만들면
             BoardService.createBoard(board).then(res => {
                 window.location.replace('/qna-board');
             });
-        } else {
-            BoardService.updateBoard(this.state.idx, board).then(res => {
-                this.props.history.push(`/read-board/${this.state.idx}`);
+        } else { // 있던 게시글 업데이트면
+            // 파일 Url 글번호로 가져와서
+            // qboardFileUrl 값 다시 주기
+            BoardService.updateBoard(this.state.qboardNo, board).then(res => {
+                this.props.history.push(`/read-board/${this.state.qboardNo}`);
             });
         }
     }
@@ -116,78 +93,57 @@ class CreateBoardComponent extends Component {
     }
 
     componentDidMount() {
-        if (this.state.idx === '_create') {
+        if (this.state.qboardNo === '_create') {
             return
         } else {
-            BoardService.getOneBoard(this.state.idx).then( (res) => {
+            BoardService.getOneBoard(this.state.qboardNo).then( (res) => {
                 let board = res.data;
                 console.log("board => "+ JSON.stringify(board));
                 
                 this.setState({
-                        noticeYn: board.noticeYn,
-                        secretYn: board.secretYn,
-                        title: board.title,
-                        writer: board.writer,
-                        content: board.content
+                    qboardTitle: board.qboardTitle,
+                    qboardWriter: board.qboardWriter,
+                    qboardContent: board.qboardContent
                 });
             });
         }
     }
     render() {
         return (
-            <div class="main-content">
-				<div class="row row-inline-block small-spacing">
-				<div class="col-xs-12">
-				<div class="box-content">
-				<div class="clearfix"><h4 class="box-title pull-left"></h4></div>
-            <div class="card-content">
-			    <form class="form-horizontal">
-                    <div class="form-group">
-					    <label for="noticeYn" class="col-sm-2 control-label">공지글 설정</label>
-					        <div class="col-sm-10" style={{marginTop:"10px"}}> 
-						        <input type="checkbox" id="noticeYn" name="noticeYn" checked={this.state.noticeYn} onChange={this.changeNoticeHandler} />
+            <div className="main-content">
+				<div className="row row-inline-block small-spacing">
+				<div className="col-xs-12">
+				<div className="box-content">
+				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+            <div className="card-content">
+			    <form className="form-horizontal">
+                    
+
+				    <div className="form-group">
+					    <label for="title" className="col-sm-2 control-label">제목</label>
+					        <div className="col-sm-10">
+						        <input type="text" className="form-control" placeholder="제목을 입력해 주세요." value={this.state.qboardTitle} onChange={this.changeTitleHandler}/>
 					        </div>
 				    </div>
 
-				    <div class="form-group">
-					    <label for="secretYn" class="col-sm-2 control-label">비밀글 설정</label>
-					        <div class="col-sm-10" style={{marginTop:"10px"}}>
-						        <input type="checkbox" id="secretYn" name="secretYn" checked={this.state.secretYn} onChange={this.changeSecretHandler} />
-					        </div>
-				    </div>
-
-				    <div class="form-group">
-					    <label for="title" class="col-sm-2 control-label">제목</label>
-					        <div class="col-sm-10">
-						        <input type="text" class="form-control" placeholder="제목을 입력해 주세요." value={this.state.title} onChange={this.changeTitleHandler}/>
-					        </div>
-				    </div>
-
-				    <div class="form-group">
-					    <label for="writer" class="col-sm-2 control-label">이름</label>
-					        <div class="col-sm-10">
-						        <input type="text" class="form-control" placeholder="이름을 입력해 주세요." value={this.state.writer} onChange={this.changeWriterHandler}/>
-					        </div>
-				    </div>
-
-				    <div class="form-group">
-					    <label for="content" class="col-sm-2 control-label">내용</label>
-					        <div class="col-sm-10">
-						        <textarea class="form-control" placeholder="내용을 입력해 주세요." value={this.state.content} onChange={this.changeContentHandler}></textarea>
+				    <div className="form-group">
+					    <label for="content" className="col-sm-2 control-label">내용</label>
+					        <div className="col-sm-10">
+						        <textarea className="form-control" placeholder="내용을 입력해 주세요." value={this.state.qboardContent} onChange={this.changeContentHandler}></textarea>
 					        </div>
                     </div>
                 
-                    <div class="form-group">        
-                        <label for="file_0" class="col-sm-2 control-label">파일</label>
-                            <div class="col-sm-10">
+                    <div className="form-group">        
+                        <label for="file_0" className="col-sm-2 control-label">파일</label>
+                            <div className="col-sm-10">
                                 <input type="file" onChange={this.changeFileHandler} name="file" />
                             </div>    
                     </div>
 
 				   
-				    <div class="btn_wrap text-center">
-                        <button type="submit" class="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
-                        <button class="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
+				    <div className="btn_wrap text-center">
+                        <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
+                        <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
 					    
                     </div>
 

@@ -28,17 +28,17 @@ class MyPageBoardComponent extends Component {
             />
         );
         return (
-            <div class="main-content">
-                <div class="row row-inline-block small-spacing">
-               <div class="col-xs-12">
-               <div class="box-content">
-               <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
-                    <button type="button" class="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} class="glyphicon glyphicon-user" aria-hidden="true"></i></button>
+            <div className="main-content">
+                <div className="row row-inline-block small-spacing">
+               <div className="col-xs-12">
+               <div className="box-content">
+               <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+                    <button type="button" className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.username}</div>
                         <a style={{display:'inline', marginLeft:'40px'}} href="/">회원 정보 수정</a>
                         <br/><br/>
                         
-                        <table class="table table-hover" style={{width:'500px'}}>
+                        <table className="table table-hover" style={{width:'500px'}}>
                             <thead>
                                 <tr>
                                     <th>&nbsp;&nbsp;&nbsp;&nbsp;알림</th>
@@ -54,12 +54,6 @@ class MyPageBoardComponent extends Component {
                                 </tr>
                             </tbody>
                         </table>
-                        
-                        <br/><br/>
-                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
-                            <br/><br/>
-
-                        <ColoredLine color="lightgray" />
 
                         <br/><br/>
                         <div style={{fontWeight:'bolder'}}>관심 해시태그</div>
@@ -70,6 +64,14 @@ class MyPageBoardComponent extends Component {
                         <br/><br/>
 
                         <ColoredLine color="lightgray" />
+                        
+                        <br/><br/>
+                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
+                            <br/><br/>
+
+                        <ColoredLine color="lightgray" />
+
+                        
 
                </div>
                </div>

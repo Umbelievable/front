@@ -1,35 +1,26 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import ItemService from '../service/ItemService';
 
-class MenuBoardComponent extends Component {
+class CategoryBoardComponent extends Component {
     constructor(props) {
         const query = queryString.parse(window.location.search);
 
         super(props)
         this.state = {
             cateNo: query.cateNo,
-            thisCateNo: query.thisCateNo,
-            items: []
+            items:[]
         }
     }
 
-     // BoardService는 페이지만 넣었지만 
-     // 아이템은 cateNo랑 thisCateNO도 넣어야함
-     // 추후 수정
-
     componentDidMount() {
-        ItemService.getCertainItems(this.state.cateNo, this.state.thisCateNo).then((res) => {
+        ItemService.getAllItems(this.state.cateNo).then((res) => {
             this.setState({items: res.data});
-        });
-
+        }); 
+     
     }
 
-    //readItem(idx) { // 아이템 상세 페이지 보여주기 
-    //    this.props.history.push(`/read-board/${idx}`);
-    //}
-
+  
     render() {
         return (
             <div className="main-content"> 
@@ -65,13 +56,9 @@ class MenuBoardComponent extends Component {
                 </div>
                 </div>
                 </div> 
+            
 
-                               
-                
-                
-                
-                
-                </div>
+				</div>
 				</div>
 				</div>
 			</div>
@@ -79,4 +66,4 @@ class MenuBoardComponent extends Component {
     }
 }
 
-export default withRouter(MenuBoardComponent);
+export default CategoryBoardComponent;

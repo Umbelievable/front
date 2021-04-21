@@ -11,7 +11,6 @@ class HeaderComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            categories: [],
             searchType:'all',
             searchKeyword:'',
             isModalOpen:false,
@@ -32,13 +31,7 @@ class HeaderComponent extends Component {
         else{
             this.setState({ currentUser: currentUser, userReady: true });
         } 
-        
-        
-  
-        CategoryService.getCategory().then((res) => {
-          this.setState({ 
-            categories: res.data});
-        });
+ 
     }
     
     changeTypeHandler = (event) => {
@@ -82,28 +75,28 @@ class HeaderComponent extends Component {
     render() {
         const { currentUser } = this.state;
         return (
-        <div class="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
-          <div class="btn_wrap text-right">
+        <div className="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
+          <div className="btn_wrap text-right">
           {!this.state.userReady && (
-              <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
+              <button className="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
          {this.state.userReady && (
-             <button class="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.username}님의 my page</button>)}
+             <button className="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.username}님의 my page</button>)}
         
           {!this.state.userReady && (
-              <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
+              <button className="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
         {this.state.userReady && (
-              <button class="btn btn-primary waves-effect waves-light" onClick={this.logOut}>LOGOUT</button>)}
+              <button className="btn btn-primary waves-effect waves-light" onClick={this.logOut}>LOGOUT</button>)}
               
               
               
               <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			    </div>
-			    <div class="text-center">
-				    <h1 class="page-title" onClick = {this.goToList}>DZBZ</h1>
-        <div id="adv-search" class="input-group">
+			    <div className="text-center">
+				    <h1 className="page-title" onClick = {this.goToList}>DZBZ</h1>
+        <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
-					<div class="form-group" style={{display:'inline-block'}}>
-						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" class="form-control" style={{width:"100px"},{height:"44px"}}>
+					<div className="form-group" style={{display:'inline-block'}}>
+						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" className="form-control" style={{width:"100px"},{height:"44px"}}>
                             <option value="all" >전체</option>
                             <option value="title" >제목</option>
 							<option value="content" >내용</option>
@@ -111,12 +104,12 @@ class HeaderComponent extends Component {
 						</select>
 					</div>
 
-					<div class="form-group" style={{display:'inline-block'}}>
-						<input type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} class="form-control"  style={{width:"300px"}} placeholder="키워드를 입력해 주세요."/>
+					<div className="form-group" style={{display:'inline-block'}}>
+						<input type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"300px"}} placeholder="키워드를 입력해 주세요."/>
 					</div>
 
-          <div class="form-group" style={{display:'inline-block'}}>
-					  <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} class="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+          <div className="form-group" style={{display:'inline-block'}}>
+					  <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </div>          
         </form>
 	      </div>

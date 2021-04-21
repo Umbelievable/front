@@ -19,19 +19,29 @@ class ListBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
+
+        // 네비바에 현재 위치 표시하기 
+        var header = document.getElementById("navbar");
+        var qnabtn = document.getElementById("qnabtn");
+        var btns = header.getElementsByClassName("mybtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = "mybtn"
+        }
+        qnabtn.className += " active";
+
     }
 
     createBoard() {
         this.props.history.push('/create-board/_create');
     }
 
-    readBoard(idx) {
-        this.props.history.push(`/read-board/${idx}`);
+    readBoard(qboardNo) {
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     goToUpdate = (event) => {
         event.preventDefault();
-        this.props.history.push(`/create-board/${this.state.idx}`);
+        this.props.history.push(`/create-board/${this.state.qboardNo}`);
     }
 
     listBoard(p_num) {
@@ -104,15 +114,15 @@ class ListBoardComponent extends Component {
   
     render() {
         return (
-            <div class="main-content"> 
-                <div class="row row-inline-block small-spacing">
-				<div class="col-xs-12">                   
-				<div class="box-content">
-				<div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+            <div className="main-content"> 
+                <div className="row row-inline-block small-spacing">
+				<div className="col-xs-12">                   
+				<div className="box-content">
+				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
             
 
-            <div class="table-responsive clearfix">
-			    <table class="table table-hover">
+            <div className="table-responsive clearfix">
+			    <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>번호 </th>
@@ -126,49 +136,44 @@ class ListBoardComponent extends Component {
                         {
                         this.state.boards.map(
                             board => 
-                            <tr key = {board.idx}>
-                                <td> {board.idx} </td>
-                                <td> <a href={'/read-board/'+board.idx}>{board.title} </a> </td>
-                                <td> {board.writer} </td>
-                                <td> {board.insertTime} </td>
-                                <td> {board.viewCnt} </td>
+                            <tr key = {board.qboardNo}>
+                                <td> {board.qboardNo} </td>
+                                <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
+                                <td> {board.qboardWriter} </td>
+                                <td> {board.qboardInsertTime} </td>
+                                <td> {board.qboardViews} </td>
                             </tr>
                         )
                         }
                     </tbody>
                 </table>
-                <div class="btn_wrap text-right">
-                    <button class="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+                <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			    </div>
             </div>
 
             <div className ="row">
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-center">
 
-                            {
-                                this.isMoveToFirstPage()
-                            }
-                            {
-                                this.isPagingPrev()
-                            }
-                            {
-                                this.viewPaging()
-                            }
-                            {
-                                this.isPagingNext()
-                            }
-                            {
-                                this.isMoveToLastPage()
-                            }
-                        </ul>
-                    </nav>
-                </div>
-
-
-
-
-
+                        {
+                            this.isMoveToFirstPage()
+                        }
+                        {
+                            this.isPagingPrev()
+                        }
+                        {
+                            this.viewPaging()
+                        }
+                        {
+                            this.isPagingNext()
+                        }
+                        {
+                            this.isMoveToLastPage()
+                        }
+                    </ul>
+                </nav>
+            </div>
 
 
 				</div>

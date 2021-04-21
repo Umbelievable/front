@@ -11,14 +11,25 @@ class CustomerServiceBoardComponent extends Component {
 
     }
 
+    componentDidMount() {
+        var header = document.getElementById("navbar");
+        var csbtn = document.getElementById("csbtn");
+        var btns = header.getElementsByClassName("mybtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = "mybtn"
+        }
+        csbtn.className += " active";
+
+    }
+
 
     render() {
         return (
-        <div class="main-content">
-            <div class="row row-inline-block small-spacing">
-            <div class="col-xs-12">
-            <div class="box-content">
-            <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+        <div className="main-content">
+            <div className="row row-inline-block small-spacing">
+            <div className="col-xs-12">
+            <div className="box-content">
+            <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
         
             </div>
