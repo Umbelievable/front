@@ -7,8 +7,8 @@ class CommentService{
         return axios.get(COMMENT_API_BASE_URL + "/" + qboardNo);
     }
 
-    createComment(comment) {
-        return axios.post(COMMENT_API_BASE_URL, comment);
+    createComment(qboardNo, comment) {
+        return axios.post(COMMENT_API_BASE_URL + "/" + qboardNo, comment);
     }
 
     updateComment(qboardNo, qcommentNo, comment) {

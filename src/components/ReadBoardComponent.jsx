@@ -42,13 +42,12 @@ class ReadBoardComponent extends Component {
     createComment = (event) => {
       event.preventDefault();
       let comment = {
-         qboardNo: this.state.qboardNo,
          qcommentContent: this.state.qcommentContent,
          qcommentWriter: this.state.currentUser.username,
       };
       console.log("comment => "+ JSON.stringify(comment));
 
-      CommentService.createComment(comment).then(res => {
+      CommentService.createComment(this.state.qboardNo, comment).then(res => {
          window.location.replace(`/read-board/${this.state.qboardNo}`);
       });
       

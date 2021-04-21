@@ -6,8 +6,8 @@ class PhotoCommentService{
     getComments(pboardNo) {
         return axios.get(COMMENT_API_BASE_URL + "/" + pboardNo);
     }
-    createComment(comment) {
-        return axios.post(COMMENT_API_BASE_URL, comment);
+    createComment(pboardNo, comment) {
+        return axios.post(COMMENT_API_BASE_URL + "/" + pboardNo, comment);
     }
 
     updateComment(pboardNo, pcommentNo, comment) {

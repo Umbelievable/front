@@ -44,13 +44,12 @@ class ReadPhotoBoardComponent extends Component {
     createComment = (event) => {
         event.preventDefault();
         let comment = {
-           pboardNo: this.state.pboardNo,
            pcommentContent: this.state.pcommentContent,
            pcommentWriter: this.state.currentUser.username,
         };
         console.log("comment => "+ JSON.stringify(comment));
   
-        PhotoCommentService.createComment(comment).then(res => {
+        PhotoCommentService.createComment(this.state.pboardNo, comment).then(res => {
            window.location.replace(`/read-photoboard/${this.state.pboardNo}`);
         });
         
@@ -58,7 +57,6 @@ class ReadPhotoBoardComponent extends Component {
 
     updateComment = async function (pcommentNo) {
         let comment = {
-           pboardNo: this.state.pboardNo,
            pcommentContent: this.state.newComment,
            pcommentWriter: this.state.currentUser.username,
         };
