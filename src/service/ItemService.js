@@ -153,6 +153,167 @@ class ItemService {
         }
 
     }
+
+    getCertainItem(pdNo, cateNo, thisCateNo){
+        if(cateNo=="거실가구"){
+            if(thisCateNo=="TV거실장"){
+                return axios.get(ITEM_API_BASE_URL + "/livingroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="소파"){
+                return axios.get(ITEM_API_BASE_URL + "/livingroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+
+            }
+            else if(thisCateNo=="장식장"){
+                return axios.get(ITEM_API_BASE_URL + "/livingroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+            else { // 테이블
+                return axios.get(ITEM_API_BASE_URL + "/livingroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });                
+            }
+        }
+        else if(cateNo=="침실가구"){
+            if(thisCateNo=="거울"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+            else if(thisCateNo=="매트리스"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+            else if(thisCateNo=="부부테이블"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });             
+            }
+            else if(thisCateNo=="서랍장"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="장롱/붙박이장"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="침대"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="침실세트"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+            else if(thisCateNo=="협탁"){
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else { // 화장대
+                return axios.get(ITEM_API_BASE_URL + "/bedroom?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+           
+        }
+        else if(cateNo=="서재/사무용가구"){
+            if(thisCateNo=="사무/교구용가구"){
+                return axios.get(ITEM_API_BASE_URL + "/library?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="의자"){
+                return axios.get(ITEM_API_BASE_URL + "/library?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+
+            }
+            else if(thisCateNo=="책꽂이"){
+                return axios.get(ITEM_API_BASE_URL + "/library?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="책상"){
+                return axios.get(ITEM_API_BASE_URL + "/library?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else { // 책장
+                return axios.get(ITEM_API_BASE_URL + "/library?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+
+            
+        }
+        else if(cateNo=="수납가구"){
+            if(thisCateNo=="CD/DVD장"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="고가구"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+
+            }
+            else if(thisCateNo=="공간박스"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="나비장"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="선반"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="소품수납함"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="수납장"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="신발장"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="우산꽂이"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="잡지꽂이"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="코너장"){
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else { // 행거
+                return axios.get(ITEM_API_BASE_URL + "/storage?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+
+            
+        }
+        else { // 주방가구
+            if(thisCateNo=="그릇장/컵보드"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="기타주방가구"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+            }
+            else if(thisCateNo=="레인지대"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="식탁/의자"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="와인용품"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else if(thisCateNo=="왜건/카트"){
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            else { // 주방수납장
+                return axios.get(ITEM_API_BASE_URL + "/kitchen?pdNo="+pdNo+"&cateNo="+cateNo+"&thisCateNo="+thisCateNo, { headers: authHeader() });
+                
+            }
+            
+        }
+
+
+    }
     
 }
 

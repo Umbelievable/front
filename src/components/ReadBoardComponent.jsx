@@ -164,16 +164,9 @@ class ReadBoardComponent extends Component {
                   <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.qboardInsertTime}</span>
 
                   <ColoredLine color="lightgray"/>
-                  {
-                     this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
-                        
-                                 <img src={this.state.file}/>
-                             
-                           )
-                        }
-
-
-
+                  {this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
+                     <img src={this.state.file}/>
+                  )}
 
                   <div style={{padding:'50px 100px 80px 30px'}}>
                      {this.state.board.qboardContent}
@@ -227,7 +220,7 @@ class ReadBoardComponent extends Component {
 
                                  <span className="time">{comment.qcommentInsertTime}</span>
 
-                                 {(this.state.currentUser.username == comment.qcommentWriter) &&( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
+                                 {!this.state.isModify &&(this.state.currentUser.username == comment.qcommentWriter) &&( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
                                     <button type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
                                  )}
                                                                

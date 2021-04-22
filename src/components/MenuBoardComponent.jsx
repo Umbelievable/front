@@ -26,9 +26,9 @@ class MenuBoardComponent extends Component {
 
     }
 
-    //readItem(idx) { // 아이템 상세 페이지 보여주기 
-    //    this.props.history.push(`/read-board/${idx}`);
-    //}
+    readItem(pdNo, cateNo, thisCateNo) { 
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&thisCateNo=${thisCateNo}`);
+    }
 
     render() {
         return (
@@ -46,7 +46,7 @@ class MenuBoardComponent extends Component {
                         this.state.items.map(
                             item => 
                             <div key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
-                                <div className="card shadow-sm">
+                                <div className="card shadow-sm" onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
                                 <div className="cropping">
                                     <img src={item.pdImg}/>
                                 </div>

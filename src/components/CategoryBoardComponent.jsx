@@ -20,6 +20,10 @@ class CategoryBoardComponent extends Component {
      
     }
 
+    readItem(pdNo, cateNo, thisCateNo) { 
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&thisCateNo=${thisCateNo}`);
+    }
+
   
     render() {
         return (
@@ -37,7 +41,7 @@ class CategoryBoardComponent extends Component {
                         this.state.items.map(
                             item => 
                             <div key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
-                                <div className="card shadow-sm">
+                                <div className="card shadow-sm" onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
                                 <div className="cropping">
                                     <img src={item.pdImg}/>
                                 </div>
