@@ -86,6 +86,15 @@ class ReadBoardComponent extends Component {
          );
          this.setState({ file: "data:;base64," + base64 });
       });
+
+      // 네비바에 현재 위치 표시하기 
+      var header = document.getElementById("navbar");
+      var qnabtn = document.getElementById("qnabtn");
+      var btns = header.getElementsByClassName("mybtn");
+      for (var i = 0; i < btns.length; i++) {
+          btns[i].className = "mybtn"
+      }
+      qnabtn.className += " active";
       
     }
 
