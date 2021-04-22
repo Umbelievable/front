@@ -140,6 +140,15 @@ class ReadBoardComponent extends Component {
 
 
     render() {
+      const ColoredLine = ({ color }) => (
+         <hr
+             style={{
+                 color: color,
+                 backgroundColor: color,
+                 height: '0.6px'
+             }}
+         />
+     );
         return (
             <div className="main-content">
                <div className="row row-inline-block small-spacing">
@@ -147,55 +156,41 @@ class ReadBoardComponent extends Component {
                <div className="box-content">
                <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
                   <div className="card-content">
-                     <form className="form-horizontal form-view">
-                        <div className="form-group">
-                           <label for="inp-type-1" className="col-sm-2 control-label">제목</label>
-                           <div className="col-sm-10">
-                              <p className="form-control" > {this.state.board.qboardTitle} </p>
-                           </div>
-                        </div>
 
-                        <div className="form-group">
-                           <label for="inp-type-2" className="col-sm-2 control-label">이름</label>
-                           <div className="col-sm-10">
-                              <p className="form-control"> {this.state.board.qboardWriter} </p>
-                           </div>
-                        </div>
+                  <ColoredLine color="black"/>
+                  <h3 style={{fontSize:'18px', display:'inline', padding:'0px 50px 0px 10px'}}>{this.state.board.qboardTitle}</h3>
+                  <h4 style={{fontSize:'14px', display:'inline', padding:'0px 50px 0px 0px'}}>{this.state.board.qboardWriter}</h4>
+                  
+                  <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.qboardInsertTime}</span>
 
-                        <div className="form-group">
-                           <label for="inp-type-5" className="col-sm-2 control-label">내용</label>
-                           <div className="col-sm-10">
-                              <p className="form-control"> {this.state.board.qboardContent} </p>
-                           </div>
-                        </div>
-
-                        {
-                           this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
-                              <div className="form-group">
-                                 <label for="inp-type-5" className="col-sm-2 control-label">사진</label>
-                                 <div className="col-sm-10">
-                                    <img src={this.state.file}/>
-                                 </div>
-                              </div>
+                  <ColoredLine color="lightgray"/>
+                  {
+                     this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
+                        
+                                 <img src={this.state.file}/>
+                             
                            )
                         }
 
-                        
-                       
-                        <div className="form-group">
-                           <label for="inp-type-5" className="col-sm-2 control-label">등록일</label>
-                           <div className="col-sm-10">
-                              <p className="form-control">{this.state.board.qboardInsertTime}</p>
-                           </div>
-                        </div>
 
-                        <div className="form-group">
-                           <label for="inp-type-5" className="col-sm-2 control-label">조회 수</label>
-                           <div className="col-sm-10">
-                              <p className="form-control">{this.state.board.qboardViews}</p>
-                           </div>
-                        </div>
-                     </form>
+
+
+                  <div style={{padding:'50px 100px 80px 30px'}}>
+                     {this.state.board.qboardContent}
+                  </div>
+
+
+
+
+
+
+                     
+
+
+
+
+
+
 
                      <div className="btn_wrap text-center">
                         <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
