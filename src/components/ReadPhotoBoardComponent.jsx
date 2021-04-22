@@ -92,6 +92,16 @@ class ReadPhotoBoardComponent extends Component {
          );
          this.setState({ file: "data:;base64," + base64 });
       });
+
+      // 네비바에 현재 위치 표시하기 
+      var header = document.getElementById("navbar");
+      var photobtn = document.getElementById("photobtn");
+      var btns = header.getElementsByClassName("mybtn");
+      for (var i = 0; i < btns.length; i++) {
+          btns[i].className = "mybtn"
+      }
+      photobtn.className += " active";
+
       
       
     }
@@ -101,8 +111,8 @@ class ReadPhotoBoardComponent extends Component {
     }
 
     goToUpdate = (event) => { //게시글 업데이트
-        // event.preventDefault();
-        // this.props.history.push(`/create-board/${this.state.qboardNo}`);
+        event.preventDefault();
+        this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
     }
 
 

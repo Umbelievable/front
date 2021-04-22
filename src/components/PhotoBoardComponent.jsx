@@ -12,7 +12,8 @@ class PhotoBoardComponent extends Component {
             paging: {},
             boards: [],
         }
-        this.getImgSrc=this.getImgSrc.bind(this)
+        this.getImgSrc=this.getImgSrc.bind(this);
+        this.createBoard = this.createBoard.bind(this);
     }
     
     componentDidMount() {
@@ -40,8 +41,17 @@ class PhotoBoardComponent extends Component {
         return file;
     }
 
+    createBoard() {
+        this.props.history.push('/create-photoboard/_create');
+    }
+
     readPhotoBoard(pboardNo) {
         this.props.history.push(`/read-photoboard/${pboardNo}`);
+    }
+
+    goToUpdate = (event) => {
+        event.preventDefault();
+        this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
     }
 
     listBoard(p_num) {
@@ -151,7 +161,11 @@ class PhotoBoardComponent extends Component {
         
             </div>
             </div>
-            </div> 
+            </div>
+
+            <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+			</div> 
             
             <div className ="row">
                 <nav aria-label="Page navigation example">

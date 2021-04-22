@@ -55,7 +55,6 @@ class ReadBoardComponent extends Component {
 
     updateComment = async function (qcommentNo) {
       let comment = {
-         qboardNo: this.state.qboardNo,
          qcommentContent: this.state.newComment,
          qcommentWriter: this.state.currentUser.username,
       };
