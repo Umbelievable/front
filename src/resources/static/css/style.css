@@ -1477,3 +1477,63 @@ textarea.form-control {
   top: 0;
   width: 100%;
 }
+
+.mybtn {
+  border: none;
+  outline: none;
+  padding: 10px 16px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+/* Style the active class (and buttons on mouse-over) */
+.active,
+.mybtn:hover {
+  color: rgb(162, 231, 98);
+}
+
+.hashtag {
+  display: inline;
+  border-radius: 7px;
+  padding: 5px 20px 5px 20px;
+  margin: 10px;
+  background-color: lavender;
+}
+
+.cropping {
+  max-width: 350px;
+  max-height: 350px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cropping img {
+  width: 350px;
+  height: 350px;
+}
+
+.card-body {
+  height: 91.8px;
+}
+
+.card-text {
+  height: 40px;
+}
+
+.mainImg {
+  max-width: 350px;
+  max-height: 350px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  display: inline-block;
+  padding: 20px;
+}

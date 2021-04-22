@@ -3,20 +3,20 @@ import axios from 'axios';
 const COMMENT_API_BASE_URL = "http://localhost:8080/api/comment"; 
 
 class CommentService{
-    getComments(idx) {
-        return axios.get(COMMENT_API_BASE_URL + "/" + idx);
+    getComments(qboardNo) {
+        return axios.get(COMMENT_API_BASE_URL + "/" + qboardNo);
     }
 
-    createComment(comment) {
-        return axios.post(COMMENT_API_BASE_URL, comment);
+    createComment(qboardNo, comment) {
+        return axios.post(COMMENT_API_BASE_URL + "/" + qboardNo, comment);
     }
 
-    updateComment(idx, commentIdx, comment) {
-        return axios.put(COMMENT_API_BASE_URL + "/" + idx + "/" + commentIdx, comment);
+    updateComment(qboardNo, qcommentNo, comment) {
+        return axios.put(COMMENT_API_BASE_URL + "/" + qboardNo + "/" + qcommentNo, comment);
     }
 
-    deleteComment(idx, commentIdx) {
-        return axios.delete(COMMENT_API_BASE_URL + "/" + idx + "/" + commentIdx);
+    deleteComment(qboardNo, qcommentNo) {
+        return axios.delete(COMMENT_API_BASE_URL + "/" + qboardNo + "/" + qcommentNo);
     }
 }
 

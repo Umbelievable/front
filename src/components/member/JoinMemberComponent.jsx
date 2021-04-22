@@ -130,7 +130,7 @@ class JoinMemberComponent extends Component {
             <div class="box-content">
             <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
 
-            <div class="card-content">
+            <div style={{width:'840px', margin:'auto'}}  class="card-content" >
             <Form
             onSubmit={this.handleRegister}
             ref={c => {
@@ -140,19 +140,31 @@ class JoinMemberComponent extends Component {
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
-                  <Input
+                  <label htmlFor="ID">아이디</label>
+                  <input
                     type="text"
                     className="form-control"
                     name="username"
-                    value={this.state.username}
+                    value={this.state.username}  // db되고 back되면 이게 userid임
                     onChange={this.onChangeUsername}
                     validations={[required, vusername]}
                   />
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="password">비밀번호</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                    validations={[required, vpassword]}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">이메일</label>
                   <Input
                     type="text"
                     className="form-control"
@@ -164,19 +176,92 @@ class JoinMemberComponent extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="name">이름</label>
                   <Input
-                    type="password"
+                    type="text"
                     className="form-control"
-                    name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
+                    name="name"
+                    //추가
+                  />
+                  
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="phoneNo">전화번호</label>
+                  <Input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    //추가
                   />
                 </div>
 
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block">Sign Up</button>
+                  <label htmlFor="birthDate">생년월일</label>
+                  <br/>
+
+                  <div style={{display:'inline'}}>
+                  <input
+                    style={{display: 'inline-block', width: '260px',margin:'0px 30px 0px 0px'}}
+                    class="form-control"
+                    type="text"
+                    name="name"
+                    placeholder="년(4자)"
+                    aria-label="년(4자)"
+                    maxLength="4"
+                    //추가
+                  />
+                  </div>
+                  <div style={{display:'inline'}}>
+                   <select style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 0px'}} 
+                          aial-label="월"
+                          class="form-control"
+                   >
+                   <option value>월</option>
+                   <option value="01">1</option>
+                   <option value="02">2</option>
+                   <option value="03">3</option>
+                   <option value="04">4</option>
+                   <option value="05">5</option>
+                   <option value="06">6</option>
+                   <option value="07">7</option>
+                   <option value="08">8</option>
+                   <option value="09">9</option>
+                   <option value="10">10</option>
+                   <option value="11">11</option>
+                   <option value="12">12</option>
+                   </select>
+                 
+                   </div>
+                   <div style={{display:'inline'}}>
+                   <input type="text" 
+                          style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 30px'}}
+                          class="form-control"
+                          placeholder="일" 
+                          aria-label="일" 
+                          maxLength="2"></input>
+                          
+                          </div>
+                </div>
+                
+
+                <div className="form-group">
+                  <label htmlFor="sex">성별</label>
+                  <select
+                    className="form-control"
+                    name="sex"
+                    aria-label="성별"
+                    //추가
+                    >
+                      <option value selected>성별</option>
+                      <option value="M">남자</option>
+                      <option value="F">여자</option>
+                    </select>    
+                 
+                </div>
+
+                <div className="form-group">
+                  <button className="btn btn-primary btn-block">가입하기</button>
                 </div>
               </div>
             )}
@@ -202,7 +287,7 @@ class JoinMemberComponent extends Component {
               }}
             />
           </Form>
-			    
+             
             </div>                                
 
         

@@ -19,19 +19,29 @@ class ListBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
+
+        // 네비바에 현재 위치 표시하기 
+        var header = document.getElementById("navbar");
+        var qnabtn = document.getElementById("qnabtn");
+        var btns = header.getElementsByClassName("mybtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = "mybtn"
+        }
+        qnabtn.className += " active";
+
     }
 
     createBoard() {
         this.props.history.push('/create-board/_create');
     }
 
-    readBoard(idx) {
-        this.props.history.push(`/read-board/${idx}`);
+    readBoard(qboardNo) {
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     goToUpdate = (event) => {
         event.preventDefault();
-        this.props.history.push(`/create-board/${this.state.idx}`);
+        this.props.history.push(`/create-board/${this.state.qboardNo}`);
     }
 
     listBoard(p_num) {
@@ -126,12 +136,12 @@ class ListBoardComponent extends Component {
                         {
                         this.state.boards.map(
                             board => 
-                            <tr key = {board.idx}>
-                                <td> {board.idx} </td>
-                                <td> <a href={'/read-board/'+board.idx}>{board.title} </a> </td>
-                                <td> {board.writer} </td>
-                                <td> {board.insertTime} </td>
-                                <td> {board.viewCnt} </td>
+                            <tr key = {board.qboardNo}>
+                                <td> {board.qboardNo} </td>
+                                <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
+                                <td> {board.qboardWriter} </td>
+                                <td> {board.qboardInsertTime} </td>
+                                <td> {board.qboardViews} </td>
                             </tr>
                         )
                         }
@@ -143,32 +153,27 @@ class ListBoardComponent extends Component {
             </div>
 
             <div className ="row">
-                    <nav aria-label="Page navigation example">
-                        <ul className="pagination justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-center">
 
-                            {
-                                this.isMoveToFirstPage()
-                            }
-                            {
-                                this.isPagingPrev()
-                            }
-                            {
-                                this.viewPaging()
-                            }
-                            {
-                                this.isPagingNext()
-                            }
-                            {
-                                this.isMoveToLastPage()
-                            }
-                        </ul>
-                    </nav>
-                </div>
-
-
-
-
-
+                        {
+                            this.isMoveToFirstPage()
+                        }
+                        {
+                            this.isPagingPrev()
+                        }
+                        {
+                            this.viewPaging()
+                        }
+                        {
+                            this.isPagingNext()
+                        }
+                        {
+                            this.isMoveToLastPage()
+                        }
+                    </ul>
+                </nav>
+            </div>
 
 
 				</div>

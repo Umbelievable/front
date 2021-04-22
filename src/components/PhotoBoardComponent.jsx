@@ -1,160 +1,181 @@
 import React, { Component } from 'react';
+import { Base64 } from 'js-base64';
+import PhotoBoardService from '../service/PhotoBoardService';
+import FileService from '../service/FileService';
 
 
 class PhotoBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-           
+            p_num: 1,
+            paging: {},
+            boards: [],
         }
+        this.getImgSrc=this.getImgSrc.bind(this)
+    }
+    
+    componentDidMount() {
+
+        PhotoBoardService.getBoards(this.state.p_num).then((res) => {
+            this.setState({ 
+                p_num: res.data.pagingData.currentPageNum,
+                paging: res.data.pagingData,
+                boards: res.data.list});
+        });
+
+        // 네비바에 현재 위치 표시하기 
+        var header = document.getElementById("navbar");
+        var photobtn = document.getElementById("photobtn");
+        var btns = header.getElementsByClassName("mybtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = "mybtn"
+        }
+        photobtn.className += " active";
 
     }
+
+    getImgSrc(url){
+        var file = "data:;base64," + url;
+        return file;
+    }
+
+    readPhotoBoard(pboardNo) {
+        this.props.history.push(`/read-photoboard/${pboardNo}`);
+    }
+
+    listBoard(p_num) {
+        console.log("pageNum : "+ p_num);
+        PhotoBoardService.getBoards(p_num).then((res) => {
+            console.log(res.data);
+            this.setState({ 
+                p_num: res.data.pagingData.currentPageNum,
+                paging: res.data.pagingData,
+                boards: res.data.list});
+        });
+    }
+
+    viewPaging() {
+        const pageNums = [];
+
+        for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
+            pageNums.push(i);
+        }
+
+        return (pageNums.map((page) => 
+        <li className="page-item" key={page.toString()} >
+            <a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>
+        </li>
+        ));
+        
+    }
+
+    isPagingPrev(){
+        if (this.state.paging.prev) {
+            return (
+                <li className="page-item">
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1) )} tabindex="-1">Previous</a>
+                </li>
+            );
+        }
+    }
+
+    isPagingNext(){
+        if (this.state.paging.next) {
+            return (
+                <li className="page-item">
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1) )} tabIndex="-1">Next</a>
+                </li>
+            );
+        }
+    }
+
+    isMoveToFirstPage() {
+        if (this.state.p_num != 1) {
+            return (
+                <li className="page-item">
+                    <a className="page-link" onClick = {() => this.listBoard(1)} tabIndex="-1">Move to First Page</a>
+                </li>
+            );
+        }
+    }
+
+    isMoveToLastPage() {
+        if (this.state.p_num != this.state.paging.pageNumCountTotal) {
+            return (
+                <li className="page-item">
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                </li>
+            );
+        }
+    }
+
+
 
 
     render() {
         return (
-        <div class="main-content">
-            <div class="row row-inline-block small-spacing">
-            <div class="col-xs-12">
-            <div class="box-content">
-            <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+        <div className="main-content">
+            <div className="row row-inline-block small-spacing">
+            <div className="col-xs-12">
+            <div className="box-content">
+            <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
-            <div class="album py-5 bg-light">
-            <div class="container">
+            <div className="album py-5 bg-light">
+            <div className="container">
 
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {
+                    this.state.boards.map(
+                        board => 
+                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)}>
+                            <div className="card shadow-sm">
+                            <div className="cropping">
+                                <img src={this.getImgSrc(board.pboardFileUrl)}/>
+                            </div>
+                            <div className="card-body">
+                                <p className="card-text">{board.pboardTitle}</p>
+                            <div className="d-flex justify-content-between align-items-center">
+                                <small className="text-muted">{board.pboardWriter}</small>
+                            </div>
+                            </div>
+                            </div>
+                        </div>
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/04/27/aa/0427aa3320406371935bd2279240707b.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">내 방 사진</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
+                    )
+                }
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/d6/1e/83/d61e832dc10783968c377cea2797cf66.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">제 방 멋지죠??</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
+                
 
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/e5/ca/29/e5ca29cf1cd224f2759640d7a49197f4.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">이런데서 살고싶어요ㅋㅋ</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted"></small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/04/27/aa/0427aa3320406371935bd2279240707b.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/d6/1e/83/d61e832dc10783968c377cea2797cf66.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/e5/ca/29/e5ca29cf1cd224f2759640d7a49197f4.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/04/27/aa/0427aa3320406371935bd2279240707b.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/d6/1e/83/d61e832dc10783968c377cea2797cf66.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card shadow-sm">
-                    <div width="300px" height="300px" style={{overflow: 'hidden'},{display: 'flex'},{alignItems: 'center'},{justifyContent: 'center'}}>
-                        <img src="https://i.pinimg.com/564x/e5/ca/29/e5ca29cf1cd224f2759640d7a49197f4.jpg"/>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">추천 아이템1</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <small class="text-muted">9 mins</small>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-
+                
         
             </div>
             </div>
-            </div>      
+            </div> 
+            
+            <div className ="row">
+                <nav aria-label="Page navigation example">
+                    <ul className="pagination justify-content-center">
+
+                        {
+                            this.isMoveToFirstPage()
+                        }
+                        {
+                            this.isPagingPrev()
+                        }
+                        {
+                            this.viewPaging()
+                        }
+                        {
+                            this.isPagingNext()
+                        }
+                        {
+                            this.isMoveToLastPage()
+                        }
+                    </ul>
+                </nav>
+            </div>
+
             </div>
             </div>
             </div>

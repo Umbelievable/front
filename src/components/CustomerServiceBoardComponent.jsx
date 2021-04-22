@@ -11,6 +11,17 @@ class CustomerServiceBoardComponent extends Component {
 
     }
 
+    componentDidMount() {
+        var header = document.getElementById("navbar");
+        var csbtn = document.getElementById("csbtn");
+        var btns = header.getElementsByClassName("mybtn");
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].className = "mybtn"
+        }
+        csbtn.className += " active";
+
+    }
+
 
     render() {
         return (

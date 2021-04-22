@@ -11,13 +11,14 @@ class HeaderComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            categories: [],
+            searchBoard:'allBoard',
             searchType:'all',
             searchKeyword:'',
             isModalOpen:false,
             currentUser: { username: "" }
         }
         this.joinMember = this.joinMember.bind(this);
+        this.changeBoardHandler=this.changeBoardHandler.bind(this);
         this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
 
@@ -32,15 +33,13 @@ class HeaderComponent extends Component {
         else{
             this.setState({ currentUser: currentUser, userReady: true });
         } 
-        
-        
-  
-        CategoryService.getCategory().then((res) => {
-          this.setState({ 
-            categories: res.data});
-        });
+ 
     }
     
+    changeBoardHandler = (event) => {
+        this.setState({searchBoard: event.target.value});
+    }
+
     changeTypeHandler = (event) => {
         this.setState({searchType: event.target.value});
     }
@@ -61,9 +60,8 @@ class HeaderComponent extends Component {
       this.setState({ isModalOpen: false });
     }
 
-    searchBoard(searchType, searchKeyword){
-        this.props.history.push(`/search-board?searchType=${searchType}&searchKeyword=${searchKeyword}`);
-       
+    searchBoard(searchBoard,searchType, searchKeyword){
+        this.props.history.push(`/search-board?searchBoard=${searchBoard}&searchType=${searchType}&searchKeyword=${searchKeyword}`);
     }
 
     goToList() {
@@ -87,7 +85,7 @@ class HeaderComponent extends Component {
           {!this.state.userReady && (
               <button class="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
          {this.state.userReady && (
-             <button class="btn btn-primary waves-effect waves-light" >{currentUser.username}님의 my page</button>)}
+             <button class="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.username}님의 my page</button>)}
         
           {!this.state.userReady && (
               <button class="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
@@ -102,6 +100,15 @@ class HeaderComponent extends Component {
 				    <h1 class="page-title" onClick = {this.goToList}>DZBZ</h1>
         <div id="adv-search" class="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
+
+                <div class="form-group" style={{display:'inline-block'}}>
+                <select value={this.state.searchBoard} onChange={this.changeBoardHandler} name="searchBoard" class="form-control" style={{width:"100px"},{height:"44px"}}>
+                            <option value="allBoard" >전체</option>
+                            <option value="photo" >Photo</option>
+							<option value="qna" >Q&amp;A</option>
+						</select>
+                </div>
+
 					<div class="form-group" style={{display:'inline-block'}}>
 						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" class="form-control" style={{width:"100px"},{height:"44px"}}>
                             <option value="all" >전체</option>
@@ -116,7 +123,7 @@ class HeaderComponent extends Component {
 					</div>
 
           <div class="form-group" style={{display:'inline-block'}}>
-					  <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} class="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					  <button onClick = {() => this.searchBoard(this.state.searchBoard, this.state.searchType, this.state.searchKeyword)} class="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
           </div>          
         </form>
 	      </div>
