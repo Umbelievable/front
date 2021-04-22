@@ -12,11 +12,11 @@ class ReadBoardComponent extends Component {
         this.state = { 
             qboardNo: this.props.match.params.qboardNo,
             board: {},
-            qcommentContent:'',
-            qcommentWriter:'',
+            qcommentContent: '',
+            qcommentWriter: '',
             comments: [],
-            isModify:false,
-            newComment:'',
+            isModify: false,
+            newComment: '',
             file: null, // 게시글에 이미지파일 첨부되어있다면 img 가져와서 담을 변수
             currentUser: { username: "" }
         }

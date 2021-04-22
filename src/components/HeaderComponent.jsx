@@ -11,10 +11,10 @@ class HeaderComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchBoard:'allBoard',
-            searchType:'all',
-            searchKeyword:'',
-            isModalOpen:false,
+            searchBoard: 'allBoard',
+            searchType: 'all',
+            searchKeyword: '',
+            isModalOpen: false,
             currentUser: { username: "" }
         }
         this.joinMember = this.joinMember.bind(this);

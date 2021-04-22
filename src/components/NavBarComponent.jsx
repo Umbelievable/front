@@ -9,11 +9,11 @@ class NavBarComponent extends Component {
         super(props)
         this.state = {
             categories: [],
-            bed_categories:[],
-            kitchen_categories:[],
-            library_categories:[],
-            livingroom_categories:[],
-            storage_categories:[],
+            bed_categories: [],
+            kitchen_categories: [],
+            library_categories: [],
+            livingroom_categories: [],
+            storage_categories: [],
             currentUser: { username: "" }
 
         }

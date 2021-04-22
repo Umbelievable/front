@@ -12,11 +12,11 @@ class ReadPhotoBoardComponent extends Component {
         this.state = { 
             pboardNo: this.props.match.params.pboardNo,
             board: {},
-            pcommentContent:'',
-            pcommentWriter:'',
+            pcommentContent: '',
+            pcommentWriter: '',
             comments: [],
-            isModify:false,
-            newComment:'',
+            isModify: false,
+            newComment: '',
             file: null, 
             currentUser: { username: "" }
             

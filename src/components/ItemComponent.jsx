@@ -8,12 +8,12 @@ class ItemComponent extends Component{
 
         super(props)
         this.state = {
-            itemInfo:[],
-            cateNo:query.cateNo,
-            thisCateNo:query.thisCateNo,
-            pdNo:query.pdNo,
-            reviews:[],  //리뷰목록
-            reviewResult:[]  //리뷰키워드그래프 데이터타입 아직모름.
+            itemInfo: [],
+            cateNo: query.cateNo,
+            thisCateNo: query.thisCateNo,
+            pdNo: query.pdNo,
+            reviews: [],  //리뷰목록
+            reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름.
         }
     }
 

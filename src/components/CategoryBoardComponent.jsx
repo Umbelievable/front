@@ -9,7 +9,7 @@ class CategoryBoardComponent extends Component {
         super(props)
         this.state = {
             cateNo: query.cateNo,
-            items:[]
+            items: []
         }
     }
 
