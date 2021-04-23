@@ -15,6 +15,7 @@ class ReadBoardComponent extends Component {
             qcommentContent: '',
             qcommentWriter: '',
             comments: [],
+            currentCommentNo: '',
             isModify: false,
             newComment: '',
             file: null, // 게시글에 이미지파일 첨부되어있다면 img 가져와서 담을 변수
@@ -29,13 +30,48 @@ class ReadBoardComponent extends Component {
 
     changeContentHandler = (event) => {
       this.setState({qcommentContent: event.target.value});
+      
     }
 
     changeCommentContentHandler = (event) => {
       this.setState({newComment: event.target.value});
     }
 
-    changeModalHandler = (event) => {
+    changeModalHandler(qcommentNo) {
+      var commentLi = document.getElementById("liId"+qcommentNo);
+      var commentSpan = document.getElementById("spanId"+qcommentNo); 
+      var commentdelBtn = document.getElementById("delBtnId"+qcommentNo); // 삭제 버튼
+      var commentmodiBtn = document.getElementById("modiBtnId"+qcommentNo); // 수정 버튼
+
+      commentLi.removeChild(commentSpan);
+      commentLi.removeChild(commentdelBtn);
+      commentLi.removeChild(commentmodiBtn); // 원래 있던 span, delBtn, modiBtn 지우고
+
+      var newINPUT = document.createElement("input"); // input 태그 새로 만들고
+      var newButton = document.createElement("button"); // 수정 완료 버튼 새로 만들고
+      var newI = document.createElement("i"); // 버튼 안에 들어갈 체크 아이콘
+      newI.setAttribute("class", "glyphicon glyphicon-ok");
+      newI.setAttribute("aria-hidden", "true");
+
+      newINPUT.setAttribute("class", "form-control");
+      newINPUT.style.width = "1080px";
+      newINPUT.style.height = "22.4px";
+      newINPUT.style.display = "inline";
+      newINPUT.value = commentSpan.innerHTML;
+      newINPUT.onchange = this.changeCommentContentHandler;
+
+      newButton.setAttribute("class", "btn btn-xs btn-circle");
+      newButton.style.display = "inline";
+      newButton.style.width = "32px";
+      newButton.style.height = "31.6px";
+      newButton.onclick = () => this.updateComment(qcommentNo);
+      
+
+	   commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
+      newButton.appendChild(newI);
+      commentLi.appendChild(newButton);
+      
+
       this.setState({isModify: !this.state.isModify,});
     }
 
@@ -172,19 +208,6 @@ class ReadBoardComponent extends Component {
                      {this.state.board.qboardContent}
                   </div>
 
-
-
-
-
-
-                     
-
-
-
-
-
-
-
                      <div className="btn_wrap text-center">
                         <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
                         <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
@@ -207,29 +230,22 @@ class ReadBoardComponent extends Component {
                            { 
                            this.state.comments.map(
                               comment =>
-                              <li key = {comment.qcommentNo}>  
+                              <li id={"liId"+comment.qcommentNo} key = {comment.qcommentNo}> 
+                              
                                  <span className="name">{comment.qcommentWriter}</span>
 
-                                 {!this.state.isModify && ( //수정 안하면 원래 댓글 내용 보여주고
-                                    <span className="desc">{comment.qcommentContent}</span>
-                                 )}
-
-                                 {this.state.isModify && ( //수정 중이면 플레이스 홀더로 원래 댓글 내용 띄워주고 입력 받기
-                                    <input type="text" className="form-control" style={{width:"1000px"}} onChange={this.changeCommentContentHandler} placeholder={comment.qcommentContent}/>
-                                 )}
+                                 
+                                 <span id={"spanId"+comment.qcommentNo} className="desc">{comment.qcommentContent}</span>
+                                 
 
                                  <span className="time">{comment.qcommentInsertTime}</span>
 
-                                 {!this.state.isModify &&(this.state.currentUser.username == comment.qcommentWriter) &&( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
-                                    <button type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
+                                 {(this.state.currentUser.username == comment.qcommentWriter) && ( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
+                                    <button id={"delBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
                                  )}
                                                                
-                                 {!this.state.isModify && (this.state.currentUser.username == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
-                                 <button type="button" className="btn btn-xs btn-circle" onClick={this.changeModalHandler} style={{right: "55px"}}><i className="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
-                                 )}
-
-                                 {this.state.isModify && ( // 수정 중이면 수정 완료 버튼 띄우기
-                                 <button type="button" className="btn btn-xs btn-circle" onClick={() => this.updateComment(comment.qcommentNo)} style={{right: "55px"}}><i className="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
+                                 {(this.state.currentUser.username == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
+                                 <button id={"modiBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.changeModalHandler(comment.qcommentNo)} style={{right: "55px"}}><i className="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
                                  )}
 
                               </li>

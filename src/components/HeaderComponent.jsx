@@ -100,7 +100,7 @@ class HeaderComponent extends Component {
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 
                     <div className="form-group" style={{display:'inline-block'}}>
-                        <select value={this.state.searchBoard} onChange={this.changeBoardHandler} name="searchBoard" className="form-control" style={{width:"100px", height:"44px"}}>
+                        <select value={this.state.searchBoard} onChange={this.changeBoardHandler} name="searchBoard" className="form-control" style={{width:"80px", height:"44px"}}>
                             <option value="allBoard" >전체</option>
                             <option value="photo" >Photo</option>
                             <option value="qna" >Q&amp;A</option>
@@ -108,7 +108,7 @@ class HeaderComponent extends Component {
                     </div>
 
 					<div className="form-group" style={{display:'inline-block'}}>
-						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" className="form-control" style={{width:"100px", height:"44px"}}>
+						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" className="form-control" style={{width:"80px", height:"44px"}}>
                             <option value="all" >전체</option>
                             <option value="title" >제목</option>
 							<option value="content" >내용</option>
@@ -117,15 +117,15 @@ class HeaderComponent extends Component {
 					</div>
 
 					<div className="form-group" style={{display:'inline-block'}}>
-						<input type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"300px"}} placeholder="키워드를 입력해 주세요."/>
+						<input type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"280px"}} placeholder="키워드를 입력해 주세요."/>
 					</div>
 
-          <div className="form-group" style={{display:'inline-block'}}>
-					  <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-          </div>          
-        </form>
-	      </div>
-			    </div>
+                    <div className="form-group" style={{display:'inline-block'}}>
+					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>          
+                </form>
+	        </div>
+			</div>
 
         
 		</div>

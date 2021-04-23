@@ -44,7 +44,6 @@ function App() {
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
               <Route path = "/read-photoboard/:pboardNo" component = {ReadPhotoBoardComponent}></Route>
               <Route path = "/create-photoboard/:pboardNo" component = {CreatePhotoBoardComponent}></Route>
-              
               </Switch>
         <FooterComponent/>
       </Router>
