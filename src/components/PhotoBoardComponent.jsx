@@ -142,25 +142,18 @@ class PhotoBoardComponent extends Component {
                 {
                     this.state.boards.map(
                         board => 
-                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)}>
-                            <div>
+                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)} style={{padding:'20px 10px'}}>
                             <div className="cropping">
-                                <img src={this.getImgSrc(board.pboardFileUrl)}/>
-                            </div>
-                            
-                                <p className="card-text">{board.pboardTitle}</p>
-                            
-                                <small className="text-muted">{board.pboardWriter}</small>
-                            
+                                <img className="cropping-layerBottom" src={this.getImgSrc(board.pboardFileUrl)}/>
+                                <div className="cropping-layerTop">
+                                    <p className="cropping-text">{board.pboardTitle}<br/><br/><small className="text-muted">{board.pboardWriter}</small></p>
+                                </div>
                             </div>
                         </div>
 
                     )
                 }
 
-                
-
-                
         
             </div>
             </div>
