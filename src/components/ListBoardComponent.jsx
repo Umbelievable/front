@@ -19,6 +19,9 @@ class ListBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
+        // qna 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ QnA 검색";
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");

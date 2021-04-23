@@ -12,6 +12,10 @@ class CustomerServiceBoardComponent extends Component {
     }
 
     componentDidMount() {
+        // DZBZ 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ 통합 검색";
+
         var header = document.getElementById("navbar");
         var csbtn = document.getElementById("csbtn");
         var btns = header.getElementsByClassName("mybtn");

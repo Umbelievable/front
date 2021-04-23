@@ -12,6 +12,9 @@ class MainBoardComponent extends Component {
     }
 
     componentDidMount() {
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ 통합 검색";
+
         var header = document.getElementById("navbar");
         var homebtn = document.getElementById("homebtn");
         var btns = header.getElementsByClassName("mybtn");

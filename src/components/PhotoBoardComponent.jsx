@@ -25,6 +25,10 @@ class PhotoBoardComponent extends Component {
                 boards: res.data.list});
         });
 
+        // photo 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ Photo 검색";
+
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");
         var photobtn = document.getElementById("photobtn");
@@ -131,7 +135,7 @@ class PhotoBoardComponent extends Component {
             <div className="box-content">
             <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
-            <div className="album py-5 bg-light">
+            <div className="album py-5 bg-white">
             <div className="container">
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -139,16 +143,15 @@ class PhotoBoardComponent extends Component {
                     this.state.boards.map(
                         board => 
                         <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)}>
-                            <div className="card shadow-sm">
+                            <div>
                             <div className="cropping">
                                 <img src={this.getImgSrc(board.pboardFileUrl)}/>
                             </div>
-                            <div className="card-body">
+                            
                                 <p className="card-text">{board.pboardTitle}</p>
-                            <div className="d-flex justify-content-between align-items-center">
+                            
                                 <small className="text-muted">{board.pboardWriter}</small>
-                            </div>
-                            </div>
+                            
                             </div>
                         </div>
 

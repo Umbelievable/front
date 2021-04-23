@@ -98,26 +98,8 @@ class HeaderComponent extends Component {
 				<h1 className="page-title" onClick = {this.goToList}>DZBZ</h1>
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
-
-                    <div className="form-group" style={{display:'inline-block'}}>
-                        <select value={this.state.searchBoard} onChange={this.changeBoardHandler} name="searchBoard" className="form-control" style={{width:"80px", height:"44px"}}>
-                            <option value="allBoard" >전체</option>
-                            <option value="photo" >Photo</option>
-                            <option value="qna" >Q&amp;A</option>
-                        </select>
-                    </div>
-
 					<div className="form-group" style={{display:'inline-block'}}>
-						<select value={this.state.searchType} onChange={this.changeTypeHandler} name="searchType" className="form-control" style={{width:"80px", height:"44px"}}>
-                            <option value="all" >전체</option>
-                            <option value="title" >제목</option>
-							<option value="content" >내용</option>
-							<option value="writer" >작성자</option>
-						</select>
-					</div>
-
-					<div className="form-group" style={{display:'inline-block'}}>
-						<input type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"280px"}} placeholder="키워드를 입력해 주세요."/>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"400px"}} placeholder="DZBZ 상품 검색"/>
 					</div>
 
                     <div className="form-group" style={{display:'inline-block'}}>

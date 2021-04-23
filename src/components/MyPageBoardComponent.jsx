@@ -11,6 +11,10 @@ class MyPageBoardComponent extends Component {
     }
 
     componentDidMount() {
+        // DZBZ 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ 통합 검색";
+        
         const currentUser = MemberService.getCurrentUser();
         this.setState({ currentUser: currentUser, userReady: true });
         
