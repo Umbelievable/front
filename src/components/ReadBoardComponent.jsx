@@ -15,8 +15,6 @@ class ReadBoardComponent extends Component {
             qcommentContent: '',
             qcommentWriter: '',
             comments: [],
-            currentCommentNo: '',
-            isModify: false,
             newComment: '',
             file: null, // 게시글에 이미지파일 첨부되어있다면 img 가져와서 담을 변수
             currentUser: { username: "" }
@@ -54,7 +52,7 @@ class ReadBoardComponent extends Component {
       newI.setAttribute("aria-hidden", "true");
 
       newINPUT.setAttribute("class", "form-control");
-      newINPUT.style.width = "1080px";
+      newINPUT.style.width = "1200px";
       newINPUT.style.height = "22.4px";
       newINPUT.style.display = "inline";
       newINPUT.value = commentSpan.innerHTML;
@@ -70,9 +68,7 @@ class ReadBoardComponent extends Component {
 	   commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
       newButton.appendChild(newI);
       commentLi.appendChild(newButton);
-      
 
-      this.setState({isModify: !this.state.isModify,});
     }
 
     createComment = (event) => {
@@ -99,7 +95,6 @@ class ReadBoardComponent extends Component {
       CommentService.updateComment(this.state.qboardNo, qcommentNo, comment).then(res => {
          window.location.replace(`/read-board/${this.state.qboardNo}`);
       });
-      
     }
 
     componentDidMount() {
@@ -137,7 +132,7 @@ class ReadBoardComponent extends Component {
         this.props.history.push('/qna-board');
     }
 
-    goToUpdate = (event) => { //게시글 업데이트
+    goToUpdate = (event) => { // 게시글 업데이트
         event.preventDefault();
         this.props.history.push(`/create-board/${this.state.qboardNo}`);
     }
