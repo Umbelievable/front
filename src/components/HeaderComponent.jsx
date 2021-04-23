@@ -99,11 +99,10 @@ class HeaderComponent extends Component {
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>
-						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control"  style={{width:"400px"}} placeholder="DZBZ 상품 검색"/>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"400px", border:'none'}} placeholder="DZBZ 상품 검색"/>
 					</div>
-
                     <div className="form-group" style={{display:'inline-block'}}>
-					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df"}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df", height:'42px'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>          
                 </form>
 	        </div>

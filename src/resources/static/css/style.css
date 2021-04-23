@@ -20,7 +20,7 @@ html,
 body {
   position: relative;
   height: 100%;
-  background: #f5f7fa;
+  width: 100%;
   color: #505458;
 }
 #wrapper {
@@ -818,7 +818,6 @@ Version 1.0
   z-index: 10;
   margin-left: 20px;
   margin-right: 20px;
-  padding-top: 30px;
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -1024,13 +1023,7 @@ Version 1.0
   padding: 30px;
   margin: 0px 0px 20px 0px;
   background: #ffffff;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
-  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05),
-    0 1px 1px rgba(0, 0, 0, 0.05);
+
   /* State */
   /* Style */
   /* Color */
@@ -1416,10 +1409,6 @@ textarea.form-control {
   margin-left: 0;
   margin-right: 0;
 }
-.form-group .form-control:last-child {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
 
 @media screen and (min-width: 768px) {
   #adv-search {
@@ -1571,6 +1560,7 @@ textarea.form-control {
 .cropping.active .cropping-text_mobile {
   display: block;
 }
+
 .card-body {
   height: 91.8px;
 }
@@ -1590,4 +1580,43 @@ textarea.form-control {
   height: 350px;
   display: inline-block;
   padding: 20px;
+}
+
+.auto-grid {
+  --auto-grid-min-size: 25rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(var(--auto-grid-min-size), 1fr)
+  );
+  margin: 0px;
+  padding: 0px;
+  border: 1px solid black;
+}
+
+.cs {
+  list-style: none;
+  padding: 2rem 3rem;
+  font-size: 1.2rem;
+  background: #ffffff;
+  color: black;
+  border: 0.3px solid lightgray;
+}
+
+.cs:hover {
+  background: rgb(59, 141, 96);
+  color: white;
+}
+
+.cs div {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.numDiv {
+  font-size: 30px;
+}
+
+.txtDiv {
+  font-size: 13px;
 }
