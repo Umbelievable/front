@@ -1620,3 +1620,7 @@ textarea.form-control {
 .txtDiv {
   font-size: 13px;
 }
+
+.answer {
+  display: none;
+}
