@@ -79,11 +79,9 @@ class CreateBoardComponent extends Component {
             BoardService.createBoard(board).then(res => {
                 window.location.replace('/qna-board');
             });
-        } else { // 있던 게시글 업데이트면
-            // 파일 Url 글번호로 가져와서
-            // qboardFileUrl 값 다시 주기
+        } else { 
             BoardService.updateBoard(this.state.qboardNo, board).then(res => {
-                this.props.history.push(`/read-board/${this.state.qboardNo}`);
+                window.location.replace(`/read-board/${this.state.qboardNo}`);
             });
         }
     }
@@ -95,7 +93,9 @@ class CreateBoardComponent extends Component {
     componentDidMount() {
         if (this.state.qboardNo === '_create') {
             return
-        } else {
+        } else { // 있던 게시글 업데이트면
+            // 파일 Url 글번호로 가져와서
+            // qboardFileUrl 값 다시 주기
             BoardService.getOneBoard(this.state.qboardNo).then( (res) => {
                 let board = res.data;
                 console.log("board => "+ JSON.stringify(board));
@@ -103,7 +103,8 @@ class CreateBoardComponent extends Component {
                 this.setState({
                     qboardTitle: board.qboardTitle,
                     qboardWriter: board.qboardWriter,
-                    qboardContent: board.qboardContent
+                    qboardContent: board.qboardContent,
+                    qboardFileUrl: board.qboardFileUrl
                 });
             });
         }

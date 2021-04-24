@@ -83,7 +83,7 @@ class CreatePhotoBoardComponent extends Component {
             // 파일 Url 글번호로 가져와서
             // qboardFileUrl 값 다시 주기
             PhotoBoardService.updateBoard(this.state.pboardNo, board).then(res => {
-                this.props.history.push(`/read-photoboard/${this.state.pboardNo}`);
+                window.location.replace(`/read-photoboard/${this.state.pboardNo}`);
             });
         }
     }
@@ -105,7 +105,8 @@ class CreatePhotoBoardComponent extends Component {
                 this.setState({
                     pboardTitle: board.pboardTitle,
                     pboardWriter: board.pboardWriter,
-                    pboardContent: board.pboardContent
+                    pboardContent: board.pboardContent,
+                    pboardFileUrl: board.pboardFileUrl
                 });
             });
         }
@@ -120,7 +121,6 @@ class CreatePhotoBoardComponent extends Component {
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
                 <div className="card-content">
 			    <form className="form-horizontal">
-                    
 
 				    <div className="form-group">
 					    <label for="title" className="col-sm-2 control-label">제목</label>
@@ -143,7 +143,6 @@ class CreatePhotoBoardComponent extends Component {
                             </div>    
                     </div>
 
-				   
 				    <div className="btn_wrap text-center">
                         <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
                         <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
