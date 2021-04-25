@@ -9,7 +9,7 @@ class CategoryBoardComponent extends Component {
         super(props)
         this.state = {
             cateNo: query.cateNo,
-            items:[]
+            items: []
         }
     }
 
@@ -20,45 +20,44 @@ class CategoryBoardComponent extends Component {
      
     }
 
-    readItem(pdNo,cateNo,thisCateNo) { 
+    readItem(pdNo, cateNo, thisCateNo) { 
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&thisCateNo=${thisCateNo}`);
     }
 
-
+  
     render() {
         return (
-            <div class="main-content"> 
-                <div class="row row-inline-block small-spacing">
-				<div class="col-xs-12">                   
-				<div class="box-content">
-				<div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+            <div className="main-content"> 
+                <div className="row row-inline-block small-spacing">
+				<div className="col-xs-12">                   
+				<div className="box-content">
+				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
-                <div class="album py-5 bg-light">
-                <div class="container">
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div className="album py-5 bg-light">
+                <div className="container">
+
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {
                         this.state.items.map(
                             item => 
-                            <div key = {item.pdNo, item.cateNo, item.thisCateNo} class="col">
-                                <div class="card shadow-sm" onClick={()=>this.readItem(item.pdNo,item.cateNo,item.thisCateNo)}>
-                                <div class="cropping">
+                            <div key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
+                                <div className="card shadow-sm" onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
+                                <div className="cropping">
                                     <img src={item.pdImg}/>
                                 </div>
-                                <div class="card-body">
-                                    <p class="card-text">{item.pdTitle}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <small class="text-muted">{item.pdPrice}</small>
+                                <div className="card-body">
+                                    <p className="card-text">{item.pdTitle}</p>
+                                <div className="d-flex justify-content-between align-items-center">
+                                    <small className="text-muted">{item.pdPrice}</small>
                                 </div>
                                 </div>
                                 </div>
-                                
                             </div>
 
                         )
                     }
 
                 </div>
-
                 </div>
                 </div> 
             

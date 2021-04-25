@@ -4,6 +4,7 @@ import CommentService from '../service/CommentService';
 import MemberService from '../service/MemberService';
 import FileService from '../service/FileService';
 
+
 class ReadBoardComponent extends Component {
     constructor(props) {
         super(props);
@@ -11,11 +12,10 @@ class ReadBoardComponent extends Component {
         this.state = { 
             qboardNo: this.props.match.params.qboardNo,
             board: {},
-            qcommentContent:'',
-            qcommentWriter:'',
+            qcommentContent: '',
+            qcommentWriter: '',
             comments: [],
-            isModify:false,
-            newComment:'',
+            newComment: '',
             file: null, // 게시글에 이미지파일 첨부되어있다면 img 가져와서 담을 변수
             currentUser: { username: "" }
         }
@@ -28,26 +28,58 @@ class ReadBoardComponent extends Component {
 
     changeContentHandler = (event) => {
       this.setState({qcommentContent: event.target.value});
+      
     }
 
     changeCommentContentHandler = (event) => {
       this.setState({newComment: event.target.value});
     }
 
-    changeModalHandler = (event) => {
-      this.setState({isModify: !this.state.isModify,});
+    changeModalHandler(qcommentNo) {
+      var commentLi = document.getElementById("liId"+qcommentNo);
+      var commentSpan = document.getElementById("spanId"+qcommentNo); 
+      var commentdelBtn = document.getElementById("delBtnId"+qcommentNo); // 삭제 버튼
+      var commentmodiBtn = document.getElementById("modiBtnId"+qcommentNo); // 수정 버튼
+
+      commentLi.removeChild(commentSpan);
+      commentLi.removeChild(commentdelBtn);
+      commentLi.removeChild(commentmodiBtn); // 원래 있던 span, delBtn, modiBtn 지우고
+
+      var newINPUT = document.createElement("input"); // input 태그 새로 만들고
+      var newButton = document.createElement("button"); // 수정 완료 버튼 새로 만들고
+      var newI = document.createElement("i"); // 버튼 안에 들어갈 체크 아이콘
+      newI.setAttribute("class", "glyphicon glyphicon-ok");
+      newI.setAttribute("aria-hidden", "true");
+
+      newINPUT.setAttribute("class", "form-control");
+      newINPUT.style.width = "1200px";
+      newINPUT.style.height = "22.4px";
+      newINPUT.style.display = "inline";
+      newINPUT.value = commentSpan.innerHTML;
+      newINPUT.onchange = this.changeCommentContentHandler;
+
+      newButton.setAttribute("class", "btn btn-xs btn-circle");
+      newButton.style.display = "inline";
+      newButton.style.width = "32px";
+      newButton.style.height = "31.6px";
+      newButton.onclick = () => this.updateComment(qcommentNo);
+      
+
+	   commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
+      newButton.appendChild(newI);
+      commentLi.appendChild(newButton);
+
     }
 
     createComment = (event) => {
       event.preventDefault();
       let comment = {
-         qboardNo: this.state.qboardNo,
          qcommentContent: this.state.qcommentContent,
          qcommentWriter: this.state.currentUser.username,
       };
       console.log("comment => "+ JSON.stringify(comment));
 
-      CommentService.createComment(comment).then(res => {
+      CommentService.createComment(this.state.qboardNo, comment).then(res => {
          window.location.replace(`/read-board/${this.state.qboardNo}`);
       });
       
@@ -55,7 +87,6 @@ class ReadBoardComponent extends Component {
 
     updateComment = async function (qcommentNo) {
       let comment = {
-         qboardNo: this.state.qboardNo,
          qcommentContent: this.state.newComment,
          qcommentWriter: this.state.currentUser.username,
       };
@@ -64,7 +95,6 @@ class ReadBoardComponent extends Component {
       CommentService.updateComment(this.state.qboardNo, qcommentNo, comment).then(res => {
          window.location.replace(`/read-board/${this.state.qboardNo}`);
       });
-      
     }
 
     componentDidMount() {
@@ -86,6 +116,15 @@ class ReadBoardComponent extends Component {
          );
          this.setState({ file: "data:;base64," + base64 });
       });
+
+      // 네비바에 현재 위치 표시하기 
+      var header = document.getElementById("navbar");
+      var qnabtn = document.getElementById("qnabtn");
+      var btns = header.getElementsByClassName("mybtn");
+      for (var i = 0; i < btns.length; i++) {
+          btns[i].className = "mybtn"
+      }
+      qnabtn.className += " active";
       
     }
 
@@ -93,9 +132,8 @@ class ReadBoardComponent extends Component {
         this.props.history.push('/qna-board');
     }
 
-    goToUpdate = (event) => { //게시글 업데이트
+    goToUpdate = (event) => { // 게시글 업데이트
         event.preventDefault();
-        
         this.props.history.push(`/create-board/${this.state.qboardNo}`);
     }
 
@@ -133,109 +171,76 @@ class ReadBoardComponent extends Component {
 
 
     render() {
+      const ColoredLine = ({ color }) => (
+         <hr
+             style={{
+                 color: color,
+                 backgroundColor: color,
+                 height: '0.6px'
+             }}
+         />
+     );
         return (
-            <div class="main-content">
-               <div class="row row-inline-block small-spacing">
-               <div class="col-xs-12">
-               <div class="box-content">
-               <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
-               
-                  <div class="card-content">
-                     <form class="form-horizontal form-view">
-                        <div class="form-group">
-                           <label for="inp-type-1" class="col-sm-2 control-label">제목</label>
-                           <div class="col-sm-10">
-                              <p class="form-control" > {this.state.board.qboardTitle} </p>
-                           </div>
-                        </div>
+            <div className="main-content">
+               <div className="row row-inline-block small-spacing">
+               <div className="col-xs-12">
+               <div className="box-content">
+               <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+                  <div className="card-content">
 
-                        <div class="form-group">
-                           <label for="inp-type-2" class="col-sm-2 control-label">이름</label>
-                           <div class="col-sm-10">
-                              <p class="form-control"> {this.state.board.qboardWriter} </p>
-                           </div>
-                        </div>
+                  <ColoredLine color="black"/>
+                  <h3 style={{fontSize:'18px', display:'inline', padding:'0px 50px 0px 10px'}}>{this.state.board.qboardTitle}</h3>
+                  <h4 style={{fontSize:'14px', display:'inline', padding:'0px 50px 0px 0px'}}>{this.state.board.qboardWriter}</h4>
+                  
+                  <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.qboardInsertTime}</span>
 
-                        <div class="form-group">
-                           <label for="inp-type-5" class="col-sm-2 control-label">내용</label>
-                           <div class="col-sm-10">
-                              <p class="form-control"> {this.state.board.qboardContent} </p>
-                           </div>
-                        </div>
+                  <ColoredLine color="lightgray"/>
+                  {this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
+                     <img src={this.state.file}/>
+                  )}
 
-                        {
-                           this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
-                              <div class="form-group">
-                                 <label for="inp-type-5" class="col-sm-2 control-label">사진</label>
-                                 <div class="col-sm-10">
-                                    <img src={this.state.file}/>
-                                 </div>
-                              </div>
-                           )
-                        }
+                  <div style={{padding:'50px 100px 80px 30px'}}>
+                     {this.state.board.qboardContent}
+                  </div>
 
-                        
-                       
-                        <div class="form-group">
-                           <label for="inp-type-5" class="col-sm-2 control-label">등록일</label>
-                           <div class="col-sm-10">
-                              <p class="form-control">{this.state.board.qboardInsertTime}</p>
-                           </div>
-                        </div>
-
-                        <div class="form-group">
-                           <label for="inp-type-5" class="col-sm-2 control-label">조회 수</label>
-                           <div class="col-sm-10">
-                              <p class="form-control">{this.state.board.qboardViews}</p>
-                           </div>
-                        </div>
-                     </form>
-
-                     <div class="btn_wrap text-center">
-                        <button class="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
-                        <button class="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
-                        <button class="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
+                     <div className="btn_wrap text-center">
+                        <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
+                        <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
+                        <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
                      </div>
                   </div>
                </div>
 
-               <div class="box-content">
-                  <div class="card-content">
-                     <div class="clearfix"><h4 class="box-title pull-left">Comment</h4></div>
-                     <form class="form-horizontal form-view">
-                        <div class="input-group margin-bottom-20">
-                           <input type="text" class="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
-                           <div class="input-group-btn">
-                              <button type="button" class="btn waves-effect waves-light" onClick={this.createComment}><i class="fa fa-commenting" aria-hidden="true"></i></button>
+               <div className="box-content">
+                  <div className="card-content">
+                     <div className="clearfix"><h4 className="box-title pull-left">Comment</h4></div>
+                     <form className="form-horizontal form-view">
+                        <div className="input-group margin-bottom-20">
+                           <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
+                           <div className="input-group-btn">
+                              <button type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
                            </div>
                         </div>
-                        <ul class="notice-list">
+                        <ul className="notice-list">
                            { 
                            this.state.comments.map(
                               comment =>
-                              <li key = {comment.qcommentNo}>  
-                                 <span class="name">{comment.qcommentWriter}</span>
+                              <li id={"liId"+comment.qcommentNo} key = {comment.qcommentNo}> 
+                              
+                                 <span className="name">{comment.qcommentWriter}</span>
 
-                                 {!this.state.isModify && ( //수정 안하면 원래 댓글 내용 보여주고
-                                    <span class="desc">{comment.qcommentContent}</span>
-                                 )}
+                                 
+                                 <span id={"spanId"+comment.qcommentNo} className="desc">{comment.qcommentContent}</span>
+                                 
 
-                                 {this.state.isModify && ( //수정 중이면 플레이스 홀더로 원래 댓글 내용 띄워주고 입력 받기
-                                    <input type="text" class="form-control" style={{width:"1000px"}} onChange={this.changeCommentContentHandler} placeholder={comment.qcommentContent}/>
-                                 )}
+                                 <span className="time">{comment.qcommentInsertTime}</span>
 
-                                 <span class="time">{comment.qcommentInsertTime}</span>
-
-                                 {(this.state.currentUser.username == comment.qcommentWriter) &&( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
-                                    <button type="button" class="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i class="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
+                                 {(this.state.currentUser.username == comment.qcommentWriter) && ( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
+                                    <button id={"delBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
                                  )}
                                                                
-                                 {!this.state.isModify && (this.state.currentUser.username == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
-                                 <button type="button" class="btn btn-xs btn-circle" onClick={this.changeModalHandler} style={{right: "55px"}}><i class="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
-                                 )}
-
-                                 {this.state.isModify && ( // 수정 중이면 수정 완료 버튼 띄우기
-                                 <button type="button" class="btn btn-xs btn-circle" onClick={() => this.updateComment(comment.qcommentNo)} style={{right: "55px"}}><i class="glyphicon glyphicon-ok" aria-hidden="true"></i></button>
+                                 {(this.state.currentUser.username == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
+                                 <button id={"modiBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.changeModalHandler(comment.qcommentNo)} style={{right: "55px"}}><i className="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
                                  )}
 
                               </li>

@@ -12,6 +12,9 @@ class MainBoardComponent extends Component {
     }
 
     componentDidMount() {
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ 통합 검색";
+
         var header = document.getElementById("navbar");
         var homebtn = document.getElementById("homebtn");
         var btns = header.getElementsByClassName("mybtn");
@@ -25,11 +28,11 @@ class MainBoardComponent extends Component {
 
     render() {
         return (
-        <div class="main-content">
-            <div class="row row-inline-block small-spacing">
-            <div class="col-xs-12">
-            <div class="box-content">
-            <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+        <div className="main-content">
+            <div className="row row-inline-block small-spacing">
+            <div className="col-xs-12">
+            <div className="box-content">
+            <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
             
             <Carousel>

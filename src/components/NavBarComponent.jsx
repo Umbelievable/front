@@ -9,11 +9,11 @@ class NavBarComponent extends Component {
         super(props)
         this.state = {
             categories: [],
-            bed_categories:[],
-            kitchen_categories:[],
-            library_categories:[],
-            livingroom_categories:[],
-            storage_categories:[],
+            bed_categories: [],
+            kitchen_categories: [],
+            library_categories: [],
+            livingroom_categories: [],
+            storage_categories: [],
             currentUser: { username: "" }
 
         }
@@ -90,9 +90,9 @@ class NavBarComponent extends Component {
     render() {
         return (
             <div id="navbar">
-                <nav class="navbar navbar-dark bg-dark" style={{margin:"0px 0px 0px 0px"}}>
-                <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                <nav className="navbar navbar-dark bg-dark" style={{margin:"0px 0px 0px 0px"}}>
+                <button  className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
                 <button onClick={()=>this.props.history.push('/main-board')} className="mybtn" id="homebtn">Home</button>
@@ -101,8 +101,8 @@ class NavBarComponent extends Component {
                 <button onClick={()=>this.props.history.push('/cs-board')} className="mybtn" id="csbtn">Customer&nbsp;Service</button>
 
                 </nav>
-                <div class="collapse" id="navbarToggleExternalContent" style={{padding:"0px 10px 0px 150px", backgroundColor:'#343A40'}}>
-                    <div class="bg-dark p-4">                        
+                <div className="collapse" id="navbarToggleExternalContent" style={{padding:"0px 10px 0px 150px", backgroundColor:'#343A40'}}>
+                    <div className="bg-dark p-4">                        
                     <Nav defaultActiveKey="/home" className="flex-column">
                     {
                         this.state.categories.map(

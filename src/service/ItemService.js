@@ -346,7 +346,17 @@ class ItemService {
 
 
     }
-    
+
+    //카테고리 상관 x
+    searchItems(searchKeyword){
+        return axios.get(ITEM_API_BASE_URL+"/searchAll?keyword="+searchKeyword, { headers:authHeader()});
+    }
+
+    //카테고리 별 검색
+    searchCateItems(searchKeyword,cateNo,thisCateNo){
+        return axios.get(ITEM_API_BASE_URL+"/search?keyword="+searchKeyword+"&category="+cateNo+"&thisCate="+thisCateNo,{headers:authHeader()});
+    }
+
 }
 
 export default new ItemService();

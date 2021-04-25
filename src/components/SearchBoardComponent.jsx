@@ -12,17 +12,18 @@ class SearchBoardComponent extends Component {
         super(props)
         this.state = { 
             boards: [],
-            searchBoard:query.searchBoard,
+            searchBoard: query.searchBoard,
             searchType: query.searchType,
             searchKeyword: query.searchKeyword
         }
 
         this.createBoard = this.createBoard.bind(this);
 
-        this.changeBoardHandler=this.changeBoardHandler.bind(this);
+        this.changeBoardHandler = this.changeBoardHandler.bind(this);
         this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
     }
+
 
     changeBoardHandler = (event) => {
         this.setState({searchBoard:event.target.value});
@@ -51,23 +52,22 @@ class SearchBoardComponent extends Component {
         this.props.history.push(`/read-board/${idx}`);
     }
 
-    searchBoard(searchBoard,searchType, searchKeyword){
+    searchBoard(searchBoard, searchType, searchKeyword){
         this.props.history.push(`/search-board?searchBoard=${searchBoard}&searchType=${searchType}&searchKeyword=${searchKeyword}`);
         
     }
 
     render() {
         return (
-            <div class="main-content">
-                <div class="row row-inline-block small-spacing">
-				<div class="col-xs-12">
-				<div class="box-content">
-				<div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+            <div className="main-content">
+                <div className="row row-inline-block small-spacing">
+				<div className="col-xs-12">
+				<div className="box-content">
+				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
             
-
-            <div class="table-responsive clearfix">
-			    <table class="table table-hover">
+            <div className="table-responsive clearfix">
+			    <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>번호 </th>
@@ -93,8 +93,8 @@ class SearchBoardComponent extends Component {
                         }
                     </tbody>
                 </table>
-                <div class="btn_wrap text-right">
-                    <button class="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+                <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			    </div>
             </div>
 				</div>

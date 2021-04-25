@@ -19,6 +19,9 @@ class ListBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
+        // qna 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ QnA 검색";
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");
@@ -114,15 +117,15 @@ class ListBoardComponent extends Component {
   
     render() {
         return (
-            <div class="main-content"> 
-                <div class="row row-inline-block small-spacing">
-				<div class="col-xs-12">                   
-				<div class="box-content">
-				<div class="clearfix"><h4 class="box-title pull-left"></h4></div>
+            <div className="main-content"> 
+                <div className="row row-inline-block small-spacing">
+				<div className="col-xs-12">                   
+				<div className="box-content">
+				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
             
 
-            <div class="table-responsive clearfix">
-			    <table class="table table-hover">
+            <div className="table-responsive clearfix">
+			    <table className="table table-hover">
                     <thead>
                         <tr>
                             <th>번호 </th>
@@ -147,8 +150,8 @@ class ListBoardComponent extends Component {
                         }
                     </tbody>
                 </table>
-                <div class="btn_wrap text-right">
-                    <button class="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+                <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			    </div>
             </div>
 

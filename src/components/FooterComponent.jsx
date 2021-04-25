@@ -15,7 +15,7 @@ class FooterComponent extends Component {
     render() {
         return (
             <div>
-                <footer class="footer">
+                <footer className="footer">
                     <span onClick = {this.goToAdmin} className="text-muted">UMbelievable</span>
                 </footer>
             </div>

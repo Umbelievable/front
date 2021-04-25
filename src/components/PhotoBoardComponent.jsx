@@ -10,11 +10,15 @@ class PhotoBoardComponent extends Component {
         this.state = {
             p_num: 1,
             paging: {},
-            boards: [],
+            boards: []
+
         }
-        this.getImgSrc=this.getImgSrc.bind(this)
+        this.getImgSrc=this.getImgSrc.bind(this);
+        this.createBoard = this.createBoard.bind(this);
+        
     }
     
+
     componentDidMount() {
 
         PhotoBoardService.getBoards(this.state.p_num).then((res) => {
@@ -23,6 +27,10 @@ class PhotoBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
+
+        // photo 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ Photo 검색";
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");
@@ -35,13 +43,23 @@ class PhotoBoardComponent extends Component {
 
     }
 
+
     getImgSrc(url){
         var file = "data:;base64," + url;
         return file;
     }
 
+    createBoard() {
+        this.props.history.push('/create-photoboard/_create');
+    }
+
     readPhotoBoard(pboardNo) {
         this.props.history.push(`/read-photoboard/${pboardNo}`);
+    }
+
+    goToUpdate = (event) => {
+        event.preventDefault();
+        this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
     }
 
     listBoard(p_num) {
@@ -121,37 +139,33 @@ class PhotoBoardComponent extends Component {
             <div className="box-content">
             <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
-            <div className="album py-5 bg-light">
+            <div className="album py-5 bg-white">
             <div className="container">
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {
                     this.state.boards.map(
                         board => 
-                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)}>
-                            <div className="card shadow-sm">
+                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)} style={{padding:'20px 10px'}}>
                             <div className="cropping">
-                                <img src={this.getImgSrc(board.pboardFileUrl)}/>
-                            </div>
-                            <div className="card-body">
-                                <p className="card-text">{board.pboardTitle}</p>
-                            <div className="d-flex justify-content-between align-items-center">
-                                <small className="text-muted">{board.pboardWriter}</small>
-                            </div>
-                            </div>
+                                <img className="cropping-layerBottom" src={this.getImgSrc(board.pboardFileUrl)}/>
+                                <div className="cropping-layerTop">
+                                    <p className="cropping-text">{board.pboardTitle}<br/><br/><small className="text-muted">{board.pboardWriter}</small></p>
+                                </div>
                             </div>
                         </div>
 
                     )
                 }
 
-                
-
-                
         
             </div>
             </div>
-            </div> 
+            </div>
+
+            <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+			</div> 
             
             <div className ="row">
                 <nav aria-label="Page navigation example">

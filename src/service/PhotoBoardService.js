@@ -24,8 +24,8 @@ class PhotoBoardService{
         return axios.delete(BOARD_API_BASE_URL + "/" + pboardNo, { headers: authHeader() });
     }
     
-    searchBoards(searchType, searchKeyword){
-        return axios.get(BOARD_API_BASE_URL + "/search?type=" + searchType + "&keyword=" + searchKeyword, { headers: authHeader() });
+    searchBoards(searchKeyword){
+        return axios.get(BOARD_API_BASE_URL + "/search?keyword" + searchKeyword, { headers: authHeader() });
     }
 }
 
