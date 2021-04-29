@@ -41,15 +41,16 @@ class MenuBoardComponent extends Component {
                     {
                         this.state.items.map(
                             item => 
-                            <div key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
+                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
                                 <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
                                 <div className="menucropping">
                                     <img src={item.pdImg}/>
                                 </div>
                                 <div className="card-body">
-                                    <p className="card-text">{item.pdTitle}</p>
+                                    <small className="card-text" style={{fontSize:'11px'}}>{item.pdMall}</small>
+                                    <small className="card-text" style={{display:'block', fontWeight:'bold', fontSize:'13px', height:'62px'}}>{item.pdTitle}</small>
                                 <div className="d-flex justify-content-between align-items-center">
-                                    <small className="text-muted">{item.pdPrice}</small>
+                                    <p className="card-text" style={{fontWeight:'bolder', fontSize:'20px'}}>{item.pdPrice}</p>
                                 </div>
                                 </div>
                                 </div>
