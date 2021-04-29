@@ -33,7 +33,7 @@ class CategoryBoardComponent extends Component {
 				<div className="box-content">
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 
-                <div className="album py-5 bg-light">
+                <div className="album py-5 bg-white">
                 <div className="container">
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">

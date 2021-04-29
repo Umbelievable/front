@@ -15,7 +15,7 @@ class HeaderComponent extends Component {
             searchType: 'all',
             searchKeyword: '',
             isModalOpen: false,
-            currentUser: { username: "" }
+            currentUser: { id: "" }
         }
         this.joinMember = this.joinMember.bind(this);
         this.changeBoardHandler=this.changeBoardHandler.bind(this);
@@ -85,7 +85,7 @@ class HeaderComponent extends Component {
             {!this.state.userReady && (
                 <button className="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
             {this.state.userReady && (
-                <button className="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.username}님의 my page</button>)}
+                <button className="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
             {!this.state.userReady && (
                 <button className="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
             {this.state.userReady && (

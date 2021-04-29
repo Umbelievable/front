@@ -1624,3 +1624,18 @@ textarea.form-control {
 .answer {
   display: none;
 }
+
+.menucropping {
+  width: 270px;
+  height: 270px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+.menucropping img {
+  width: 270px;
+  height: 270px;
+  border-radius: 10px;
+}
