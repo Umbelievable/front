@@ -90,68 +90,65 @@ class NavBarComponent extends Component {
     render() {
         return (
             <div id="navbar">
-                <nav className="navbar navbar-dark bg-dark" style={{margin:"0px 0px 0px 0px"}}>
-                <button  className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <button onClick={()=>this.props.history.push('/main-board')} className="mybtn" id="homebtn">Home</button>
-                <button onClick={()=>this.props.history.push('/photo-board')} className="mybtn" id="photobtn">Photo</button>
-                <button onClick={()=>this.props.history.push('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A</button>
-                <button onClick={()=>this.props.history.push('/cs-board')} className="mybtn" id="csbtn">Customer&nbsp;Service</button>
-
-                </nav>
-                <div className="collapse" id="navbarToggleExternalContent" style={{padding:"0px 10px 0px 150px", backgroundColor:'#343A40'}}>
-                    <div className="bg-dark p-4">                        
-                    <Nav defaultActiveKey="/home" className="flex-column">
+            <nav className="navbar navbar-light bg-light" style={{margin:'0px 0px 60px'}}>
+                <div className="justify-content-start mr-auto">
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px'}}>Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    
                     {
                         this.state.categories.map(
-                        category => 
-                            <li key = {category.cateNo}>
-                                <Nav.Link href={`/category-board?cateNo=`+category.cateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', width:'200px', textAlign:'left', color:'lightskyblue'}}>{category.cateNo}</Nav.Link>
-                                {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
+                        category =>
+                        <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left'}}> 
+                            <button className="dropbtn" onClick={()=>this.props.history.push(`/category-board?cateNo=`+category.cateNo)} >
+                                {category.cateNo}
+                            </button>
+                            <div className="dropdown-content" style={{left:'0'}}>
+                            {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
                                     livingroom_category => 
-                                    <a href={`/menu-board?cateNo=거실가구&thisCateNo=`+livingroom_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'white'}} key = {livingroom_category.cateNo, livingroom_category.thisCateNo}>
+                                    <a href={`/menu-board?cateNo=거실가구&thisCateNo=`+livingroom_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'black'}} key = {livingroom_category.cateNo, livingroom_category.thisCateNo}>
                                         {livingroom_category.thisCateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "서재/사무용가구" && this.state.library_categories.map(
                                     library_category => 
-                                    <a href={`/menu-board?cateNo=서재/사무용가구&thisCateNo=`+library_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'white'}} key = {library_category.cateNo, library_category.thisCateNo}>
+                                    <a href={`/menu-board?cateNo=서재/사무용가구&thisCateNo=`+library_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'black'}} key = {library_category.cateNo, library_category.thisCateNo}>
                                         {library_category.thisCateNo}
                                     </a>                       
                                 )}
 
                                 {category.cateNo == "수납가구" && this.state.storage_categories.map(
                                     storage_category => 
-                                    <a href={`/menu-board?cateNo=수납가구&thisCateNo=`+storage_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'white'}} key = {storage_category.cateNo, storage_category.thisCateNo}>
+                                    <a href={`/menu-board?cateNo=수납가구&thisCateNo=`+storage_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'black'}} key = {storage_category.cateNo, storage_category.thisCateNo}>
                                         {storage_category.thisCateNo}
                                     </a>                       
                                 )}
 
                                 {category.cateNo == "주방가구" && this.state.kitchen_categories.map(
                                     kitchen_category => 
-                                    <a href={`/menu-board?cateNo=주방가구&thisCateNo=`+kitchen_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'white'}} key = {kitchen_category.cateNo, kitchen_category.thisCateNo}>
+                                    <a href={`/menu-board?cateNo=주방가구&thisCateNo=`+kitchen_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'black'}} key = {kitchen_category.cateNo, kitchen_category.thisCateNo}>
                                         {kitchen_category.thisCateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "침실가구" && this.state.bed_categories.map(
                                     bed_category => 
-                                    <a href={`/menu-board?cateNo=침실가구&thisCateNo=`+bed_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'white'}} key = {bed_category.cateNo, bed_category.thisCateNo}>
+                                    <a href={`/menu-board?cateNo=침실가구&thisCateNo=`+bed_category.thisCateNo} style={{display:'inline-block', padding:'14px 20px 0px 20px', color:'black'}} key = {bed_category.cateNo, bed_category.thisCateNo}>
                                         {bed_category.thisCateNo}
                                     </a>                      
                                 )}
-                            </li>                      
-                        )
+                            </div>
+                          </div>                                            
+                            )
                     }
                     
-                    </Nav>
-
-                    
-                    </div>
                 </div>
+
+                <div className="justify-content-start ml-auto">
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px'}}>Community&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    <button onClick={()=>this.props.history.push('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
+                    <button onClick={()=>this.props.history.push('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
+                </div>
+            </nav>
             </div>
         );
     }

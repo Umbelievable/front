@@ -186,7 +186,6 @@ class JoinMemberComponent extends Component {
             <div class="row row-inline-block small-spacing">
             <div class="col-xs-12">
             <div class="box-content">
-            <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
 
             <div style={{width:'840px', margin:'auto'}}  class="card-content" >
             <Form onSubmit={this.handleRegister} ref={c => {this.form = c;}}>

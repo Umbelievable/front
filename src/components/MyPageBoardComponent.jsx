@@ -36,7 +36,7 @@ class MyPageBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
                <div className="col-xs-12">
                <div className="box-content">
-               <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+  
                     <button type="button" className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.username}</div>
                         <a style={{display:'inline', marginLeft:'40px'}} href="/">회원 정보 수정</a>

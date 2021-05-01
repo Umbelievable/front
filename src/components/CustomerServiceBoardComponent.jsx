@@ -46,7 +46,7 @@ class CustomerServiceBoardComponent extends Component {
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
-            <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+
             <ul id="csUl" class="auto-grid">
                 <li className="cs">
                     <div className="ques" onClick={()=>this.actAns("cs1")}>

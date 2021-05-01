@@ -195,7 +195,7 @@ class ReadPhotoBoardComponent extends Component {
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
-            <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+           
                <div className="card-content">
 
                <ColoredLine color="black"/>

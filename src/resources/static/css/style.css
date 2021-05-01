@@ -1020,7 +1020,6 @@ Version 1.0
 */
 .box-content {
   position: relative;
-  padding: 30px;
   margin: 0px 0px 20px 0px;
   background: #ffffff;
 
@@ -1448,14 +1447,13 @@ textarea.form-control {
 #navbar {
   z-index: 12;
   overflow: hidden;
-  background-color: #333;
 }
 
 /* Navbar links */
 #navbar a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -1470,19 +1468,19 @@ textarea.form-control {
 .mybtn {
   border: none;
   outline: none;
-  padding: 10px 16px;
+  padding: 14px;
   cursor: pointer;
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent;
   border: none;
-  color: #ffffff;
+  color: rgb(73, 73, 73);
 }
 
 /* Style the active class (and buttons on mouse-over) */
 .active,
 .mybtn:hover {
-  color: rgb(162, 231, 98);
+  color: rgba(113, 218, 16, 0.829);
 }
 
 .hashtag {
@@ -1647,4 +1645,57 @@ textarea.form-control {
   transform: scale(
     1.2
   ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.subcate {
+  display: inline-block;
+  padding: 14px 20px 0px 20px;
+  color: black;
+}
+
+/*---------------------새로추가------------------------------------------------*/
+
+.dropbtn {
+  border: none;
+  outline: none;
+  padding: 14px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: rgb(73, 73, 73);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  border-radius: 10px;
+  right: 0;
+  background-color: aliceblue;
+  min-width: 600px;
+  max-width: 1100px;
+  z-index: 30;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
 }
