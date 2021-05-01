@@ -830,8 +830,8 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 10px 50px 0px 50px;
-  background: #1d84df;
-  color: #ffffff;
+  background: white;
+  color: #2d6c4a;
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -1675,10 +1675,11 @@ textarea.form-control {
 .dropdown-content {
   display: none;
   position: absolute;
-  border-radius: 10px;
+  border-radius: 5px;
   right: 0;
-  background-color: aliceblue;
-  min-width: 600px;
+  background-color: white;
+  border: 1px solid #2d6c4a;
+  min-width: 580px;
   max-width: 1100px;
   z-index: 30;
 }
@@ -1698,4 +1699,17 @@ textarea.form-control {
 }
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+}
+
+.mainhomebtn {
+  border: none;
+  outline: none;
+  padding: 14px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: rgb(73, 73, 73);
+  font-size: small;
 }

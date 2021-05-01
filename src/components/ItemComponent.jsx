@@ -108,9 +108,7 @@ class ItemComponent extends Component{
             <div className="col-xs-12">                   
             <div className="box-content">
 
-            
-            
-            
+         
             <div style={{display:'inline', height:'400px'}}>
                 <img src={this.state.itemInfo.pdImg} style={{display:'inline-block', width:'30%', height:'400px', alignItems:'flex-start', justifyContent:'space-around'}}/>
                     <div style={{ display:'inline-block',margin:'0px 40px',width:'30%',height:'400px'}}>

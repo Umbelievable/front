@@ -17,7 +17,7 @@ class FooterComponent extends Component {
             <div>
                 <footer className="footer">
                     <span onClick = {this.goToAdmin} className="text-muted">UMbelievable</span>
-                    <a id="csbtn" className="mybtn" href="#">Customer&nbsp;Service</a>
+                    <a id="csbtn" className="mybtn" href="/cs-board">Customer&nbsp;Service</a>
                 </footer>
             </div>
         );

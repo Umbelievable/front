@@ -83,26 +83,26 @@ class HeaderComponent extends Component {
         <div className="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
             <div className="btn_wrap text-right">
             {!this.state.userReady && (
-                <button className="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
+                <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
             {this.state.userReady && (
-                <button className="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+                <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
             {!this.state.userReady && (
-                <button className="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
+                <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
             {this.state.userReady && (
-                <button className="btn btn-primary waves-effect waves-light" onClick={this.logOut}>LOGOUT</button>)}
+                <button className="mainhomebtn" onClick={this.logOut}>LOGOUT</button>)}
               
 
             <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			</div>
 			<div className="text-center">
-				<h1 className="page-title" onClick = {this.goToList}>DZBZ</h1>
+				<h1 style={{fontSize:'30px'}}className="page-title" onClick = {this.goToList}>DZBZ</h1>
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>
-						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"400px", border:'none'}} placeholder="DZBZ 상품 검색"/>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', border:'2px solid #2D6C4A'}} placeholder="DZBZ 상품 검색"/>
 					</div>
                     <div className="form-group" style={{display:'inline-block'}}>
-					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df", height:'42px'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#2D6C4A", height:'46px', border:'2px solid #2D6C4A'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>          
                 </form>
 	        </div>
