@@ -187,7 +187,7 @@ class JoinMemberComponent extends Component {
             <div class="col-xs-12">
             <div class="box-content">
 
-            <div style={{width:'840px', margin:'auto'}}  class="card-content" >
+            <div style={{width:'600px', margin:'auto'}}  class="card-content" >
             <Form onSubmit={this.handleRegister} ref={c => {this.form = c;}}>
             {!this.state.successful && (
               <div>
@@ -256,7 +256,7 @@ class JoinMemberComponent extends Component {
 
                   <div style={{display:'inline'}}>
                   <input
-                    style={{display: 'inline-block', width: '260px',margin:'0px 30px 0px 0px'}}
+                    style={{display: 'inline-block', width: '180px',margin:'0px 30px 0px 0px'}}
                     class="form-control"
                     type="text"
                     name="birY"
@@ -268,7 +268,7 @@ class JoinMemberComponent extends Component {
                   />
                   </div>
                   <div style={{display:'inline'}}>
-                   <select style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 0px'}} 
+                   <select style={{display: 'inline-block', width: '180px',margin:'0px 0px 0px 0px'}} 
                         aial-label="월"
                         name="birM"
                         class="form-control"
@@ -294,7 +294,7 @@ class JoinMemberComponent extends Component {
                    </div>
                    <div style={{display:'inline'}}>
                    <input type="text" 
-                        style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 30px'}}
+                        style={{display: 'inline-block', width: '180px',margin:'0px 0px 0px 30px'}}
                         class="form-control"
                         name="birD"
                         placeholder="일" 

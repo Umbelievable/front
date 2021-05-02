@@ -163,7 +163,7 @@ class PhotoBoardComponent extends Component {
                     <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			</div> 
             
-            <div className ="row">
+            <div style={{textAlign:'center'}}>
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center">
 

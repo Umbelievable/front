@@ -154,7 +154,7 @@ class ListBoardComponent extends Component {
 			    </div>
             </div>
 
-            <div className ="row">
+            <div style={{textAlign:'center'}}>
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center">
 

@@ -13,19 +13,19 @@ class ItemComponent extends Component{
             paging: {},
             itemInfo: {},
             cateNo: query.cateNo,
-            thisCateNo: query.thisCateNo,
+            subcateNo: query.subcateNo,
             pdNo: query.pdNo,
             reviews: [],  //리뷰목록
-            reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름.
+            reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름
         }
     }
 
     componentDidMount(){
-        ItemService.getCertainItem(this.state.pdNo, this.state.cateNo, this.state.thisCateNo).then( res => {
+        ItemService.getCertainItem(this.state.pdNo, this.state.cateNo, this.state.subcateNo).then( res => {
             this.setState({itemInfo: res.data});
         });
 
-        ReviewService.getReviews(this.state.p_num, this.state.cateNo, this.state.thisCateNo, this.state.pdNo).then( res => {
+        ReviewService.getReviews(this.state.p_num, this.state.cateNo, this.state.subcateNo, this.state.pdNo).then( res => {
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
@@ -33,9 +33,9 @@ class ItemComponent extends Component{
         });
     }
 
-    listBoard(p_num, cateNo, thisCateNo, pdNo) {
+    listBoard(p_num, cateNo, subcateNo, pdNo) {
         console.log("pageNum : "+ p_num);
-        ReviewService.getReviews(p_num, cateNo, thisCateNo, pdNo).then( res => {
+        ReviewService.getReviews(p_num, cateNo, subcateNo, pdNo).then( res => {
             console.log(res.data);
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
@@ -53,7 +53,7 @@ class ItemComponent extends Component{
 
         return (pageNums.map((page) => 
         <li className="page-item" key={page.toString()} >
-            <a className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.thisCateNo, this.state.pdNo)}>{page}</a>
+            <a className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.subcateNo, this.state.pdNo)}>{page}</a>
         </li>
         ));
         
@@ -63,7 +63,7 @@ class ItemComponent extends Component{
         if (this.state.paging.prev) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1, this.state.cateNo, this.state.thisCateNo, this.state.pdNo) )} tabindex="-1">Previous</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabindex="-1">Previous</a>
                 </li>
             );
         }
@@ -73,7 +73,7 @@ class ItemComponent extends Component{
         if (this.state.paging.next) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1, this.state.cateNo, this.state.thisCateNo, this.state.pdNo) )} tabIndex="-1">Next</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">Next</a>
                 </li>
             );
         }
@@ -83,7 +83,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != 1) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard(1, this.state.cateNo, this.state.thisCateNo, this.state.pdNo)} tabIndex="-1">Move to First Page</a>
+                    <a className="page-link" onClick = {() => this.listBoard(1, this.state.cateNo, this.state.subcateNo, this.state.pdNo)} tabIndex="-1">Move to First Page</a>
                 </li>
             );
         }
@@ -93,7 +93,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != this.state.paging.pageNumCountTotal) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal,this.state.cateNo, this.state.thisCateNo, this.state.pdNo) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal,this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
                 </li>
             );
         }
@@ -138,7 +138,7 @@ class ItemComponent extends Component{
                         {
                         this.state.reviews.map(
                             review => 
-                            <tr key = {review.reviewNo, review.pdNo, review.subcateNo, review.cateNo}>
+                            <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                 <td> {review.reviewNo} </td>
                                 <td> {review.star} </td>
                                 <td> {review.customerId} </td>

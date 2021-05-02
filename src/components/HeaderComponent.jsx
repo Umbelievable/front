@@ -95,7 +95,7 @@ class HeaderComponent extends Component {
             <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			</div>
 			<div className="text-center">
-				<h1 style={{fontSize:'30px'}}className="page-title" onClick = {this.goToList}>DZBZ</h1>
+				<h1 style={{fontSize:'30px'}}className="page-title" onClick = {this.goToList}><i class="fa fa-home"></i>&nbsp;DZBZ&nbsp;<i class="fa fa-home fa-flip-vertical"></i></h1>
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>

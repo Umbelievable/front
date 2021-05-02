@@ -71,7 +71,7 @@ a:active,
 a:focus {
   text-decoration: none !important;
   outline: none;
-  color: #304ffe;
+  color: #2d6c4a;
 }
 input,
 button {
@@ -547,12 +547,12 @@ h4 strong {
   margin-left: 8px;
 }
 .btn-primary {
-  background: #1d84df;
+  background: #2d6c4a;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background: #304ffe !important;
+  background: #204e36 !important;
 }
 .btn-primary.btn-bordered {
   border-color: #1d84df;
@@ -1484,10 +1484,10 @@ textarea.form-control {
 
 .hashtag {
   display: inline;
-  border-radius: 7px;
+  border-radius: 3px;
   padding: 5px 20px 5px 20px;
   margin: 10px;
-  background-color: lavender;
+  background-color: #a4ccb6;
 }
 
 .cropping,
@@ -1713,4 +1713,9 @@ textarea.form-control {
   border: none;
   color: rgb(73, 73, 73);
   font-size: small;
+}
+
+.pagination > li > a {
+  background-color: white;
+  color: #2d6c4a;
 }

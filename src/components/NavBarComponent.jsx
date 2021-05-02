@@ -14,7 +14,7 @@ class NavBarComponent extends Component {
             library_categories: [],
             livingroom_categories: [],
             storage_categories: [],
-            currentUser: { username: "" }
+            currentUser: { id: "" }
 
         }
         this.myFunction = this.myFunction.bind(this);
@@ -78,7 +78,7 @@ class NavBarComponent extends Component {
 
     isLogin = (event) => {
         const { currentUser } = this.state;
-        if(currentUser.username == "guest"){ // 안했으면 alert창 띄워서 로그인 시키기
+        if(currentUser.id == "guest"){ // 안했으면 alert창 띄워서 로그인 시키기
             window.confirm("로그인 후 이용해주세요.\n");
             this.props.history.push('/main-board');
         }
@@ -98,44 +98,44 @@ class NavBarComponent extends Component {
                         this.state.categories.map(
                         category =>
                         <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left'}}> 
-                            <button className="dropbtn" onClick={()=>this.props.history.push(`/category-board?cateNo=`+category.cateNo)} >
+                            <button className="dropbtn" onClick={()=>window.location.replace(`/category-board?cateNo=`+category.cateNo)} >
                                 {category.cateNo}
                             </button>
 
                             <div className="dropdown-content" style={{left:'0'}}>
                                 {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
                                     livingroom_category =>
-                                    <a href={`/menu-board?cateNo=거실가구&thisCateNo=`+livingroom_category.thisCateNo} style={{display:'block', padding:'7px 23px'}} key = {livingroom_category.cateNo, livingroom_category.thisCateNo}>
-                                        {livingroom_category.thisCateNo}
+                                    <a href={`/menu-board?cateNo=거실가구&subcateNo=`+livingroom_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
+                                        {livingroom_category.subcateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "서재/사무용가구" && this.state.library_categories.map(
                                     library_category => 
-                                    <a href={`/menu-board?cateNo=서재/사무용가구&thisCateNo=`+library_category.thisCateNo} style={{display:'block', padding:'7px 25px'}} key = {library_category.cateNo, library_category.thisCateNo}>
-                                        {library_category.thisCateNo}
+                                    <a href={`/menu-board?cateNo=서재/사무용가구&subcateNo=`+library_category.subcateNo} style={{display:'block', padding:'7px 25px'}} key = {library_category.cateNo, library_category.subcateNo}>
+                                        {library_category.subcateNo}
                                     </a>                       
                                 )}
 
                                 {category.cateNo == "수납가구" && this.state.storage_categories.map(
                                     storage_category => 
-                                    <a href={`/menu-board?cateNo=수납가구&thisCateNo=`+storage_category.thisCateNo} style={{display:'block', padding:'7px 23px'}} key = {storage_category.cateNo, storage_category.thisCateNo}>
-                                        {storage_category.thisCateNo}
+                                    <a href={`/menu-board?cateNo=수납가구&subcateNo=`+storage_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {storage_category.cateNo, storage_category.subcateNo}>
+                                        {storage_category.subcateNo}
                                     </a>
                                                         
                                 )}
 
                                 {category.cateNo == "주방가구" && this.state.kitchen_categories.map(
                                     kitchen_category => 
-                                    <a href={`/menu-board?cateNo=주방가구&thisCateNo=`+kitchen_category.thisCateNo} style={{display:'block', padding:'7px 23px'}} key = {kitchen_category.cateNo, kitchen_category.thisCateNo}>
-                                        {kitchen_category.thisCateNo}
+                                    <a href={`/menu-board?cateNo=주방가구&subcateNo=`+kitchen_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {kitchen_category.cateNo, kitchen_category.subcateNo}>
+                                        {kitchen_category.subcateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "침실가구" && this.state.bed_categories.map(
                                     bed_category => 
-                                    <a href={`/menu-board?cateNo=침실가구&thisCateNo=`+bed_category.thisCateNo} style={{display:'block', padding:'7px 23px'}} key = {bed_category.cateNo, bed_category.thisCateNo}>
-                                        {bed_category.thisCateNo}
+                                    <a href={`/menu-board?cateNo=침실가구&subcateNo=`+bed_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {bed_category.cateNo, bed_category.subcateNo}>
+                                        {bed_category.subcateNo}
                                     </a>                      
                                 )}
                             </div>

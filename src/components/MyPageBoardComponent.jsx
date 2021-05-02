@@ -60,6 +60,7 @@ class MyPageBoardComponent extends Component {
                         </table>
 
                         <br/><br/>
+                        <br/><br/><br/><br/>
                         <div style={{fontWeight:'bolder'}}>관심 해시태그</div>
                             <br/>
                             <div className="hashtag">#&nbsp;침대</div>
@@ -70,8 +71,12 @@ class MyPageBoardComponent extends Component {
                         <ColoredLine color="lightgray" />
                         
                         <br/><br/>
+                        <br/><br/>
+
                         <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
-                            <br/><br/>
+                        
+                        <br/><br/>
+                        <br/><br/>
 
                         <ColoredLine color="lightgray" />
 
