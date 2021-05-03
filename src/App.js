@@ -34,6 +34,7 @@ function App() {
               <Route path = "/create-board/:qboardNo" component = {CreateBoardComponent}></Route>
               <Route path = "/read-board/:qboardNo" component = {ReadBoardComponent}></Route>
               <Route path = "/search-board" component = {SearchBoardComponent}></Route>
+              <Route path = "/search-photoboard" component = {PhotoBoardComponent}></Route>
               <Route path = "/member-join" component = {JoinMemberComponent}></Route>
               <Route path = "/photo-board" component = {PhotoBoardComponent}></Route>
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>

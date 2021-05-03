@@ -1624,3 +1624,27 @@ textarea.form-control {
 .answer {
   display: none;
 }
+
+.menucropping {
+  width: 270px;
+  height: 270px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.menucropping img {
+  width: 270px;
+  height: 270px;
+
+  transition: transform 0.2s;
+}
+
+.menucropping img:hover {
+  transform: scale(
+    1.2
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}

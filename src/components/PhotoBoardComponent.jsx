@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import { Base64 } from 'js-base64';
 import PhotoBoardService from '../service/PhotoBoardService';
 import FileService from '../service/FileService';
+import queryString from 'query-string';
 
 
 class PhotoBoardComponent extends Component {
     constructor(props) {
+        const query = queryString.parse(window.location.search);
+        
         super(props);
         this.state = {
             p_num: 1,
             paging: {},
-            boards: []
+            boards: [],
+            searchKeyword: query.searchKeyword
 
         }
         this.getImgSrc=this.getImgSrc.bind(this);
         this.createBoard = this.createBoard.bind(this);
+        this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
         
     }
     
+    changeKeywordHandler = (event) => {
+        this.setState({searchKeyword: event.target.value});
+    }
 
     componentDidMount() {
 
@@ -31,6 +39,11 @@ class PhotoBoardComponent extends Component {
         // photo 통합 검색
         var searchBar = document.getElementById("searchBar");
         searchBar.placeholder="DZBZ Photo 검색";
+
+        PhotoBoardService.searchBoards(this.state.searchKeyword).then((res)=>{
+            this.setState({ boards:res.data});
+        });
+        
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");
@@ -57,10 +70,15 @@ class PhotoBoardComponent extends Component {
         this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
+    searchBoard(searchKeyword){
+        this.props.history.push(`/search-photoboard?searchKeyword=${searchKeyword}`);
+    }
+
     goToUpdate = (event) => {
         event.preventDefault();
         this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
     }
+
 
     listBoard(p_num) {
         console.log("pageNum : "+ p_num);

@@ -12,26 +12,13 @@ class SearchBoardComponent extends Component {
         super(props)
         this.state = { 
             boards: [],
-            searchBoard: query.searchBoard,
-            searchType: query.searchType,
             searchKeyword: query.searchKeyword
         }
 
         this.createBoard = this.createBoard.bind(this);
-
-        this.changeBoardHandler = this.changeBoardHandler.bind(this);
-        this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
     }
 
-
-    changeBoardHandler = (event) => {
-        this.setState({searchBoard:event.target.value});
-    }
-
-    changeTypeHandler = (event) => {
-        this.setState({searchType: event.target.value});
-    }
 
     changeKeywordHandler = (event) => {
         this.setState({searchKeyword: event.target.value});
@@ -39,7 +26,7 @@ class SearchBoardComponent extends Component {
    
     componentDidMount() { 
         //백 수정하고 서비스 수정하고 이부분 다시수정! searchBoard
-        BoardService.searchBoards(this.state.searchType, this.state.searchKeyword).then((res) => {
+        BoardService.searchBoards(this.state.searchKeyword).then((res) => {
             this.setState({ boards: res.data});
         });
     }
@@ -52,8 +39,8 @@ class SearchBoardComponent extends Component {
         this.props.history.push(`/read-board/${idx}`);
     }
 
-    searchBoard(searchBoard, searchType, searchKeyword){
-        this.props.history.push(`/search-board?searchBoard=${searchBoard}&searchType=${searchType}&searchKeyword=${searchKeyword}`);
+    searchBoard(searchKeyword){
+        this.props.history.push(`/search-board?searchKeyword=${searchKeyword}`);
         
     }
 
@@ -80,7 +67,6 @@ class SearchBoardComponent extends Component {
                     <tbody>
                         {
                         this.state.boards.map(
-                            //백 수정하고 서비스 수정하고 이 부분 다시 수정!
                             board => 
                             <tr key = {board.qboardNo}>
                                 <td> {board.qboardNo} </td>

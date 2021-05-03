@@ -13,7 +13,7 @@ class ItemComponent extends Component{
             paging: {},
             itemInfo: {},
             cateNo: query.cateNo,
-            thisCateNo: query.thisCateNo,
+            thisCateNo: query.subcateNo,
             pdNo: query.pdNo,
             reviews: [],  //리뷰목록
             reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름.

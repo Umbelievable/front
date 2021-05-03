@@ -6,7 +6,7 @@ import { isEmail } from "validator";
 import MemberService from '../../service/MemberService';
 
 const required = value => {
-    if (!value) {
+  if (!value) {
       return (
         <div className="alert alert-danger" role="alert">
           This field is required!
@@ -25,11 +25,11 @@ const required = value => {
     }
   };
   
-  const vusername = value => {
+  const vid = value => {
     if (value.length < 3 || value.length > 20) {
       return (
         <div className="alert alert-danger" role="alert">
-          The username must be between 3 and 20 characters.
+          The id must be between 3 and 20 characters.
         </div>
       );
     }
@@ -49,23 +49,38 @@ class JoinMemberComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
+            id: "",
             email: "",
             password: "",
+            // 여기 밑으로 이번에 추가한 필드들
+            username: "",
+            birY: "",
+            birM: "",
+            birD: "",
+            birthDate: "",
+            phone: "",
+            sex: "", // 여기까지 // joinDate는 백에서 넣어줌
             successful: false,
             message: ""
         }
         this.handleRegister = this.handleRegister.bind(this);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeId = this.onChangeId.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-    
+        // 새로추가한 함수 6개
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangeBirY = this.onChangeBirY.bind(this);
+        this.onChangeBirM = this.onChangeBirM.bind(this);
+        this.onChangeBirD = this.onChangeBirD.bind(this);
+        this.onChangePhone = this.onChangePhone.bind(this);
+        this.onChangeSex = this.onChangeSex.bind(this);
+        // 여기까지
 
     }
 
-    onChangeUsername(e) {
+      onChangeId(e) {
         this.setState({
-          username: e.target.value
+          id: e.target.value
         });
       }
     
@@ -81,6 +96,44 @@ class JoinMemberComponent extends Component {
         });
       }
 
+      // 새로 추가한 함수 6개
+      onChangeUsername(e) {
+        this.setState({
+          username: e.target.value
+        });
+      }
+    
+      onChangeBirY(e) {
+        this.setState({
+          birY: e.target.value
+        });
+      }
+
+      onChangeBirM(e) {
+        this.setState({
+          birM: e.target.value
+        });
+      }
+
+      onChangeBirD(e) {
+        this.setState({
+          birD: e.target.value
+        });
+      }
+    
+      onChangePhone(e) {
+        this.setState({
+          phone: e.target.value
+        });
+      }
+
+      onChangeSex(e) {
+        this.setState({
+          sex: e.target.value
+        });
+      }
+
+
       handleRegister(e) {
         e.preventDefault();
     
@@ -93,9 +146,14 @@ class JoinMemberComponent extends Component {
     
         if (this.checkBtn.context._errors.length === 0) {
           MemberService.register(
-            this.state.username,
+            this.state.id,
             this.state.email,
-            this.state.password
+            this.state.password,
+            this.state.username, //새로 추가 username, birthDate, phone, sex
+            new Date(this.state.birY+"-"+this.state.birM+"-"+this.state.birD),
+            this.state.phone,
+            this.state.sex
+
           ).then(
             response => {
               this.setState({
@@ -131,23 +189,18 @@ class JoinMemberComponent extends Component {
             <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
 
             <div style={{width:'840px', margin:'auto'}}  class="card-content" >
-            <Form
-            onSubmit={this.handleRegister}
-            ref={c => {
-              this.form = c;
-            }}
-          >
+            <Form onSubmit={this.handleRegister} ref={c => {this.form = c;}}>
             {!this.state.successful && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="ID">아이디</label>
+                  <label htmlFor="id">아이디</label>
                   <input
                     type="text"
                     className="form-control"
-                    name="username"
-                    value={this.state.username}  // db되고 back되면 이게 userid임
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
+                    name="id"
+                    value={this.state.id}  
+                    onChange={this.onChangeId}
+                    validations={[required, vid]}
                   />
                 </div>
 
@@ -176,23 +229,25 @@ class JoinMemberComponent extends Component {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="name">이름</label>
+                  <label htmlFor="username">이름</label>
                   <Input
                     type="text"
                     className="form-control"
-                    name="name"
-                    //추가
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
                   />
                   
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="phoneNo">전화번호</label>
+                  <label htmlFor="phone">전화번호</label>
                   <Input
                     type="text"
                     className="form-control"
-                    name="name"
-                    //추가
+                    name="phone"
+                    value={this.state.phone}
+                    onChange={this.onChangePhone}
                   />
                 </div>
 
@@ -205,59 +260,67 @@ class JoinMemberComponent extends Component {
                     style={{display: 'inline-block', width: '260px',margin:'0px 30px 0px 0px'}}
                     class="form-control"
                     type="text"
-                    name="name"
+                    name="birY"
                     placeholder="년(4자)"
                     aria-label="년(4자)"
                     maxLength="4"
-                    //추가
+                    value={this.state.birY}
+                    onChange={this.onChangeBirY}
                   />
                   </div>
                   <div style={{display:'inline'}}>
                    <select style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 0px'}} 
-                          aial-label="월"
-                          class="form-control"
+                        aial-label="월"
+                        name="birM"
+                        class="form-control"
+                        placeholder="년(4자)"
+                        value={this.state.birM}
+                        onChange={this.onChangeBirM}
                    >
-                   <option value>월</option>
-                   <option value="01">1</option>
-                   <option value="02">2</option>
-                   <option value="03">3</option>
-                   <option value="04">4</option>
-                   <option value="05">5</option>
-                   <option value="06">6</option>
-                   <option value="07">7</option>
-                   <option value="08">8</option>
-                   <option value="09">9</option>
-                   <option value="10">10</option>
-                   <option value="11">11</option>
-                   <option value="12">12</option>
+                      <option value>월</option>
+                      <option value="01">1</option>
+                      <option value="02">2</option>
+                      <option value="03">3</option>
+                      <option value="04">4</option>
+                      <option value="05">5</option>
+                      <option value="06">6</option>
+                      <option value="07">7</option>
+                      <option value="08">8</option>
+                      <option value="09">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
                    </select>
                  
                    </div>
                    <div style={{display:'inline'}}>
                    <input type="text" 
-                          style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 30px'}}
-                          class="form-control"
-                          placeholder="일" 
-                          aria-label="일" 
-                          maxLength="2"></input>
-                          
-                          </div>
+                        style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 30px'}}
+                        class="form-control"
+                        name="birD"
+                        placeholder="일" 
+                        aria-label="일" 
+                        maxLength="2"
+                        value={this.state.birD}
+                        onChange={this.onChangeBirD}
+                        />
+                  </div>
                 </div>
                 
-
                 <div className="form-group">
                   <label htmlFor="sex">성별</label>
                   <select
                     className="form-control"
                     name="sex"
                     aria-label="성별"
-                    //추가
+                    value={this.state.sex}
+                    onChange={this.onChangeSex}
                     >
                       <option value selected>성별</option>
-                      <option value="M">남자</option>
-                      <option value="F">여자</option>
-                    </select>    
-                 
+                      <option value="Y">남자</option>
+                      <option value="X">여자</option>
+                      <option value="N">미공개</option>
+                  </select>    
                 </div>
 
                 <div className="form-group">
@@ -266,31 +329,24 @@ class JoinMemberComponent extends Component {
               </div>
             )}
 
-            {this.state.message && (
-              <div className="form-group">
-                <div
-                  className={
-                    this.state.successful
-                      ? "alert alert-success"
-                      : "alert alert-danger"
-                  }
-                  role="alert"
-                >
-                  {this.state.message}
+              {this.state.message && (
+                <div className="form-group">
+                  <div
+                    className={
+                      this.state.successful
+                        ? "alert alert-success"
+                        : "alert alert-danger"
+                    }
+                    role="alert"
+                  >
+                    {this.state.message}
+                  </div>
                 </div>
-              </div>
-            )}
-            <CheckButton
-              style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
-              }}
-            />
-          </Form>
-             
+              )}
+              <CheckButton style={{ display: "none" }} ref={c => {this.checkBtn = c;}}/>
+            </Form>        
             </div>                                
 
-        
             </div>
             </div>
             </div>
