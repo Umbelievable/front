@@ -1719,3 +1719,14 @@ textarea.form-control {
   background-color: white;
   color: #2d6c4a;
 }
+
+.itemcropping {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}

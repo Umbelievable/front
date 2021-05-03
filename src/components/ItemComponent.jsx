@@ -103,25 +103,29 @@ class ItemComponent extends Component{
     render(){
      
         return (
-            <div className="main-content"> 
+            <div className="main-content" style={{padding:'0em 5em'}}> 
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">                   
             <div className="box-content">
 
          
-            <div style={{display:'inline', height:'400px'}}>
-                <img src={this.state.itemInfo.pdImg} style={{display:'inline-block', width:'30%', height:'400px', alignItems:'flex-start', justifyContent:'space-around'}}/>
-                    <div style={{ display:'inline-block',margin:'0px 40px',width:'30%',height:'400px'}}>
-                        <div style={{ fontWeight:'bolder', fontSize:'23px'}}>{this.state.itemInfo.pdTitle}</div>
-                        <br/>
-                        <div style={{ fontWeight:'bolder', fontSize:'20px',color:'#ea4335'}}>{this.state.itemInfo.pdPrice}</div>
-                            <button className="btn btn-primary waves-effect waves-light" style={{marginTop:'130px'}}>BUY NOW</button>
-                            <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px",marginTop:'130px'}}>CART</button>
-                    </div>  
-                    <div style={{ display:'inline-block',margin:'0px 40px',width:'25%',height:'400px'}}>
-                        <div style={{ fontWeight:'bolder', fontSize:'23px'}}>리뷰 분석 결과</div>
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <div style={{padding:'3em 0em 3em 3em'}}>
+                    <img className="itemcropping" src={this.state.itemInfo.pdImg}/>
+                </div>
+                <div style={{padding:'3em 1em'}}>
+                    <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{this.state.itemInfo.pdMall}</div>
+                    <div style={{ paddingTop:'3px', paddingBottom:'3px', fontSize:'large', color:'black'}}>{this.state.itemInfo.pdTitle}</div>
+                    <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.state.itemInfo.pdPrice}</div>
+                        <button className="btn btn-primary waves-effect waves-light" style={{marginTop:'130px'}}>BUY NOW</button>
+                        <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px",marginTop:'130px'}}>CART</button>
                     </div>
+                <div style={{padding:'3em'}}>
+                    <div style={{ fontSize:'large', color:'black'}}>소비자 리뷰 분석 결과</div>   
+                </div>  
+                    
             </div>
+            <br/><br/>
         
             <div className="table-responsive clearfix">
 			    <table className="table table-hover">
