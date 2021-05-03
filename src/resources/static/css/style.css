@@ -71,7 +71,7 @@ a:active,
 a:focus {
   text-decoration: none !important;
   outline: none;
-  color: #304ffe;
+  color: #2d6c4a;
 }
 input,
 button {
@@ -547,12 +547,12 @@ h4 strong {
   margin-left: 8px;
 }
 .btn-primary {
-  background: #1d84df;
+  background: #2d6c4a;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:focus {
-  background: #304ffe !important;
+  background: #204e36 !important;
 }
 .btn-primary.btn-bordered {
   border-color: #1d84df;
@@ -830,8 +830,8 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 10px 50px 0px 50px;
-  background: #1d84df;
-  color: #ffffff;
+  background: white;
+  color: #2d6c4a;
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -1020,7 +1020,6 @@ Version 1.0
 */
 .box-content {
   position: relative;
-  padding: 30px;
   margin: 0px 0px 20px 0px;
   background: #ffffff;
 
@@ -1447,15 +1446,13 @@ textarea.form-control {
 
 #navbar {
   z-index: 12;
-  overflow: hidden;
-  background-color: #333;
 }
 
 /* Navbar links */
 #navbar a {
   float: left;
   display: block;
-  color: #f2f2f2;
+  color: black;
   text-align: center;
   padding: 14px;
   text-decoration: none;
@@ -1470,27 +1467,46 @@ textarea.form-control {
 .mybtn {
   border: none;
   outline: none;
+<<<<<<< HEAD
   padding: 10px 16px;
+=======
+  padding: 14px;
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
   cursor: pointer;
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent;
   border: none;
+<<<<<<< HEAD
   color: #ffffff;
+=======
+  color: rgb(73, 73, 73);
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 }
 
 /* Style the active class (and buttons on mouse-over) */
 .active,
 .mybtn:hover {
+<<<<<<< HEAD
   color: rgb(162, 231, 98);
+=======
+  color: rgba(113, 218, 16, 0.829);
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 }
 
 .hashtag {
   display: inline;
+<<<<<<< HEAD
   border-radius: 7px;
   padding: 5px 20px 5px 20px;
   margin: 10px;
   background-color: lavender;
+=======
+  border-radius: 3px;
+  padding: 5px 20px 5px 20px;
+  margin: 10px;
+  background-color: #a4ccb6;
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 }
 
 .cropping,
@@ -1648,3 +1664,80 @@ textarea.form-control {
     1.2
   ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
+<<<<<<< HEAD
+=======
+
+.subcate {
+  display: inline-block;
+  padding: 14px 20px 0px 20px;
+  color: black;
+}
+
+/*---------------------새로추가------------------------------------------------*/
+
+.dropbtn {
+  border: none;
+  outline: none;
+  padding: 14px 0px 17px 0px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  width: 150px;
+  color: rgb(73, 73, 73);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 15;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  border-left: 1px solid #2d6c4a;
+  border-right: 1px solid #2d6c4a;
+  border-bottom: 1px solid #2d6c4a;
+  width: 100%;
+  z-index: 15;
+}
+
+.dropdown-content a {
+  color: black;
+  text-decoration: none;
+  display: block;
+  font-size: 13px;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+.mainhomebtn {
+  border: none;
+  outline: none;
+  padding: 14px;
+  cursor: pointer;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: rgb(73, 73, 73);
+  font-size: small;
+}
+
+.pagination > li > a {
+  background-color: white;
+  color: #2d6c4a;
+}
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052

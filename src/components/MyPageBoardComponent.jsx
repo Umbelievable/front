@@ -36,7 +36,11 @@ class MyPageBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
                <div className="col-xs-12">
                <div className="box-content">
+<<<<<<< HEAD
                <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+=======
+  
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                     <button type="button" className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.username}</div>
                         <a style={{display:'inline', marginLeft:'40px'}} href="/">회원 정보 수정</a>
@@ -60,6 +64,10 @@ class MyPageBoardComponent extends Component {
                         </table>
 
                         <br/><br/>
+<<<<<<< HEAD
+=======
+                        <br/><br/><br/><br/>
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                         <div style={{fontWeight:'bolder'}}>관심 해시태그</div>
                             <br/>
                             <div className="hashtag">#&nbsp;침대</div>
@@ -70,8 +78,17 @@ class MyPageBoardComponent extends Component {
                         <ColoredLine color="lightgray" />
                         
                         <br/><br/>
+<<<<<<< HEAD
                         <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
                             <br/><br/>
+=======
+                        <br/><br/>
+
+                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
+                        
+                        <br/><br/>
+                        <br/><br/>
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
                         <ColoredLine color="lightgray" />
 

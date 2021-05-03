@@ -121,7 +121,10 @@ class ListBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">                   
 				<div className="box-content">
+<<<<<<< HEAD
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+=======
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             
 
             <div className="table-responsive clearfix">
@@ -155,7 +158,11 @@ class ListBoardComponent extends Component {
 			    </div>
             </div>
 
+<<<<<<< HEAD
             <div className ="row">
+=======
+            <div style={{textAlign:'center'}}>
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                 <nav aria-label="Page navigation example">
                     <ul className="pagination justify-content-center">
 

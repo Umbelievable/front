@@ -83,7 +83,11 @@ class CreatePhotoBoardComponent extends Component {
             // 파일 Url 글번호로 가져와서
             // qboardFileUrl 값 다시 주기
             PhotoBoardService.updateBoard(this.state.pboardNo, board).then(res => {
+<<<<<<< HEAD
                 this.props.history.push(`/read-photoboard/${this.state.pboardNo}`);
+=======
+                window.location.replace(`/read-photoboard/${this.state.pboardNo}`);
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             });
         }
     }
@@ -105,7 +109,12 @@ class CreatePhotoBoardComponent extends Component {
                 this.setState({
                     pboardTitle: board.pboardTitle,
                     pboardWriter: board.pboardWriter,
+<<<<<<< HEAD
                     pboardContent: board.pboardContent
+=======
+                    pboardContent: board.pboardContent,
+                    pboardFileUrl: board.pboardFileUrl
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                 });
             });
         }
@@ -117,10 +126,16 @@ class CreatePhotoBoardComponent extends Component {
 				<div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
+<<<<<<< HEAD
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
                 <div className="card-content">
 			    <form className="form-horizontal">
                     
+=======
+
+                <div className="card-content">
+			    <form className="form-horizontal">
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
 				    <div className="form-group">
 					    <label for="title" className="col-sm-2 control-label">제목</label>
@@ -143,7 +158,10 @@ class CreatePhotoBoardComponent extends Component {
                             </div>    
                     </div>
 
+<<<<<<< HEAD
 				   
+=======
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 				    <div className="btn_wrap text-center">
                         <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
                         <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
@@ -161,4 +179,8 @@ class CreatePhotoBoardComponent extends Component {
     }
 }
 
+<<<<<<< HEAD
 export default CreatePhotoBoardComponent;
+=======
+export default CreatePhotoBoardComponent;
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052

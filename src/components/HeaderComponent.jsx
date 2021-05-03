@@ -83,6 +83,7 @@ class HeaderComponent extends Component {
         <div className="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
             <div className="btn_wrap text-right">
             {!this.state.userReady && (
+<<<<<<< HEAD
                 <button className="btn btn-primary waves-effect waves-light" onClick={this.joinMember}>JOIN</button>)}
             {this.state.userReady && (
                 <button className="btn btn-primary waves-effect waves-light" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
@@ -90,11 +91,21 @@ class HeaderComponent extends Component {
                 <button className="btn btn-primary waves-effect waves-light" onClick={this.openModal}>LOGIN</button>)}
             {this.state.userReady && (
                 <button className="btn btn-primary waves-effect waves-light" onClick={this.logOut}>LOGOUT</button>)}
+=======
+                <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
+            {this.state.userReady && (
+                <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+            {!this.state.userReady && (
+                <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
+            {this.state.userReady && (
+                <button className="mainhomebtn" onClick={this.logOut}>LOGOUT</button>)}
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
               
 
             <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			</div>
 			<div className="text-center">
+<<<<<<< HEAD
 				<h1 className="page-title" onClick = {this.goToList}>DZBZ</h1>
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
@@ -103,6 +114,16 @@ class HeaderComponent extends Component {
 					</div>
                     <div className="form-group" style={{display:'inline-block'}}>
 					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#1d84df", height:'42px'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+=======
+				<h1 style={{fontSize:'30px'}}className="page-title" onClick = {this.goToList}><i class="fa fa-home"></i>&nbsp;DZBZ&nbsp;<i class="fa fa-home fa-flip-vertical"></i></h1>
+            <div id="adv-search" className="input-group">
+				<form id="searchForm" style={{display:'inline-block'}} role="form">
+					<div className="form-group" style={{display:'inline-block'}}>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', border:'2px solid #2D6C4A'}} placeholder="DZBZ 상품 검색"/>
+					</div>
+                    <div className="form-group" style={{display:'inline-block'}}>
+					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#2D6C4A", height:'46px', border:'2px solid #2D6C4A'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                     </div>          
                 </form>
 	        </div>

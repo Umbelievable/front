@@ -79,11 +79,17 @@ class CreateBoardComponent extends Component {
             BoardService.createBoard(board).then(res => {
                 window.location.replace('/qna-board');
             });
+<<<<<<< HEAD
         } else { // 있던 게시글 업데이트면
             // 파일 Url 글번호로 가져와서
             // qboardFileUrl 값 다시 주기
             BoardService.updateBoard(this.state.qboardNo, board).then(res => {
                 this.props.history.push(`/read-board/${this.state.qboardNo}`);
+=======
+        } else { 
+            BoardService.updateBoard(this.state.qboardNo, board).then(res => {
+                window.location.replace(`/read-board/${this.state.qboardNo}`);
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             });
         }
     }
@@ -95,7 +101,13 @@ class CreateBoardComponent extends Component {
     componentDidMount() {
         if (this.state.qboardNo === '_create') {
             return
+<<<<<<< HEAD
         } else {
+=======
+        } else { // 있던 게시글 업데이트면
+            // 파일 Url 글번호로 가져와서
+            // qboardFileUrl 값 다시 주기
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             BoardService.getOneBoard(this.state.qboardNo).then( (res) => {
                 let board = res.data;
                 console.log("board => "+ JSON.stringify(board));
@@ -103,7 +115,12 @@ class CreateBoardComponent extends Component {
                 this.setState({
                     qboardTitle: board.qboardTitle,
                     qboardWriter: board.qboardWriter,
+<<<<<<< HEAD
                     qboardContent: board.qboardContent
+=======
+                    qboardContent: board.qboardContent,
+                    qboardFileUrl: board.qboardFileUrl
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                 });
             });
         }
@@ -114,7 +131,10 @@ class CreateBoardComponent extends Component {
 				<div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
+<<<<<<< HEAD
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+=======
+>>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             <div className="card-content">
 			    <form className="form-horizontal">
                     
