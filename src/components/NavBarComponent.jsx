@@ -147,8 +147,8 @@ class NavBarComponent extends Component {
 
                 <div className="justify-content-start ml-auto">
                     <a className="navbar-brand" style={{margin:'0px', fontSize:'20px'}}>Community&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
-                    <button onClick={()=>this.props.history.push('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
-                    <button onClick={()=>this.props.history.push('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
+                    <button onClick={()=>window.location.replace('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
+                    <button onClick={()=>window.location.replace('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
                 </div>
             </nav>
             </div>

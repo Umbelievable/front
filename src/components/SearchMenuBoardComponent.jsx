@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
-import queryString from 'query-string';
 import ItemService from '../service/ItemService';
+import queryString from 'query-string';
 
-class MenuBoardComponent extends Component {
+
+class SearchMenuBoardComponent extends Component {
+    
     constructor(props) {
         const query = queryString.parse(window.location.search);
 
         super(props)
-        this.state = {
+        this.state = { 
+            searchKeyword: query.searchKeyword,
             cateNo: query.cateNo,
             subcateNo: query.subcateNo,
             items: []
         }
+        this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
     }
 
-    componentDidMount() {
-        ItemService.getCertainItems(this.state.cateNo, this.state.subcateNo).then((res) => {
+    changeKeywordHandler = (event) => {
+        this.setState({searchKeyword: event.target.value});
+    }
+   
+    componentDidMount() { 
+        ItemService.searchCateItems(this.state.searchKeyword, this.state.cateNo, this.state.subcateNo).then((res) => {
             this.setState({items: res.data});
         });
-
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
@@ -28,11 +34,10 @@ class MenuBoardComponent extends Component {
 
     render() {
         return (
-            <div className="main-content"> 
+            <div className="main-content">
                 <div className="row row-inline-block small-spacing">
-				<div className="col-xs-12">                   
+				<div className="col-xs-12">
 				<div className="box-content">
-
 
                 <div className="album py-5 bg-white">
                 <div className="container">
@@ -61,10 +66,11 @@ class MenuBoardComponent extends Component {
 
                 </div>
                 </div>
-                </div> 
-
-                
                 </div>
+                    
+
+            
+				</div>
 				</div>
 				</div>
 			</div>
@@ -72,4 +78,4 @@ class MenuBoardComponent extends Component {
     }
 }
 
-export default MenuBoardComponent;
+export default SearchMenuBoardComponent;

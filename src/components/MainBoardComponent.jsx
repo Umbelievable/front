@@ -12,8 +12,8 @@ class MainBoardComponent extends Component {
     }
 
     componentDidMount() {
-        var searchBar = document.getElementById("searchBar");
-        searchBar.placeholder="DZBZ 통합 검색";
+        // var searchBar = document.getElementById("searchBar");
+        // searchBar.placeholder="DZBZ 통합 검색";
 
     }
 

@@ -5,32 +5,15 @@ import queryString from 'query-string';
 
 
 class SearchBoardComponent extends Component {
-    
     constructor(props) {
         const query = queryString.parse(window.location.search);
 
         super(props)
         this.state = { 
             boards: [],
-            searchBoard: query.searchBoard,
-            searchType: query.searchType,
             searchKeyword: query.searchKeyword
         }
-
-        this.createBoard = this.createBoard.bind(this);
-
-        this.changeBoardHandler = this.changeBoardHandler.bind(this);
-        this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
-    }
-
-
-    changeBoardHandler = (event) => {
-        this.setState({searchBoard:event.target.value});
-    }
-
-    changeTypeHandler = (event) => {
-        this.setState({searchType: event.target.value});
     }
 
     changeKeywordHandler = (event) => {
@@ -38,23 +21,13 @@ class SearchBoardComponent extends Component {
     }
    
     componentDidMount() { 
-        //백 수정하고 서비스 수정하고 이부분 다시수정! searchBoard
-        BoardService.searchBoards(this.state.searchType, this.state.searchKeyword).then((res) => {
+        BoardService.searchBoards(this.state.searchKeyword).then((res) => {
             this.setState({ boards: res.data});
         });
     }
 
-    createBoard() {
-        this.props.history.push('/create-board/_create');
-    }
-
-    readBoard(idx) {
-        this.props.history.push(`/read-board/${idx}`);
-    }
-
-    searchBoard(searchBoard, searchType, searchKeyword){
-        this.props.history.push(`/search-board?searchBoard=${searchBoard}&searchType=${searchType}&searchKeyword=${searchKeyword}`);
-        
+    readBoard(qboardNo) {
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     render() {
@@ -64,8 +37,6 @@ class SearchBoardComponent extends Component {
 				<div className="col-xs-12">
 				<div className="box-content">
 
-
-            
             <div className="table-responsive clearfix">
 			    <table className="table table-hover">
                     <thead>
@@ -80,7 +51,6 @@ class SearchBoardComponent extends Component {
                     <tbody>
                         {
                         this.state.boards.map(
-                            //백 수정하고 서비스 수정하고 이 부분 다시 수정!
                             board => 
                             <tr key = {board.qboardNo}>
                                 <td> {board.qboardNo} </td>
@@ -93,9 +63,7 @@ class SearchBoardComponent extends Component {
                         }
                     </tbody>
                 </table>
-                <div className="btn_wrap text-right">
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
-			    </div>
+                
             </div>
 				</div>
 				</div>

@@ -26,8 +26,8 @@ class PhotoBoardComponent extends Component {
         });
 
         // photo 통합 검색
-        var searchBar = document.getElementById("searchBar");
-        searchBar.placeholder="DZBZ Photo 검색";
+        // var searchBar = document.getElementById("searchBar");
+        // searchBar.placeholder="DZBZ Photo 검색";
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");
