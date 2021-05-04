@@ -25,6 +25,10 @@ class SearchPhotoBoardComponent extends Component {
         PhotoBoardService.searchBoards(this.state.searchKeyword).then((res) => {
             this.setState({ boards: res.data});
         });
+
+        // photo 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ Photo 검색";
     }
 
     getImgSrc(url){
@@ -34,11 +38,6 @@ class SearchPhotoBoardComponent extends Component {
 
     readPhotoBoard(pboardNo) {
         this.props.history.push(`/read-photoboard/${pboardNo}`);
-    }
-
-    searchBoard(searchKeyword){
-        this.props.history.push(`/search-photoboard?searchKeyword=${searchKeyword}`);
-        
     }
 
     render() {

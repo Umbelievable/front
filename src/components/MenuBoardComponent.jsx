@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 import ItemService from '../service/ItemService';
 
@@ -19,6 +18,10 @@ class MenuBoardComponent extends Component {
         ItemService.getCertainItems(this.state.cateNo, this.state.subcateNo).then((res) => {
             this.setState({items: res.data});
         });
+
+        // 소카테고리 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder = this.state.subcateNo+" 상품 검색";
 
     }
 

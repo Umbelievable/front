@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Base64 } from 'js-base64';
 import PhotoBoardService from '../service/PhotoBoardService';
-import FileService from '../service/FileService';
-
 
 class PhotoBoardComponent extends Component {
     constructor(props) {
@@ -26,8 +23,8 @@ class PhotoBoardComponent extends Component {
         });
 
         // photo 통합 검색
-        // var searchBar = document.getElementById("searchBar");
-        // searchBar.placeholder="DZBZ Photo 검색";
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ Photo 검색";
 
         // 네비바에 현재 위치 표시하기 
         var header = document.getElementById("navbar");

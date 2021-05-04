@@ -26,6 +26,10 @@ class SearchMenuBoardComponent extends Component {
         ItemService.searchCateItems(this.state.searchKeyword, this.state.cateNo, this.state.subcateNo).then((res) => {
             this.setState({items: res.data});
         });
+
+        // 소카테고리 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder = this.state.subcateNo+" 상품 검색";
     }
 
     readItem(pdNo, cateNo, subcateNo) { 

@@ -9,6 +9,7 @@ import ReadBoardComponent from './components/ReadBoardComponent';
 import SearchBoardComponent from './components/SearchBoardComponent';
 import SearchPhotoBoardComponent from './components/SearchPhotoBoardComponent';
 import SearchMenuBoardComponent from './components/SearchMenuBoardComponent';
+import SearchAllBoardComponent from './components/SearchAllBoardComponent';
 import JoinMemberComponent from './components/member/JoinMemberComponent';
 import PhotoBoardComponent from './components/PhotoBoardComponent';
 import AdminBoardComponent from './components/AdminBoardComponent';
@@ -38,6 +39,7 @@ function App() {
               <Route path = "/search-board" component = {SearchBoardComponent}></Route>
               <Route path = "/search-photoboard" component = {SearchPhotoBoardComponent}></Route>
               <Route path = "/search-menuboard" component = {SearchMenuBoardComponent}></Route>
+              <Route path = "/search-allboard" component = {SearchAllBoardComponent}></Route>
               <Route path = "/member-join" component = {JoinMemberComponent}></Route>
               <Route path = "/photo-board" component = {PhotoBoardComponent}></Route>
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>

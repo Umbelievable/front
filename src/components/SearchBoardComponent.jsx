@@ -24,6 +24,9 @@ class SearchBoardComponent extends Component {
         BoardService.searchBoards(this.state.searchKeyword).then((res) => {
             this.setState({ boards: res.data});
         });
+        //qna 통합 검색
+        var searchBar = document.getElementById("searchBar");
+        searchBar.placeholder="DZBZ QnA 검색";
     }
 
     readBoard(qboardNo) {
@@ -37,34 +40,34 @@ class SearchBoardComponent extends Component {
 				<div className="col-xs-12">
 				<div className="box-content">
 
-            <div className="table-responsive clearfix">
-			    <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>번호 </th>
-                            <th>제목 </th>
-                            <th>작성자 </th>
-                            <th>등록일 </th>
-                            <th>조회수 </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        this.state.boards.map(
-                            board => 
-                            <tr key = {board.qboardNo}>
-                                <td> {board.qboardNo} </td>
-                                <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
-                                <td> {board.qboardWriter} </td>
-                                <td> {board.qboardInsertTime} </td>
-                                <td> {board.qboardViews} </td>
+                <div className="table-responsive clearfix">
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>번호 </th>
+                                <th>제목 </th>
+                                <th>작성자 </th>
+                                <th>등록일 </th>
+                                <th>조회수 </th>
                             </tr>
-                        )
-                        }
-                    </tbody>
-                </table>
-                
-            </div>
+                        </thead>
+                        <tbody>
+                            {
+                            this.state.boards.map(
+                                board => 
+                                <tr key = {board.qboardNo}>
+                                    <td> {board.qboardNo} </td>
+                                    <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
+                                    <td> {board.qboardWriter} </td>
+                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {board.qboardViews} </td>
+                                </tr>
+                            )
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
 				</div>
 				</div>
 				</div>
