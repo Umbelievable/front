@@ -41,6 +41,7 @@ class SearchAllBoardComponent extends Component {
         });
 
         // 아이템 가져오기
+        
         ItemService.searchAllItems(this.state.searchKeyword).then((res) => {
             this.setState({items: res.data});
         });
