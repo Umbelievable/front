@@ -165,8 +165,6 @@ class ItemService {
         return axios.get(ITEM_API_BASE_URL + "/search?keyword="+searchKeyword+"&category="+cateNo+"&subcateNo="+subcateNo, { headers: authHeader() });
     }
     
-
-    
 }
 
 export default new ItemService();

@@ -32,7 +32,6 @@ class ListBoardComponent extends Component {
             btns[i].className = "mybtn"
         }
         qnabtn.className += " active";
-
     }
 
     createBoard() {

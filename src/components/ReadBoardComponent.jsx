@@ -22,7 +22,6 @@ class ReadBoardComponent extends Component {
 
         this.changeContentHandler = this.changeContentHandler.bind(this);
         this.changeCommentContentHandler = this.changeCommentContentHandler.bind(this);
-
         this.createComment = this.createComment.bind(this);
     }
 

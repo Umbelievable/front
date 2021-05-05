@@ -34,7 +34,6 @@ class PhotoBoardComponent extends Component {
             btns[i].className = "mybtn"
         }
         photobtn.className += " active";
-
     }
 
     getImgSrc(url){

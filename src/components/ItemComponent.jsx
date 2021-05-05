@@ -50,7 +50,6 @@ class ItemComponent extends Component{
         for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
             pageNums.push(i);
         }
-
         return (pageNums.map((page) => 
         <li className="page-item" key={page.toString()} >
             <a className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.subcateNo, this.state.pdNo)}>{page}</a>

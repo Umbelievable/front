@@ -17,7 +17,6 @@ class MyPageBoardComponent extends Component {
         
         const currentUser = MemberService.getCurrentUser();
         this.setState({ currentUser: currentUser, userReady: true });
-        
     }
 
     

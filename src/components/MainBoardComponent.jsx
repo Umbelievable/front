@@ -6,7 +6,6 @@ class MainBoardComponent extends Component {
         super(props);
 
         this.state = {
-           
         }
 
     }

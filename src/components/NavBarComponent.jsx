@@ -61,7 +61,6 @@ class NavBarComponent extends Component {
               livingroom_categories: res.data});
         });
     }
-   
 
     // Get the navbar
     // Get the offset position of the navbar

@@ -34,7 +34,6 @@ class CreateBoardComponent extends Component {
     changeFileHandler = (event) => {
         this.setState({ file: event.target.files[0]}); //파일 데이터 넣고
         this.setState({ qboardFileUrl: event.target.files[0].name}); // Board 객체에 fileUrl 값 넣기
-
     }
 
     fileUpload = async function (file) {

@@ -67,7 +67,7 @@ class JoinMemberComponent extends Component {
         this.onChangeId = this.onChangeId.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
-        // 새로추가한 함수 6개
+        // 새로 추가한 함수 6개
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangeBirY = this.onChangeBirY.bind(this);
         this.onChangeBirM = this.onChangeBirM.bind(this);

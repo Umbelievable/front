@@ -17,7 +17,6 @@ class PhotoCommentService{
     deleteComment(pboardNo, pcommentNo) {
         return axios.delete(COMMENT_API_BASE_URL + "/" + pboardNo + "/" + pcommentNo);
     }
-
 }
 
 export default new PhotoCommentService();

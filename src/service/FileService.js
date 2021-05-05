@@ -16,7 +16,6 @@ class FileService {
     getOneFilePhoto(pboardNo) {
         return axios.get(File_API_BASE_URL + "/photo/" + pboardNo, { responseType: 'arraybuffer' }, { headers: authHeader() });
     }
-
     
 }
 

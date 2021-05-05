@@ -20,6 +20,7 @@ class AdminBoardComponent extends Component {
             <div className="box-content">
 
         
+        
             </div>
             </div>
             </div>

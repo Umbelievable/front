@@ -45,7 +45,6 @@ class SearchMenuBoardComponent extends Component {
 
                 <div className="album py-5 bg-white">
                 <div className="container">
-
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                     {
                         this.state.items.map(

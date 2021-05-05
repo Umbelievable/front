@@ -32,7 +32,6 @@ class CategoryBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">
 
-
                 <div className="album py-5 bg-white">
                 <div className="container">
 
@@ -54,7 +53,6 @@ class CategoryBoardComponent extends Component {
                                 </div>
                                 </div>
                             </div>
-
                         )
                     }
 

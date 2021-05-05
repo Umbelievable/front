@@ -18,6 +18,7 @@ class CommentService{
     deleteComment(qboardNo, qcommentNo) {
         return axios.delete(COMMENT_API_BASE_URL + "/" + qboardNo + "/" + qcommentNo);
     }
+    
 }
 
 export default new CommentService();

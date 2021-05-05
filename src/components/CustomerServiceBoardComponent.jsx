@@ -36,7 +36,6 @@ class CustomerServiceBoardComponent extends Component {
 
         var sel = document.getElementById(liNum);
         sel.style.display = "block";
-
     }
 
 

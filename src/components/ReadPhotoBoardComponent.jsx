@@ -8,7 +8,7 @@ import FileService from '../service/FileService';
 class ReadPhotoBoardComponent extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = { 
             pboardNo: this.props.match.params.pboardNo,
             board: {},
