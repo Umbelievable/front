@@ -54,7 +54,7 @@ class HeaderComponent extends Component {
         // qna에 있는지 // photo에 있는지 // main에서 전체 검색할건지(커뮤 두 개+아이템 전체) // 소카테고리(침실가구-침대) 들어가서 걔만 찾을건지 
         // 게시판 타입마다 렌더링 다르게 해줘야 하기 때문에 searchBoardComponent 여러개 구현
 
-        if(searchBoardType=='/main-board'){
+        if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
             window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
         }
         else if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
