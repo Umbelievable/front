@@ -1730,3 +1730,13 @@ textarea.form-control {
   justify-content: center;
   border-radius: 10px;
 }
+
+.cartcropping {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1em;
+}

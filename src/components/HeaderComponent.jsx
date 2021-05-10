@@ -92,6 +92,8 @@ class HeaderComponent extends Component {
                 <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
             {this.state.userReady && (
                 <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+            {this.state.userReady && (
+                <button className="mainhomebtn" onClick={()=>window.location.replace('/cart-board')}>CART</button>)}
             {!this.state.userReady && (
                 <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
             {this.state.userReady && (

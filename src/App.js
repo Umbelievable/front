@@ -21,6 +21,7 @@ import CustomerServiceBoardComponent from './components/CustomerServiceBoardComp
 import ItemComponent from './components/ItemComponent';
 import ReadPhotoBoardComponent from './components/ReadPhotoBoardComponent';
 import CreatePhotoBoardComponent from './components/CreatePhotoBoardComponent';
+import CartBoardComponent from './components/CartBoardComponent';
 
 
 
@@ -49,6 +50,7 @@ function App() {
               <Route path = "/menu-board" component = {MenuBoardComponent}></Route>
               <Route path = "/read-item" component = {ItemComponent}></Route>
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
+              <Route path = "/cart-board" component = {CartBoardComponent}></Route>
               <Route path = "/read-photoboard/:pboardNo" component = {ReadPhotoBoardComponent}></Route>
               <Route path = "/create-photoboard/:pboardNo" component = {CreatePhotoBoardComponent}></Route>
               </Switch>
