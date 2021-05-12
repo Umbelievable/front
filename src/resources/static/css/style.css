@@ -1731,6 +1731,15 @@ textarea.form-control {
   border-radius: 10px;
 }
 
+.ordercropping {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
 .cartcropping {
   width: 120px;
   height: 120px;
@@ -1738,7 +1747,6 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
-  padding-left: 1em;
 }
 
 .countBtn{

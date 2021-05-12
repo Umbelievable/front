@@ -142,8 +142,8 @@ class ReadBoardComponent extends Component {
             BoardService.deleteBoard(this.state.qboardNo).then( res => {
                 console.log("delete result => "+ JSON.stringify(res));
                 if (res.status == 200) {
-               window.confirm("게시글 삭제가 완료되었습니다.\n");
-                    this.props.history.push('/qna-board');
+                   window.confirm("게시글 삭제가 완료되었습니다.\n");
+                   this.props.history.push('/qna-board');
                 } 
                 else {
                     alert("글 삭제가 실패했습니다.");

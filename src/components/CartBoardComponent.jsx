@@ -27,7 +27,10 @@ class CartBoardComponent extends Component {
         this.setState({isChecked: !this.state.isChecked,});
     }
 
-    goToOrder() { // qna로 가는 함수
+    goToOrder() { // 주문하기 버튼 눌렀을때
+        // 주문 완료되었다는 alert창 띄우고
+        // 주문 목록 페이지로 이동하기
+        alert("주문이 완료되었습니다.\n");
         this.props.history.push('/order-board');
     }
 
