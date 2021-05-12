@@ -6,6 +6,7 @@ class CartBoardComponent extends Component {
         
         super(props)
         this.state = {
+            isChecked: false,
             currentUser: { id: "" }
         }
     }
@@ -18,20 +19,36 @@ class CartBoardComponent extends Component {
         else{
             this.setState({ currentUser: currentUser, userReady: true });
         } 
+        this.selectAll=this.selectAll.bind(this);
      
+    }
+
+    changeCheckHandler = (event) => {
+        this.setState({isChecked: !this.state.isChecked,});
+    }
+
+    selectAll(){
+        var checkboxes = document.getElementsByName('check');
+        var checkAll = document.getElementsByName('checkAll');
+        
+        if(!this.state.isChecked){ // 전체 선택하기
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = true;
+            }
+        }
+
+        else { // 선택 해제
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].checked = false;
+            }
+        }
     }
 
     
     render() {
         const { currentUser } = this.state;
         const ColoredLine = ({ color }) => (
-            <hr
-                style={{
-                    color: color,
-                    backgroundColor: color,
-                    height: 0.5
-                }}
-            />
+            <hr style={{ color: color, backgroundColor: color, height: 0.5}}/>
         );
 
         return (
@@ -44,7 +61,7 @@ class CartBoardComponent extends Component {
                 <div className="col-sm-12">
                     <p style={{padding:'1em 0em 0em 3em', fontSize:'large'}}><b>{currentUser.id}</b>님의 장바구니</p>
                     <div className="col-sm-2" style={{padding:'1em 0em 1em 4em'}}>
-                        <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="color" value="blue"/></div>
+                        <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="checkAll" value="selectAll" onChange={this.changeCheckHandler} onClick={this.selectAll}/></div>
                         <p style={{display:'inline', paddingLeft:'1em'}}>모두 선택</p>
                     </div>
                     <br/>
@@ -58,7 +75,7 @@ class CartBoardComponent extends Component {
                     <div style={{overflowY:'scroll', height:'340px', width:'100%'}}>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="color" value="blue"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -69,7 +86,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="color" value="blue"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_1414725/14147251300.20210305110358.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -80,7 +97,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="color" value="blue"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -91,7 +108,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="color" value="blue"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
