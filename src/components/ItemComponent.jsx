@@ -15,9 +15,12 @@ class ItemComponent extends Component{
             cateNo: query.cateNo,
             subcateNo: query.subcateNo,
             pdNo: query.pdNo,
+            count: 1, // 구매수량
             reviews: [],  //리뷰목록
             reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름
         }
+        this.up=this.up.bind(this);
+        this.down=this.down.bind(this);
     }
 
     componentDidMount(){
@@ -98,9 +101,19 @@ class ItemComponent extends Component{
         }
     }
 
+    up() {
+        this.setState({count: this.state.count+1});
+    }
+
+    down() {
+        if(this.state.count > 1){
+            this.setState({count: this.state.count-1});
+        }
+        
+    }
+
 
     render(){
-     
         return (
             <div className="main-content" style={{padding:'0em 5em'}}> 
             <div className="row row-inline-block small-spacing">
@@ -114,7 +127,14 @@ class ItemComponent extends Component{
                 </div>
                 <div style={{padding:'3em 1em'}}>
                     <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{this.state.itemInfo.pdMall}</div>
-                    <div style={{ paddingTop:'3px', paddingBottom:'3px', fontSize:'large', color:'black'}}>{this.state.itemInfo.pdTitle}</div>
+                    <div style={{ paddingTop:'3px', paddingBottom:'2em', fontSize:'large', color:'black'}}>{this.state.itemInfo.pdTitle}</div>
+                    <div style={{ paddingTop:'1em', paddingBottom:'2em', color:'black'}}>
+                        
+                        수량 
+                        <button className="countBtn" onClick={this.down} style={{ margin: '0em 1em'}}>-</button>
+                        {this.state.count}
+                        <button className="countBtn" onClick={this.up} style={{ margin: '0em 1em'}}>+</button>
+                    </div>
                     <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.state.itemInfo.pdPrice}</div>
                         <button className="btn btn-primary waves-effect waves-light" style={{marginTop:'130px'}}>BUY NOW</button>
                         <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px",marginTop:'130px'}}>CART</button>

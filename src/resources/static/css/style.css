@@ -555,13 +555,13 @@ h4 strong {
   background: #204e36 !important;
 }
 .btn-primary.btn-bordered {
-  border-color: #1d84df;
-  color: #1d84df;
+  border-color: #3f9969;
+  color: #3f9969;
 }
 .btn-primary.btn-bordered:hover,
 .btn-primary.btn-bordered:active,
 .btn-primary.btn-bordered:focus {
-  border-color: #304ffe;
+  border-color: #204e36;
   color: #ffffff;
 }
 .btn-success {
@@ -1739,4 +1739,11 @@ textarea.form-control {
   align-items: center;
   justify-content: center;
   padding-left: 1em;
+}
+
+.countBtn{
+  background-color: rgb(163, 162, 162);
+  border: none;
+  color: white;
+  border-radius: 3px;
 }
