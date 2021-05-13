@@ -17,10 +17,13 @@ class ItemComponent extends Component{
             pdNo: query.pdNo,
             count: 1, // 구매수량
             reviews: [],  //리뷰목록
-            reviewResult: []  //리뷰키워드그래프 데이터타입 아직모름
+            reviewResult: [],  //리뷰키워드그래프 데이터타입 아직모름
+            isClicked: false
         }
         this.up=this.up.bind(this);
         this.down=this.down.bind(this);
+        this.changeImg=this.changeImg.bind(this);
+
     }
 
     componentDidMount(){
@@ -108,9 +111,44 @@ class ItemComponent extends Component{
     down() {
         if(this.state.count > 1){
             this.setState({count: this.state.count-1});
+        }  
+    }
+    showLike() {
+        if(this.state.isClicked == false){
+            return (
+                <i style={{fontSize:'30px'}} className="glyphicon glyphicon-heart-empty" aria-hidden="true"></i>
+            );
+        }
+        else{
+            return (
+                <i style={{fontSize:'30px'}} className="glyphicon glyphicon-heart" aria-hidden="true"></i>
+            );
         }
         
     }
+    changeImg() {
+        this.setState({isClicked: !this.state.isClicked,});
+    }
+
+    numberWithCommas(x) { // 콤마 정규식
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  
+
+    totalPrice(){
+        var price = this.state.itemInfo.pdPrice+""; // 123,000원+공백 -> string 형변환 때문
+        var rPrice = price.substring(0, price.length-1).replace(/,/g, ""); // 콤마 제거
+        var count = this.state.count; // 구매 수량
+        var res = Number(count) * Number(rPrice); // 가격*수량
+
+        // 콤마 다시 붙이고 원 붙여서 출력하기
+        return (
+            <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.numberWithCommas(res)+"원"}</div>
+        );
+        
+    }
+
+
 
 
     render(){
@@ -125,20 +163,22 @@ class ItemComponent extends Component{
                 <div style={{padding:'3em 0em 3em 3em'}}>
                     <img className="itemcropping" src={this.state.itemInfo.pdImg}/>
                 </div>
-                <div style={{padding:'3em 1em'}}>
+                <div style={{padding:'3em 1em', position:'relative'}}>
                     <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{this.state.itemInfo.pdMall}</div>
                     <div style={{ paddingTop:'3px', paddingBottom:'2em', fontSize:'large', color:'black'}}>{this.state.itemInfo.pdTitle}</div>
                     <div style={{ paddingTop:'1em', paddingBottom:'2em', color:'black'}}>
-                        
                         수량 
                         <button className="countBtn" onClick={this.down} style={{ margin: '0em 1em'}}>-</button>
                         {this.state.count}
                         <button className="countBtn" onClick={this.up} style={{ margin: '0em 1em'}}>+</button>
                     </div>
-                    <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.state.itemInfo.pdPrice}</div>
-                        <button className="btn btn-primary waves-effect waves-light" style={{marginTop:'130px'}}>BUY NOW</button>
-                        <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px",marginTop:'130px'}}>CART</button>
-                    </div>
+                    
+                    {this.totalPrice()}
+                    <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
+                    <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
+                    <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>CART</button>
+                    
+                </div>
                 <div style={{padding:'3em'}}>
                     <div style={{ fontSize:'large', color:'black'}}>소비자 리뷰 분석 결과</div>   
                 </div>  

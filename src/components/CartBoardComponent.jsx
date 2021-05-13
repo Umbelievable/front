@@ -82,7 +82,7 @@ class CartBoardComponent extends Component {
                     <div style={{overflowY:'scroll', height:'340px', width:'100%'}}>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -94,7 +94,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_1414725/14147251300.20210305110358.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -106,7 +106,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
@@ -118,7 +118,7 @@ class CartBoardComponent extends Component {
                         </div>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="check"/></div>
+                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
                                 <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
                             </div>
                             <div className="col-sm-6" style={{padding:'1em 0em'}}>
