@@ -1,35 +1,133 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import MemberService from '../service/MemberService';
+import LikeService from '../service/LikeService';
+import ItemService from '../service/ItemService';
 
 class MyPageBoardComponent extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            currentUser: { username: "" }
+            likes: [],
+            itemList: [],
+            currentUser: { id: "" }
         }
     }
 
     componentDidMount() {
+        const currentUser = MemberService.getCurrentUser();
+        this.setState({ currentUser: currentUser, userReady: true });
+
         // DZBZ 통합 검색
         var searchBar = document.getElementById("searchBar");
         searchBar.placeholder="DZBZ 통합 검색";
         
-        const currentUser = MemberService.getCurrentUser();
-        this.setState({ currentUser: currentUser, userReady: true });
+        LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 저렇게 넣어야 안꼬임
+            this.setState({likes: res.data});
+            for(var i=0; i<res.data.length; i++){
+                ItemService.getCertainItem(res.data[i].pdNo, res.data[i].categoryNo, res.data[i].subcateNo).then( resul => {
+                    this.setState({itemList: this.state.itemList.concat(resul.data)});
+                });
+            }
+        });
+        
+        
     }
 
-    
+    tableINFO() {
+        var forArray = [];
+        var data = this.state.itemList;
+        var i = 0;
+
+        while(i<data.length){
+            if(data[i] && data[i+1] && data[i+2]){
+                forArray.push(
+                    <tr style={{pointerEvents: 'none'}}>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i].pdTitle}</div>                
+                            </div>
+                        </td>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i+1].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i+1].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i+1].pdTitle}</div>                
+                            </div>
+                        </td>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i+2].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i+2].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i+2].pdTitle}</div>                
+                            </div>
+                        </td>
+                    </tr>
+                );
+            }
+            else if(data[i] && data[i+1] && !data[i+2]){
+                forArray.push(
+                    <tr style={{pointerEvents: 'none'}}>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i].pdTitle}</div>                
+                            </div>
+                        </td>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i+1].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i+1].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i+1].pdTitle}</div>                
+                            </div>
+                        </td>
+                        <td style={{width:'33%'}}>
+                        </td>
+                    </tr>
+                );
+            }
+            else if(data[i] && !data[i+1] && !data[i+2]){
+                forArray.push(
+                    <tr style={{pointerEvents: 'none'}}>
+                        <td style={{width:'33%'}}>
+                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                <img className="ordercropping" src={data[i].pdImg}/>
+                            </div>
+                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>{data[i].pdMall}</div>
+                                <div style={{ fontWeight:'bolder', paddingTop:'5px', paddingBottom:'10px', fontSize:'15px', color:'black'}}>{data[i].pdTitle}</div>                
+                            </div>
+                        </td>
+                        <td style={{width:'33%'}}>
+                        </td>
+                        <td style={{width:'33%'}}>
+                        </td>
+                    </tr>
+                );
+            }
+            i=i+3;
+        }
+        return forArray;
+    }
+
     render() {
         const ColoredLine = ({ color }) => (
-            <hr
-                style={{
-                    color: color,
-                    backgroundColor: color,
-                    height: 1
-                }}
-            />
+            <hr style={{color: color, backgroundColor: color, height: 1}}/>
         );
+        
         return (
             <div className="main-content">
                 <div className="row row-inline-block small-spacing">
@@ -37,7 +135,7 @@ class MyPageBoardComponent extends Component {
                <div className="box-content">
   
                     <button type="button" className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
-                        <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.username}</div>
+                        <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
                         <a style={{display:'inline', marginLeft:'40px'}} href="/">회원 정보 수정</a>
                         <br/><br/>
                         
@@ -78,36 +176,14 @@ class MyPageBoardComponent extends Component {
                             <table className="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th colSpan='2' style={{width:'100%'}}>좋아요 목록</th>
+                                        <th colSpan='3' style={{width:'100%'}}>좋아요 목록</th>
                                         
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr style={{pointerEvents: 'none'}}>
-                                        <td>
-                                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                                <img className="ordercropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
-                                            </div>
-                                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름 어쩌구저쩌구 쫌 길수도</div>
-                                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름 더길수도있음 뫄뫄가구솨솨가구</div>
-                                                
-                                            </div>
-                                        </td>
-                                        
-                                        <td>
-                                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                                <img className="ordercropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
-                                            </div>
-                                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름 어쩌구저쩌구 쫌 길수도</div>
-                                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름 더길수도있음 뫄뫄가구솨솨가구</div>
-                                                
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    
+                                    {
+                                        this.tableINFO()
+                                    }
                                 </tbody>
                             </table>
                             
