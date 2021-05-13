@@ -60,7 +60,7 @@ class MyPageBoardComponent extends Component {
 
                         <br/><br/>
                         <br/><br/><br/><br/>
-                        <div style={{fontWeight:'bolder'}}>관심 해시태그</div>
+                        <div style={{fontWeight:'bolder', textAlign:'center'}}>관심 해시태그</div>
                             <br/>
                             <div className="hashtag">#&nbsp;침대</div>
                             <div className="hashtag">#&nbsp;엔틱</div>
@@ -72,10 +72,46 @@ class MyPageBoardComponent extends Component {
                         <br/><br/>
                         <br/><br/>
 
-                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
+                       
                         
-                        <br/><br/>
-                        <br/><br/>
+                        <div className="table-responsive clearfix">
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th colSpan='2' style={{width:'100%'}}>좋아요 목록</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style={{pointerEvents: 'none'}}>
+                                        <td>
+                                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                                <img className="ordercropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
+                                            </div>
+                                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름 어쩌구저쩌구 쫌 길수도</div>
+                                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름 더길수도있음 뫄뫄가구솨솨가구</div>
+                                                
+                                            </div>
+                                        </td>
+                                        
+                                        <td>
+                                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                                <img className="ordercropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
+                                            </div>
+                                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름 어쩌구저쩌구 쫌 길수도</div>
+                                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름 더길수도있음 뫄뫄가구솨솨가구</div>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    
+                                </tbody>
+                            </table>
+                            
+                        </div>
 
                         <ColoredLine color="lightgray" />
 
