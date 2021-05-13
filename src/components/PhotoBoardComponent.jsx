@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PhotoBoardService from '../service/PhotoBoardService';
+import FileService from '../service/FileService';
 
 class PhotoBoardComponent extends Component {
     constructor(props) {
@@ -8,6 +9,7 @@ class PhotoBoardComponent extends Component {
             p_num: 1,
             paging: {},
             boards: [],
+            fileUrl: []
         }
         this.getImgSrc=this.getImgSrc.bind(this);
         this.createBoard = this.createBoard.bind(this);
@@ -20,6 +22,18 @@ class PhotoBoardComponent extends Component {
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
                 boards: res.data.list});
+
+                for(var i=0; i<res.data.list.length; i++){
+                    FileService.getOneFilePhoto(res.data.list[i].pboardNo).then( resul => {
+                        const base64 = btoa(
+                            new Uint8Array(resul.data).reduce(
+                             (data, byte) => data + String.fromCharCode(byte),
+                             '',
+                           ),
+                         );
+                        this.setState({fileUrl: this.state.fileUrl.concat("data:;base64," + base64)});
+                    });
+                }
         });
 
         // photo 통합 검색
@@ -120,6 +134,27 @@ class PhotoBoardComponent extends Component {
         }
     }
 
+    getPhoto(){
+        var forArray = [];
+        var data = this.state.boards;
+        //var i=0;
+        for(var i=0; i<data.length; i++){
+            forArray.push(
+                <div key = {data[i].pboardNo} className="col" onClick = {() => this.readPhotoBoard(data[i].pboardNo)} style={{padding:'20px 10px'}}>
+                    <div className="cropping">
+                        <img className="cropping-layerBottom" src={this.state.fileUrl[i]}/>
+                        <div className="cropping-layerTop">
+                            <p className="cropping-text">{data[i].pboardTitle}<br/><br/><small className="text-muted">{data[i].pboardWriter}</small></p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+       
+        return forArray;
+    }
+
 
 
 
@@ -136,21 +171,8 @@ class PhotoBoardComponent extends Component {
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {
-                    this.state.boards.map(
-                        board => 
-                        <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)} style={{padding:'20px 10px'}}>
-                            <div className="cropping">
-                                <img className="cropping-layerBottom" src={this.getImgSrc(board.pboardFileUrl)}/>
-                                <div className="cropping-layerTop">
-                                    <p className="cropping-text">{board.pboardTitle}<br/><br/><small className="text-muted">{board.pboardWriter}</small></p>
-                                </div>
-                            </div>
-                        </div>
-
-                    )
+                    this.getPhoto()
                 }
-
-        
             </div>
             </div>
             </div>
