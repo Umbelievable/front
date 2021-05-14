@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import queryString from 'query-string';
 import BoardService from '../service/BoardService';
 import PhotoBoardService from '../service/PhotoBoardService';
@@ -86,107 +89,103 @@ class SearchAllBoardComponent extends Component {
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
-
     render() {
         return (
             <div className="main-content">
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
-                <h1>qna 검색결과</h1>
-                <br/>
-                <div>
-                <div className="table-responsive clearfix">
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>번호 </th>
-                                <th>제목 </th>
-                                <th>작성자 </th>
-                                <th>등록일 </th>
-                                <th>조회수 </th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                
+                <Tabs>
+                    <TabList>
+                        <Tab>&nbsp;&nbsp;&nbsp;&nbsp;Q&amp;A&nbsp;Community&nbsp;&nbsp;&nbsp;&nbsp;</Tab>
+                        <Tab>&nbsp;&nbsp;&nbsp;&nbsp;Photo&nbsp;Community&nbsp;&nbsp;&nbsp;&nbsp;</Tab>
+                        <Tab>&nbsp;&nbsp;&nbsp;&nbsp;Product&nbsp;&nbsp;&nbsp;&nbsp;</Tab>
+                    </TabList>
+
+                    <TabPanel>
+                        <div style={{padding:'3em'}} className="table-responsive clearfix">
+                            <table className="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>번호 </th>
+                                        <th>제목 </th>
+                                        <th>작성자 </th>
+                                        <th>등록일 </th>
+                                        <th>조회수 </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                    this.state.qnaBoards.map(
+                                        qnaboard => 
+                                        <tr key = {qnaboard.qboardNo}>
+                                            <td> {qnaboard.qboardNo} </td>
+                                            <td> <a href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
+                                            <td> {qnaboard.qboardWriter} </td>
+                                            <td> {qnaboard.qboardInsertTime} </td>
+                                            <td> {qnaboard.qboardViews} </td>
+                                        </tr>
+                                    )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </TabPanel>
+                        
+                    <TabPanel>
+                        <div className="album py-5 bg-white">
+                            <div className="container">
+                            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                                {
+                                    this.state.finalphotoBoards.map(
+                                        photoboard => 
+                                        <div key = {photoboard.pboardNo} className="col" onClick = {() => this.readPhotoBoard(photoboard.pboardNo)} style={{padding:'20px 10px'}}>
+                                            <div className="cropping">
+                                                <img className="cropping-layerBottom" src={photoboard.pboardFileUrl}/>
+                                                <div className="cropping-layerTop">
+                                                    <p className="cropping-text">{photoboard.pboardTitle}<br/><br/><small className="text-muted">{photoboard.pboardWriter}</small></p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    )
+                                }
+                            </div>
+                            </div>
+                        </div>
+                    </TabPanel>
+
+                    <TabPanel>
+                        <div className="album py-5 bg-white">
+                        <div className="container">
+
+                        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                             {
-                            this.state.qnaBoards.map(
-                                qnaboard => 
-                                <tr key = {qnaboard.qboardNo}>
-                                    <td> {qnaboard.qboardNo} </td>
-                                    <td> <a href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
-                                    <td> {qnaboard.qboardWriter} </td>
-                                    <td> {qnaboard.qboardInsertTime} </td>
-                                    <td> {qnaboard.qboardViews} </td>
-                                </tr>
-                            )
-                            }
-                        </tbody>
-                    </table>
-                </div>
-
-                </div>
-
-                <h1>photo 검색결과</h1>
-                <br/>
-                <div>
-                <div className="album py-5 bg-white">
-                <div className="container">
-
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {
-                        this.state.finalphotoBoards.map(
-                            photoboard => 
-                            <div key = {photoboard.pboardNo} className="col" onClick = {() => this.readPhotoBoard(photoboard.pboardNo)} style={{padding:'20px 10px'}}>
-                                <div className="cropping">
-                                    <img className="cropping-layerBottom" src={photoboard.pboardFileUrl}/>
-                                    <div className="cropping-layerTop">
-                                        <p className="cropping-text">{photoboard.pboardTitle}<br/><br/><small className="text-muted">{photoboard.pboardWriter}</small></p>
+                                this.state.items.map(
+                                    item => 
+                                    <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
+                                        <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
+                                        <div className="menucropping">
+                                            <img src={item.pdImg}/>
+                                        </div>
+                                        <div className="card-body">
+                                            <small className="card-text" style={{fontSize:'11px'}}>{item.pdMall}</small>
+                                            <small className="card-text" style={{display:'block', fontWeight:'bold', fontSize:'13px', height:'62px'}}>{item.pdTitle}</small>
+                                        <div className="d-flex justify-content-between align-items-center">
+                                            <p className="card-text" style={{fontWeight:'bolder', fontSize:'20px'}}>{item.pdPrice}</p>
+                                        </div>
+                                        </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                )
+                            }
 
-                        )
-                    }
-                </div>
-                </div>
-                </div>
-                </div>
-
-                <h1>상품 검색결과</h1>
-                <br/>
-                <div>
-                <div className="album py-5 bg-white">
-                <div className="container">
-
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-                    {
-                        this.state.items.map(
-                            item => 
-                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
-                                <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
-                                <div className="menucropping">
-                                    <img src={item.pdImg}/>
-                                </div>
-                                <div className="card-body">
-                                    <small className="card-text" style={{fontSize:'11px'}}>{item.pdMall}</small>
-                                    <small className="card-text" style={{display:'block', fontWeight:'bold', fontSize:'13px', height:'62px'}}>{item.pdTitle}</small>
-                                <div className="d-flex justify-content-between align-items-center">
-                                    <p className="card-text" style={{fontWeight:'bolder', fontSize:'20px'}}>{item.pdPrice}</p>
-                                </div>
-                                </div>
-                                </div>
-                            </div>
-
-                        )
-                    }
-
-                </div>
-                </div>
-                </div>
-
-                </div>
-
-            
+                        </div>
+                        </div>
+                        </div>
+                    </TabPanel>
+                </Tabs>
 				</div>
 				</div>
 				</div>

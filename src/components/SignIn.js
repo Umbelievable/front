@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import {Navbar, Nav, FormControl, Button, Modal, NavDropdown, Sidebar} from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Modal } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import MemberService from "../service/MemberService";
 import Form from "react-validation/build/form";

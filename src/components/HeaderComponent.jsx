@@ -57,7 +57,7 @@ class HeaderComponent extends Component {
         if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
             window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
         }
-        else if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
+        if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
             window.location.replace(`/search-board?searchKeyword=${searchKeyword}`);
         }
         else if(searchBoardType=='/photo-board' || searchBoardType=='/search-photoboard'){
@@ -66,6 +66,9 @@ class HeaderComponent extends Component {
         else if(searchBoardType=='/menu-board' || searchBoardType=='/search-menuboard'){ // subCate
             const params = new URLSearchParams(window.location.search);
             window.location.replace(`/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`);
+        }
+        else {
+            window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
         }
     }
 
