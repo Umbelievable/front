@@ -795,6 +795,7 @@ Version 1.0
   z-index: 10;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 2em;
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -979,9 +980,10 @@ Version 1.0
 1. Footer
 */
 .footer {
-  padding: 19px 30px 20px 30px;
+  padding: 20px 30px 20px 30px;
   margin: 0px -20px 0px -20px;
   color: rgba(0, 0, 0, 0.7);
+  height: 160px;
 }
 .footer a {
   color: rgba(0, 0, 0, 0.7);
@@ -1462,9 +1464,10 @@ textarea.form-control {
 .hashtag {
   display: inline;
   border-radius: 3px;
-  padding: 5px 20px 5px 20px;
-  margin: 10px;
+  padding: 1em 4em;
+  margin: 1em;
   background-color: #a4ccb6;
+  color: black;
 }
 
 .cropping,
@@ -1715,6 +1718,7 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
+
 }
 
 .cartcropping {
@@ -1731,4 +1735,24 @@ textarea.form-control {
   border: none;
   color: white;
   border-radius: 3px;
+}
+
+.likeMall{
+  font-weight: bolder;
+  font-size: small;
+  color: gray;
+  padding-left: 1em;
+}
+
+.likeTitle{
+  font-weight: bolder;
+  font-size: 15px;
+  color: black;
+  padding-top: 5px;
+  padding-bottom: 1em;
+  padding-left: 1em;
+}
+
+.likeList{
+  width: 33%;
 }

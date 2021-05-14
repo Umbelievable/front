@@ -64,9 +64,8 @@ class CartBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">
                     
-
                 <div className="col-sm-12">
-                    <p style={{padding:'1em 0em 0em 3em', fontSize:'large', textAlign:'center'}}><b>{currentUser.id}</b>님의 장바구니</p>
+                    <p style={{paddingLeft:'3em', fontSize:'20px', textAlign:'center'}}><b>{currentUser.id}</b>님의 장바구니</p>
                     <div className="col-sm-2" style={{padding:'1em 0em 1em 4em'}}>
                         <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" name="checkAll" value="selectAll" onChange={this.changeCheckHandler} onClick={this.selectAll}/></div>
                         <p style={{display:'inline', paddingLeft:'1em'}}>모두 선택</p>
@@ -79,7 +78,7 @@ class CartBoardComponent extends Component {
 
                 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
-                    <div style={{overflowY:'scroll', height:'340px', width:'100%'}}>
+                    <div style={{overflowY:'scroll', height:'400px', width:'100%'}}>
                         <div className="col-sm-12">
                             <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
                                 <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
@@ -130,18 +129,13 @@ class CartBoardComponent extends Component {
                         </div>
                     </div>
 
-                    <div style={{padding:'3em', borderLeft:'1px solid lightgray'}}>
+                    <div style={{padding:'3em 0em 3em 6em'}}>
                         <div style={{ paddingTop:'1em', paddingBottom:'3px', fontSize:'large', color:'black'}}>총 상품금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>60,000원</b></div>
-                        <div style={{ paddingTop:'1em', paddingBottom:'3em', fontSize:'large', color:'black'}}>총 배송비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>10,000원</b></div>
-                        <div style={{ paddingTop:'1em', fontSize:'28px', color:'black', display:'inline'}}>결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>70,000원</b></div>
-                        <button onClick={this.goToOrder.bind(this)} style={{marginLeft:'4em', display:'inline'}} className="btn btn-primary waves-effect waves-light">주문하기</button>
-                        
+                        <div style={{ paddingTop:'1em', paddingBottom:'2em', fontSize:'large', color:'black'}}>총 배송비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>10,000원</b></div>
+                        <div style={{ paddingTop:'1em', paddingBottom:'1em', fontSize:'28px', color:'black'}}>결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>70,000원</b></div>
+                        <button onClick={this.goToOrder.bind(this)} style={{ padding:'1em 6em'}} className="btn btn-primary waves-effect waves-light">상품 주문하기</button>                      
                     </div>
-
                 </div>
-
-                
-                
 
 				</div>
 				</div>

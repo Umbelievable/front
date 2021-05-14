@@ -66,7 +66,7 @@ class NavBarComponent extends Component {
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     myFunction () {
         var navbar = document.getElementById("navbar");
-        if (window.pageYOffset >= 190) {
+        if (window.pageYOffset >= 197) {
             navbar.classList.add("sticky");
         } 
         else {
@@ -90,7 +90,7 @@ class NavBarComponent extends Component {
             <div id="navbar">
             <nav className="navbar navbar-white bg-white" style={{margin:'0px 0px 40px', borderBottom:'1px solid #2D6C4A', padding:'0px 10px'}}>
                 <div className="justify-content-start mr-auto">
-                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px'}}>Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px'}}>&nbsp;&nbsp;Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
                     
                     {
                         this.state.categories.map(
