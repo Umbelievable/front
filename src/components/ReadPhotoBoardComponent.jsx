@@ -66,7 +66,7 @@ class ReadPhotoBoardComponent extends Component {
       newButton.onclick = () => this.updateComment(qcommentNo);
       
 
-	   commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
+	  commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
       newButton.appendChild(newI);
       commentLi.appendChild(newButton);
 

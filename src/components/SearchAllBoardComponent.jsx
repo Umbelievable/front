@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import BoardService from '../service/BoardService';
 import PhotoBoardService from '../service/PhotoBoardService';
 import ItemService from '../service/ItemService';
+import FileService from '../service/FileService';
 
 
 class SearchAllBoardComponent extends Component {
@@ -14,9 +15,9 @@ class SearchAllBoardComponent extends Component {
             searchKeyword: query.searchKeyword,
             qnaBoards: [],
             photoBoards: [],
+            finalphotoBoards: [],
             items: []
         }
-        this.getImgSrc=this.getImgSrc.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);
     }
 
@@ -36,18 +37,41 @@ class SearchAllBoardComponent extends Component {
 
         // photo게시글 가져오기
         PhotoBoardService.searchBoards(this.state.searchKeyword).then((res) => {
-            this.setState({ photoBoards: res.data});
+            this.setState({ 
+                photoBoards: res.data}); // 원래대로 백에서 정보 받고
+
+                for(var i=0; i<res.data.length; i++){ // 반복문 시작
+                    const pb = res.data[i]; // 리스트에서 하나씩 빼서
+
+                    FileService.getOneFilePhoto(res.data[i].pboardNo).then( resul => {
+                        const base64 = btoa(
+                            new Uint8Array(resul.data).reduce(
+                             (data, byte) => data + String.fromCharCode(byte),
+                             '',
+                           ),
+                         ); // 파일 처리 하고
+                        
+                        const newarr = [{"pboardNo": pb.pboardNo,
+                                        "pboardTitle": pb.pboardTitle,
+                                        "pboardWriter": pb.pboardWriter,
+                                        "pboardInsertTime": pb.pboardInsertTime,
+                                        "pboardViews": pb.pboardViews,
+                                        "pboardContent": pb.pboardContent,
+                                        "pboardUpdateTime": pb.pboardUpdateTime,
+                                        "pboardFileUrl": "data:;base64," + base64,
+                                        "photoComments": pb.photoComments
+                                        }]; // 새 배열 만들어서 다시 세팅
+                        this.setState({finalphotoBoards: this.state.finalphotoBoards.concat(newarr).sort(function(a, b){ // 정렬까지 해서 렌더링에 사용할 배열 만들기
+                            return b.pboardNo - a.pboardNo
+                        })}); 
+                    });
+                }
         });
 
         // 아이템 가져오기
         ItemService.searchAllItems(this.state.searchKeyword).then((res) => {
             this.setState({items: res.data});
         });
-    }
-
-    getImgSrc(url){
-        var file = "data:;base64," + url;
-        return file;
     }
 
     readBoard(qboardNo) {
@@ -110,11 +134,11 @@ class SearchAllBoardComponent extends Component {
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {
-                        this.state.photoBoards.map(
+                        this.state.finalphotoBoards.map(
                             photoboard => 
                             <div key = {photoboard.pboardNo} className="col" onClick = {() => this.readPhotoBoard(photoboard.pboardNo)} style={{padding:'20px 10px'}}>
                                 <div className="cropping">
-                                    <img className="cropping-layerBottom" src={this.getImgSrc(photoboard.pboardFileUrl)}/>
+                                    <img className="cropping-layerBottom" src={photoboard.pboardFileUrl}/>
                                     <div className="cropping-layerTop">
                                         <p className="cropping-text">{photoboard.pboardTitle}<br/><br/><small className="text-muted">{photoboard.pboardWriter}</small></p>
                                     </div>
