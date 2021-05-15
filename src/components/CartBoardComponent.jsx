@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import MemberService from '../service/MemberService';
+import CartService from '../service/CartService';
+import ItemService from '../service/ItemService';
 
 class CartBoardComponent extends Component {
     constructor(props) {
@@ -7,20 +9,39 @@ class CartBoardComponent extends Component {
         super(props)
         this.state = {
             isChecked: false,
-            currentUser: { id: "" }
+            currentUser: { id: "" },
+            cartList: [],
+            itemList: [],
+            finalcarts: []
         }
+        this.selectAll=this.selectAll.bind(this);
     }
 
     componentDidMount() {
         const currentUser = MemberService.getCurrentUser();
-        if (!currentUser){
-            this.setState({ currentUser: "guest", userReady: false });
-        }
-        else{
-            this.setState({ currentUser: currentUser, userReady: true });
-        } 
-        this.selectAll=this.selectAll.bind(this);
-     
+        this.setState({ currentUser: currentUser, userReady: true });
+
+        CartService.getCartItems(MemberService.getCurrentUser().id).then((res) => { 
+            this.setState({ cartList: res.data });
+            for(var i=0; i<res.data.length; i++){
+                const vol = res.data[i].volume; // 카트 형태로 받아온거에선 vol만 저장
+                ItemService.getCertainItem(res.data[i].pdNo, res.data[i].categoryNo, res.data[i].subcateNo).then( resul => { // 카트 조건에 해당하는 아이템 찾으면
+                    const item = resul.data;
+                    // 아이템에서 가져온 가격 원 빼고 콤마 빼야됨 -> 최종 가격 출력하기위해
+                    const itemPrice = (item.pdPrice).replace(/,/g, "").substring(0,item.pdPrice.length-2);
+                    const cartItem = [{"pdMall": item.pdMall,
+                                        "pdTitle": item.pdTitle,
+                                        "pdImg": item.pdImg,
+                                        "volume": vol,
+                                        "totalPrice": itemPrice * vol
+                                    }]; // 렌더링에서 map으로 한번에 뽑으려고 이렇게 배열 만드는거
+                    this.setState({finalcarts: this.state.finalcarts.concat(cartItem)});
+
+  
+                });
+            }
+        });
+
     }
 
     changeCheckHandler = (event) => {
@@ -36,7 +57,6 @@ class CartBoardComponent extends Component {
 
     selectAll(){
         var checkboxes = document.getElementsByName('check');
-        var checkAll = document.getElementsByName('checkAll');
         
         if(!this.state.isChecked){ // 전체 선택하기
             for (var i = 0; i < checkboxes.length; i++) {
@@ -49,6 +69,10 @@ class CartBoardComponent extends Component {
                 checkboxes[i].checked = false;
             }
         }
+    }
+
+    numberWithCommas(x) { // 콤마 정규식
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     
@@ -79,54 +103,24 @@ class CartBoardComponent extends Component {
                 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
                     <div style={{overflowY:'scroll', height:'400px', width:'100%'}}>
-                        <div className="col-sm-12">
-                            <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
-                                <img className="cartcropping" src="http://cdn.011st.com/11dims/resize/600x600/quality/75/11src/pd/17/8/4/3/3/2/4/XaCvd/10843324_B.jpg"/>
+                        {
+                        this.state.finalcarts.map( 
+                            finalcart => 
+                            <div className="col-sm-12">
+                                <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
+                                    <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
+                                    <img className="cartcropping" src={finalcart.pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em'}}>
+                                    <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
+                                    <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
+                                    <div style={{ fontSize:'normal', color:'black'}}>수량 : {finalcart.volume} </div>
+                                    <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em'}}>
-                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름</div>
-                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름</div>
-                                <div style={{ fontSize:'normal', color:'black'}}>수량 : 2 </div>
-                                <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>100,000원</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-12">
-                            <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
-                                <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_1414725/14147251300.20210305110358.jpg?type=f640"/>
-                            </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em'}}>
-                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름</div>
-                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름</div>
-                                <div style={{ fontSize:'normal', color:'black'}}>수량 : 2 </div>
-                                <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>100,000원</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-12">
-                            <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
-                                <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
-                            </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em'}}>
-                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름</div>
-                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름</div>
-                                <div style={{ fontSize:'normal', color:'black'}}>수량 : 2 </div>
-                                <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>100,000원</div>
-                            </div>
-                        </div>
-                        <div className="col-sm-12">
-                            <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input type="checkbox" name="check"/></div>
-                                <img className="cartcropping" src="https://shopping-phinf.pstatic.net/main_2592100/25921002522.20210208193230.jpg?type=f640"/>
-                            </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em'}}>
-                                <div style={{ fontWeight:'bolder', fontSize:'small', color:'gray'}}>회사이름</div>
-                                <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'large', color:'black'}}>가구이름</div>
-                                <div style={{ fontSize:'normal', color:'black'}}>수량 : 2 </div>
-                                <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>100,000원</div>
-                            </div>
-                        </div>
+                        )
+                        }
+                       
                     </div>
 
                     <div style={{padding:'3em 0em 3em 6em'}}>

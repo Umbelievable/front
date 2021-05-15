@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import LikeService from '../service/LikeService';
+import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 
 class ItemComponent extends Component{
@@ -28,6 +29,7 @@ class ItemComponent extends Component{
         this.up=this.up.bind(this);
         this.down=this.down.bind(this);
         this.changeImg=this.changeImg.bind(this);
+        this.addCart=this.addCart.bind(this);
 
     }
 
@@ -201,6 +203,19 @@ class ItemComponent extends Component{
         
     }
 
+    addCart(){ //add cart 버튼 누르면 실행되는 함수
+        let item = {
+            userId: this.state.currentUser.id,
+            pdNo: this.state.pdNo,
+            subcateNo: this.state.subcateNo,
+            categoryNo: this.state.cateNo,
+            volume: this.state.count
+        };
+        CartService.addItem(item).then(res => {
+            alert('장바구니에 상품을 추가했습니다.');
+        });
+    }
+
 
     render(){
         return (
@@ -227,7 +242,7 @@ class ItemComponent extends Component{
                     {this.totalPrice()}
                     <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
                     <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
-                    <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>CART</button>
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
                     
                 </div>
                 <div style={{padding:'3em'}}>
