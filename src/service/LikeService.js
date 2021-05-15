@@ -10,8 +10,10 @@ class LikeService{
     createLikeItem(item){
         return axios.post(LIKE_API_BASE_URL, item, { headers: authHeader() });
     }
-   
-    
+    deleteLikeItem(likeNo){
+        return axios.delete(LIKE_API_BASE_URL + "/" + likeNo, { headers: authHeader() });
+    }
+       
 }
 
 export default new LikeService();

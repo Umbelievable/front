@@ -21,7 +21,8 @@ class ItemComponent extends Component{
             reviews: [],  //리뷰목록
             reviewResult: [],  //리뷰키워드그래프 데이터타입 아직모름
             isClicked: false,
-            currentUser: { id: "" }
+            currentUser: { id: "" },
+            likes: [] // 유저별 좋아요 목록
 
         }
         this.up=this.up.bind(this);
@@ -50,6 +51,22 @@ class ItemComponent extends Component{
                 p_num: null,
                 paging: null,
                 reviews: null});
+        });
+
+        // 유저 좋아요 목록 가져오기 -> 좋아요 목록에 있는건 칠한 하트로 뽑아야하고 다시 눌렀을때 삭제도 할 수 있게
+        LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
+            this.setState({likes: res.data}); // 리스트에 넣고 
+            
+            for(var i=0; i<res.data.length; i++){ // 리스트 길이만큼 돌기 
+                const pdNo = res.data[i].pdNo;
+                const cateNo = res.data[i].categoryNo;
+                const subcateNo = res.data[i].subcateNo;
+
+                if((this.state.pdNo == pdNo) && (this.state.cateNo == cateNo) && (this.state.subcateNo == subcateNo)){ // 이미 좋아요를 누른 상태라면
+                    this.setState({isClicked: true}); // 하트 칠해서 출력하기
+                }
+                
+            }
         });
     }
 
@@ -154,7 +171,14 @@ class ItemComponent extends Component{
 
         }
         else { // 눌린상태면 // deleteLikeItem 호출
-
+            const likeItem = this.state.likes;
+            for(var i=0; i<likeItem.length; i++){
+                if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
+                    LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
+                        alert('관심상품 목록에서 삭제했습니다.');
+                    });
+                }
+            }
         }
         this.setState({isClicked: !this.state.isClicked,}); // 지금 상태랑 반대인 그림으로 바꾸기
     }
