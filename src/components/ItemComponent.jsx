@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
+import LikeService from '../service/LikeService';
+import MemberService from '../service/MemberService';
 
 class ItemComponent extends Component{
     constructor(props){
@@ -18,7 +20,9 @@ class ItemComponent extends Component{
             count: 1, // 구매수량
             reviews: [],  //리뷰목록
             reviewResult: [],  //리뷰키워드그래프 데이터타입 아직모름
-            isClicked: false
+            isClicked: false,
+            currentUser: { id: "" }
+
         }
         this.up=this.up.bind(this);
         this.down=this.down.bind(this);
@@ -27,15 +31,25 @@ class ItemComponent extends Component{
     }
 
     componentDidMount(){
+        const currentUser = MemberService.getCurrentUser();
+        this.setState({ currentUser: currentUser, userReady: true });
+
         ItemService.getCertainItem(this.state.pdNo, this.state.cateNo, this.state.subcateNo).then( res => {
             this.setState({itemInfo: res.data});
         });
 
+        
+        // 리뷰가 있으면 (res.data.pagingData.currentPageNum != null) setState하고 없으면 그냥 넘기기
         ReviewService.getReviews(this.state.p_num, this.state.cateNo, this.state.subcateNo, this.state.pdNo).then( res => {
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
                 reviews: res.data.list});
+            })
+            .catch(res =>{ this.setState({ 
+                p_num: null,
+                paging: null,
+                reviews: null});
         });
     }
 
@@ -126,8 +140,23 @@ class ItemComponent extends Component{
         }
         
     }
-    changeImg() {
-        this.setState({isClicked: !this.state.isClicked,});
+    changeImg() { // 하트 눌렀을때 불리는 함수
+        if(!this.state.isClicked){ // 좋아요 안눌린상태면 // createLikeItem 호출
+            let item = {
+                userId: this.state.currentUser.id,
+                pdNo: this.state.pdNo,
+                subcateNo: this.state.subcateNo,
+                categoryNo: this.state.cateNo
+            };
+            LikeService.createLikeItem(item).then(res => {
+                alert('관심상품 목록에 추가했습니다.');
+            });
+
+        }
+        else { // 눌린상태면 // deleteLikeItem 호출
+
+        }
+        this.setState({isClicked: !this.state.isClicked,}); // 지금 상태랑 반대인 그림으로 바꾸기
     }
 
     numberWithCommas(x) { // 콤마 정규식
@@ -147,8 +176,6 @@ class ItemComponent extends Component{
         );
         
     }
-
-
 
 
     render(){
@@ -185,56 +212,70 @@ class ItemComponent extends Component{
                     
             </div>
             <br/><br/>
-        
-            <div className="table-responsive clearfix">
-			    <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>리뷰No.</th>
-                            <th>별점</th>
-                            <th>아이디</th>
-                            <th>리뷰</th>
-                            <th>날짜</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        this.state.reviews.map(
-                            review => 
-                            <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
-                                <td> {review.reviewNo} </td>
-                                <td> {review.star} </td>
-                                <td> {review.customerId} </td>
-                                <td> {review.review} </td>
-                                <td> {review.reviewDate} </td>
-                            </tr>
-                        )
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div className ="row">
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
+            {
+                (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
+                    <div>
+                    <div className="table-responsive clearfix">
+                        <table className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>리뷰No.</th>
+                                    <th>별점</th>
+                                    <th>아이디</th>
+                                    <th>리뷰</th>
+                                    <th>날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                this.state.reviews.map(
+                                    review => 
+                                    <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
+                                        <td> {review.reviewNo} </td>
+                                        <td> {review.star} </td>
+                                        <td> {review.customerId} </td>
+                                        <td> {review.review} </td>
+                                        <td> {review.reviewDate} </td>
+                                    </tr>
+                                )
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className ="row">
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination justify-content-center">
 
-                        {
-                            this.isMoveToFirstPage()
-                        }
-                        {
-                            this.isPagingPrev()
-                        }
-                        {
-                            this.viewPaging()
-                        }
-                        {
-                            this.isPagingNext()
-                        }
-                        {
-                            this.isMoveToLastPage()
-                        }
-                    </ul>
-                </nav>
-            </div>
+                                {
+                                    this.isMoveToFirstPage()
+                                }
+                                {
+                                    this.isPagingPrev()
+                                }
+                                {
+                                    this.viewPaging()
+                                }
+                                {
+                                    this.isPagingNext()
+                                }
+                                {
+                                    this.isMoveToLastPage()
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                    </div>
+                )
+            }
+            {
+                (!this.state.reviews) && ( // 없으면 없다고
+                    <div>
+                        작성된 리뷰가 없습니다.
+                    </div>
+                )
+            }
+        
+            
 
             
 

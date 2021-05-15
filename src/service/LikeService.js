@@ -7,6 +7,10 @@ class LikeService{
     getLikelist(user) {
         return axios.get(LIKE_API_BASE_URL + "?user_id=" + user, { headers: authHeader() });
     }
+    createLikeItem(item){
+        return axios.post(LIKE_API_BASE_URL, item, { headers: authHeader() });
+    }
+   
     
 }
 
