@@ -37,6 +37,19 @@ class MyPageBoardComponent extends Component {
         window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
+    deleteLike(pdNo, cateNo, subcateNo) {
+        const likeItem = this.state.likes;
+            for(var i=0; i<likeItem.length; i++){
+                if((likeItem[i].pdNo == pdNo) && (likeItem[i].categoryNo == cateNo) && (likeItem[i].subcateNo == subcateNo)) {
+                    LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
+                        alert('관심상품 목록에서 삭제했습니다.');
+                        window.location.replace('/mypage-board');
+                    });
+                }
+            }
+    }
+
+
     tableINFO() {
         var forArray = [];
         const data = this.state.itemList;
@@ -48,31 +61,46 @@ class MyPageBoardComponent extends Component {
                 const data0 = data[i]; const data1 = data[i+1]; const data2 = data[i+2];
                 forArray.push(
                     <tr>
-                        <td className="likeList" onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i].pdImg}/>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i].pdMall}</div>
+                                    <div className="likeTitle">{data[i].pdTitle}</div>                
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i].pdMall}</div>
-                                <div className="likeTitle">{data[i].pdTitle}</div>                
-                            </div>
-                        </td>
-                        <td className="likeList" onClick={()=> this.readItem(data1.pdNo, data1.cateNo, data1.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i+1].pdImg}/>
-                            </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i+1].pdMall}</div>
-                                <div className="likeTitle">{data[i+1].pdTitle}</div>                
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data0.pdNo, data0.cateNo, data0.subcateNo)}>x</button>        
                             </div>
                         </td>
-                        <td className="likeList" onClick={()=> this.readItem(data2.pdNo, data2.cateNo, data2.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i+2].pdImg}/>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data1.pdNo, data1.cateNo, data1.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i+1].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i+1].pdMall}</div>
+                                    <div className="likeTitle">{data[i+1].pdTitle}</div>                
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i+2].pdMall}</div>
-                                <div className="likeTitle">{data[i+2].pdTitle}</div>                
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data1.pdNo, data1.cateNo, data1.subcateNo)}>x</button>        
+                            </div>
+                        </td>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data2.pdNo, data2.cateNo, data2.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i+2].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i+2].pdMall}</div>
+                                    <div className="likeTitle">{data[i+2].pdTitle}</div>                
+                                </div>
+                            </div>
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data2.pdNo, data2.cateNo, data2.subcateNo)}>x</button>        
                             </div>
                         </td>
                     </tr>
@@ -82,22 +110,32 @@ class MyPageBoardComponent extends Component {
                 const data0 = data[i]; const data1 = data[i+1];
                 forArray.push(
                     <tr>
-                        <td className="likeList" onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i].pdImg}/>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i].pdMall}</div>
+                                    <div className="likeTitle">{data[i].pdTitle}</div>                
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i].pdMall}</div>
-                                <div className="likeTitle">{data[i].pdTitle}</div>                
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data0.pdNo, data0.cateNo, data0.subcateNo)}>x</button>        
                             </div>
                         </td>
-                        <td className="likeList" onClick={()=> this.readItem(data1.pdNo, data1.cateNo, data1.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i+1].pdImg}/>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data1.pdNo, data1.cateNo, data1.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i+1].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i+1].pdMall}</div>
+                                    <div className="likeTitle">{data[i+1].pdTitle}</div>                
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i+1].pdMall}</div>
-                                <div className="likeTitle">{data[i+1].pdTitle}</div>                
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data1.pdNo, data1.cateNo, data1.subcateNo)}>x</button>        
                             </div>
                         </td>
                         <td className="likeList"/>
@@ -108,13 +146,18 @@ class MyPageBoardComponent extends Component {
                 const data0 = data[i];
                 forArray.push(
                     <tr>
-                        <td className="likeList" onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
-                            <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
-                                <img className="ordercropping" src={data[i].pdImg}/>
+                        <td className="likeList">
+                            <div onClick={()=> this.readItem(data0.pdNo, data0.cateNo, data0.subcateNo)}>
+                                <div className="col-sm-3" style={{padding:'1em 0em 1em 1em'}}>
+                                    <img className="ordercropping" src={data[i].pdImg}/>
+                                </div>
+                                <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
+                                    <div className="likeMall">{data[i].pdMall}</div>
+                                    <div className="likeTitle">{data[i].pdTitle}</div>                
+                                </div>
                             </div>
-                            <div className="col-sm-6" style={{padding:'1em 0em', textAlign:'left'}}>
-                                <div className="likeMall">{data[i].pdMall}</div>
-                                <div className="likeTitle">{data[i].pdTitle}</div>                
+                            <div className="col-sm-1" className="likeDel">
+                                <button className="likeDelBtn" onClick={()=> this.deleteLike(data0.pdNo, data0.cateNo, data0.subcateNo)}>x</button>        
                             </div>
                         </td>
                         <td className="likeList"/>

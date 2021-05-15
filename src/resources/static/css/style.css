@@ -1690,7 +1690,6 @@ textarea.form-control {
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent;
-  border: none;
   color: rgb(73, 73, 73);
   font-size: small;
 }
@@ -1751,6 +1750,17 @@ textarea.form-control {
   padding-top: 5px;
   padding-bottom: 1em;
   padding-left: 1em;
+}
+
+.likeDel{
+  padding: 1em 3em;
+}
+
+.likeDelBtn{
+  border: none;
+  outline: none;
+  background-color: lightgray;
+  color: rgb(70, 70, 70);
 }
 
 .likeList{
