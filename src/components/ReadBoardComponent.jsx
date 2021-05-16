@@ -17,11 +17,7 @@ class ReadBoardComponent extends Component {
             comments: [],
             newComment: '',
             file: null, // 게시글에 이미지파일 첨부되어있다면 img 가져와서 담을 변수
-<<<<<<< HEAD
             currentUser: { username: "" }
-=======
-            currentUser: { id: "" }
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
         }
 
         this.changeContentHandler = this.changeContentHandler.bind(this);
@@ -78,11 +74,7 @@ class ReadBoardComponent extends Component {
       event.preventDefault();
       let comment = {
          qcommentContent: this.state.qcommentContent,
-<<<<<<< HEAD
          qcommentWriter: this.state.currentUser.username,
-=======
-         qcommentWriter: this.state.currentUser.id,
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
       };
       console.log("comment => "+ JSON.stringify(comment));
 
@@ -95,11 +87,7 @@ class ReadBoardComponent extends Component {
     updateComment = async function (qcommentNo) {
       let comment = {
          qcommentContent: this.state.newComment,
-<<<<<<< HEAD
          qcommentWriter: this.state.currentUser.username,
-=======
-         qcommentWriter: this.state.currentUser.id,
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
       };
       console.log("comment => "+ JSON.stringify(comment));
 
@@ -196,11 +184,7 @@ class ReadBoardComponent extends Component {
                <div className="row row-inline-block small-spacing">
                <div className="col-xs-12">
                <div className="box-content">
-<<<<<<< HEAD
                <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
-=======
-      
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                   <div className="card-content">
 
                   <ColoredLine color="black"/>
@@ -250,19 +234,11 @@ class ReadBoardComponent extends Component {
 
                                  <span className="time">{comment.qcommentInsertTime}</span>
 
-<<<<<<< HEAD
                                  {(this.state.currentUser.username == comment.qcommentWriter) && ( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
                                     <button id={"delBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
                                  )}
                                                                
                                  {(this.state.currentUser.username == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
-=======
-                                 {(this.state.currentUser.id == comment.qcommentWriter) && ( // 삭제 버튼은 현재 로그인한 사람과 댓글 작성자가 같을 때
-                                    <button id={"delBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.deleteComment(this.state.qboardNo, comment.qcommentNo)} ><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></button>
-                                 )}
-                                                               
-                                 {(this.state.currentUser.id == comment.qcommentWriter) && ( // 수정 중 아니면 수정 버튼 띄우고
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                                  <button id={"modiBtnId"+comment.qcommentNo} type="button" className="btn btn-xs btn-circle" onClick={() => this.changeModalHandler(comment.qcommentNo)} style={{right: "55px"}}><i className="glyphicon glyphicon-pencil" aria-hidden="true"></i></button>
                                  )}
 

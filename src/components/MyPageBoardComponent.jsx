@@ -175,19 +175,6 @@ class MyPageBoardComponent extends Component {
         return (
             <div className="main-content">
                 <div className="row row-inline-block small-spacing">
-<<<<<<< HEAD
-               <div className="col-xs-12">
-               <div className="box-content">
-<<<<<<< HEAD
-               <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
-=======
-  
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-                    <button type="button" className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
-                        <div style={{display:'inline', marginLeft:'40px', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.username}</div>
-                        <a style={{display:'inline', marginLeft:'40px'}} href="/">회원 정보 수정</a>
-                        <br/><br/>
-=======
                 <div className="col-xs-12">
                 <div className="box-content">
 
@@ -198,7 +185,6 @@ class MyPageBoardComponent extends Component {
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
                         <a style={{display:'inline', marginLeft:'2em'}} href="/">회원 정보 수정</a>
                         <br/><br/><br/>
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
                         
                         <table className="table">
                             <thead>
@@ -227,38 +213,6 @@ class MyPageBoardComponent extends Component {
                     </div>
                 </div>
 
-<<<<<<< HEAD
-                        <br/><br/>
-<<<<<<< HEAD
-=======
-                        <br/><br/><br/><br/>
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-                        <div style={{fontWeight:'bolder'}}>관심 해시태그</div>
-                            <br/>
-                            <div className="hashtag">#&nbsp;침대</div>
-                            <div className="hashtag">#&nbsp;엔틱</div>
-                            <div className="hashtag">#&nbsp;카펫</div>
-                        <br/><br/>
-
-                        <ColoredLine color="lightgray" />
-                        
-                        <br/><br/>
-<<<<<<< HEAD
-                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
-                            <br/><br/>
-=======
-                        <br/><br/>
-
-                        <div style={{fontWeight:'bolder'}}>좋아요 목록</div>
-                        
-                        <br/><br/>
-                        <br/><br/>
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-
-                        <ColoredLine color="lightgray" />
-
-                        
-=======
                 <br/><br/>
                 <div className="table-responsive clearfix">
                     <table className="table">
@@ -275,7 +229,6 @@ class MyPageBoardComponent extends Component {
                     </table>
                 </div>        
    
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
 
                </div>
                </div>

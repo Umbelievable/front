@@ -3,38 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
-    "cors": "^2.8.5",
-    "jquery": "^3.6.0",
-    "js-base64": "^3.6.0",
-=======
-<<<<<<< HEAD
-    "@grapecity/wijmo.all": "^5.20211.781",
-=======
->>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
-<<<<<<< HEAD
-    "jquery": "^3.6.0",
-    "js-base64": "^3.6.0",
-=======
->>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
     "query-string": "^4.3.4",
-    "react": "^17.0.2",
+    "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-bootstrap-navbar": "^1.1.0",
     "react-bootstrap-sidebar": "^0.0.1",
-    "react-dom": "^17.0.2",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-tabs": "^3.2.2",
@@ -42,16 +22,7 @@
     "reactstrap": "^8.9.0",
     "simple-react-validator": "^1.6.0",
     "validator": "^13.5.2",
-<<<<<<< HEAD
-    "web-vitals": "^1.1.1"
-=======
-<<<<<<< HEAD
-    "web-vitals": "^1.1.0",
-    "wijmo": "^5.20211.781"
-=======
     "web-vitals": "^1.1.0"
->>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
   },
   "scripts": {
     "start": "react-scripts start",

@@ -23,19 +23,12 @@ class CategoryService {
 
     getStorageCategory(){
         return axios.get(CATEGORY_API_BASE_URL + "/small/storage", { headers: authHeader() });
-<<<<<<< HEAD
 
     }
 
     getLivingroomCategory(){
         return axios.get(CATEGORY_API_BASE_URL + "/small/livingroom");
 
-=======
-    }
-
-    getLivingroomCategory(){
-        return axios.get(CATEGORY_API_BASE_URL + "/small/livingroom", { headers: authHeader() });
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
     }
     
 

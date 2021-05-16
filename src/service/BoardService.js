@@ -25,18 +25,9 @@ class BoardService {
         return axios.delete(BOARD_API_BASE_URL + "/" + qboardNo, { headers: authHeader() });
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
     searchBoards(searchKeyword){
         return axios.get(BOARD_API_BASE_URL + "/search?keyword=" + searchKeyword, { headers: authHeader() });
-=======
-    searchBoards(searchType, searchKeyword){
-        return axios.get(BOARD_API_BASE_URL + "/search?type=" + searchType + "&keyword=" + searchKeyword, { headers: authHeader() });
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-=======
-    searchBoards(searchKeyword){
-        return axios.get(BOARD_API_BASE_URL + "/search?keyword=" + searchKeyword, { headers: authHeader() });
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
+
     }
 }
 

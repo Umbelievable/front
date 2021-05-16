@@ -186,14 +186,9 @@ class JoinMemberComponent extends Component {
             <div class="row row-inline-block small-spacing">
             <div class="col-xs-12">
             <div class="box-content">
-<<<<<<< HEAD
-            <div class="clearfix"><h4 class="box-title pull-left"></h4></div>
-
-            <div style={{width:'840px', margin:'auto'}}  class="card-content" >
-=======
 
             <div style={{width:'600px', margin:'auto'}}  class="card-content" >
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+
             <Form onSubmit={this.handleRegister} ref={c => {this.form = c;}}>
             {!this.state.successful && (
               <div>
@@ -254,83 +249,6 @@ class JoinMemberComponent extends Component {
                     value={this.state.phone}
                     onChange={this.onChangePhone}
                   />
-<<<<<<< HEAD
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="birthDate">생년월일</label>
-                  <br/>
-
-                  <div style={{display:'inline'}}>
-                  <input
-                    style={{display: 'inline-block', width: '260px',margin:'0px 30px 0px 0px'}}
-                    class="form-control"
-                    type="text"
-                    name="birY"
-                    placeholder="년(4자)"
-                    aria-label="년(4자)"
-                    maxLength="4"
-                    value={this.state.birY}
-                    onChange={this.onChangeBirY}
-                  />
-                  </div>
-                  <div style={{display:'inline'}}>
-                   <select style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 0px'}} 
-                        aial-label="월"
-                        name="birM"
-                        class="form-control"
-                        placeholder="년(4자)"
-                        value={this.state.birM}
-                        onChange={this.onChangeBirM}
-                   >
-                      <option value>월</option>
-                      <option value="01">1</option>
-                      <option value="02">2</option>
-                      <option value="03">3</option>
-                      <option value="04">4</option>
-                      <option value="05">5</option>
-                      <option value="06">6</option>
-                      <option value="07">7</option>
-                      <option value="08">8</option>
-                      <option value="09">9</option>
-                      <option value="10">10</option>
-                      <option value="11">11</option>
-                      <option value="12">12</option>
-                   </select>
-                 
-                   </div>
-                   <div style={{display:'inline'}}>
-                   <input type="text" 
-                        style={{display: 'inline-block', width: '260px',margin:'0px 0px 0px 30px'}}
-                        class="form-control"
-                        name="birD"
-                        placeholder="일" 
-                        aria-label="일" 
-                        maxLength="2"
-                        value={this.state.birD}
-                        onChange={this.onChangeBirD}
-                        />
-                  </div>
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="sex">성별</label>
-                  <select
-                    className="form-control"
-                    name="sex"
-                    aria-label="성별"
-                    value={this.state.sex}
-                    onChange={this.onChangeSex}
-                    >
-                      <option value selected>성별</option>
-                      <option value="Y">남자</option>
-                      <option value="X">여자</option>
-                      <option value="N">미공개</option>
-                  </select>    
-                </div>
-
-                <div className="form-group">
-=======
                 </div>
 
                 <div className="form-group">
@@ -406,7 +324,6 @@ class JoinMemberComponent extends Component {
                 </div>
 
                 <div className="form-group">
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                   <button className="btn btn-primary btn-block">가입하기</button>
                 </div>
               </div>

@@ -9,21 +9,13 @@ class MenuBoardComponent extends Component {
         super(props)
         this.state = {
             cateNo: query.cateNo,
-<<<<<<< HEAD
-            thisCateNo: query.thisCateNo,
-=======
             subcateNo: query.subcateNo,
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             items: []
         }
     }
 
     componentDidMount() {
-<<<<<<< HEAD
-        ItemService.getCertainItems(this.state.cateNo, this.state.thisCateNo).then((res) => {
-=======
         ItemService.getCertainItems(this.state.cateNo, this.state.subcateNo).then((res) => {
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             this.setState({items: res.data});
         });
 
@@ -32,13 +24,9 @@ class MenuBoardComponent extends Component {
         searchBar.placeholder = this.state.subcateNo+" 상품 검색";
     }
 
-<<<<<<< HEAD
-    readItem(pdNo, cateNo, thisCateNo) { 
-        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&thisCateNo=${thisCateNo}`);
-=======
     readItem(pdNo, cateNo, subcateNo) { 
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+
     }
 
     render() {
@@ -47,11 +35,7 @@ class MenuBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">                   
 				<div className="box-content">
-<<<<<<< HEAD
 				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
-=======
-
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
                 <div className="album py-5 bg-white">
                 <div className="container">
@@ -60,13 +44,8 @@ class MenuBoardComponent extends Component {
                     {
                         this.state.items.map(
                             item => 
-<<<<<<< HEAD
                             <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
                                 <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
-=======
-                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
-                                <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                                 <div className="menucropping">
                                     <img src={item.pdImg}/>
                                 </div>
