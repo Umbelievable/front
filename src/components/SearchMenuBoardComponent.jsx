@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import queryString from 'query-string';
 import ItemService from '../service/ItemService';
+import queryString from 'query-string';
 
-class MenuBoardComponent extends Component {
+
+class SearchMenuBoardComponent extends Component {
+    
     constructor(props) {
         const query = queryString.parse(window.location.search);
 
         super(props)
-        this.state = {
+        this.state = { 
+            searchKeyword: query.searchKeyword,
             cateNo: query.cateNo,
-<<<<<<< HEAD
-            thisCateNo: query.thisCateNo,
-=======
             subcateNo: query.subcateNo,
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
             items: []
         }
+        this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
     }
 
-    componentDidMount() {
-<<<<<<< HEAD
-        ItemService.getCertainItems(this.state.cateNo, this.state.thisCateNo).then((res) => {
-=======
-        ItemService.getCertainItems(this.state.cateNo, this.state.subcateNo).then((res) => {
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+    changeKeywordHandler = (event) => {
+        this.setState({searchKeyword: event.target.value});
+    }
+   
+    componentDidMount() { 
+        ItemService.searchCateItems(this.state.searchKeyword, this.state.cateNo, this.state.subcateNo).then((res) => {
             this.setState({items: res.data});
         });
 
@@ -32,41 +32,25 @@ class MenuBoardComponent extends Component {
         searchBar.placeholder = this.state.subcateNo+" 상품 검색";
     }
 
-<<<<<<< HEAD
-    readItem(pdNo, cateNo, thisCateNo) { 
-        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&thisCateNo=${thisCateNo}`);
-=======
     readItem(pdNo, cateNo, subcateNo) { 
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
     }
 
     render() {
         return (
-            <div className="main-content"> 
+            <div className="main-content">
                 <div className="row row-inline-block small-spacing">
-				<div className="col-xs-12">                   
+				<div className="col-xs-12">
 				<div className="box-content">
-<<<<<<< HEAD
-				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
-=======
-
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
                 <div className="album py-5 bg-white">
                 <div className="container">
-
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                     {
                         this.state.items.map(
                             item => 
-<<<<<<< HEAD
-                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
-                                <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
-=======
                             <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
                                 <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
                                 <div className="menucropping">
                                     <img src={item.pdImg}/>
                                 </div>
@@ -85,10 +69,11 @@ class MenuBoardComponent extends Component {
 
                 </div>
                 </div>
-                </div> 
-
-                
                 </div>
+                    
+
+            
+				</div>
 				</div>
 				</div>
 			</div>
@@ -96,4 +81,4 @@ class MenuBoardComponent extends Component {
     }
 }
 
-export default MenuBoardComponent;
+export default SearchMenuBoardComponent;

@@ -165,9 +165,7 @@ class CreatePhotoBoardComponent extends Component {
 				    <div className="btn_wrap text-center">
                         <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
                         <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
-					    
                     </div>
-
                 </form>
             </div>
                    

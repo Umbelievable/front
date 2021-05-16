@@ -206,6 +206,12 @@ class ItemService {
         return axios.get(ITEM_API_BASE_URL + "/getItem?pdNo="+pdNo+"&cateNo="+cateNo+"&subcateNo="+subcateNo, { headers: authHeader() });
         
     }
+    searchAllItems(searchKeyword){
+        return axios.get(ITEM_API_BASE_URL + "/searchAll?keyword=" + searchKeyword, { headers: authHeader() });
+    }
+    searchCateItems(searchKeyword, cateNo, subcateNo){
+        return axios.get(ITEM_API_BASE_URL + "/search?keyword="+searchKeyword+"&category="+cateNo+"&subcateNo="+subcateNo, { headers: authHeader() });
+    }
     
 }
 

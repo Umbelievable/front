@@ -24,6 +24,7 @@ class AdminBoardComponent extends Component {
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
         
+        
             </div>
             </div>
             </div>

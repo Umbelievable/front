@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Nav} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import CategoryService from '../service/CategoryService';
 import MemberService from '../service/MemberService';
@@ -65,14 +64,13 @@ class NavBarComponent extends Component {
               livingroom_categories: res.data});
         });
     }
-   
 
     // Get the navbar
     // Get the offset position of the navbar
     // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
     myFunction () {
         var navbar = document.getElementById("navbar");
-        if (window.pageYOffset >= 190) {
+        if (window.pageYOffset >= 197) {
             navbar.classList.add("sticky");
         } 
         else {
@@ -125,7 +123,7 @@ class NavBarComponent extends Component {
 =======
             <nav className="navbar navbar-white bg-white" style={{margin:'0px 0px 40px', borderBottom:'1px solid #2D6C4A', padding:'0px 10px'}}>
                 <div className="justify-content-start mr-auto">
-                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px'}}>Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px'}}>&nbsp;&nbsp;Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
                     
                     {
                         this.state.categories.map(
@@ -212,8 +210,8 @@ class NavBarComponent extends Component {
 
                 <div className="justify-content-start ml-auto">
                     <a className="navbar-brand" style={{margin:'0px', fontSize:'20px'}}>Community&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
-                    <button onClick={()=>this.props.history.push('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
-                    <button onClick={()=>this.props.history.push('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
+                    <button onClick={()=>window.location.replace('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
+                    <button onClick={()=>window.location.replace('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
                 </div>
             </nav>
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052

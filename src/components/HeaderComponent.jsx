@@ -1,9 +1,6 @@
-import { findAllByDisplayValue } from '@testing-library/dom';
 import React, { Component } from 'react';
-import {Navbar, Nav, Form, FormControl, Button, Modal, NavDropdown, Sidebar} from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
-import CategoryService from '../service/CategoryService';
 import MemberService from '../service/MemberService';
 
 
@@ -11,22 +8,18 @@ class HeaderComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            searchBoard: 'allBoard',
-            searchType: 'all',
+            searchBoardType: window.location.pathname,
             searchKeyword: '',
             isModalOpen: false,
             currentUser: { id: "" }
         }
         this.joinMember = this.joinMember.bind(this);
-        this.changeBoardHandler=this.changeBoardHandler.bind(this);
-        this.changeTypeHandler = this.changeTypeHandler.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
 
     }
 
     componentDidMount() {
         const currentUser = MemberService.getCurrentUser();
-        
         if (!currentUser){
             this.setState({ currentUser: "guest", userReady: false });
         }
@@ -36,14 +29,6 @@ class HeaderComponent extends Component {
  
     }
 
-    changeBoardHandler = (event) => {
-        this.setState({searchBoard: event.target.value});
-    }
-    
-    changeTypeHandler = (event) => {
-        this.setState({searchType: event.target.value});
-    }
-    
     changeKeywordHandler = (event) => {
         this.setState({searchKeyword: event.target.value});
     }
@@ -60,8 +45,31 @@ class HeaderComponent extends Component {
       this.setState({ isModalOpen: false });
     }
 
-    searchBoard(searchBoard, searchType, searchKeyword){
-        this.props.history.push(`/search-board?searchBoard=${searchBoard}&searchType=${searchType}&searchKeyword=${searchKeyword}`);
+    searchBoard = (event) => {
+        event.preventDefault();
+        var searchBoardType = this.state.searchBoardType;
+        var searchKeyword = this.state.searchKeyword;
+
+        // searchBoard는 사용자 위치 반환      
+        // qna에 있는지 // photo에 있는지 // main에서 전체 검색할건지(커뮤 두 개+아이템 전체) // 소카테고리(침실가구-침대) 들어가서 걔만 찾을건지 
+        // 게시판 타입마다 렌더링 다르게 해줘야 하기 때문에 searchBoardComponent 여러개 구현
+
+        if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
+            window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
+        }
+        if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
+            window.location.replace(`/search-board?searchKeyword=${searchKeyword}`);
+        }
+        else if(searchBoardType=='/photo-board' || searchBoardType=='/search-photoboard'){
+            window.location.replace(`/search-photoboard?searchKeyword=${searchKeyword}`);
+        }
+        else if(searchBoardType=='/menu-board' || searchBoardType=='/search-menuboard'){ // subCate
+            const params = new URLSearchParams(window.location.search);
+            window.location.replace(`/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`);
+        }
+        else {
+            window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
+        }
     }
 
     goToList() {
@@ -79,6 +87,7 @@ class HeaderComponent extends Component {
 
     render() {
         const { currentUser } = this.state;
+
         return (
         <div className="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
             <div className="btn_wrap text-right">
@@ -95,6 +104,8 @@ class HeaderComponent extends Component {
                 <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
             {this.state.userReady && (
                 <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+            {this.state.userReady && (
+                <button className="mainhomebtn" onClick={()=>window.location.replace('/cart-board')}>CART</button>)}
             {!this.state.userReady && (
                 <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
             {this.state.userReady && (
@@ -119,11 +130,15 @@ class HeaderComponent extends Component {
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>
-						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', border:'2px solid #2D6C4A'}} placeholder="DZBZ 상품 검색"/>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', border:'2px solid #2D6C4A'}} placeholder="DZBZ 통합 검색"/>
 					</div>
                     <div className="form-group" style={{display:'inline-block'}}>
+<<<<<<< HEAD
 					    <button onClick = {() => this.searchBoard(this.state.searchType, this.state.searchKeyword)} className="form-control" style={{background: "#2D6C4A", height:'46px', border:'2px solid #2D6C4A'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+=======
+					    <button onClick = {this.searchBoard} className="form-control" style={{background: "#2D6C4A", height:'46px', border:'2px solid #2D6C4A'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
                     </div>          
                 </form>
 	        </div>

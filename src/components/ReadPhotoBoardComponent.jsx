@@ -8,7 +8,7 @@ import FileService from '../service/FileService';
 class ReadPhotoBoardComponent extends Component {
     constructor(props) {
         super(props);
-
+        
         this.state = { 
             pboardNo: this.props.match.params.pboardNo,
             board: {},
@@ -66,7 +66,7 @@ class ReadPhotoBoardComponent extends Component {
       newButton.onclick = () => this.updateComment(qcommentNo);
       
 
-	   commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
+	  commentLi.appendChild(newINPUT); // 새 input 태그 붙이기
       newButton.appendChild(newI);
       commentLi.appendChild(newButton);
 

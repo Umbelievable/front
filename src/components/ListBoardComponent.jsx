@@ -19,7 +19,8 @@ class ListBoardComponent extends Component {
                 paging: res.data.pagingData,
                 boards: res.data.list});
         });
-        // qna 통합 검색
+        
+        //qna 통합 검색
         var searchBar = document.getElementById("searchBar");
         searchBar.placeholder="DZBZ QnA 검색";
 
@@ -31,7 +32,6 @@ class ListBoardComponent extends Component {
             btns[i].className = "mybtn"
         }
         qnabtn.className += " active";
-
     }
 
     createBoard() {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Base64 } from 'js-base64';
 import PhotoBoardService from '../service/PhotoBoardService';
 import FileService from '../service/FileService';
 <<<<<<< HEAD
@@ -7,21 +6,21 @@ import queryString from 'query-string';
 =======
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
-
 class PhotoBoardComponent extends Component {
     constructor(props) {
         const query = queryString.parse(window.location.search);
         
         super(props);
         this.state = {
-            p_num: 1,
-            paging: {},
             boards: [],
+<<<<<<< HEAD
 <<<<<<< HEAD
             searchKeyword: query.searchKeyword
 
+=======
+            finalboards: []
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
         }
-        this.getImgSrc=this.getImgSrc.bind(this);
         this.createBoard = this.createBoard.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
         
@@ -39,12 +38,36 @@ class PhotoBoardComponent extends Component {
     
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
     componentDidMount() {
-
-        PhotoBoardService.getBoards(this.state.p_num).then((res) => {
+        PhotoBoardService.getBoards().then((res) => {
             this.setState({ 
-                p_num: res.data.pagingData.currentPageNum,
-                paging: res.data.pagingData,
-                boards: res.data.list});
+                boards: res.data}); // 원래대로 백에서 정보 받고
+
+                for(var i=0; i<res.data.length; i++){ // 반복문 시작
+                    const pb = res.data[i]; // 리스트에서 하나씩 빼서
+
+                    FileService.getOneFilePhoto(res.data[i].pboardNo).then( resul => {
+                        const base64 = btoa(
+                            new Uint8Array(resul.data).reduce(
+                             (data, byte) => data + String.fromCharCode(byte),
+                             '',
+                           ),
+                         ); // 파일 처리 하고
+                        
+                        const newarr = [{"pboardNo": pb.pboardNo,
+                                        "pboardTitle": pb.pboardTitle,
+                                        "pboardWriter": pb.pboardWriter,
+                                        "pboardInsertTime": pb.pboardInsertTime,
+                                        "pboardViews": pb.pboardViews,
+                                        "pboardContent": pb.pboardContent,
+                                        "pboardUpdateTime": pb.pboardUpdateTime,
+                                        "pboardFileUrl": "data:;base64," + base64,
+                                        "photoComments": pb.photoComments
+                                        }]; // 새 배열 만들어서 다시 세팅
+                        this.setState({finalboards: this.state.finalboards.concat(newarr).sort(function(a, b){ // 정렬까지 해서 렌더링에 사용할 배열 만들기
+                            return b.pboardNo - a.pboardNo
+                        })}); 
+                    });
+                }
         });
 
         // photo 통합 검색
@@ -68,6 +91,7 @@ class PhotoBoardComponent extends Component {
         }
         photobtn.className += " active";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
     }
@@ -75,6 +99,8 @@ class PhotoBoardComponent extends Component {
     getImgSrc(url){
         var file = "data:;base64," + url;
         return file;
+=======
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
     }
 
     createBoard() {
@@ -183,75 +209,6 @@ class PhotoBoardComponent extends Component {
     }
 
 
-    listBoard(p_num) {
-        console.log("pageNum : "+ p_num);
-        PhotoBoardService.getBoards(p_num).then((res) => {
-            console.log(res.data);
-            this.setState({ 
-                p_num: res.data.pagingData.currentPageNum,
-                paging: res.data.pagingData,
-                boards: res.data.list});
-        });
-    }
-
-    viewPaging() {
-        const pageNums = [];
-
-        for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
-            pageNums.push(i);
-        }
-
-        return (pageNums.map((page) => 
-        <li className="page-item" key={page.toString()} >
-            <a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>
-        </li>
-        ));
-        
-    }
-
-    isPagingPrev(){
-        if (this.state.paging.prev) {
-            return (
-                <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1) )} tabindex="-1">Previous</a>
-                </li>
-            );
-        }
-    }
-
-    isPagingNext(){
-        if (this.state.paging.next) {
-            return (
-                <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1) )} tabIndex="-1">Next</a>
-                </li>
-            );
-        }
-    }
-
-    isMoveToFirstPage() {
-        if (this.state.p_num != 1) {
-            return (
-                <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard(1)} tabIndex="-1">Move to First Page</a>
-                </li>
-            );
-        }
-    }
-
-    isMoveToLastPage() {
-        if (this.state.p_num != this.state.paging.pageNumCountTotal) {
-            return (
-                <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
-                </li>
-            );
-        }
-    }
-
-
-
-
     render() {
         return (
         <div className="main-content">
@@ -259,8 +216,15 @@ class PhotoBoardComponent extends Component {
             <div className="col-xs-12">
             <div className="box-content">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
 =======
+=======
+
+            <div className="btn_wrap text-right">
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+			</div>
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
         
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 
@@ -269,25 +233,23 @@ class PhotoBoardComponent extends Component {
 
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 {
-                    this.state.boards.map(
+                    this.state.finalboards.map(
                         board => 
                         <div key = {board.pboardNo} className="col" onClick = {() => this.readPhotoBoard(board.pboardNo)} style={{padding:'20px 10px'}}>
                             <div className="cropping">
-                                <img className="cropping-layerBottom" src={this.getImgSrc(board.pboardFileUrl)}/>
+                                <img className="cropping-layerBottom" src={board.pboardFileUrl}/>
                                 <div className="cropping-layerTop">
                                     <p className="cropping-text">{board.pboardTitle}<br/><br/><small className="text-muted">{board.pboardWriter}</small></p>
                                 </div>
                             </div>
                         </div>
-
                     )
                 }
-
-        
             </div>
             </div>
             </div>
 
+<<<<<<< HEAD
             <div className="btn_wrap text-right">
                     <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			</div> 
@@ -318,6 +280,9 @@ class PhotoBoardComponent extends Component {
                     </ul>
                 </nav>
             </div>
+=======
+             
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
 
             </div>
             </div>

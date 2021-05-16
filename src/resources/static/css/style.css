@@ -378,6 +378,10 @@ h4 strong {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .btn {
   background: #e4e7ea;
   outline: none !important;
@@ -509,30 +513,7 @@ h4 strong {
   line-height: 38px;
   color: #ffffff;
 }
-.btn.btn-facebook {
-  background-color: #3b5998 !important;
-}
-.btn.btn-twitter {
-  background-color: #55acee !important;
-}
-.btn.btn-google-plus {
-  background-color: #dd4b39 !important;
-}
-.btn.btn-linkedin {
-  background-color: #007bb6 !important;
-}
-.btn.btn-instagram {
-  background-color: #3f729b !important;
-}
-.btn.btn-pinterest {
-  background-color: #cb2027 !important;
-}
-.btn.btn-dribbble {
-  background-color: #ea4c89 !important;
-}
-.btn.btn-youtube {
-  background-color: #bb0000 !important;
-}
+
 .btn.btn-social-with-text {
   width: 100%;
   margin-bottom: 15px;
@@ -555,13 +536,13 @@ h4 strong {
   background: #204e36 !important;
 }
 .btn-primary.btn-bordered {
-  border-color: #1d84df;
-  color: #1d84df;
+  border-color: #3f9969;
+  color: #3f9969;
 }
 .btn-primary.btn-bordered:hover,
 .btn-primary.btn-bordered:active,
 .btn-primary.btn-bordered:focus {
-  border-color: #304ffe;
+  border-color: #204e36;
   color: #ffffff;
 }
 .btn-success {
@@ -583,21 +564,21 @@ h4 strong {
   color: #ffffff;
 }
 .btn-info {
-  background: #00aeff;
+  background: #3f9969;
 }
 .btn-info:hover,
 .btn-info:active,
 .btn-info:focus {
-  background: #00aeff !important;
+  background: #3f9969 !important;
 }
 .btn-info.btn-bordered {
-  border-color: #00aeff;
-  color: #00aeff;
+  border-color: #3f9969;
+  color: #3f9969;
 }
 .btn-info.btn-bordered:hover,
 .btn-info.btn-bordered:active,
 .btn-info.btn-bordered:focus {
-  border-color: #00aeff;
+  border-color: #3f9969;
   color: #ffffff;
 }
 .btn-warning {
@@ -715,16 +696,16 @@ h4 strong {
 }
 /* Background colors */
 .bg-custom {
-  background-color: #71b6f9 !important;
+  background-color: #3f9969 !important;
 }
 .bg-primary {
-  background-color: #1d84df !important;
+  background-color: #3f9969 !important;
 }
 .bg-success {
   background-color: #00bf4f !important;
 }
 .bg-info {
-  background-color: #00aeff !important;
+  background-color: #3f9969 !important;
 }
 .bg-warning {
   background-color: #ff8f00 !important;
@@ -770,7 +751,7 @@ h4 strong {
   color: #aab2bd !important;
 }
 .text-primary {
-  color: #188ae2 !important;
+  color: #3f9969 !important;
 }
 .text-warning {
   color: #fbbc05 !important;
@@ -818,6 +799,7 @@ Version 1.0
   z-index: 10;
   margin-left: 20px;
   margin-right: 20px;
+  margin-bottom: 2em;
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -1002,9 +984,10 @@ Version 1.0
 1. Footer
 */
 .footer {
-  padding: 19px 30px 20px 30px;
+  padding: 20px 30px 20px 30px;
   margin: 0px -20px 0px -20px;
   color: rgba(0, 0, 0, 0.7);
+  height: 160px;
 }
 .footer a {
   color: rgba(0, 0, 0, 0.7);
@@ -1503,12 +1486,36 @@ textarea.form-control {
   background-color: lavender;
 =======
   border-radius: 3px;
-  padding: 5px 20px 5px 20px;
-  margin: 10px;
+  padding: 1em 4em;
+  margin: 1em;
   background-color: #a4ccb6;
+<<<<<<< HEAD
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+=======
+  color: black;
 }
 
+<<<<<<< HEAD
+.hashtagrank:hover {
+  color: #a4ccb6;
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
+}
+
+.nounhashbtn {
+  font-size: 15px;
+  border: 1px solid rgb(73, 73, 73);;
+  border-radius: 20px;
+  margin: 5px;
+  padding:10px;
+  text-align: center;
+  display: inline-block;
+}
+.nounhashbtn:hover{
+  background-color:  #a4ccb6;
+}
+
+=======
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .cropping,
 .cropping * {
   box-sizing: border-box;
@@ -1731,7 +1738,6 @@ textarea.form-control {
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent;
-  border: none;
   color: rgb(73, 73, 73);
   font-size: small;
 }
@@ -1740,4 +1746,75 @@ textarea.form-control {
   background-color: white;
   color: #2d6c4a;
 }
+<<<<<<< HEAD
 >>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
+=======
+
+.itemcropping {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.ordercropping {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.cartcropping {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+}
+
+.countBtn{
+  background-color: rgb(163, 162, 162);
+  border: none;
+  color: white;
+  border-radius: 3px;
+}
+
+.likeMall{
+  font-weight: bolder;
+  font-size: small;
+  color: gray;
+  padding-left: 1em;
+}
+
+.likeTitle{
+  font-weight: bolder;
+  font-size: 15px;
+  color: black;
+  padding-top: 5px;
+  padding-bottom: 1em;
+  padding-left: 1em;
+}
+
+.likeDel{
+  padding: 1em 3em;
+}
+
+.likeDelBtn{
+  border: none;
+  outline: none;
+  background-color: lightgray;
+  color: rgb(70, 70, 70);
+}
+
+.likeList{
+  width: 33%;
+}
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6

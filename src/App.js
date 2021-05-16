@@ -7,6 +7,9 @@ import FooterComponent from './components/FooterComponent';
 import CreateBoardComponent from './components/CreateBoardComponent';
 import ReadBoardComponent from './components/ReadBoardComponent';
 import SearchBoardComponent from './components/SearchBoardComponent';
+import SearchPhotoBoardComponent from './components/SearchPhotoBoardComponent';
+import SearchMenuBoardComponent from './components/SearchMenuBoardComponent';
+import SearchAllBoardComponent from './components/SearchAllBoardComponent';
 import JoinMemberComponent from './components/member/JoinMemberComponent';
 import PhotoBoardComponent from './components/PhotoBoardComponent';
 import AdminBoardComponent from './components/AdminBoardComponent';
@@ -18,6 +21,9 @@ import CustomerServiceBoardComponent from './components/CustomerServiceBoardComp
 import ItemComponent from './components/ItemComponent';
 import ReadPhotoBoardComponent from './components/ReadPhotoBoardComponent';
 import CreatePhotoBoardComponent from './components/CreatePhotoBoardComponent';
+import CartBoardComponent from './components/CartBoardComponent';
+import OrderBoardComponent from './components/OrderBoardComponent';
+
 
 
 
@@ -34,7 +40,13 @@ function App() {
               <Route path = "/create-board/:qboardNo" component = {CreateBoardComponent}></Route>
               <Route path = "/read-board/:qboardNo" component = {ReadBoardComponent}></Route>
               <Route path = "/search-board" component = {SearchBoardComponent}></Route>
+<<<<<<< HEAD
               <Route path = "/search-photoboard" component = {PhotoBoardComponent}></Route>
+=======
+              <Route path = "/search-photoboard" component = {SearchPhotoBoardComponent}></Route>
+              <Route path = "/search-menuboard" component = {SearchMenuBoardComponent}></Route>
+              <Route path = "/search-allboard" component = {SearchAllBoardComponent}></Route>
+>>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
               <Route path = "/member-join" component = {JoinMemberComponent}></Route>
               <Route path = "/photo-board" component = {PhotoBoardComponent}></Route>
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>
@@ -43,8 +55,10 @@ function App() {
               <Route path = "/menu-board" component = {MenuBoardComponent}></Route>
               <Route path = "/read-item" component = {ItemComponent}></Route>
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
+              <Route path = "/cart-board" component = {CartBoardComponent}></Route>
               <Route path = "/read-photoboard/:pboardNo" component = {ReadPhotoBoardComponent}></Route>
               <Route path = "/create-photoboard/:pboardNo" component = {CreatePhotoBoardComponent}></Route>
+              <Route path = "/order-board" component = {OrderBoardComponent}></Route>
               </Switch>
         <FooterComponent/>
       </Router>
