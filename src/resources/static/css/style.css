@@ -378,10 +378,7 @@ h4 strong {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .btn {
   background: #e4e7ea;
   outline: none !important;
@@ -1450,55 +1447,32 @@ textarea.form-control {
 .mybtn {
   border: none;
   outline: none;
-<<<<<<< HEAD
-  padding: 10px 16px;
-=======
   padding: 14px;
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
   cursor: pointer;
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent;
   border: none;
-<<<<<<< HEAD
-  color: #ffffff;
-=======
   color: rgb(73, 73, 73);
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 }
 
 /* Style the active class (and buttons on mouse-over) */
 .active,
 .mybtn:hover {
-<<<<<<< HEAD
-  color: rgb(162, 231, 98);
-=======
   color: rgba(113, 218, 16, 0.829);
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
 }
 
 .hashtag {
   display: inline;
-<<<<<<< HEAD
-  border-radius: 7px;
-  padding: 5px 20px 5px 20px;
-  margin: 10px;
-  background-color: lavender;
-=======
   border-radius: 3px;
   padding: 1em 4em;
   margin: 1em;
   background-color: #a4ccb6;
-<<<<<<< HEAD
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-=======
   color: black;
 }
 
-<<<<<<< HEAD
 .hashtagrank:hover {
   color: #a4ccb6;
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
 }
 
 .nounhashbtn {
@@ -1514,8 +1488,6 @@ textarea.form-control {
   background-color:  #a4ccb6;
 }
 
-=======
->>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .cropping,
 .cropping * {
   box-sizing: border-box;
@@ -1671,8 +1643,6 @@ textarea.form-control {
     1.2
   ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
-<<<<<<< HEAD
-=======
 
 .subcate {
   display: inline-block;
@@ -1746,9 +1716,6 @@ textarea.form-control {
   background-color: white;
   color: #2d6c4a;
 }
-<<<<<<< HEAD
->>>>>>> 8c4fad14df0e9bbeb576640f19a25503ec180052
-=======
 
 .itemcropping {
   width: 400px;
@@ -1817,4 +1784,4 @@ textarea.form-control {
 .likeList{
   width: 33%;
 }
->>>>>>> 840d536be0884e6bfa08aa4a31f86075ebfcd1a6
+
