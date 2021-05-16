@@ -26,7 +26,6 @@ class MenuBoardComponent extends Component {
 
     readItem(pdNo, cateNo, subcateNo) { 
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
-
     }
 
     render() {
@@ -35,7 +34,7 @@ class MenuBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">                   
 				<div className="box-content">
-				<div className="clearfix"><h4 className="box-title pull-left"></h4></div>
+
 
                 <div className="album py-5 bg-white">
                 <div className="container">
@@ -44,8 +43,8 @@ class MenuBoardComponent extends Component {
                     {
                         this.state.items.map(
                             item => 
-                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.thisCateNo} className="col">
-                                <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.thisCateNo)}>
+                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
+                                <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
                                 <div className="menucropping">
                                     <img src={item.pdImg}/>
                                 </div>
