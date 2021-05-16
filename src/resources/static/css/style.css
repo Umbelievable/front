@@ -378,7 +378,10 @@ h4 strong {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .btn {
   background: #e4e7ea;
   outline: none !important;
@@ -1471,6 +1474,7 @@ textarea.form-control {
   color: black;
 }
 
+<<<<<<< HEAD
 .hashtagrank:hover {
   color: #a4ccb6;
 }
@@ -1488,6 +1492,8 @@ textarea.form-control {
   background-color:  #a4ccb6;
 }
 
+=======
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 .cropping,
 .cropping * {
   box-sizing: border-box;

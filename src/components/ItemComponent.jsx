@@ -4,7 +4,10 @@ import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import LikeService from '../service/LikeService';
 import MemberService from '../service/MemberService';
+<<<<<<< HEAD
 import HashtagService from '../service/HashtagService';
+=======
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
 
 class ItemComponent extends Component{
     constructor(props){
@@ -231,6 +234,7 @@ class ItemComponent extends Component{
                     <button className="btn btn-primary waves-effect waves-light"style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>CART</button>
                     
                 </div>
+<<<<<<< HEAD
 
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
                 <div >
@@ -260,6 +264,14 @@ class ItemComponent extends Component{
             <div className="nounhashbtn">#&nbsp;조립</div>
           
 
+=======
+                <div style={{padding:'3em'}}>
+                    <div style={{ fontSize:'large', color:'black'}}>소비자 리뷰 분석 결과</div>   
+                </div>  
+                    
+            </div>
+            <br/><br/>
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
             {
                 (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
@@ -325,6 +337,12 @@ class ItemComponent extends Component{
         
             
 
+<<<<<<< HEAD
+=======
+            
+
+            
+>>>>>>> 8b10a9616ebad19dfbffa49177514e247324b15c
             </div>
             </div>
             </div>
