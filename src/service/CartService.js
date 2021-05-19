@@ -15,6 +15,10 @@ class CartService{
     deleteItem(cartNo) {
         return axios.delete(CART_API_BASE_URL + "/" + cartNo, { headers: authHeader() });
     }
+
+    updateItem(cartNo, volume){
+        return axios.put(CART_API_BASE_URL + "/" + cartNo + "/" + volume, { headers: authHeader() });
+    }
     
        
 }

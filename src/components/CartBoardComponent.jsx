@@ -12,9 +12,11 @@ class CartBoardComponent extends Component {
             cartList: [],
             itemList: [],
             finalcarts: [],
-            orderPrice: 0
+            orderPrice: 0,
+            vol: 0
         }
         this.selectAll=this.selectAll.bind(this);
+
     }
 
     componentDidMount() {
@@ -53,6 +55,8 @@ class CartBoardComponent extends Component {
         });
 
     }
+
+    
 
     goToOrder() { // 주문하기 버튼 눌렀을때
         // 주문 완료되었다는 alert창 띄우고
@@ -114,8 +118,6 @@ class CartBoardComponent extends Component {
 
     deleteItem(){ // 선택 상품 삭제 함수
         // 카트서비스에서 삭제 부르려면 cartNo를 인자로 넘겨야함
-
-        
         var checkboxes = document.getElementsByName('check'); // 체크박스 리스트 가져오기
         const ordercart = this.state.finalcarts; 
         
@@ -130,6 +132,22 @@ class CartBoardComponent extends Component {
         alert("상품이 삭제되었습니다.\n");
         window.location.replace('/cart-board');
         
+    }
+
+    updateVol(id){
+        var txtBox = document.getElementById("txtId"+id);
+        //txtBox.value -> 바뀐 수량
+        const cart = this.state.cartList;
+        for(var i=0; i<cart.length; i++){
+            if(cart[i].cartNo == id){
+                CartService.updateItem(id, txtBox.value);
+                break;
+            }
+        }
+        alert("수량이 변경되었습니다.\n");
+        window.location.replace('/cart-board');
+        
+
     }
 
     numberWithCommas(x) { // 콤마 정규식
@@ -176,7 +194,8 @@ class CartBoardComponent extends Component {
                                     <div className="col-sm-6" style={{padding:'1em 0em'}}>
                                         <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
                                         <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
-                                        <div style={{ fontSize:'normal', color:'black'}}>수량 : {finalcart.volume} </div>
+                                        <div style={{ fontSize:'normal', color:'black', display: 'inline'}}>수량 : </div><input id={"txtId"+finalcart.finalCartId} style={{display: 'inline', width:'30px', border:'1px solid gray'}} type="text" placeholder={finalcart.volume}/>
+                                        <button style={{display: 'inline', border:'none', padding:'3px', margin:'0px 5px'}} onClick={()=>this.updateVol(finalcart.finalCartId)}>변경</button>
                                         <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
                                     </div>
                                 </div>
