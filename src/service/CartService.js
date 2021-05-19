@@ -8,7 +8,7 @@ class CartService{
         return axios.get(CART_API_BASE_URL + "?user_id=" + user_id, { headers: authHeader() });
     }
 
-    addItem(item){
+    addItem(item){ // 장바구니 아이템 추가
         return axios.post(CART_API_BASE_URL, item, { headers: authHeader() });
     }
 
