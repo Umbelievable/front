@@ -25,14 +25,18 @@ class CartBoardComponent extends Component {
             this.setState({ cartList: res.data });
             for(var i=0; i<res.data.length; i++){
                 const id = i;
-                const vol = res.data[i].volume; // 카트 형태로 받아온거에선 vol만 저장
+                const cartNo = res.data[i].cartNo;
+                const vol = res.data[i].volume; // 카트 형태로 받아온거에선 cartNo, vol만 저장
                 ItemService.getCertainItem(res.data[i].pdNo, res.data[i].categoryNo, res.data[i].subcateNo).then( resul => { // 카트 조건에 해당하는 아이템 찾으면
                     const item = resul.data;
                     
                     // 아이템에서 가져온 가격 원 빼고 콤마 빼야됨 -> 최종 가격 출력하기위해
                     const itemPrice = (item.pdPrice).replace(/,/g, "").substring(0,item.pdPrice.length-2);
-                    const cartItem = [{ "finalCartId": id,
+                    const cartItem = [{ "finalCartId": cartNo,
                                         "pdMall": item.pdMall,
+                                        "pdNo": item.pdNo,
+                                        "categoryNo": item.cateNo,
+                                        "subcateNo": item.subcateNo,
                                         "pdTitle": item.pdTitle,
                                         "pdImg": item.pdImg,
                                         "volume": vol,
@@ -58,10 +62,11 @@ class CartBoardComponent extends Component {
     }
 
     selectOne(ckId){
+        var i = 0;
         var flag = 0;
         var checkAll = document.getElementById('checkAll');
         var checkboxes = document.getElementsByName('check');
-        for(var i=0; i<checkboxes.length; i++){
+        for(i=0; i<checkboxes.length; i++){
             if(checkboxes[i].checked == false){ // 하나라도 false인거 있으면 flag 체크해두기
                 flag = 1;
             }
@@ -73,15 +78,29 @@ class CartBoardComponent extends Component {
             checkAll.checked = false; // 전체선택도 해제
         }
 
+        const ordercart = this.state.finalcarts;
+        var price = 0;
+        for(i=0; i<checkboxes.length; i++){
+            if(checkboxes[i].checked == true){ // 하나라도 false인거 있으면 flag 체크해두기
+                price = price + ordercart[i].totalPrice;
+                
+            }
+        }
+        this.setState({ orderPrice: price });
+
     }
 
     selectAll(){
+        const ordercart = this.state.finalcarts;
+        var price = 0;
         var checkAll = document.getElementById('checkAll');
         var checkboxes = document.getElementsByName('check')
         if(checkAll.checked == true){ // 전체 선택하기
             for(var i=0; i<checkboxes.length; i++){
                 checkboxes[i].checked = true;
+                price = price + ordercart[i].totalPrice;
             }
+            this.setState({ orderPrice: price });
 
         }
 
@@ -89,7 +108,28 @@ class CartBoardComponent extends Component {
             for(var i=0; i<checkboxes.length; i++){
                 checkboxes[i].checked = false;
             }
+            this.setState({ orderPrice: 0 });
         }
+    }
+
+    deleteItem(){ // 선택 상품 삭제 함수
+        // 카트서비스에서 삭제 부르려면 cartNo를 인자로 넘겨야함
+
+        
+        var checkboxes = document.getElementsByName('check'); // 체크박스 리스트 가져오기
+        const ordercart = this.state.finalcarts; 
+        
+
+        for(var i=0; i<checkboxes.length; i++){ // 리스트 크기만큼 돌면서 
+            
+            if(checkboxes[i].checked == true){ // 선택된 애들
+                const cartNo = ordercart[i].finalCartId;
+                CartService.deleteItem(cartNo);
+            }
+        }
+        alert("상품이 삭제되었습니다.\n");
+        window.location.replace('/cart-board');
+        
     }
 
     numberWithCommas(x) { // 콤마 정규식
@@ -123,25 +163,30 @@ class CartBoardComponent extends Component {
 
                 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
-                    <div style={{overflowY:'scroll', height:'400px', width:'100%'}}>
-                        {
-                        this.state.finalcarts.map( 
-                            finalcart => 
-                            <div className="col-sm-12">
-                                <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                    <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input id={"ckId"+finalcart.finalCartId} onClick={()=> this.selectOne("ckId"+finalcart.finalCartId)} type="checkbox" name="check" defaultChecked/></div>
-                                    <img className="cartcropping" src={finalcart.pdImg}/>
+                    <div>
+                        <div style={{overflowY:'scroll', height:'400px', width:'100%'}}>
+                            {
+                            this.state.finalcarts.map( 
+                                finalcart => 
+                                <div className="col-sm-12">
+                                    <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
+                                        <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input id={"ckId"+finalcart.finalCartId} onClick={()=> this.selectOne("ckId"+finalcart.finalCartId)} type="checkbox" name="check" defaultChecked/></div>
+                                        <img className="cartcropping" src={finalcart.pdImg}/>
+                                    </div>
+                                    <div className="col-sm-6" style={{padding:'1em 0em'}}>
+                                        <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
+                                        <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
+                                        <div style={{ fontSize:'normal', color:'black'}}>수량 : {finalcart.volume} </div>
+                                        <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
+                                    </div>
                                 </div>
-                                <div className="col-sm-6" style={{padding:'1em 0em'}}>
-                                    <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
-                                    <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
-                                    <div style={{ fontSize:'normal', color:'black'}}>수량 : {finalcart.volume} </div>
-                                    <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
-                                </div>
-                            </div>
-                        )
-                        }
-                       
+                            )
+                            }
+                        
+                        </div>
+                        <div style={{ textAlign:'center' }}>
+                            <button onClick={()=>this.deleteItem()} style={{ margin:'1em' }} className="btn waves-effect waves-light">선택 상품 삭제</button>  
+                        </div>
                     </div>
 
                     <div style={{padding:'3em 0em 3em 6em'}}>

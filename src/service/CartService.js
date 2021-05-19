@@ -11,6 +11,10 @@ class CartService{
     addItem(item){
         return axios.post(CART_API_BASE_URL, item, { headers: authHeader() });
     }
+
+    deleteItem(cartNo) {
+        return axios.delete(CART_API_BASE_URL + "/" + cartNo, { headers: authHeader() });
+    }
     
        
 }
