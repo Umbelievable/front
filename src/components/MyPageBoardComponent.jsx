@@ -179,30 +179,31 @@ class MyPageBoardComponent extends Component {
                 <div className="box-content">
 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
-                
-                    <div style={{padding:'2em 3em', marginTop:'1em', borderRight:'1px solid gray'}}>
+                    <div style={{padding:'1em 3em 2em 3em', borderRight:'1px solid gray'}}>
                         <button className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
                         <a style={{display:'inline', marginLeft:'2em'}} href="/">회원 정보 수정</a>
-                        <br/><br/><br/>
+                        <br/><br/>
                         
-                        <table className="table">
+                        <table className="mypage">
                             <thead>
                                 <tr>
-                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;알림</th>
+                                    <th colSpan='2' style={{fontSize:'large'}}>{this.state.currentUser.id}님의 활동 내역</th>
+                                </tr>
+                                <tr>
                                     <th>주문 내역</th>
-                                    <th>작성글</th>
+                                    <th>내 게시글</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
+                                <tr style={{fontSize:'large'}}>
+                                    <td><a href='/order-board'>2 </a></td>
+                                    <td><a href='/mypost-board'>3 </a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    
                     <div style={{padding:'3em 5em', textAlign:'center'}}>
                         <div style={{fontWeight:'bolder', textAlign:'center', fontSize:'20px'}}>{this.state.currentUser.id}님의 관심 해시태그</div>
                         <br/><br/><br/>
@@ -238,4 +239,4 @@ class MyPageBoardComponent extends Component {
     }
 }
 
-export default withRouter(MyPageBoardComponent);
+export default MyPageBoardComponent;

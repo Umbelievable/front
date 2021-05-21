@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MemberService from '../service/MemberService';
 import CartService from '../service/CartService';
 import ItemService from '../service/ItemService';
+import PurchaseService from '../service/PurchaseService';
 
 class CartBoardComponent extends Component {
     constructor(props) {
@@ -59,10 +60,38 @@ class CartBoardComponent extends Component {
     
 
     goToOrder() { // 주문하기 버튼 눌렀을때
-        // 주문 완료되었다는 alert창 띄우고
-        // 주문 목록 페이지로 이동하기
-        alert("주문이 완료되었습니다.\n");
-        this.props.history.push('/order-board');
+        // PurchaseService불러서 주문목록 post하고
+        var checkboxes = document.getElementsByName('check'); // 체크박스 리스트 가져오기
+        const ordercart = this.state.finalcarts; 
+        
+
+        for(var i=0; i<checkboxes.length; i++){ // 리스트 크기만큼 돌면서 
+            
+            if(checkboxes[i].checked == true){ // 선택된 애들
+                const cartNo = ordercart[i].finalCartId;
+
+                // 주문목록으로 넘길때 필요한 애들
+                const pdNo = ordercart[i].pdNo;
+                const userId = MemberService.getCurrentUser().id; 
+                const subcateNo = ordercart[i].subcateNo;
+                const categoryNo = ordercart[i].categoryNo;
+                const volume = ordercart[i].volume;
+
+                let pur = {
+                    userId: userId,
+                    pdNo: pdNo,
+                    categoryNo: categoryNo,
+                    subcateNo: subcateNo,
+                    volume: volume
+                };
+                PurchaseService.addPurchase(pur);
+                CartService.deleteItem(cartNo); // CartService불러서 주문 완료된 상품 장바구니에서 삭제하기
+            }
+        }
+
+
+        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+        this.props.history.push('/order-board'); // 주문 목록 페이지로 이동하기
     }
 
     selectOne(ckId){

@@ -12,7 +12,7 @@ class SearchAllBoardComponent extends Component {
     constructor(props) {
         const query = queryString.parse(window.location.search);
 
-        super(props)
+        super(props);
         this.state = {
             searchKeyword: query.searchKeyword,
             qnaBoards: [],
