@@ -25,7 +25,7 @@ class PhotoBoardService{
     }
     
     searchBoards(searchKeyword){
-        return axios.get(BOARD_API_BASE_URL + "/search?keyword" + searchKeyword, { headers: authHeader() });
+        return axios.get(BOARD_API_BASE_URL + "/search?keyword=" + searchKeyword, { headers: authHeader() });
     }
 }
 
