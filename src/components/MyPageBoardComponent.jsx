@@ -3,6 +3,8 @@ import { withRouter } from 'react-router-dom';
 import MemberService from '../service/MemberService';
 import LikeService from '../service/LikeService';
 import ItemService from '../service/ItemService';
+import BoardService from '../service/BoardService';
+import PhotoBoardService from '../service/PhotoBoardService';
 
 class MyPageBoardComponent extends Component {
     constructor(props) {
@@ -10,6 +12,7 @@ class MyPageBoardComponent extends Component {
         this.state = {
             likes: [],
             itemList: [],
+            mypost: 0,
             currentUser: { id: "" }
         }
     }
@@ -29,6 +32,14 @@ class MyPageBoardComponent extends Component {
                     this.setState({itemList: this.state.itemList.concat(resul.data)});
                 });
             }
+        });
+
+        // 내 게시글 수 세려고
+        BoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mypost: this.state.mypost + res.data.length});
+        });
+        PhotoBoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mypost: this.state.mypost + res.data.length});
         });
 
     }
@@ -188,17 +199,17 @@ class MyPageBoardComponent extends Component {
                         <table className="mypage">
                             <thead>
                                 <tr>
-                                    <th colSpan='2' style={{fontSize:'large'}}>{this.state.currentUser.id}님의 활동 내역</th>
+                                    <th colSpan='2' style={{fontSize:'large', fontWeight:'lighter'}}>{this.state.currentUser.id}님의 활동 내역</th>
                                 </tr>
                                 <tr>
-                                    <th>주문 내역</th>
-                                    <th>내 게시글</th>
+                                    <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>주문 내역</th>
+                                    <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>내 게시글</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr style={{fontSize:'large'}}>
                                     <td><a href='/order-board'>2 </a></td>
-                                    <td><a href='/mypost-board'>3 </a></td>
+                                    <td><a href='/mypost-board'>{this.state.mypost} </a></td>
                                 </tr>
                             </tbody>
                         </table>
