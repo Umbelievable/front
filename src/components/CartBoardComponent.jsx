@@ -57,7 +57,9 @@ class CartBoardComponent extends Component {
 
     }
 
-    
+    readItem(pdNo, cateNo, subcateNo) {
+        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+    }
 
     goToOrder() { // 주문하기 버튼 눌렀을때
         // PurchaseService불러서 주문목록 post하고
@@ -91,10 +93,10 @@ class CartBoardComponent extends Component {
 
 
         alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-        this.props.history.push('/order-board'); // 주문 목록 페이지로 이동하기
+        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
     }
 
-    selectOne(ckId){
+    selectOne(){
         var i = 0;
         var flag = 0;
         var checkAll = document.getElementById('checkAll');
@@ -150,7 +152,6 @@ class CartBoardComponent extends Component {
         var checkboxes = document.getElementsByName('check'); // 체크박스 리스트 가져오기
         const ordercart = this.state.finalcarts; 
         
-
         for(var i=0; i<checkboxes.length; i++){ // 리스트 크기만큼 돌면서 
             
             if(checkboxes[i].checked == true){ // 선택된 애들
@@ -217,15 +218,15 @@ class CartBoardComponent extends Component {
                                 finalcart => 
                                 <div className="col-sm-12">
                                     <div className="col-sm-4" style={{padding:'1em 0em 1em 5em'}}>
-                                        <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input id={"ckId"+finalcart.finalCartId} onClick={()=> this.selectOne("ckId"+finalcart.finalCartId)} type="checkbox" name="check" defaultChecked/></div>
-                                        <img className="cartcropping" src={finalcart.pdImg}/>
+                                        <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input id={"ckId"+finalcart.finalCartId} onClick={()=> this.selectOne()} type="checkbox" name="check" defaultChecked/></div>
+                                        <img className="cartcropping" src={finalcart.pdImg} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}/>
                                     </div>
-                                    <div className="col-sm-6" style={{padding:'1em 0em'}}>
+                                    <div className="col-sm-6" style={{padding:'1em 0em'}} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}>
                                         <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
                                         <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
                                         <div style={{ fontSize:'normal', color:'black', display: 'inline'}}>수량 : </div><input id={"txtId"+finalcart.finalCartId} style={{display: 'inline', width:'30px', border:'1px solid gray'}} type="text" placeholder={finalcart.volume}/>
-                                        <button style={{display: 'inline', border:'none', padding:'3px', margin:'0px 5px'}} onClick={()=>this.updateVol(finalcart.finalCartId)}>변경</button>
-                                        <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'20px', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
+                                        <button style={{display: 'inline', border:'none', padding:'2px', margin:'0px 5px'}} onClick={()=>this.updateVol(finalcart.finalCartId)}>변경</button>
+                                        <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'normal', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
                                     </div>
                                 </div>
                             )

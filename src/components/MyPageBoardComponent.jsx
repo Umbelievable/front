@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import MemberService from '../service/MemberService';
 import LikeService from '../service/LikeService';
 import ItemService from '../service/ItemService';
 import BoardService from '../service/BoardService';
 import PhotoBoardService from '../service/PhotoBoardService';
+import PurchaseService from '../service/PurchaseService';
 
 class MyPageBoardComponent extends Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class MyPageBoardComponent extends Component {
             likes: [],
             itemList: [],
             mypost: 0,
+            mypur: 0,
             currentUser: { id: "" }
         }
     }
@@ -38,8 +39,14 @@ class MyPageBoardComponent extends Component {
         BoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
             this.setState({ mypost: this.state.mypost + res.data.length});
         });
+
         PhotoBoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
             this.setState({ mypost: this.state.mypost + res.data.length});
+        });
+
+        // 주문 내역도
+        PurchaseService.getPurchaselist(MemberService.getCurrentUser().id).then((res) => { // 저렇게 넣어야 안꼬임
+            this.setState({ mypur: res.data.length});
         });
 
     }
@@ -208,7 +215,7 @@ class MyPageBoardComponent extends Component {
                             </thead>
                             <tbody>
                                 <tr style={{fontSize:'large'}}>
-                                    <td><a href='/order-board'>2 </a></td>
+                                    <td><a href='/order-board'>{this.state.mypur} </a></td>
                                     <td><a href='/mypost-board'>{this.state.mypost} </a></td>
                                 </tr>
                             </tbody>
