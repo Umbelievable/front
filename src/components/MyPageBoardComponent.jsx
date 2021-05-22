@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
 import MemberService from '../service/MemberService';
 import LikeService from '../service/LikeService';
 import ItemService from '../service/ItemService';
+import BoardService from '../service/BoardService';
+import PhotoBoardService from '../service/PhotoBoardService';
+import PurchaseService from '../service/PurchaseService';
 
 class MyPageBoardComponent extends Component {
     constructor(props) {
@@ -10,6 +12,8 @@ class MyPageBoardComponent extends Component {
         this.state = {
             likes: [],
             itemList: [],
+            mypost: 0,
+            mypur: 0,
             currentUser: { id: "" }
         }
     }
@@ -29,6 +33,20 @@ class MyPageBoardComponent extends Component {
                     this.setState({itemList: this.state.itemList.concat(resul.data)});
                 });
             }
+        });
+
+        // 내 게시글 수 세려고
+        BoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mypost: this.state.mypost + res.data.length});
+        });
+
+        PhotoBoardService.searchBoards(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mypost: this.state.mypost + res.data.length});
+        });
+
+        // 주문 내역도
+        PurchaseService.getPurchaselist(MemberService.getCurrentUser().id).then((res) => { // 저렇게 넣어야 안꼬임
+            this.setState({ mypur: res.data.length});
         });
 
     }
@@ -179,30 +197,31 @@ class MyPageBoardComponent extends Component {
                 <div className="box-content">
 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
-                
-                    <div style={{padding:'2em 3em', marginTop:'1em', borderRight:'1px solid gray'}}>
+                    <div style={{padding:'1em 3em 2em 3em', borderRight:'1px solid gray'}}>
                         <button className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
                         <a style={{display:'inline', marginLeft:'2em'}} href="/">회원 정보 수정</a>
-                        <br/><br/><br/>
+                        <br/><br/>
                         
-                        <table className="table">
+                        <table className="mypage">
                             <thead>
                                 <tr>
-                                    <th>&nbsp;&nbsp;&nbsp;&nbsp;알림</th>
-                                    <th>주문 내역</th>
-                                    <th>작성글</th>
+                                    <th colSpan='2' style={{fontSize:'large', fontWeight:'lighter'}}>{this.state.currentUser.id}님의 활동 내역</th>
+                                </tr>
+                                <tr>
+                                    <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>주문 내역</th>
+                                    <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>내 게시글</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
+                                <tr style={{fontSize:'large'}}>
+                                    <td><a href='/order-board'>{this.state.mypur} </a></td>
+                                    <td><a href='/mypost-board'>{this.state.mypost} </a></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
+                    
                     <div style={{padding:'3em 5em', textAlign:'center'}}>
                         <div style={{fontWeight:'bolder', textAlign:'center', fontSize:'20px'}}>{this.state.currentUser.id}님의 관심 해시태그</div>
                         <br/><br/><br/>
@@ -238,4 +257,4 @@ class MyPageBoardComponent extends Component {
     }
 }
 
-export default withRouter(MyPageBoardComponent);
+export default MyPageBoardComponent;

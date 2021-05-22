@@ -1785,3 +1785,28 @@ textarea.form-control {
   width: 33%;
 }
 
+table.mypage {
+  border-collapse: separate;
+  border-bottom: 1px solid #ccc;
+  border-spacing: 2px;
+  text-align: center;
+  line-height: 1.5;
+  margin: 20px 10px;
+  width: 100%;
+}
+table.mypage th {
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+  vertical-align: top;
+  color: #fff;
+  background: #2d6c4a;
+}
+table.mypage td {
+  text-align: center;
+  padding: 10px;
+  vertical-align: top;
+  
+  background: rgb(250, 250, 250);
+}
+

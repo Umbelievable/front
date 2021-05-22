@@ -17,6 +17,7 @@ import AdminBoardComponent from './components/AdminBoardComponent';
 import MenuBoardComponent from './components/MenuBoardComponent';
 import NavBarComponent from './components/NavBarComponent';
 import MyPageBoardComponent from './components/MyPageBoardComponent';
+import MyPostBoardComponent from './components/MyPostBoardComponent';
 import CategoryBoardComponent from './components/CategoryBoardComponent';
 import CustomerServiceBoardComponent from './components/CustomerServiceBoardComponent';
 import ItemComponent from './components/ItemComponent';
@@ -52,6 +53,7 @@ function App() {
               <Route path = "/menu-board" component = {MenuBoardComponent}></Route>
               <Route path = "/read-item" component = {ItemComponent}></Route>
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
+              <Route path = "/mypost-board" component = {MyPostBoardComponent}></Route>
               <Route path = "/cart-board" component = {CartBoardComponent}></Route>
               <Route path = "/read-photoboard/:pboardNo" component = {ReadPhotoBoardComponent}></Route>
               <Route path = "/create-photoboard/:pboardNo" component = {CreatePhotoBoardComponent}></Route>
