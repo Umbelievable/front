@@ -206,17 +206,19 @@ class MyPageBoardComponent extends Component {
                         <table className="mypage">
                             <thead>
                                 <tr>
-                                    <th colSpan='2' style={{fontSize:'large', fontWeight:'lighter'}}>{this.state.currentUser.id}님의 활동 내역</th>
+                                    <th colSpan='3' style={{fontSize:'large', fontWeight:'lighter'}}>{this.state.currentUser.id}님의 활동 내역</th>
                                 </tr>
                                 <tr>
                                     <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>주문 내역</th>
                                     <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>내 게시글</th>
+                                    <th style={{backgroundColor:'#eee', color:'#2d6c4a'}}>내 댓글</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr style={{fontSize:'large'}}>
                                     <td><a href='/order-board'>{this.state.mypur} </a></td>
                                     <td><a href='/mypost-board'>{this.state.mypost} </a></td>
+                                    <td><a href='/mypost-board'>댓글 </a></td>
                                 </tr>
                             </tbody>
                         </table>

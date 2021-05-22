@@ -204,8 +204,12 @@ class ReadBoardComponent extends Component {
 
                      <div className="btn_wrap text-center">
                         <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
-                        <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
-                        <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
+                        {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                           <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
+                        )}
+                        {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                           <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>
+                        )}        
                      </div>
                   </div>
                </div>
