@@ -195,7 +195,7 @@ class ReadBoardComponent extends Component {
 
                   <ColoredLine color="lightgray"/>
                   {this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
-                     <img src={this.state.file}/>
+                     <img className="postcropping" src={this.state.file}/>
                   )}
 
                   <div style={{padding:'50px 100px 80px 30px'}}>

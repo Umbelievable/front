@@ -205,7 +205,7 @@ class ReadPhotoBoardComponent extends Component {
                <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.pboardInsertTime}</span>
 
                <ColoredLine color="lightgray"/>
-               <img src={this.state.file}/>
+               <img className="postcropping" src={this.state.file}/>
                
 
                <div style={{padding:'50px 100px 80px 30px'}}>
@@ -214,9 +214,13 @@ class ReadPhotoBoardComponent extends Component {
 
                   <div className="btn_wrap text-center">
                      <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
+                     {(this.state.currentUser.username == this.state.board.pboardWriter) && (
                      <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
+                     )}
+                     {(this.state.currentUser.username == this.state.board.pboardWriter) && (
                      <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
-                  </div>
+                     )}
+                     </div>
                </div>
             </div>
 
