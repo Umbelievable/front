@@ -64,11 +64,11 @@ class MyPostBoardComponent extends Component {
     }
 
     readBoard(qboardNo) {
-        this.props.history.push(`/read-board/${qboardNo}`);
+        window.location.replace(`/read-board/${qboardNo}`);
     }
 
     readPhotoBoard(pboardNo) {
-        this.props.history.push(`/read-photoboard/${pboardNo}`);
+        window.location.replace(`/read-photoboard/${pboardNo}`);
     }
 
 

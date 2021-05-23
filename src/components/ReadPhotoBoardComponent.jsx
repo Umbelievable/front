@@ -138,12 +138,12 @@ class ReadPhotoBoardComponent extends Component {
     }
 
     goToList() { // photo로 가는 함수
-        this.props.history.push('/photo-board');
+        window.location.replace('/photo-board');
     }
 
     goToUpdate = (event) => { // 게시글 업데이트
         event.preventDefault();
-        this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
+        window.location.replace(`/create-photoboard/${this.state.pboardNo}`);
     }
 
 
@@ -152,8 +152,8 @@ class ReadPhotoBoardComponent extends Component {
             PhotoBoardService.deleteBoard(this.state.pboardNo).then( res => {
                 console.log("delete result => "+ JSON.stringify(res));
                 if (res.status == 200) {
-               window.confirm("게시글 삭제가 완료되었습니다.\n");
-                    this.props.history.push('/photo-board');
+                    window.confirm("게시글 삭제가 완료되었습니다.\n");
+                    window.location.replace('/photo-board');
                 } 
                 else {
                     alert("글 삭제가 실패했습니다.");

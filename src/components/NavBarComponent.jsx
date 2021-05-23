@@ -78,7 +78,7 @@ class NavBarComponent extends Component {
         const { currentUser } = this.state;
         if(currentUser.id == "guest"){ // 안했으면 alert창 띄워서 로그인 시키기
             window.confirm("로그인 후 이용해주세요.\n");
-            this.props.history.push('/main-board');
+            window.location.replace('/main-board');
         }
         else{ // 로그인 했으면 return true;
             return true;

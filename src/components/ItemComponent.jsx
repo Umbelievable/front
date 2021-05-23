@@ -4,6 +4,7 @@ import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
+import PurchaseService from '../service/PurchaseService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
 
@@ -206,6 +207,21 @@ class ItemComponent extends Component{
         
     }
 
+    goToOrder() { // BUY NOW 눌렀을 때
+        // 주문목록으로 넘길때 필요한 애들
+        let pur = {
+            userId: MemberService.getCurrentUser().id,
+            pdNo: this.state.pdNo,
+            categoryNo: this.state.cateNo,
+            subcateNo: this.state.subcateNo,
+            volume: this.state.count
+        };
+        PurchaseService.addPurchase(pur); // 구매목록에 추가하고
+
+        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
+    }
+
     addCart(){ //add cart 버튼 누르면 실행되는 함수
         let item = {
             userId: this.state.currentUser.id,
@@ -244,7 +260,7 @@ class ItemComponent extends Component{
                     
                     {this.totalPrice()}
                     <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
-                    <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.goToOrder.bind(this)} style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
                     <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
                     
                 </div>

@@ -61,7 +61,7 @@ class SearchPhotoBoardComponent extends Component {
     }
 
     readPhotoBoard(pboardNo) {
-        this.props.history.push(`/read-photoboard/${pboardNo}`);
+        window.location.replace(`/read-photoboard/${pboardNo}`);
     }
 
     render() {

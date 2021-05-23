@@ -48,7 +48,7 @@ class CreatePhotoBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            this.props.history.push('/photo-board');
+            window.location.replace('/photo-board');
         });
         
     }
@@ -91,7 +91,7 @@ class CreatePhotoBoardComponent extends Component {
     }
 
     cancel() {
-        this.props.history.push('/photo-board');
+        window.location.replace('/photo-board');
     }
 
  

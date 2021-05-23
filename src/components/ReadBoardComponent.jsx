@@ -128,12 +128,12 @@ class ReadBoardComponent extends Component {
     }
 
     goToList() { // qna로 가는 함수
-        this.props.history.push('/qna-board');
+        window.location.replace('/qna-board');
     }
 
     goToUpdate = (event) => { // 게시글 업데이트
         event.preventDefault();
-        this.props.history.push(`/create-board/${this.state.qboardNo}`);
+        window.location.replace(`/create-board/${this.state.qboardNo}`);
     }
 
 
@@ -143,7 +143,7 @@ class ReadBoardComponent extends Component {
                 console.log("delete result => "+ JSON.stringify(res));
                 if (res.status == 200) {
                    window.confirm("게시글 삭제가 완료되었습니다.\n");
-                   this.props.history.push('/qna-board');
+                   window.location.replace('/qna-board');
                 } 
                 else {
                     alert("글 삭제가 실패했습니다.");

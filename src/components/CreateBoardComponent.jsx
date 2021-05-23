@@ -45,7 +45,7 @@ class CreateBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            this.props.history.push('/qna-board');
+            window.location.replace('/qna-board');
         });
         
     }
@@ -87,7 +87,7 @@ class CreateBoardComponent extends Component {
     }
 
     cancel() {
-        this.props.history.push('/qna-board');
+        window.location.replace('/qna-board');
     }
 
     componentDidMount() {

@@ -78,7 +78,7 @@ class HeaderComponent extends Component {
     }
 
     joinMember(){
-        this.props.history.push('/member-join');
+        window.location.replace('/member-join');
     }
 
     logOut() {
@@ -114,7 +114,6 @@ class HeaderComponent extends Component {
 						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', height:'46px', border:'2px solid #2D6C4A'}} placeholder="DZBZ 통합 검색"/>
 					</div>
                     <div className="form-group" style={{display:'inline-block'}}>
-
 					    <button onClick = {this.searchBoard} className="form-control" style={{background: "#2D6C4A", height:'46px', border:'2px solid #2D6C4A'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
                     </div>          
                 </form>

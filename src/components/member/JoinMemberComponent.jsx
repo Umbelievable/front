@@ -160,7 +160,7 @@ class JoinMemberComponent extends Component {
                 message: response.data.message,
                 successful: true
               });
-              this.props.history.push('/main-board');
+              window.location.replace('/main-board');
             },
             error => {
               const resMessage =

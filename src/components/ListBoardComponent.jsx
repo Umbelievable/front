@@ -35,16 +35,16 @@ class ListBoardComponent extends Component {
     }
 
     createBoard() {
-        this.props.history.push('/create-board/_create');
+        window.location.replace('/create-board/_create');
     }
 
     readBoard(qboardNo) {
-        this.props.history.push(`/read-board/${qboardNo}`);
+        window.location.replace(`/read-board/${qboardNo}`);
     }
 
     goToUpdate = (event) => {
         event.preventDefault();
-        this.props.history.push(`/create-board/${this.state.qboardNo}`);
+        window.location.replace(`/create-board/${this.state.qboardNo}`);
     }
 
     listBoard(p_num) {

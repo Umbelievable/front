@@ -33,7 +33,7 @@ class SearchMenuBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
-        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     render() {

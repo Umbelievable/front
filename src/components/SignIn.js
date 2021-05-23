@@ -56,7 +56,7 @@ class SignIn extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       MemberService.login(this.state.id, this.state.password).then(
         () => {
-          this.props.history.push("/main-board");
+          window.location.replace("/main-board");
           window.location.reload();
         },
         error => {
