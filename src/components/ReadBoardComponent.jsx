@@ -219,9 +219,9 @@ class ReadBoardComponent extends Component {
                      <div className="clearfix"><h4 className="box-title pull-left">Comment</h4></div>
                      <form className="form-horizontal form-view">
                         <div className="input-group margin-bottom-20">
-                           <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
+                           <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} style={{height:'45px'}} placeholder="댓글을 입력해 주세요."/>
                            <div className="input-group-btn">
-                              <button type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
+                              <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
                            </div>
                         </div>
                         <ul className="notice-list">
