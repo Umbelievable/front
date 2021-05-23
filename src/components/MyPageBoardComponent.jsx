@@ -5,6 +5,8 @@ import ItemService from '../service/ItemService';
 import BoardService from '../service/BoardService';
 import PhotoBoardService from '../service/PhotoBoardService';
 import PurchaseService from '../service/PurchaseService';
+import PhotoCommentService from '../service/PhotoCommentService';
+import CommentService from '../service/CommentService';
 
 class MyPageBoardComponent extends Component {
     constructor(props) {
@@ -13,6 +15,7 @@ class MyPageBoardComponent extends Component {
             likes: [],
             itemList: [],
             mypost: 0,
+            mycomment: 0,
             mypur: 0,
             currentUser: { id: "" }
         }
@@ -47,6 +50,15 @@ class MyPageBoardComponent extends Component {
         // 주문 내역도
         PurchaseService.getPurchaselist(MemberService.getCurrentUser().id).then((res) => { // 저렇게 넣어야 안꼬임
             this.setState({ mypur: res.data.length});
+        });
+
+        // 내 댓글
+        CommentService.getUserComment(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mycomment: this.state.mycomment + res.data.length});
+        });
+
+        PhotoCommentService.getUserComment(MemberService.getCurrentUser().id).then((res) => {
+            this.setState({ mycomment: this.state.mycomment + res.data.length});
         });
 
     }
@@ -197,7 +209,7 @@ class MyPageBoardComponent extends Component {
                 <div className="box-content">
 
                 <div className="row row-cols-1 row-cols-sm-2 g-2">
-                    <div style={{padding:'1em 3em 2em 3em', borderRight:'1px solid gray'}}>
+                    <div style={{padding:'1em 4em 2em 3em', borderRight:'1px solid gray'}}>
                         <button className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
                         <a style={{display:'inline', marginLeft:'2em'}} href="/">회원 정보 수정</a>
@@ -218,7 +230,7 @@ class MyPageBoardComponent extends Component {
                                 <tr style={{fontSize:'large'}}>
                                     <td><a href='/order-board'>{this.state.mypur} </a></td>
                                     <td><a href='/mypost-board'>{this.state.mypost} </a></td>
-                                    <td><a href='/mypost-board'>댓글 </a></td>
+                                    <td><a href='/mycomment-board'>{this.state.mycomment} </a></td>
                                 </tr>
                             </tbody>
                         </table>
