@@ -170,6 +170,7 @@ class ItemComponent extends Component{
             };
             LikeService.createLikeItem(item).then(res => {
                 alert('관심상품 목록에 추가했습니다.');
+                window.location.replace(`/read-item?pdNo=${this.state.pdNo}&cateNo=${this.state.cateNo}&subcateNo=${this.state.subcateNo}`);
             });
 
         }
@@ -179,6 +180,7 @@ class ItemComponent extends Component{
                 if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
                         alert('관심상품 목록에서 삭제했습니다.');
+                        window.location.replace(`/read-item?pdNo=${this.state.pdNo}&cateNo=${this.state.cateNo}&subcateNo=${this.state.subcateNo}`);
                     });
                 }
             }
