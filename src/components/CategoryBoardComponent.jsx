@@ -35,6 +35,9 @@ class CategoryBoardComponent extends Component {
                 <div className="album py-5 bg-white">
                 <div className="container">
 
+                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span></div>
+                <br/><br/>
+
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                     {
                         this.state.items.map(

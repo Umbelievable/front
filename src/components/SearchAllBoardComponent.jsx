@@ -95,6 +95,7 @@ class SearchAllBoardComponent extends Component {
 				<div className="col-xs-12">
 				<div className="box-content">
                 
+                <div style={{textAlign:'center', fontSize:'larger'}}><span style={{color: 'black'}} className="glyphicon glyphicon-search" aria-hidden="true"></span><b>&nbsp;"{this.state.searchKeyword}"</b>&nbsp;검색 결과</div>
                 <Tabs>
                     <TabList>
                         <Tab>&nbsp;&nbsp;&nbsp;&nbsp;Q&amp;A&nbsp;Community&nbsp;&nbsp;&nbsp;&nbsp;</Tab>
