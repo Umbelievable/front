@@ -110,7 +110,7 @@ class HeaderComponent extends Component {
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>
-						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', border:'2px solid #2D6C4A'}} placeholder="DZBZ 통합 검색"/>
+						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', height:'46px', border:'2px solid #2D6C4A'}} placeholder="DZBZ 통합 검색"/>
 					</div>
                     <div className="form-group" style={{display:'inline-block'}}>
 
