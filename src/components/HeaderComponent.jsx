@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 import MemberService from '../service/MemberService';
+import imageSrc from '../resources/image/dzbzlogo.png';
 
 
 class HeaderComponent extends Component {
@@ -106,7 +107,7 @@ class HeaderComponent extends Component {
             <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			</div>
 			<div className="text-center">
-				<h1 style={{fontSize:'30px'}}className="page-title" onClick = {this.goToList}><i class="fa fa-home"></i>&nbsp;DZBZ&nbsp;<i class="fa fa-home fa-flip-vertical"></i></h1>
+				<div style={{verticalAlign:'middle', fontSize:'50px'}} onClick = {this.goToList}><i class="fa fa-home"></i><img style={{width:'140px', height:'78px'}} src={imageSrc}/><i class="fa fa-home fa-flip-vertical"></i></div>
             <div id="adv-search" className="input-group">
 				<form id="searchForm" style={{display:'inline-block'}} role="form">
 					<div className="form-group" style={{display:'inline-block'}}>
