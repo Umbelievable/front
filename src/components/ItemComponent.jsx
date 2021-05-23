@@ -21,8 +21,7 @@ class ItemComponent extends Component{
             pdNo: query.pdNo,
             count: 1, // 구매수량
             reviews: [],  //리뷰목록
-            nounHash: [], //명사해시태그목록
-            adjHash: [],  //형용사해시태그목록
+            reviewResult: [],  //리뷰키워드그래프 데이터타입 아직모름
             isClicked: false,
             currentUser: { id: "" },
             likes: [] // 유저별 좋아요 목록
@@ -72,16 +71,7 @@ class ItemComponent extends Component{
                 
             }
         });
-
-        HashtagService.getNounTop5(this.state.pdNo,this.state.subcateNo,this.state.cateNo).then( res => {
-            this.setState({ nounHash: res.data});
-        });
-        HashtagService.getAdjTop5(this.state.pdNo,this.state.subcateNo,this.state.cateNo).then( res => {
-            this.setState({ adjHash: res.data});
-        });
     }
-
-
 
     listBoard(p_num, cateNo, subcateNo, pdNo) {
         console.log("pageNum : "+ p_num);
@@ -262,28 +252,30 @@ class ItemComponent extends Component{
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
                 <div >
                     <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>소비자 리뷰 분석 결과</div>
-            
-                  {
-                      this.state.adjHash.map(
-                          adjhash =>
-                          <div key={adjhash.id} style={{fontSize:'23px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
-                      )
-                  }
-                   
-                        
+                    
+                        <div style={{fontSize:'23px'}} className="hashtagrank" title="rank1">#&nbsp;훌륭하다</div>
+                        <div style={{fontSize:'23px'}} className="hashtagrank" title="rank2">#&nbsp;황당하다</div>
+                        <div style={{fontSize:'23px'}} className="hashtagrank" title="rank3">#&nbsp;화사하다</div>
+                        <div style={{fontSize:'23px'}} className="hashtagrank" title="rank4">#&nbsp;푹신하다</div>
+                        <div style={{fontSize:'23px'}} className="hashtagrank" title="rank5">#&nbsp;편안하다</div>
                           
                 </div> 
                 </div> 
                     
             </div>
             <br/><br/>
-           {
-               this.state.nounHash.map(
-                   nounhash =>
-                   <div key={nounhash.id} className="nounhashbtn">#&nbsp;{nounhash.name}</div>
-               )
-           }
-                    
+           
+            <div className="nounhashbtn">#&nbsp;배송</div>
+            <div className="nounhashbtn">#&nbsp;촉감</div>
+            <div className="nounhashbtn">#&nbsp;냄새</div>
+            <div className="nounhashbtn">#&nbsp;색</div>
+            <div className="nounhashbtn">#&nbsp;사진</div>
+            <div className="nounhashbtn">#&nbsp;사이즈</div>
+            <div className="nounhashbtn">#&nbsp;환불</div>
+            <div className="nounhashbtn">#&nbsp;교환</div>
+            <div className="nounhashbtn">#&nbsp;재구매</div>
+            <div className="nounhashbtn">#&nbsp;조립</div>
+          
             {
                 (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
