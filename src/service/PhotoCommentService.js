@@ -18,6 +18,10 @@ class PhotoCommentService{
     deleteComment(pboardNo, pcommentNo) {
         return axios.delete(COMMENT_API_BASE_URL + "/" + pboardNo + "/" + pcommentNo, { headers: authHeader() });
     }
+
+    getUserComment(user){
+        return axios.get(COMMENT_API_BASE_URL + "/writer?writer=" + user, { headers: authHeader() });
+    }
 }
 
 export default new PhotoCommentService();

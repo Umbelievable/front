@@ -45,7 +45,7 @@ class CreateBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            this.props.history.push('/qna-board');
+            window.location.replace('/qna-board');
         });
         
     }
@@ -87,7 +87,7 @@ class CreateBoardComponent extends Component {
     }
 
     cancel() {
-        this.props.history.push('/qna-board');
+        window.location.replace('/qna-board');
     }
 
     componentDidMount() {
@@ -134,7 +134,7 @@ class CreateBoardComponent extends Component {
 				    <div className="form-group">
 					    <label for="content" className="col-sm-2 control-label">내용</label>
 					        <div className="col-sm-10">
-						        <textarea className="form-control" placeholder="내용을 입력해 주세요." value={this.state.qboardContent} onChange={this.changeContentHandler}></textarea>
+						        <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.qboardContent} onChange={this.changeContentHandler}></textarea>
 					        </div>
                     </div>
                 

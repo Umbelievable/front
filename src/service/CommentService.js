@@ -20,6 +20,9 @@ class CommentService{
         return axios.delete(COMMENT_API_BASE_URL + "/" + qboardNo + "/" + qcommentNo, { headers: authHeader() });
     }
     
+    getUserComment(user){
+        return axios.get(COMMENT_API_BASE_URL + "/writer?writer=" + user, { headers: authHeader() });
+    }
 }
 
 export default new CommentService();

@@ -78,7 +78,7 @@ class NavBarComponent extends Component {
         const { currentUser } = this.state;
         if(currentUser.id == "guest"){ // 안했으면 alert창 띄워서 로그인 시키기
             window.confirm("로그인 후 이용해주세요.\n");
-            this.props.history.push('/main-board');
+            window.location.replace('/main-board');
         }
         else{ // 로그인 했으면 return true;
             return true;
@@ -103,21 +103,21 @@ class NavBarComponent extends Component {
                             <div className="dropdown-content" style={{left:'0'}}>
                                 {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
                                     livingroom_category =>
-                                    <a href={`/menu-board?cateNo=거실가구&subcateNo=`+livingroom_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
+                                    <a href={`/menu-board?cateNo=거실가구&subcateNo=`+livingroom_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
                                         {livingroom_category.subcateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "서재/사무용가구" && this.state.library_categories.map(
                                     library_category => 
-                                    <a href={`/menu-board?cateNo=서재/사무용가구&subcateNo=`+library_category.subcateNo} style={{display:'block', padding:'7px 25px'}} key = {library_category.cateNo, library_category.subcateNo}>
+                                    <a href={`/menu-board?cateNo=서재/사무용가구&subcateNo=`+library_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {library_category.cateNo, library_category.subcateNo}>
                                         {library_category.subcateNo}
                                     </a>                       
                                 )}
 
                                 {category.cateNo == "수납가구" && this.state.storage_categories.map(
                                     storage_category => 
-                                    <a href={`/menu-board?cateNo=수납가구&subcateNo=`+storage_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {storage_category.cateNo, storage_category.subcateNo}>
+                                    <a href={`/menu-board?cateNo=수납가구&subcateNo=`+storage_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {storage_category.cateNo, storage_category.subcateNo}>
                                         {storage_category.subcateNo}
                                     </a>
                                                         
@@ -125,14 +125,14 @@ class NavBarComponent extends Component {
 
                                 {category.cateNo == "주방가구" && this.state.kitchen_categories.map(
                                     kitchen_category => 
-                                    <a href={`/menu-board?cateNo=주방가구&subcateNo=`+kitchen_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {kitchen_category.cateNo, kitchen_category.subcateNo}>
+                                    <a href={`/menu-board?cateNo=주방가구&subcateNo=`+kitchen_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {kitchen_category.cateNo, kitchen_category.subcateNo}>
                                         {kitchen_category.subcateNo}
                                     </a>                      
                                 )}
 
                                 {category.cateNo == "침실가구" && this.state.bed_categories.map(
                                     bed_category => 
-                                    <a href={`/menu-board?cateNo=침실가구&subcateNo=`+bed_category.subcateNo} style={{display:'block', padding:'7px 23px'}} key = {bed_category.cateNo, bed_category.subcateNo}>
+                                    <a href={`/menu-board?cateNo=침실가구&subcateNo=`+bed_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {bed_category.cateNo, bed_category.subcateNo}>
                                         {bed_category.subcateNo}
                                     </a>                      
                                 )}

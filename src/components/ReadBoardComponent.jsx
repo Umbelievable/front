@@ -128,12 +128,12 @@ class ReadBoardComponent extends Component {
     }
 
     goToList() { // qna로 가는 함수
-        this.props.history.push('/qna-board');
+        window.location.replace('/qna-board');
     }
 
     goToUpdate = (event) => { // 게시글 업데이트
         event.preventDefault();
-        this.props.history.push(`/create-board/${this.state.qboardNo}`);
+        window.location.replace(`/create-board/${this.state.qboardNo}`);
     }
 
 
@@ -143,7 +143,7 @@ class ReadBoardComponent extends Component {
                 console.log("delete result => "+ JSON.stringify(res));
                 if (res.status == 200) {
                    window.confirm("게시글 삭제가 완료되었습니다.\n");
-                   this.props.history.push('/qna-board');
+                   window.location.replace('/qna-board');
                 } 
                 else {
                     alert("글 삭제가 실패했습니다.");
@@ -195,7 +195,7 @@ class ReadBoardComponent extends Component {
 
                   <ColoredLine color="lightgray"/>
                   {this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
-                     <img src={this.state.file}/>
+                     <img className="postcropping" src={this.state.file}/>
                   )}
 
                   <div style={{padding:'50px 100px 80px 30px'}}>
@@ -204,8 +204,12 @@ class ReadBoardComponent extends Component {
 
                      <div className="btn_wrap text-center">
                         <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
-                        <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
-                        <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
+                        {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                           <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
+                        )}
+                        {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                           <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>
+                        )}        
                      </div>
                   </div>
                </div>
@@ -215,9 +219,9 @@ class ReadBoardComponent extends Component {
                      <div className="clearfix"><h4 className="box-title pull-left">Comment</h4></div>
                      <form className="form-horizontal form-view">
                         <div className="input-group margin-bottom-20">
-                           <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
+                           <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} style={{height:'45px'}} placeholder="댓글을 입력해 주세요."/>
                            <div className="input-group-btn">
-                              <button type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
+                              <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
                            </div>
                         </div>
                         <ul className="notice-list">

@@ -61,7 +61,7 @@ class SearchPhotoBoardComponent extends Component {
     }
 
     readPhotoBoard(pboardNo) {
-        this.props.history.push(`/read-photoboard/${pboardNo}`);
+        window.location.replace(`/read-photoboard/${pboardNo}`);
     }
 
     render() {
@@ -70,6 +70,8 @@ class SearchPhotoBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
+
+                <div style={{textAlign:'center', fontSize:'larger'}}><span style={{color: 'black'}} className="glyphicon glyphicon-search" aria-hidden="true"></span><b>&nbsp;"{this.state.searchKeyword}"</b>&nbsp;검색 결과</div>
                 
                 <div className="album py-5 bg-white">
                 <div className="container">

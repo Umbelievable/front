@@ -4,6 +4,7 @@ import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
+import PurchaseService from '../service/PurchaseService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
 import * as d3 from 'd3';
@@ -24,8 +25,7 @@ class ItemComponent extends Component{
             pdNo: query.pdNo,
             count: 1, // 구매수량
             reviews: [],  //리뷰목록
-            nounHash: [], //명사해시태그목록
-            adjHash: [],  //형용사해시태그목록
+            reviewResult: [],  //리뷰키워드그래프 데이터타입 아직모름
             isClicked: false,
             currentUser: { id: "" },
             likes: [] // 유저별 좋아요 목록
@@ -75,17 +75,9 @@ class ItemComponent extends Component{
                 
             }
         });
-
-        HashtagService.getNounTop5(this.state.pdNo,this.state.subcateNo,this.state.cateNo).then( res => {
-            this.setState({ nounHash: res.data});
-        });
-        HashtagService.getAdjTop5(this.state.pdNo,this.state.subcateNo,this.state.cateNo).then( res => {
-            this.setState({ adjHash: res.data});
-        });
     }
 
-
-    listBoard(p_num, cateNo, subcateNo, pdNo) {
+ard(p_num, cateNo, subcateNo, pdNo) {
         console.log("pageNum : "+ p_num);
         ReviewService.getReviews(p_num, cateNo, subcateNo, pdNo).then( res => {
             console.log(res.data);
@@ -182,6 +174,7 @@ class ItemComponent extends Component{
             };
             LikeService.createLikeItem(item).then(res => {
                 alert('관심상품 목록에 추가했습니다.');
+                window.location.replace(`/read-item?pdNo=${this.state.pdNo}&cateNo=${this.state.cateNo}&subcateNo=${this.state.subcateNo}`);
             });
 
         }
@@ -191,6 +184,7 @@ class ItemComponent extends Component{
                 if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
                         alert('관심상품 목록에서 삭제했습니다.');
+                        window.location.replace(`/read-item?pdNo=${this.state.pdNo}&cateNo=${this.state.cateNo}&subcateNo=${this.state.subcateNo}`);
                     });
                 }
             }
@@ -214,6 +208,21 @@ class ItemComponent extends Component{
             <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.numberWithCommas(res)+"원"}</div>
         );
         
+    }
+
+    goToOrder() { // BUY NOW 눌렀을 때
+        // 주문목록으로 넘길때 필요한 애들
+        let pur = {
+            userId: MemberService.getCurrentUser().id,
+            pdNo: this.state.pdNo,
+            categoryNo: this.state.cateNo,
+            subcateNo: this.state.subcateNo,
+            volume: this.state.count
+        };
+        PurchaseService.addPurchase(pur); // 구매목록에 추가하고
+
+        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
     }
 
     addCart(){ //add cart 버튼 누르면 실행되는 함수
@@ -255,7 +264,7 @@ class ItemComponent extends Component{
                     
                     {this.totalPrice()}
                     <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
-                    <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.goToOrder.bind(this)} style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
                     <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
                     
                 </div>
@@ -263,6 +272,7 @@ class ItemComponent extends Component{
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
                 <div >
                     <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>소비자 리뷰 분석 결과</div>
+
             
                   {
                       this.state.adjHash.map(
@@ -272,19 +282,25 @@ class ItemComponent extends Component{
                   }
                 
                         
+
                           
                 </div> 
                 </div> 
                     
             </div>
             <br/><br/>
-           {
-               this.state.nounHash.map(
-                   nounhash =>
-                   <div key={nounhash.id} className="nounhashbtn">#&nbsp;{nounhash.name}</div>
-               )
-           }
-                    
+           
+            <div className="nounhashbtn">#&nbsp;배송</div>
+            <div className="nounhashbtn">#&nbsp;촉감</div>
+            <div className="nounhashbtn">#&nbsp;냄새</div>
+            <div className="nounhashbtn">#&nbsp;색</div>
+            <div className="nounhashbtn">#&nbsp;사진</div>
+            <div className="nounhashbtn">#&nbsp;사이즈</div>
+            <div className="nounhashbtn">#&nbsp;환불</div>
+            <div className="nounhashbtn">#&nbsp;교환</div>
+            <div className="nounhashbtn">#&nbsp;재구매</div>
+            <div className="nounhashbtn">#&nbsp;조립</div>
+          
             {
                 (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
