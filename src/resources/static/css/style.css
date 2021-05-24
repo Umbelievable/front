@@ -1471,6 +1471,12 @@ textarea.form-control {
   color: black;
 }
 
+.hashtagrank{
+  margin: 5px;
+  padding:10px;
+  text-align: center;
+  display: inline-block;
+}
 .hashtagrank:hover {
   color: #a4ccb6;
 }
