@@ -6,6 +6,9 @@ import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
+import * as d3 from 'd3';
+import clund from 'd3-cloud';
+
 
 class ItemComponent extends Component{
     constructor(props){
@@ -80,7 +83,6 @@ class ItemComponent extends Component{
             this.setState({ adjHash: res.data});
         });
     }
-
 
 
     listBoard(p_num, cateNo, subcateNo, pdNo) {
@@ -228,6 +230,7 @@ class ItemComponent extends Component{
     }
 
 
+
     render(){
         return (
             <div className="main-content" style={{padding:'0em 5em'}}> 
@@ -267,7 +270,7 @@ class ItemComponent extends Component{
                           <div key={adjhash.id} style={{fontSize:'23px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
                       )
                   }
-                   
+                
                         
                           
                 </div> 
@@ -289,7 +292,7 @@ class ItemComponent extends Component{
                         <table className="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>리뷰No.</th>
+                                    <th>No.</th>
                                     <th>별점</th>
                                     <th>아이디</th>
                                     <th>리뷰</th>
