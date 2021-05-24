@@ -1471,6 +1471,12 @@ textarea.form-control {
   color: black;
 }
 
+.hashtagrank{
+  margin: 5px;
+  padding:10px;
+  text-align: center;
+  display: inline-block;
+}
 .hashtagrank:hover {
   color: #a4ccb6;
 }
@@ -1818,4 +1824,8 @@ table.mypage td {
   position: relative;
   align-items: center;
   justify-content: center;
+}
+
+.categoryDiv:hover{
+  background-color: rgb(248, 247, 172);
 }
