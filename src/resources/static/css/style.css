@@ -794,9 +794,11 @@ Version 1.0
 .main-content {
   position: relative;
   z-index: 10;
-  margin-left: 20px;
+  /* margin-left: 20px;
   margin-right: 20px;
-  margin-bottom: 2em;
+  margin-bottom: 2em; */
+  padding-top: 2em;
+  background-color: rgb(248, 248, 248);
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -809,8 +811,7 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 10px 50px 0px 50px;
-  background: white;
-  color: #2d6c4a;
+  background: rgb(248, 248, 248);
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -985,6 +986,7 @@ Version 1.0
   margin: 0px -20px 0px -20px;
   color: rgba(0, 0, 0, 0.7);
   height: 160px;
+  background-color: rgb(248, 248, 248);
 }
 .footer a {
   color: rgba(0, 0, 0, 0.7);
@@ -1001,7 +1003,6 @@ Version 1.0
 .box-content {
   position: relative;
   margin: 0px 0px 20px 0px;
-  background: #ffffff;
 
   /* State */
   /* Style */
@@ -1426,6 +1427,8 @@ textarea.form-control {
 
 #navbar {
   z-index: 12;
+  background-color: rgb(213, 224, 220);
+
 }
 
 /* Navbar links */
@@ -1453,13 +1456,13 @@ textarea.form-control {
   background-image: none !important;
   border-color: transparent;
   border: none;
-  color: rgb(73, 73, 73);
+  color: rgb(87,81,76);
 }
 
 /* Style the active class (and buttons on mouse-over) */
 .active,
 .mybtn:hover {
-  color: rgba(113, 218, 16, 0.829);
+  color: rgb(37, 160, 115);
 }
 
 .hashtag {
@@ -1659,16 +1662,17 @@ textarea.form-control {
 /*---------------------새로추가------------------------------------------------*/
 
 .dropbtn {
-  border: none;
+  border-top: none;
+  border-bottom: none;
   outline: none;
   padding: 14px 0px 17px 0px;
   cursor: pointer;
   background-color: transparent !important;
   background-image: none !important;
-  border-color: transparent;
-  border: none;
   width: 150px;
-  color: rgb(73, 73, 73);
+  color: rgb(87,81,76);
+  border-left: 1px solid rgb(213, 224, 220);
+  border-right: 1px solid rgb(213, 224, 220);
 }
 
 .dropdown {
@@ -1681,29 +1685,32 @@ textarea.form-control {
   display: none;
   position: absolute;
   right: 0;
-  background-color: white;
-  border-left: 1px solid #2d6c4a;
-  border-right: 1px solid #2d6c4a;
-  border-bottom: 1px solid #2d6c4a;
+  background-color: rgb(248, 248, 248);
+  border-top: 1px solid rgb(248, 248, 248);
+  border-left: 1px solid rgb(213, 224, 220);
+  border-right: 1px solid rgb(213, 224, 220);
+  border-bottom: 1px solid rgb(213, 224, 220);
   width: 100%;
   z-index: 15;
 }
 
 .dropdown-content a {
-  color: black;
-  text-decoration: none;
+  color: rgb(87,81,76);
   display: block;
   font-size: 13px;
+  text-align: left;
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: rgb(238, 238, 238);
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+
+.dropdown:hover{
+  background-color: rgb(248, 248, 248);
 }
 
 .mainhomebtn {
@@ -1719,7 +1726,7 @@ textarea.form-control {
 }
 
 .pagination > li > a {
-  background-color: white;
+  background-color: rgb(248, 248, 248);
   color: #2d6c4a;
 }
 
@@ -1827,5 +1834,5 @@ table.mypage td {
 }
 
 .categoryDiv:hover{
-  background-color: rgb(248, 247, 172);
+  color: rgb(120, 182, 171);
 }

@@ -32,10 +32,10 @@ class CategoryBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">
 
-                <div className="album py-5 bg-white">
+                <div className="album py-5">
                 <div className="container">
 
-                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span></div>
+                <div style={{fontSize:'larger', fontWeight:'bolder'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span></div>
                 <br/>
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">

@@ -88,19 +88,19 @@ class NavBarComponent extends Component {
     render() {
         return (
             <div id="navbar">
-            <nav className="navbar navbar-white bg-white" style={{margin:'0px 0px 40px', borderBottom:'1px solid #2D6C4A', padding:'0px 10px'}}>
+            <nav className="navbar" style={{margin:'0px', padding:'0px 10px'}}>
                 <div className="justify-content-start mr-auto">
-                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px'}}>&nbsp;&nbsp;Shopping&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px', color:'rgb(87,81,76)'}}>&nbsp;&nbsp;<b>Shopping</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
                     
                     {
                         this.state.categories.map(
                         category =>
                         <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left'}}> 
                             <button className="dropbtn" onClick={()=>window.location.replace(`/category-board?cateNo=`+category.cateNo)} >
-                                {category.cateNo}
+                                <b>{category.cateNo}</b>
                             </button>
 
-                            <div className="dropdown-content" style={{left:'0'}}>
+                            <div className="dropdown-content">
                                 {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
                                     livingroom_category =>
                                     <a href={`/menu-board?cateNo=거실가구&subcateNo=`+livingroom_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
@@ -144,9 +144,9 @@ class NavBarComponent extends Component {
                 </div>
 
                 <div className="justify-content-start ml-auto">
-                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px'}}>Community&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
-                    <button onClick={()=>window.location.replace('/qna-board')} className="mybtn" id="qnabtn">Q&amp;A Community</button>
-                    <button onClick={()=>window.location.replace('/photo-board')} className="mybtn" id="photobtn">Photo Community</button>
+                    <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', color:'rgb(87,81,76)'}}><b>Community</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
+                    <button onClick={()=>window.location.replace('/qna-board')} className="mybtn" id="qnabtn"><b>Q&amp;A Community</b></button>
+                    <button onClick={()=>window.location.replace('/photo-board')} className="mybtn" id="photobtn"><b>Photo Community</b></button>
                 </div>
             </nav>
             </div>
