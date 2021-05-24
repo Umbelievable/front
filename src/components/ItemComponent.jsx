@@ -7,7 +7,7 @@ import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
 import * as d3 from 'd3';
-import clund from 'd3-cloud';
+import WordCloud from "d3-cloud";
 
 
 class ItemComponent extends Component{
@@ -229,6 +229,16 @@ class ItemComponent extends Component{
         });
     }
 
+    reviewFilter=(event,id) => {    //nounhash 클릭시 호출되는 함수 수정중
+        alert(event.target.value.toString(),id);
+        return;
+        // var noun=this.state.nounHash.id;
+        // alert(noun);
+
+    };
+        
+    
+
 
 
     render(){
@@ -262,15 +272,19 @@ class ItemComponent extends Component{
 
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
                 <div >
-                    <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>소비자 리뷰 분석 결과</div>
+                    <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
+                        리뷰 분석 결과</div>
             
                   {
                       this.state.adjHash.map(
                           adjhash =>
-                          <div key={adjhash.id} style={{fontSize:'23px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
+                          <div key={adjhash.id} style={{fontSize:'25px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
                       )
                   }
-                
+                  <br></br>
+                  <br></br>
+                <div style={{fontSize:'15px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
+                        이 상품을 직접 구매하신 고객님들의 의견입니다.</div>
                         
                           
                 </div> 
@@ -281,7 +295,7 @@ class ItemComponent extends Component{
            {
                this.state.nounHash.map(
                    nounhash =>
-                   <div key={nounhash.id} className="nounhashbtn">#&nbsp;{nounhash.name}</div>
+                   <button key={nounhash.id} className="nounhashbtn" onClick={(e)=>this.reviewFilter(e,nounhash.id)}>#&nbsp;{nounhash.name}</button>
                )
            }
                     
