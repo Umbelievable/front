@@ -108,7 +108,7 @@ class MyCommentBoardComponent extends Component {
                                 this.state.myqcomments.map(
                                     mycomment => 
                                     <tr key = {mycomment.qcommentNo} style={{padding:'2em 3em'}}>
-                                        <td style={{verticalAlign:'middle', width:'30px'}}>{mycomment.qcommentNo}</td>
+                                        
                                         <td style={{textAlign:'left', padding:'2em'}}>
                                             <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.qcommentInsertTime} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.qcommentContent} </div>
@@ -141,7 +141,7 @@ class MyCommentBoardComponent extends Component {
                                 this.state.mypcomments.map(
                                     mycomment => 
                                     <tr key = {mycomment.pcommentNo} style={{padding:'2em 3em'}}>
-                                        <td style={{verticalAlign:'middle', width:'30px'}}>{mycomment.pcommentNo}</td>
+                                        
                                         <td style={{textAlign:'left', padding:'2em'}}>
                                             <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.pcommentInsertTime} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.pcommentContent} </div>

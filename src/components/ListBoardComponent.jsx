@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
+import CommentService from '../service/CommentService';
 
 class ListBoardComponent extends Component {
     constructor(props) {
@@ -7,7 +8,8 @@ class ListBoardComponent extends Component {
         this.state = { 
             p_num: 1,
             paging: {},
-            boards: []
+            boards: [],
+            finalboards: []
         }
         this.createBoard = this.createBoard.bind(this);
     }
@@ -18,7 +20,24 @@ class ListBoardComponent extends Component {
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
                 boards: res.data.list});
+                for(var j=0; j<res.data.list.length; j++){
+                    const board = res.data.list[j];
+                    CommentService.getComments(board.qboardNo).then(resul => {
+                        const qb = [{ "qboardNo": board.qboardNo, 
+                                        "qboardTitle": board.qboardTitle, 
+                                        "qboardWriter": board.qboardWriter, 
+                                        "qboardInsertTime": board.qboardInsertTime, 
+                                        "qboardViews": board.qboardViews,
+                                        "qboardFileUrl": board.qboardFileUrl, 
+                                        "comment": resul.data.length
+                                    }];
+                        this.setState({finalboards: this.state.finalboards.concat(qb).sort(function(a, b){ 
+                            return b.qboardNo - a.qboardNo
+                        })});
+                    });
+                }
         });
+
         
         //qna 통합 검색
         var searchBar = document.getElementById("searchBar");
@@ -122,7 +141,7 @@ class ListBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">   
 
-            <div className="table-responsive clearfix">
+            <div style={{padding:'0em 3em'}}className="table-responsive clearfix">
 			    <table className="table table-hover">
                     <thead>
                         <tr>
@@ -135,11 +154,15 @@ class ListBoardComponent extends Component {
                     </thead>
                     <tbody>
                         {
-                        this.state.boards.map(
+                        this.state.finalboards.map(
                             board => 
                             <tr key = {board.qboardNo}>
                                 <td> {board.qboardNo} </td>
-                                <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
+                                <td style={{textAlign:'left', paddingLeft:'3em'}}> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
+                                {
+                                    (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
+                                }
+                                </td>
                                 <td> {board.qboardWriter} </td>
                                 <td> {board.qboardInsertTime} </td>
                                 <td> {board.qboardViews} </td>

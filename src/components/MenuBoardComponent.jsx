@@ -39,15 +39,15 @@ class MenuBoardComponent extends Component {
                 <div className="album py-5 bg-white">
                 <div className="container">
 
-                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
-                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
+                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
+                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
                 <br/>
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
                     {
                         this.state.items.map(
                             item => 
-                            <div style={{paddingBottom:'2em'}} key = {item.pdNo, item.cateNo, item.subcateNo} className="col">
+                            <div style={{paddingBottom:'2em'}} key = {item.pdNo} className="col">
                                 <div style={{paddingBottom: '2em'}} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}>
                                 <div className="menucropping">
                                     <img src={item.pdImg}/>

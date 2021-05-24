@@ -1825,3 +1825,7 @@ table.mypage td {
   align-items: center;
   justify-content: center;
 }
+
+.categoryDiv:hover{
+  background-color: rgb(248, 247, 172);
+}

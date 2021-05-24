@@ -10,6 +10,7 @@ import * as d3 from 'd3';
 import WordCloud from "d3-cloud";
 
 
+
 class ItemComponent extends Component{
     constructor(props){
         const query = queryString.parse(window.location.search);
