@@ -36,10 +36,10 @@ class MenuBoardComponent extends Component {
 				<div className="box-content">
 
 
-                <div className="album py-5 bg-white">
+                <div className="album py-5">
                 <div className="container">
 
-                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
+                <div style={{fontSize:'larger', fontWeight:'bolder'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
                 &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
                 <br/>
 
@@ -61,7 +61,6 @@ class MenuBoardComponent extends Component {
                                 </div>
                                 </div>
                             </div>
-
                         )
                     }
 
