@@ -6,8 +6,7 @@ import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
-import * as d3 from 'd3';
-import WordCloud from "d3-cloud";
+
 
 
 
