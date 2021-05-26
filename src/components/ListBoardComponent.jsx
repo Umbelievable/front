@@ -158,7 +158,7 @@ class ListBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">   
 
-            <div style={{padding:'0em 3em'}}className="table-responsive clearfix">
+            <div style={{padding:'0em 3em'}} className="table-responsive clearfix">
 			    <table className="table table-hover">
                     <thead>
                         <tr>

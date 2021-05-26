@@ -180,12 +180,12 @@ class ReadBoardComponent extends Component {
          />
      );
         return (
-            <div className="main-content">
+            <div style={{padding:'3em'}} className="main-content">
                <div className="row row-inline-block small-spacing">
                <div className="col-xs-12">
                <div className="box-content">
                <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
-                  <div className="card-content">
+               <div className="card-content">
 
                   <ColoredLine color="black"/>
                   <h3 style={{fontSize:'18px', display:'inline', padding:'0px 50px 0px 10px'}}>{this.state.board.qboardTitle}</h3>
@@ -221,7 +221,7 @@ class ReadBoardComponent extends Component {
                         <div className="input-group margin-bottom-20">
                            <input type="text" className="form-control" value={this.state.qcommentContent} onChange={this.changeContentHandler} style={{height:'45px'}} placeholder="댓글을 입력해 주세요."/>
                            <div className="input-group-btn">
-                              <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
+                              <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="glyphicon glyphicon-edit" aria-hidden="true"></i></button>
                            </div>
                         </div>
                         <ul className="notice-list">

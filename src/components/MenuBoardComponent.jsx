@@ -53,7 +53,7 @@ class MenuBoardComponent extends Component {
                                     <img src={item.pdImg}/>
                                 </div>
                                 <div className="card-body">
-                                    <small className="card-text" style={{fontSize:'11px'}}>{item.pdMall}</small>
+                                    <small className="card-text" style={{fontSize:'12px'}}>{item.pdMall}</small>
                                     <small className="card-text" style={{display:'block', fontWeight:'bold', fontSize:'13px', height:'62px'}}>{item.pdTitle}</small>
                                 <div className="d-flex justify-content-between align-items-center">
                                     <p className="card-text" style={{fontWeight:'bolder', fontSize:'20px'}}>{item.pdPrice}</p>

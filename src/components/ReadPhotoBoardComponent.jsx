@@ -191,7 +191,7 @@ class ReadPhotoBoardComponent extends Component {
          />
      );
       return (
-         <div className="main-content">
+         <div style={{padding:'2em 3em'}} className="main-content">
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
