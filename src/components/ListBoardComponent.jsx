@@ -48,7 +48,7 @@ class ListBoardComponent extends Component {
         var qnabtn = document.getElementById("qnabtn");
         var btns = header.getElementsByClassName("mybtn");
         for (var i = 0; i < btns.length; i++) {
-            btns[i].className = "mybtn"
+            btns[i].className = "mybtn";
         }
         qnabtn.className += " active";
     }
@@ -69,12 +69,29 @@ class ListBoardComponent extends Component {
     listBoard(p_num) {
         console.log("pageNum : "+ p_num);
         BoardService.getBoards(p_num).then((res) => {
-            console.log(res.data);
+            this.setState({finalboards:[]});
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
                 boards: res.data.list});
+                for(var j=0; j<res.data.list.length; j++){
+                    const board = res.data.list[j];
+                    CommentService.getComments(board.qboardNo).then(resul => {
+                        const qb = [{ "qboardNo": board.qboardNo, 
+                                        "qboardTitle": board.qboardTitle, 
+                                        "qboardWriter": board.qboardWriter, 
+                                        "qboardInsertTime": board.qboardInsertTime, 
+                                        "qboardViews": board.qboardViews,
+                                        "qboardFileUrl": board.qboardFileUrl, 
+                                        "comment": resul.data.length
+                                    }];
+                        this.setState({finalboards: this.state.finalboards.concat(qb).sort(function(a, b){ 
+                            return b.qboardNo - a.qboardNo
+                        })});
+                    });
+                }
         });
+        
     }
 
     viewPaging() {
