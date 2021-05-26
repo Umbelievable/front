@@ -92,8 +92,10 @@ class ItemComponent extends Component{
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
-                reviews: res.data.list});
+                reviews: res.data.list})
+                
         });
+        
     }
 
     viewPaging() {
@@ -114,7 +116,7 @@ class ItemComponent extends Component{
         if (this.state.paging.prev) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabindex="-1">Previous</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabindex="-1">Previous</a>
                 </li>
             );
         }
@@ -124,7 +126,7 @@ class ItemComponent extends Component{
         if (this.state.paging.next) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">Next</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">Next</a>
                 </li>
             );
         }
@@ -144,7 +146,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != this.state.paging.pageNumCountTotal) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal,this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                    <a className="page-link" onClick = {() => this.listBoard( this.state.paging.pageNumCountTotal, this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
                 </li>
             );
         }
@@ -229,11 +231,9 @@ class ItemComponent extends Component{
         });
     }
 
-    reviewFilter=(event,id) => {    //nounhash 클릭시 호출되는 함수 수정중
-        alert(event.target.value.toString(),id);
-        return;
-        // var noun=this.state.nounHash.id;
-        // alert(noun);
+    reviewFilter(id, name) {    //nounhash 클릭시 호출되는 함수 수정중
+        // 해시태그 아이디랑 이름 받아서
+
 
     };
         
@@ -291,14 +291,15 @@ class ItemComponent extends Component{
                 </div> 
                     
             </div>
-            <br/><br/>
-           {
-               this.state.nounHash.map(
-                   nounhash =>
-                   <button key={nounhash.id} className="nounhashbtn" onClick={(e)=>this.reviewFilter(e,nounhash.id)}>#&nbsp;{nounhash.name}</button>
-               )
-           }
-                    
+            <br/>
+            {
+                this.state.nounHash.map(
+                    nounhash =>
+                    <button key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter(nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
+                )
+            }
+            <br/><br/><br/>
+            <button className="btn">전체리뷰보기</button>       
             {
                 (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
@@ -307,7 +308,7 @@ class ItemComponent extends Component{
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>별점</th>
+                                    <th style={{width: '4em'}}>별점</th>
                                     <th>아이디</th>
                                     <th>리뷰</th>
                                     <th>날짜</th>
@@ -321,7 +322,7 @@ class ItemComponent extends Component{
                                         <td> {review.reviewNo} </td>
                                         <td> {review.star} </td>
                                         <td> {review.customerId} </td>
-                                        <td> {review.review} </td>
+                                        <td style={{textAlign:'left'}}> {review.review} </td>
                                         <td> {review.reviewDate} </td>
                                     </tr>
                                 )
