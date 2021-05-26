@@ -1,7 +1,6 @@
 /* Include variables for LESS */
 /* Import file styles */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-@import url(../fonts/font-awesome/css/font-awesome.min.css);
 @import url(../plugin/bootstrap/css/bootstrap.min.css);
 /* General css */
 /*
@@ -981,6 +980,10 @@ Version 1.0
 /*-----------------------------------------------------------------------
 1. Footer
 */
+
+div{
+  font-family: 'NanumSquareR';
+}
 .footer {
   padding: 20px 30px 20px 30px;
   margin: 0px -20px 0px -20px;
@@ -1237,6 +1240,7 @@ Version 1.0
 .table > thead > tr > th {
   padding: 9px;
   text-align: center;
+  font-family: 'NanumSquareR';
 }
 .table > tbody > tr > td.text-left,
 .table > tbody > tr > th.text-left,
@@ -1428,6 +1432,7 @@ textarea.form-control {
 #navbar {
   z-index: 12;
   background-color: rgb(213, 224, 220);
+  font-family: "NanumSquareB";
 
 }
 
@@ -1637,7 +1642,7 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .menucropping img {
@@ -1673,6 +1678,7 @@ textarea.form-control {
   color: rgb(87,81,76);
   border-left: 1px solid rgb(213, 224, 220);
   border-right: 1px solid rgb(213, 224, 220);
+  font-family: "NanumSquareB";
 }
 
 .dropdown {
@@ -1723,6 +1729,7 @@ textarea.form-control {
   border-color: transparent;
   color: rgb(73, 73, 73);
   font-size: small;
+  font-family: 'NanumSquareB';
 }
 
 .pagination > li > a {
@@ -1836,3 +1843,4 @@ table.mypage td {
 .categoryDiv:hover{
   color: rgb(120, 182, 171);
 }
+

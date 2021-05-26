@@ -95,9 +95,9 @@ class NavBarComponent extends Component {
                     {
                         this.state.categories.map(
                         category =>
-                        <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left'}}> 
+                        <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left', fontSize:'larger'}}> 
                             <button className="dropbtn" onClick={()=>window.location.replace(`/category-board?cateNo=`+category.cateNo)} >
-                                <b>{category.cateNo}</b>
+                                {category.cateNo}
                             </button>
 
                             <div className="dropdown-content">

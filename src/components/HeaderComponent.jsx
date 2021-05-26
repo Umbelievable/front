@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 import MemberService from '../service/MemberService';
-import imageSrc from '../resources/image/dzbzlogo.png';
-
+import imageSrc from '../resources/image/dzbzlogo.PNG';
 
 class HeaderComponent extends Component {
     constructor(props) {
@@ -90,37 +89,37 @@ class HeaderComponent extends Component {
         const { currentUser } = this.state;
 
         return (
-        <div className="fixed-navbar" style={{overflow:'hidden'},{height:'auto'}}>                          
+        <div className="fixed-navbar" style={{overflow:'hidden', height:'auto'}}>                          
             <div className="btn_wrap text-right">
-            {!this.state.userReady && (
-                <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
-            {this.state.userReady && (
-                <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
-            {this.state.userReady && (
-                <button className="mainhomebtn" onClick={()=>window.location.replace('/cart-board')}>CART</button>)}
-            {!this.state.userReady && (
-                <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
-            {this.state.userReady && (
-                <button className="mainhomebtn" onClick={this.logOut}>LOGOUT</button>)}
-              
-
-            <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
+                {!this.state.userReady && (
+                    <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
+                {this.state.userReady && (
+                    <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+                {this.state.userReady && (
+                    <button className="mainhomebtn" onClick={()=>window.location.replace('/cart-board')}>CART</button>)}
+                {!this.state.userReady && (
+                    <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
+                {this.state.userReady && (
+                    <button className="mainhomebtn" onClick={this.logOut}>LOGOUT</button>)}
+                <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 			</div>
+
 			<div className="text-center">
-				<div style={{verticalAlign:'middle', fontSize:'55px', color:'rgb(73,117,104)'}} onClick = {this.goToList}><i class="fa fa-home"></i><img style={{width:'160px', height:'71px'}} src={imageSrc}/><i class="fa fa-home fa-flip-vertical"></i></div>
-            <div id="adv-search" className="input-group">
-				<form id="searchForm" style={{display:'inline-block'}} role="form">
-					<div className="form-group" style={{display:'inline-block'}}>
-						<input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', height:'46px', border:'2px solid rgb(73,117,104)'}} placeholder="DZBZ 통합 검색"/>
-					</div>
-                    <div className="form-group" style={{display:'inline-block'}}>
-					    <button onClick = {this.searchBoard} className="form-control" style={{background: "rgb(73,117,104)", height:'46px', border:'2px solid rgb(73,117,104)'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                    </div>          
-                </form>
-	        </div>
+				<div style={{verticalAlign:'middle', fontSize:'36px', color:'rgb(73,117,104)'}} onClick = {this.goToList}>
+                    <img style={{width:'300px', height:'77px'}} src={imageSrc}/>
+                </div><br/>
+                <div id="adv-search" className="input-group">
+                    <form id="searchForm" style={{display:'inline-block'}} role="form">
+                        <div className="form-group" style={{display:'inline-block'}}>
+                            <input id="searchBar" type="text" value={this.state.searchKeyword} name="searchKeyword" onChange={this.changeKeywordHandler} className="form-control" style={{width:"450px", border:'none', height:'46px', border:'2px solid rgb(73,117,104)'}} placeholder="DZBZ 통합 검색"/>
+                        </div>
+                        <div className="form-group" style={{display:'inline-block'}}>
+                            <button onClick = {this.searchBoard} className="form-control" style={{background: "rgb(73,117,104)", height:'46px', border:'2px solid rgb(73,117,104)'}}><span style={{color: "#ffffff"}} className="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                        </div>          
+                    </form>
+                    <br/>
+                </div>
 			</div>
-
-        
 		</div>
         );
     }
