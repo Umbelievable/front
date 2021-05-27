@@ -6,6 +6,7 @@ import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
+import PurchaseService from '../service/PurchaseService';
 
 
 class ItemComponent extends Component{
@@ -161,6 +162,7 @@ class ItemComponent extends Component{
             this.setState({count: this.state.count-1});
         }  
     }
+
     showLike() {
         if(this.state.isClicked == false){
             return (
@@ -174,6 +176,7 @@ class ItemComponent extends Component{
         }
         
     }
+
     changeImg() { // 하트 눌렀을때 불리는 함수
         if(!this.state.isClicked){ // 좋아요 안눌린상태면 // createLikeItem 호출
             let item = {
@@ -183,7 +186,7 @@ class ItemComponent extends Component{
                 categoryNo: this.state.cateNo
             };
             LikeService.createLikeItem(item).then(res => {
-                alert('관심상품 목록에 추가했습니다.');
+                window.location.reload();
             });
 
         }
@@ -192,7 +195,7 @@ class ItemComponent extends Component{
             for(var i=0; i<likeItem.length; i++){
                 if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
-                        alert('관심상품 목록에서 삭제했습니다.');
+                        window.location.reload();
                     });
                 }
             }
@@ -216,6 +219,21 @@ class ItemComponent extends Component{
             <div style={{ paddingTop:'1em', fontWeight:'bolder', fontSize:'30px', color:'black'}}>{this.numberWithCommas(res)+"원"}</div>
         );
         
+    }
+
+    goToOrder() { // buynow
+        // PurchaseService불러서 주문목록 post하고
+        let pur = {
+            userId: MemberService.getCurrentUser().id,
+            pdNo: this.state.pdNo,
+            categoryNo: this.state.cateNo,
+            subcateNo: this.state.subcateNo,
+            volume: this.state.count
+        };
+        PurchaseService.addPurchase(pur);
+
+        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
     }
 
     addCart(){ //add cart 버튼 누르면 실행되는 함수
@@ -291,7 +309,7 @@ class ItemComponent extends Component{
                     
                     {this.totalPrice()}
                     <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
-                    <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
+                    <button className="btn btn-primary waves-effect waves-light" onClick={this.goToOrder.bind(this)} style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
                     <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
                     
                 </div>
