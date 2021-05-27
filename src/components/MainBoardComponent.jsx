@@ -16,9 +16,8 @@ class MainBoardComponent extends Component {
 
     viewItem(){
         var forArray = [];
-        //var data = this.state.finalboards;
 
-        for(var i=0; i<3; i++){
+        for(var i=0; i<2; i++){
             //const pNo = data[i].pboardNo; // 글 이동
             forArray.push(
                 <Carousel.Item interval={2000}>

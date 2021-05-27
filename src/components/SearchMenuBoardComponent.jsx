@@ -33,7 +33,7 @@ class SearchMenuBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     render() {
@@ -48,8 +48,8 @@ class SearchMenuBoardComponent extends Component {
                 <div className="album py-5">
                 <div className="container">
 
-                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
-                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
+                <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span onClick={()=>this.props.history.push(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
+                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span onClick={()=>this.props.history.push(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
                 <br/><br/>
 
                     

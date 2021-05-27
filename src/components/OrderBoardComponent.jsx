@@ -50,7 +50,7 @@ class OrderBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) {
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     numberWithCommas(x) { // 콤마 정규식

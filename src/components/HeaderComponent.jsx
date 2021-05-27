@@ -25,8 +25,8 @@ class HeaderComponent extends Component {
         }
         else{
             this.setState({ currentUser: currentUser, userReady: true });
-        } 
- 
+        }
+
     }
 
     changeKeywordHandler = (event) => {
@@ -125,4 +125,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default withRouter(HeaderComponent);
+export default HeaderComponent;

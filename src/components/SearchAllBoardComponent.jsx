@@ -77,20 +77,20 @@ class SearchAllBoardComponent extends Component {
     }
 
     readBoard(qboardNo) {
-        window.location.replace(`/read-board/${qboardNo}`);
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     readPhotoBoard(pboardNo) {
-        window.location.replace(`/read-photoboard/${pboardNo}`);
+        this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     render() {
         return (
-            <div className="main-content">
+            <div className="main-content" style={{padding:'3em'}}>
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">

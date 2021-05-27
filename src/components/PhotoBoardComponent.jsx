@@ -59,16 +59,16 @@ class PhotoBoardComponent extends Component {
     }
 
     createBoard() {
-        window.location.replace('/create-photoboard/_create');
+        this.props.history.push('/create-photoboard/_create');
     }
 
     readPhotoBoard(pboardNo) {
-        window.location.replace(`/read-photoboard/${pboardNo}`);
+        this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
     goToUpdate = (event) => {
         event.preventDefault();
-        window.location.replace(`/create-photoboard/${this.state.pboardNo}`);
+        this.props.history.push(`/create-photoboard/${this.state.pboardNo}`);
     }
 
     render() {

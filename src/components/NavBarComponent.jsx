@@ -154,4 +154,4 @@ class NavBarComponent extends Component {
     }
 }
 
-export default withRouter(NavBarComponent);
+export default NavBarComponent;

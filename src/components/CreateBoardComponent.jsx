@@ -45,7 +45,7 @@ class CreateBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            window.location.replace('/qna-board');
+            this.props.history.push('/qna-board');
         });
         
     }
@@ -76,18 +76,18 @@ class CreateBoardComponent extends Component {
 
         if (this.state.qboardNo === '_create') { // 새로 만들면
             BoardService.createBoard(board).then(res => {
-                window.location.replace('/qna-board');
+                this.props.history.push('/qna-board');
             });
 
         } else { 
             BoardService.updateBoard(this.state.qboardNo, board).then(res => {
-                window.location.replace(`/read-board/${this.state.qboardNo}`);
+                this.props.history.push(`/read-board/${this.state.qboardNo}`);
             });
         }
     }
 
     cancel() {
-        window.location.replace('/qna-board');
+        this.props.history.push('/qna-board');
     }
 
     componentDidMount() {

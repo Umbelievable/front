@@ -41,7 +41,7 @@ class CustomerServiceBoardComponent extends Component {
 
     render() {
         return (
-        <div className="main-content">
+        <div className="main-content" style={{padding:'3em'}}>
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">

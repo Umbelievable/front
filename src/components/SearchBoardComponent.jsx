@@ -30,7 +30,7 @@ class SearchBoardComponent extends Component {
     }
 
     readBoard(qboardNo) {
-        window.location.replace(`/read-board/${qboardNo}`);
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     render() {

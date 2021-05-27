@@ -124,7 +124,7 @@ class UpdateMemberComponent extends Component {
             UserService.updateUserInfo(this.state.id,user).then( response => {
                 this.setState({ message: response.data.message, successful: true});
                 alert('회원정보 수정완료');
-                window.location.replace('/main-board');
+                this.props.history.push('/main-board');
             }, 
             error =>{
                 const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();

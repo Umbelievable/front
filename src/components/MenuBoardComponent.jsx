@@ -25,7 +25,7 @@ class MenuBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     render() {
@@ -39,8 +39,8 @@ class MenuBoardComponent extends Component {
                 <div className="album py-5">
                 <div className="container">
 
-                <div style={{fontSize:'larger', fontWeight:'bolder'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
-                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>window.location.replace(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
+                <div style={{fontSize:'larger', fontWeight:'bolder'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>this.props.history.push(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>
+                &nbsp;&nbsp;&gt;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>this.props.history.push(`/menu-board?cateNo=`+this.state.cateNo+`&subcateNo=`+this.state.subcateNo)}>{this.state.subcateNo}</span></div>
                 <br/>
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
