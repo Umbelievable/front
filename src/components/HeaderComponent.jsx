@@ -14,7 +14,6 @@ class HeaderComponent extends Component {
             currentUser: { id: "" }
         }
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
-
     }
 
     componentDidMount() {

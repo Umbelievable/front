@@ -18,13 +18,14 @@ class MenuBoardComponent extends Component {
         ItemService.getCertainItems(this.state.cateNo, this.state.subcateNo).then((res) => {
             this.setState({items: res.data});
         });
-
+        
         // 소카테고리 검색
         var searchBar = document.getElementById("searchBar");
-        searchBar.placeholder = this.state.subcateNo+" 상품 검색";
+        searchBar.placeholder = this.state.subcateNo+" 상품 검색";        
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
+        localStorage.setItem("scrollPos", window.pageYOffset); // 상품 보러 들어갈 때 현재 위치 저장하고
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 

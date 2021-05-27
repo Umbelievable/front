@@ -20,6 +20,7 @@ class CategoryBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
+        localStorage.setItem("scrollPos", window.pageYOffset); // 상품 보러 들어갈 때 현재 위치 저장하고
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
@@ -61,7 +62,6 @@ class CategoryBoardComponent extends Component {
                 </div>
                 </div>
                 </div> 
-            
 
 				</div>
 				</div>

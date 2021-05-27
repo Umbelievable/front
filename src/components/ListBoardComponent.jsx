@@ -69,7 +69,7 @@ class ListBoardComponent extends Component {
     listBoard(p_num) {
         console.log("pageNum : "+ p_num);
         BoardService.getBoards(p_num).then((res) => {
-            this.setState({finalboards:[]});
+            this.setState({ finalboards: [] });
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
@@ -91,12 +91,10 @@ class ListBoardComponent extends Component {
                     });
                 }
         });
-        
     }
 
     viewPaging() {
         const pageNums = [];
-
         for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
             pageNums.push(i);
         }
@@ -106,7 +104,6 @@ class ListBoardComponent extends Component {
             <a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>
         </li>
         ));
-        
     }
 
     isPagingPrev(){
@@ -158,64 +155,63 @@ class ListBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">   
 
-            <div style={{padding:'0em 3em'}} className="table-responsive clearfix">
-			    <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>번호 </th>
-                            <th>제목 </th>
-                            <th>작성자 </th>
-                            <th>등록일 </th>
-                            <th>조회수 </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        this.state.finalboards.map(
-                            board => 
-                            <tr key = {board.qboardNo}>
-                                <td> {board.qboardNo} </td>
-                                <td style={{textAlign:'left', paddingLeft:'3em'}}> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
-                                {
-                                    (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
-                                }
-                                </td>
-                                <td> {board.qboardWriter} </td>
-                                <td> {board.qboardInsertTime} </td>
-                                <td> {board.qboardViews} </td>
+                <div style={{padding:'0em 3em'}} className="table-responsive clearfix">
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>번호 </th>
+                                <th>제목 </th>
+                                <th>작성자 </th>
+                                <th>등록일 </th>
+                                <th>조회수 </th>
                             </tr>
-                        )
-                        }
-                    </tbody>
-                </table>
-                <div className="btn_wrap text-right">
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
-			    </div>
-            </div>
+                        </thead>
+                        <tbody>
+                            {
+                            this.state.finalboards.map(
+                                board => 
+                                <tr key = {board.qboardNo}>
+                                    <td> {board.qboardNo} </td>
+                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
+                                    {
+                                        (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
+                                    }
+                                    </td>
+                                    <td> {board.qboardWriter} </td>
+                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {board.qboardViews} </td>
+                                </tr>
+                            )
+                            }
+                        </tbody>
+                    </table>
+                    <div className="btn_wrap text-right">
+                        <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+                    </div>
+                </div>
 
-            <div style={{textAlign:'center'}}>
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
+                <div style={{textAlign:'center'}}>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-center">
 
-                        {
-                            this.isMoveToFirstPage()
-                        }
-                        {
-                            this.isPagingPrev()
-                        }
-                        {
-                            this.viewPaging()
-                        }
-                        {
-                            this.isPagingNext()
-                        }
-                        {
-                            this.isMoveToLastPage()
-                        }
-                    </ul>
-                </nav>
-            </div>
-
+                            {
+                                this.isMoveToFirstPage()
+                            }
+                            {
+                                this.isPagingPrev()
+                            }
+                            {
+                                this.viewPaging()
+                            }
+                            {
+                                this.isPagingNext()
+                            }
+                            {
+                                this.isMoveToLastPage()
+                            }
+                        </ul>
+                    </nav>
+                </div>
 
 				</div>
 				</div>

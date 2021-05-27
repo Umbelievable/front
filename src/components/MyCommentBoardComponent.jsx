@@ -11,14 +11,12 @@ import 'react-tabs/style/react-tabs.css';
 class MyCommentBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             myqcomments: [],
             mypcomments: [],
             qnaBoards: [],
             photoBoards: []
         }
-
     }
 
     componentDidMount() { 
