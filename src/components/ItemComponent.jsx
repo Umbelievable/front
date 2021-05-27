@@ -18,24 +18,28 @@ class ItemComponent extends Component{
         this.state = {
             p_num: 1,
             paging: {},
+            reviews: [],  //리뷰목록
             itemInfo: {},
             cateNo: query.cateNo,
             subcateNo: query.subcateNo,
             pdNo: query.pdNo,
             count: 1, // 구매수량
-            reviews: [],  //리뷰목록
             nounHash: [], //명사해시태그목록
             adjHash: [],  //형용사해시태그목록
             isClicked: false,
             currentUser: { id: "" },
-            likes: [] // 유저별 좋아요 목록
+            likes: [], // 유저별 좋아요 목록
+            showTable: 'all',
+            prevBtnId: '', // 이전에 눌린 버튼 아이디
+            prevBtnName: '', // 이전에 눌린 버튼 이름
+            hashReviews: [] // 해시태그별 리뷰목록
 
         }
-        this.up=this.up.bind(this);
-        this.down=this.down.bind(this);
-        this.changeImg=this.changeImg.bind(this);
-        this.addCart=this.addCart.bind(this);
 
+        this.up = this.up.bind(this);
+        this.down = this.down.bind(this);
+        this.changeImg = this.changeImg.bind(this);
+        this.addCart = this.addCart.bind(this);
     }
 
     componentDidMount(){
@@ -46,7 +50,6 @@ class ItemComponent extends Component{
             this.setState({itemInfo: res.data});
         });
 
-        
         // 리뷰가 있으면 (res.data.pagingData.currentPageNum != null) setState하고 없으면 그냥 넘기기
         ReviewService.getReviews(this.state.p_num, this.state.cateNo, this.state.subcateNo, this.state.pdNo).then( res => {
             this.setState({ 
@@ -95,7 +98,6 @@ class ItemComponent extends Component{
                 reviews: res.data.list})
                 
         });
-        
     }
 
     viewPaging() {
@@ -231,15 +233,41 @@ class ItemComponent extends Component{
         });
     }
 
-    reviewFilter(id, name) {    //nounhash 클릭시 호출되는 함수 수정중
-        // 해시태그 아이디랑 이름 받아서
+    showReview(review){
+        var reviewSplit = review.split(this.state.prevBtnName);
+        return(
+            <td style={{textAlign:'left'}}> {reviewSplit[0]}<b style={{backgroundColor:'#d0f0de'}}>{this.state.prevBtnName}</b>{reviewSplit[1]} </td>
+        );
+    }
 
+    reviewFilter(id, name) { // 해시태그 아이디랑 이름 받아서 // nounhash 클릭시 호출되는 함수 수정중
+        var pressbtn = document.getElementById("btnId"+id); //이게 누른 버튼
+        var btns = document.getElementsByClassName("nounhashbtn"); // 명사 버튼 10개 다 가져오기
 
+        // 버튼이 이미 눌렸는데 한번 더 눌렀으면 
+        if(id == this.state.prevBtnId){
+            this.setState({showTable: 'all'}); // 전체 리뷰 보여주고
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].className = "nounhashbtn";
+            }
+        }
+
+        // 다른 버튼이 눌린거면 해당 리뷰 보여주기
+        else{
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].className = "nounhashbtn";
+            }
+            pressbtn.className += " active";
+            this.setState({showTable: 'hash', prevBtnId: id, prevBtnName: name});
+            ReviewService.getReviewsByHashtag(this.state.pdNo, this.state.subcateNo, this.state.cateNo, name).then( res => {
+                console.log(res.data);
+                this.setState({ hashReviews: res.data })
+                    
+            });
+        }
     };
         
     
-
-
 
     render(){
         return (
@@ -295,16 +323,15 @@ class ItemComponent extends Component{
             {
                 this.state.nounHash.map(
                     nounhash =>
-                    <button key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter(nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
+                    <button id={"btnId"+nounhash.id} key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter(nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
                 )
             }
-            <br/><br/><br/>
-            <button className="btn">전체리뷰보기</button>       
+            <br/><br/>    
             {
-                (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
+                (this.state.reviews) && (this.state.showTable == 'all') && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
                     <div className="table-responsive clearfix">
-                        <table className="table table-hover">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -356,9 +383,55 @@ class ItemComponent extends Component{
                 )
             }
             {
+                (this.state.reviews) && (this.state.showTable == 'hash') && ( // 해시태그 리뷰면 해시태그 리뷰 뽑고
+                    <div className="table-responsive clearfix">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th style={{width: '4em'}}>별점</th>
+                                    <th>아이디</th>
+                                    <th>리뷰</th>
+                                    <th>날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                this.state.hashReviews.map(
+                                    review => 
+                                    <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
+                                        <td> {review.reviewNo} </td>
+                                        <td> {review.star} </td>
+                                        <td> {review.customerId} </td>
+                                        {this.showReview(review.review)}
+                                        <td> {review.reviewDate} </td>
+                                    </tr>
+                                )
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            {
                 (!this.state.reviews) && ( // 없으면 없다고
-                    <div>
-                        작성된 리뷰가 없습니다.
+                    <div className="table-responsive clearfix">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th style={{width: '4em'}}>별점</th>
+                                    <th>아이디</th>
+                                    <th>리뷰</th>
+                                    <th>날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan='5' style={{fontSize:'20px', paddingTop:'1em'}}> 작성된 리뷰가 없습니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )
             }
