@@ -44,8 +44,8 @@ class ItemComponent extends Component{
     }
 
     componentDidMount(){
+        document.body.style.height = "1000px";
         window.scrollTo(0, 0);
-
         const currentUser = MemberService.getCurrentUser();
         this.setState({ currentUser: currentUser, userReady: true });
 

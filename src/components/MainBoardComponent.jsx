@@ -41,15 +41,11 @@ class MainBoardComponent extends Component {
             <div className="col-xs-12">
             <div className="box-content">
 
-
-            
             <Carousel>
                 {
                     this.viewItem()
                 }
             </Carousel>
-
-                
 
             </div>
             </div>

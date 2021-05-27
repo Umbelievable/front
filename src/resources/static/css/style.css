@@ -1716,6 +1716,21 @@ textarea.form-control {
   background-color: rgb(238, 238, 238);
 }
 
+.dropdownBtn {
+  font-size: 14px;
+  background-color: rgb(248, 248, 248);
+  font-family: 'NanumSquareR';
+  text-align: left;
+  display: block;
+  width: 148px;
+  border: none;
+  padding: 14px;
+}
+
+.dropdownBtn:hover {
+  color: rgb(24, 179, 132);
+}
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -1760,7 +1775,6 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
-
 }
 
 .cartcropping {

@@ -4,11 +4,8 @@ import React, { Component } from 'react';
 class CustomerServiceBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-           
         }
-
     }
 
     componentDidMount() {
@@ -23,7 +20,6 @@ class CustomerServiceBoardComponent extends Component {
             btns[i].className = "mybtn"
         }
         csbtn.className += " active";
-
     }
 
     actAns(liNum){

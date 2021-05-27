@@ -78,11 +78,10 @@ class PhotoBoardComponent extends Component {
             <div className="col-xs-12">
             <div className="box-content">
 
-            <div className="btn_wrap text-right">
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+            <div style={{paddingRight:'15em'}} className="btn_wrap text-right">
+                <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
 			</div>
         
-
             <div className="album py-5">
             <div className="container">
 

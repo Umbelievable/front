@@ -17,10 +17,8 @@ class NavBarComponent extends Component {
 
         }
         this.myFunction = this.myFunction.bind(this);
-
     }
 
-    
     componentDidMount() {
         const currentUser = MemberService.getCurrentUser();
         
@@ -30,7 +28,6 @@ class NavBarComponent extends Component {
         else{
             this.setState({ currentUser: currentUser, userReady: true });
         } 
-
 
         // 스크롤 이벤트 적용
         window.addEventListener('scroll', this.myFunction);
@@ -85,62 +82,70 @@ class NavBarComponent extends Component {
         }   
     }
 
+    goCate(cateNo){
+        localStorage.setItem("scrollPos", 0);
+        window.location.href = `/category-board?cateNo=`+cateNo;
+    }
+
+    goSubCate(cateNo, subcateNo){
+        localStorage.setItem("scrollPos", 0);
+        window.location.href = `/menu-board?cateNo=`+cateNo+`&subcateNo=`+subcateNo;
+    }
+
     render() {
         return (
             <div id="navbar">
             <nav className="navbar" style={{margin:'0px', padding:'0px 10px'}}>
                 <div className="justify-content-start mr-auto">
                     <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', padding:'14px 0px', color:'rgb(87,81,76)'}}>&nbsp;&nbsp;<b>Shopping</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
-                    
                     {
                         this.state.categories.map(
                         category =>
                         <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left', fontSize:'larger'}}> 
-                            <button className="dropbtn" onClick={()=>window.location.href=`/category-board?cateNo=`+category.cateNo} >
+                            <button className="dropbtn" onClick={()=>this.goCate(category.cateNo)} >
                                 {category.cateNo}
                             </button>
 
                             <div className="dropdown-content">
                                 {category.cateNo == "거실가구" && this.state.livingroom_categories.map(
                                     livingroom_category =>
-                                    <a href={`/menu-board?cateNo=거실가구&subcateNo=`+livingroom_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
+                                    <button className="dropdownBtn" onClick={()=>this.goSubCate(livingroom_category.cateNo, livingroom_category.subcateNo)} key = {livingroom_category.cateNo, livingroom_category.subcateNo}>
                                         {livingroom_category.subcateNo}
-                                    </a>                      
+                                    </button>                      
                                 )}
 
                                 {category.cateNo == "서재/사무용가구" && this.state.library_categories.map(
-                                    library_category => 
-                                    <a href={`/menu-board?cateNo=서재/사무용가구&subcateNo=`+library_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {library_category.cateNo, library_category.subcateNo}>
+                                    library_category =>
+                                    <button className="dropdownBtn" onClick={()=>this.goSubCate(library_category.cateNo, library_category.subcateNo)} key = {library_category.cateNo, library_category.subcateNo}>
                                         {library_category.subcateNo}
-                                    </a>                       
+                                    </button>               
                                 )}
 
                                 {category.cateNo == "수납가구" && this.state.storage_categories.map(
                                     storage_category => 
-                                    <a href={`/menu-board?cateNo=수납가구&subcateNo=`+storage_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {storage_category.cateNo, storage_category.subcateNo}>
+                                    <button className="dropdownBtn" onClick={()=>this.goSubCate(storage_category.cateNo, storage_category.subcateNo)} key = {storage_category.cateNo, storage_category.subcateNo}>
                                         {storage_category.subcateNo}
-                                    </a>
+                                    </button>
                                                         
                                 )}
 
                                 {category.cateNo == "주방가구" && this.state.kitchen_categories.map(
                                     kitchen_category => 
-                                    <a href={`/menu-board?cateNo=주방가구&subcateNo=`+kitchen_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {kitchen_category.cateNo, kitchen_category.subcateNo}>
+                                    <button className="dropdownBtn" onClick={()=>this.goSubCate(kitchen_category.cateNo, kitchen_category.subcateNo)} key = {kitchen_category.cateNo, kitchen_category.subcateNo}>
                                         {kitchen_category.subcateNo}
-                                    </a>                      
+                                    </button>                      
                                 )}
 
                                 {category.cateNo == "침실가구" && this.state.bed_categories.map(
                                     bed_category => 
-                                    <a href={`/menu-board?cateNo=침실가구&subcateNo=`+bed_category.subcateNo} style={{textAlign:'left', display:'block', width:'148px'}} key = {bed_category.cateNo, bed_category.subcateNo}>
+                                    <button className="dropdownBtn" onClick={()=>this.goSubCate(bed_category.cateNo, bed_category.subcateNo)} key = {bed_category.cateNo, bed_category.subcateNo}>
                                         {bed_category.subcateNo}
-                                    </a>                      
+                                    </button>                      
                                 )}
                             </div>
                           </div>                                            
-                            )
+                        )
                     }
-                    
                 </div>
 
                 <div className="justify-content-start ml-auto">
