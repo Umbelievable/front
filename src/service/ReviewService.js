@@ -9,6 +9,10 @@ class ReviewService {
         return axios.get(REVIEW_API_BASE_URL + "?p_num=" + p_num + "&category=" + category + "&subcate=" + subcate + "&pdNo=" + pdNo, { headers: authHeader() });
     }
 
+    getReviewsByHashtag(pdNo, subcate, category, hashtag) {
+        return axios.get(REVIEW_API_BASE_URL + "/hashtag?pdNo=" + pdNo + "&subcate=" + subcate + "&category=" + category + "&hashtag=" + hashtag, { headers: authHeader() });
+    }
+
 }
 
 export default new ReviewService();

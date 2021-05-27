@@ -1498,8 +1498,15 @@ textarea.form-control {
   text-align: center;
   display: inline-block;
 }
+
 .nounhashbtn:hover{
   background-color:  #a4ccb6;
+  color: rgb(87,81,76);
+}
+
+.nounhashbtn:active{
+  background-color:  #8cd1ab;
+  color: rgb(87,81,76);
 }
 
 .cropping,
