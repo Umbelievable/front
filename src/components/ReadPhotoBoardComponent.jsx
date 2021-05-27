@@ -54,7 +54,7 @@ class ReadPhotoBoardComponent extends Component {
 
       newINPUT.setAttribute("class", "form-control");
       newINPUT.style.width = "1200px";
-      newINPUT.style.height = "22.4px";
+      newINPUT.style.height = "30px";
       newINPUT.style.display = "inline";
       newINPUT.value = commentSpan.innerHTML;
       newINPUT.onchange = this.changeCommentContentHandler;
@@ -231,7 +231,7 @@ class ReadPhotoBoardComponent extends Component {
                      <div className="input-group margin-bottom-20">
                         <input type="text" className="form-control" value={this.state.pcommentContent} style={{height:'45px'}} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
                         <div className="input-group-btn">
-                           <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="fa fa-commenting" aria-hidden="true"></i></button>
+                           <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="glyphicon glyphicon-edit" aria-hidden="true"></i></button>
                         </div>
                      </div>
                      <ul className="notice-list">

@@ -45,7 +45,7 @@ class SearchMenuBoardComponent extends Component {
 
                 <div style={{textAlign:'center', fontSize:'larger'}}><span style={{color: 'black'}} className="glyphicon glyphicon-search" aria-hidden="true"></span><b>&nbsp;"{this.state.searchKeyword}"</b>&nbsp;검색 결과</div>
 
-                <div className="album py-5 bg-white">
+                <div className="album py-5">
                 <div className="container">
 
                 <div style={{fontSize:'larger'}}>Category&nbsp;&nbsp;|&nbsp;&nbsp;<span onClick={()=>window.location.replace(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span>

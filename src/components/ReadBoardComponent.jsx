@@ -52,7 +52,7 @@ class ReadBoardComponent extends Component {
 
       newINPUT.setAttribute("class", "form-control");
       newINPUT.style.width = "1200px";
-      newINPUT.style.height = "22.4px";
+      newINPUT.style.height = "30px";
       newINPUT.style.display = "inline";
       newINPUT.value = commentSpan.innerHTML;
       newINPUT.onchange = this.changeCommentContentHandler;
