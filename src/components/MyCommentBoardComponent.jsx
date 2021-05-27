@@ -38,11 +38,11 @@ class MyCommentBoardComponent extends Component {
     }
 
     readBoard(qboardNo) {
-        window.location.replace(`/read-board/${qboardNo}`);
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     readPhotoBoard(pboardNo) {
-        window.location.replace(`/read-photoboard/${pboardNo}`);
+        this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
     findQNo(no){

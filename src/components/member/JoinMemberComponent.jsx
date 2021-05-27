@@ -118,7 +118,7 @@ class JoinMemberComponent extends Component {
             MemberService.register(this.state.id, this.state.email, this.state.password, this.state.username, //새로 추가 username, birthDate, phone, sex
             new Date(this.state.birY+"-"+this.state.birM+"-"+this.state.birD), this.state.phone, this.state.sex).then( response => {
                 this.setState({ message: response.data.message, successful: true });
-                window.location.replace('/main-board');
+                this.props.history.push('/main-board');
             },
             error =>{
                 const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();

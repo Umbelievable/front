@@ -48,7 +48,7 @@ class CreatePhotoBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            window.location.replace('/photo-board');
+            this.props.history.push('/photo-board');
         });
         
     }
@@ -77,21 +77,19 @@ class CreatePhotoBoardComponent extends Component {
 
         if (this.state.pboardNo === '_create') { // 새로 만들면
             PhotoBoardService.createBoard(board).then(res => {
-                window.location.replace('/photo-board');
+                this.props.history.push('/photo-board');
             });
         } else { // 있던 게시글 업데이트면
             // 파일 Url 글번호로 가져와서
             // qboardFileUrl 값 다시 주기
             PhotoBoardService.updateBoard(this.state.pboardNo, board).then(res => {
-
-                window.location.replace(`/read-photoboard/${this.state.pboardNo}`);
-
+                this.props.history.push(`/read-photoboard/${this.state.pboardNo}`);
             });
         }
     }
 
     cancel() {
-        window.location.replace('/photo-board');
+        this.props.history.push('/photo-board');
     }
 
  

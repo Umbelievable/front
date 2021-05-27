@@ -8,16 +8,12 @@ class FooterComponent extends Component {
         }
     }
 
-    goToAdmin() {
-        window.location.replace('/admin-board');
-    }
-
     render() {
         return (
             <div>
                 <footer className="footer">
-                    <a style={{float:'left'}} id="csbtn" className="mybtn" href="/cs-board">Customer&nbsp;Service</a>            
-                    <span style={{float:'right', padding:'14px'}}onClick = {this.goToAdmin} className="text-muted">UMbelievable</span>
+                    <a href='/cs-board' style={{float:'left'}} id="csbtn" className="mybtn" href="/cs-board">Customer&nbsp;Service</a>            
+                    <a href='/admin-board' style={{float:'right', padding:'14px'}} className="text-muted">UMbelievable</a>
                 </footer>
             </div>
         );

@@ -64,7 +64,7 @@ class MyPageBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) {
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     deleteLike(pdNo, cateNo, subcateNo) {
@@ -73,7 +73,7 @@ class MyPageBoardComponent extends Component {
                 if((likeItem[i].pdNo == pdNo) && (likeItem[i].categoryNo == cateNo) && (likeItem[i].subcateNo == subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
                         alert('관심상품 목록에서 삭제했습니다.');
-                        window.location.replace('/mypage-board');
+                        this.props.history.push('/mypage-board');
                     });
                 }
             }

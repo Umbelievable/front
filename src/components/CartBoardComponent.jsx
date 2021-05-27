@@ -58,7 +58,7 @@ class CartBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) {
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     goToOrder() { // 주문하기 버튼 눌렀을때
@@ -93,7 +93,7 @@ class CartBoardComponent extends Component {
 
 
         alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
+        this.props.history.push('/order-board'); // 주문 목록 페이지로 이동하기
     }
 
     selectOne(){
@@ -160,7 +160,7 @@ class CartBoardComponent extends Component {
             }
         }
         alert("상품이 삭제되었습니다.\n");
-        window.location.replace('/cart-board');
+        this.props.history.push('/cart-board');
         
     }
 
@@ -175,7 +175,7 @@ class CartBoardComponent extends Component {
             }
         }
         alert("수량이 변경되었습니다.\n");
-        window.location.replace('/cart-board');
+        this.props.history.push('/cart-board');
         
 
     }
