@@ -78,7 +78,7 @@ class NavBarComponent extends Component {
         const { currentUser } = this.state;
         if(currentUser.id == "guest"){ // 안했으면 alert창 띄워서 로그인 시키기
             window.confirm("로그인 후 이용해주세요.\n");
-            window.location.replace('/main-board');
+            window.location.href = '/main-board';
         }
         else{ // 로그인 했으면 return true;
             return true;
@@ -96,7 +96,7 @@ class NavBarComponent extends Component {
                         this.state.categories.map(
                         category =>
                         <div className="dropdown" key = {category.cateNo} style={{display:'inline', float:'left', fontSize:'larger'}}> 
-                            <button className="dropbtn" onClick={()=>window.location.replace(`/category-board?cateNo=`+category.cateNo)} >
+                            <button className="dropbtn" onClick={()=>window.location.href=`/category-board?cateNo=`+category.cateNo} >
                                 {category.cateNo}
                             </button>
 
@@ -145,8 +145,8 @@ class NavBarComponent extends Component {
 
                 <div className="justify-content-start ml-auto">
                     <a className="navbar-brand" style={{margin:'0px', fontSize:'20px', color:'rgb(87,81,76)'}}><b>Community</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</a>
-                    <button onClick={()=>window.location.replace('/qna-board')} className="mybtn" id="qnabtn"><b>Q&amp;A Community</b></button>
-                    <button onClick={()=>window.location.replace('/photo-board')} className="mybtn" id="photobtn"><b>Photo Community</b></button>
+                    <button onClick={()=>window.location.href ='/qna-board'} className="mybtn" id="qnabtn"><b>Q&amp;A Community</b></button>
+                    <button onClick={()=>window.location.href = '/photo-board'} className="mybtn" id="photobtn"><b>Photo Community</b></button>
                 </div>
             </nav>
             </div>

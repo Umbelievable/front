@@ -13,7 +13,6 @@ class HeaderComponent extends Component {
             isModalOpen: false,
             currentUser: { id: "" }
         }
-        this.joinMember = this.joinMember.bind(this);
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
 
     }
@@ -55,34 +54,30 @@ class HeaderComponent extends Component {
         // 게시판 타입마다 렌더링 다르게 해줘야 하기 때문에 searchBoardComponent 여러개 구현
 
         if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
-            window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
+            window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
         }
         if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
-            window.location.replace(`/search-board?searchKeyword=${searchKeyword}`);
+            window.location.href = `/search-board?searchKeyword=${searchKeyword}`;
         }
         else if(searchBoardType=='/photo-board' || searchBoardType=='/search-photoboard'){
-            window.location.replace(`/search-photoboard?searchKeyword=${searchKeyword}`);
+            window.location.href = `/search-photoboard?searchKeyword=${searchKeyword}`;
         }
         else if(searchBoardType=='/menu-board' || searchBoardType=='/search-menuboard'){ // subCate
             const params = new URLSearchParams(window.location.search);
-            window.location.replace(`/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`);
+            window.location.href = `/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`;
         }
         else {
-            window.location.replace(`/search-allboard?searchKeyword=${searchKeyword}`);
+            window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
         }
     }
 
     goToList() {
-        window.location.replace('/main-board');
-    }
-
-    joinMember(){
-        window.location.replace('/member-join');
+        window.location.href='/main-board';
     }
 
     logOut() {
         MemberService.logout();
-        window.location.replace('/main-board');
+        window.location.href = '/main-board';
     }
 
     render() {
@@ -92,11 +87,11 @@ class HeaderComponent extends Component {
         <div className="fixed-navbar" style={{overflow:'hidden', height:'auto'}}>                          
             <div className="btn_wrap text-right">
                 {!this.state.userReady && (
-                    <button className="mainhomebtn" onClick={this.joinMember}>JOIN</button>)}
+                    <button className="mainhomebtn" onClick={()=>window.location.href = '/member-join'}>JOIN</button>)}
                 {this.state.userReady && (
-                    <button className="mainhomebtn" onClick={()=>window.location.replace('/mypage-board')}>{currentUser.id}님의 my page</button>)}
+                    <button className="mainhomebtn" onClick={()=>window.location.href = '/mypage-board'}>{currentUser.id}님의 my page</button>)}
                 {this.state.userReady && (
-                    <button className="mainhomebtn" onClick={()=>window.location.replace('/cart-board')}>CART</button>)}
+                    <button className="mainhomebtn" onClick={()=>window.location.href = '/cart-board'}>CART</button>)}
                 {!this.state.userReady && (
                     <button className="mainhomebtn" onClick={this.openModal}>LOGIN</button>)}
                 {this.state.userReady && (
@@ -125,4 +120,4 @@ class HeaderComponent extends Component {
     }
 }
 
-export default HeaderComponent;
+export default withRouter(HeaderComponent);

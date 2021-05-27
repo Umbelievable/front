@@ -41,8 +41,7 @@ class SignIn extends Component {
         this.form.validateAll();
         if (this.checkBtn.context._errors.length === 0) {
             MemberService.login(this.state.id, this.state.password).then(() => {
-                window.location.replace("/main-board");
-                window.location.reload();
+                window.location.href = "/main-board";
             },
             error => { const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
             this.setState({ loading: false, message: resMessage });
