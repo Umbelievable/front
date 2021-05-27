@@ -96,7 +96,6 @@ class ItemComponent extends Component{
                 reviews: res.data.list})
                 
         });
-        
     }
 
     viewPaging() {

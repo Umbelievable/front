@@ -17,7 +17,6 @@ class CategoryBoardComponent extends Component {
         ItemService.getAllItems(this.state.cateNo).then((res) => {
             this.setState({items: res.data});
         }); 
-     
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
