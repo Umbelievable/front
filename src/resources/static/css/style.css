@@ -1863,3 +1863,13 @@ table.mypage td {
   color: rgb(120, 182, 171);
 }
 
+.heartBtn{
+  position: absolute;
+  top: 230px;
+  left : 220px;
+  border: none;
+  background-color: transparent;
+  font-size: 25px;
+  color:rgb(255, 154, 147);
+}
+
