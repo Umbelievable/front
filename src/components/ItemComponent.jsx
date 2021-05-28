@@ -259,21 +259,21 @@ class ItemComponent extends Component{
     }
 
     reviewFilter(id, name) { // 해시태그 아이디랑 이름 받아서 // nounhash 클릭시 호출되는 함수 수정중
-        var pressbtn = document.getElementById("btnId"+id); //이게 누른 버튼
-        var btns = document.getElementsByClassName("nounhashbtn"); // 명사 버튼 10개 다 가져오기
+        var pressbtn = document.getElementById(id); //이게 누른 버튼
+        var btns = document.getElementsByClassName("nounhashbtn"); // 명사 버튼 15개 다 가져오기
 
         // 버튼이 이미 눌렸는데 한번 더 눌렀으면 
-        if(id == this.state.prevBtnId){
-            this.setState({showTable: 'all'}); // 전체 리뷰 보여주고
+        if (id == this.state.prevBtnId) {
+            this.setState({showTable: 'all', prevBtnId: '', prevBtnName: ''}); // 전체 리뷰 보여주고
             for (var i = 0; i < btns.length; i++) {
                 btns[i].className = "nounhashbtn";
             }
         }
 
         // 다른 버튼이 눌린거면 해당 리뷰 보여주기
-        else{
-            for (var i = 0; i < btns.length; i++) {
-                btns[i].className = "nounhashbtn";
+        else {
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].className = "nounhashbtn";
             }
             pressbtn.className += " active";
             this.setState({showTable: 'hash', prevBtnId: id, prevBtnName: name});
@@ -317,31 +317,24 @@ class ItemComponent extends Component{
                 </div>
 
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
-                <div >
-                    <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
-                        리뷰 분석 결과</div>
-            
-                  {
-                      this.state.adjHash.map(
-                          adjhash =>
-                          <div key={adjhash.id} style={{fontSize:'25px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
-                      )
-                  }
-                  <br></br>
-                  <br></br>
-                <div style={{fontSize:'15px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
-                        이 상품을 직접 구매하신 고객님들의 의견입니다.</div>
-                        
-                          
+                    <div>
+                        <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>리뷰 분석 결과</div>
+                        {
+                        this.state.adjHash.map(
+                            adjhash =>
+                            <div key={adjhash.id} style={{fontSize:'25px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
+                        )}
+                        <br></br>
+                        <br></br>
+                        <div style={{fontSize:'15px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>이 상품을 직접 구매하신 고객님들의 의견입니다.</div>   
+                    </div> 
                 </div> 
-                </div> 
-                    
             </div>
             <br/>
             {
                 this.state.nounHash.map(
                     nounhash =>
-                    <button id={"btnId"+nounhash.id} key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter(nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
+                    <button id={"hashbtnId"+nounhash.id} key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter("hashbtnId"+nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
                 )
             }
             <br/><br/>    
