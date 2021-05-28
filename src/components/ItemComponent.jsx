@@ -182,7 +182,6 @@ class ItemComponent extends Component{
                 <i style={{fontSize:'30px'}} className="glyphicon glyphicon-heart" aria-hidden="true"></i>
             );
         }
-        
     }
 
     changeImg() { // 하트 눌렀을때 불리는 함수
