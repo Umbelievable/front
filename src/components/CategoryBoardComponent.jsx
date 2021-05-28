@@ -17,10 +17,18 @@ class CategoryBoardComponent extends Component {
         ItemService.getAllItems(this.state.cateNo).then((res) => {
             this.setState({items: res.data});
         }); 
+
+        if(sessionStorage.getItem("back") == true) { // 아이템 보다가 뒤로 온 상황이면 스크롤 유지하고
+            window.scrollTo(0,sessionStorage.getItem("scrollPos"));
+        }
+        else { // 네비바로 들어온거면 처음부터 보여주기
+            window.scrollTo(0,0);
+        }
+        
     }
 
     readItem(pdNo, cateNo, subcateNo) { 
-        localStorage.setItem("scrollPos", window.pageYOffset); // 상품 보러 들어갈 때 현재 위치 저장하고
+        sessionStorage.setItem("scrollPos", window.pageYOffset); // 상품 보러 들어갈 때 현재 위치 저장하고
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 

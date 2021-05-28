@@ -83,12 +83,10 @@ class NavBarComponent extends Component {
     }
 
     goCate(cateNo){
-        localStorage.setItem("scrollPos", 0);
         window.location.href = `/category-board?cateNo=`+cateNo;
     }
 
     goSubCate(cateNo, subcateNo){
-        localStorage.setItem("scrollPos", 0);
         window.location.href = `/menu-board?cateNo=`+cateNo+`&subcateNo=`+subcateNo;
     }
 

@@ -44,6 +44,10 @@ class ItemComponent extends Component{
     }
 
     componentDidMount(){
+        window.onpopstate = function(event){ // 아이템 상세페이지 보다가 뒤로가기 버튼 누르면 (back, true)로 저장해두고
+            sessionStorage.setItem("back", true);
+        }
+
         document.body.style.height = "1000px";
         window.scrollTo(0, 0);
         const currentUser = MemberService.getCurrentUser();

@@ -8,27 +8,22 @@ class ItemService {
     getAllItems(cateNo){
         if(cateNo=="거실가구"){
             document.body.style.height = "66260px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             return axios.get(ITEM_API_BASE_URL + "/list/allLivingroom", { headers: authHeader() });
         }
         else if(cateNo=="침실가구"){
             document.body.style.height = "122660px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             return axios.get(ITEM_API_BASE_URL + "/list/allBedroom", { headers: authHeader() });
         }
         else if(cateNo=="서재/사무용가구"){
             document.body.style.height = "77960px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             return axios.get(ITEM_API_BASE_URL + "/list/allLibrary", { headers: authHeader() });
         }
         else if(cateNo=="수납가구"){
             document.body.style.height = "62100px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             return axios.get(ITEM_API_BASE_URL + "/list/allStorage", { headers: authHeader() });
         }
         else { // 주방가구
             document.body.style.height = "84640px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             return axios.get(ITEM_API_BASE_URL + "/list/allKitchen", { headers: authHeader() });
         }
     }
@@ -36,7 +31,6 @@ class ItemService {
     getCertainItems(cateNo, subcateNo){
         if(cateNo=="거실가구"){
             document.body.style.height = "16940px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             if(subcateNo=="TV거실장"){
                 return axios.get(ITEM_API_BASE_URL + "/list/livingroom?subcateNo=TV거실장", { headers: authHeader() });               
             }
@@ -52,7 +46,6 @@ class ItemService {
         }
         else if(cateNo=="침실가구"){
             document.body.style.height = "16940px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             if(subcateNo=="거울"){
                 return axios.get(ITEM_API_BASE_URL + "/list/bedroom?subcateNo=거울", { headers: authHeader() });
             }
@@ -86,7 +79,6 @@ class ItemService {
         }
         else if(cateNo=="서재/사무용가구"){
             document.body.style.height = "16940px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             if(subcateNo=="사무/교구용가구"){
                 document.body.style.height = "16521px";
                 return axios.get(ITEM_API_BASE_URL + "/list/library?subcateNo=사무/교구용가구", { headers: authHeader() });
@@ -109,7 +101,6 @@ class ItemService {
         }
         else if(cateNo=="수납가구"){
             document.body.style.height = "4410px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             if(subcateNo=="CD/DVD장"){
                 document.body.style.height = "1062px";
                 return axios.get(ITEM_API_BASE_URL + "/list/storage?subcateNo=CD/DVD장", { headers: authHeader() });              
@@ -157,7 +148,6 @@ class ItemService {
         }
         else { // 주방가구
             document.body.style.height = "16940px";
-            window.scrollTo(0,localStorage.getItem("scrollPos"));
             if(subcateNo=="그릇장/컵보드"){
                 return axios.get(ITEM_API_BASE_URL + "/list/kitchen?subcateNo=그릇장/컵보드", { headers: authHeader() });
             }
