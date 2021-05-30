@@ -74,6 +74,7 @@ class OrderBoardComponent extends Component {
                             <th>주문 일자 </th>
                             <th>총 주문 금액</th>
                             <th>주문 상태 </th>
+                            <th>리뷰 </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,8 +96,9 @@ class OrderBoardComponent extends Component {
                                     </div>
                                 </td>
                                 <td  style={{verticalAlign:'middle'}}>{item.purchaseDate}</td>
-                                <td  style={{verticalAlign:'middle'}}>{this.numberWithCommas(item.totalPrice)}원</td>
+                                <td  style={{verticalAlign:'middle'}}>{this.numberWithCommas(item.totalPrice+10000)}원</td>
                                 <td  style={{verticalAlign:'middle'}}>구매 확정</td>
+                                <td  style={{verticalAlign:'middle'}}>작성 완료</td>
                             </tr>
                         )
                         }
