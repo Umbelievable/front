@@ -1870,6 +1870,10 @@ table.mypage td {
   border: none;
   background-color: transparent;
   font-size: 25px;
-  color:rgb(255, 154, 147);
+  color:rgb(247, 144, 144);
+}
+
+.reviewStar{
+  
 }
 

@@ -287,6 +287,25 @@ class ItemComponent extends Component{
             });
         }
     };
+
+    showStar(star){
+        var arr=[];
+        for(var i=0;i<5;i++){
+            if(i<star){
+                arr.push(
+                    <i style={{color:'rgb(243, 201, 64)'}} className="glyphicon glyphicon-star" aria-hidden="true"></i>
+                );
+            }
+            else{
+                arr.push(
+                    <i style={{color:'rgb(243, 201, 64)'}} className="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                );
+            }
+            
+        }
+        return arr;
+        
+    }
         
     
 
@@ -349,7 +368,7 @@ class ItemComponent extends Component{
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th style={{width: '4em'}}>별점</th>
+                                    <th style={{width: '8em'}}>별점</th>
                                     <th>아이디</th>
                                     <th>리뷰</th>
                                     <th>날짜</th>
@@ -361,7 +380,7 @@ class ItemComponent extends Component{
                                     review => 
                                     <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                         <td> {review.reviewNo} </td>
-                                        <td> {review.star} </td>
+                                        <td> {this.showStar(review.star)} </td>
                                         <td> {review.customerId} </td>
                                         <td style={{textAlign:'left'}}> {review.review} </td>
                                         <td> {review.reviewDate} </td>
@@ -403,7 +422,7 @@ class ItemComponent extends Component{
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th style={{width: '4em'}}>별점</th>
+                                    <th style={{width: '8em'}}>별점</th>
                                     <th>아이디</th>
                                     <th>리뷰</th>
                                     <th>날짜</th>
@@ -415,7 +434,7 @@ class ItemComponent extends Component{
                                     review => 
                                     <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                         <td> {review.reviewNo} </td>
-                                        <td> {review.star} </td>
+                                        <td> {this.showStar(review.star)} </td>
                                         <td> {review.customerId} </td>
                                         {this.showReview(review.review)}
                                         <td> {review.reviewDate} </td>

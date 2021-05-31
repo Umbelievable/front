@@ -13,6 +13,10 @@ class ReviewService {
         return axios.get(REVIEW_API_BASE_URL + "/hashtag?pdNo=" + pdNo + "&subcate=" + subcate + "&category=" + category + "&hashtag=" + hashtag, { headers: authHeader() });
     }
 
+    createReview(cateNo, subcateNo, pdNo, review){
+        return axios.post(REVIEW_API_BASE_URL + "?category=" + cateNo + "&subcate=" + subcateNo + "&pdNo=" + pdNo, review, { headers: authHeader() });
+    }
+
 }
 
 export default new ReviewService();
