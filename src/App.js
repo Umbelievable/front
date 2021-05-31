@@ -27,6 +27,8 @@ import ReadPhotoBoardComponent from './components/ReadPhotoBoardComponent';
 import CreatePhotoBoardComponent from './components/CreatePhotoBoardComponent';
 import CartBoardComponent from './components/CartBoardComponent';
 import OrderBoardComponent from './components/OrderBoardComponent';
+import ReviewBoardComponent from './components/ReviewBoardComponent';
+
 
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
 
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
               <Route path = "/order-board" component = {OrderBoardComponent}></Route>
+              <Route path = "/review-board/:purchaseNo" component = {ReviewBoardComponent}></Route>
               <Route path = "/mypost-board" component = {MyPostBoardComponent}></Route>
               <Route path = "/mycomment-board" component = {MyCommentBoardComponent}></Route>
 
