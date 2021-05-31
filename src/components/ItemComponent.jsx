@@ -306,9 +306,21 @@ class ItemComponent extends Component{
         return arr;
         
     }
-        
-    
 
+    addStar(customerId){
+        var flag = 0;
+        var newId='';
+        for(var i=0; i<customerId.length; i++){
+            if(customerId[i] == '*')
+                flag=1;
+        }
+        if(flag == 0){ // *이 없다면 붙이고 // 있다면 네이버에서 가져온 리뷰니까 그대로 출력
+            newId = customerId.substring(0,4)+"****";
+            return newId;
+        }
+        return customerId;
+    }
+        
     render(){
         return (
             <div className="main-content" style={{padding:'0em 5em'}}> 
@@ -381,7 +393,7 @@ class ItemComponent extends Component{
                                     <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                         <td> {review.reviewNo} </td>
                                         <td> {this.showStar(review.star)} </td>
-                                        <td> {review.customerId} </td>
+                                        <td> {this.addStar(review.customerId)} </td>
                                         <td style={{textAlign:'left'}}> {review.review} </td>
                                         <td> {review.reviewDate} </td>
                                     </tr>
@@ -435,7 +447,7 @@ class ItemComponent extends Component{
                                     <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                         <td> {review.reviewNo} </td>
                                         <td> {this.showStar(review.star)} </td>
-                                        <td> {review.customerId} </td>
+                                        <td> {this.addStar(review.customerId)} </td>
                                         {this.showReview(review.review)}
                                         <td> {review.reviewDate} </td>
                                     </tr>
