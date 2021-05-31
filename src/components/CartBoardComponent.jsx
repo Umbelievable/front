@@ -93,7 +93,7 @@ class CartBoardComponent extends Component {
 
 
         alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-        this.props.history.push('/order-board'); // 주문 목록 페이지로 이동하기
+        window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
     }
 
     selectOne(){
