@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const REVIEW_API_BASE_URL = "http://localhost:8080/api/reviews"; 
+const REVIEW_API_BASE_URL = "/api/reviews"; 
 
 class ReviewService {
 

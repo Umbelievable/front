@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const COMMENT_API_BASE_URL = "http://localhost:8080/api/photo_cmt"; 
+const COMMENT_API_BASE_URL = "/api/photo_cmt"; 
 
 class PhotoCommentService{
     getComments(pboardNo) {

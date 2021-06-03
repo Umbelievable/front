@@ -118,7 +118,6 @@ class CartBoardComponent extends Component {
         for(i=0; i<checkboxes.length; i++){
             if(checkboxes[i].checked == true){ // 하나라도 false인거 있으면 flag 체크해두기
                 price = price + ordercart[i].totalPrice;
-                
             }
         }
         this.setState({ orderPrice: price });

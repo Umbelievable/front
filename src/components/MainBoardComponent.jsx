@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel'
+import MemberService from '../service/MemberService';
+import RecommendService from '../service/RecommendService';
+import ItemService from '../service/ItemService';
+
 
 class MainBoardComponent extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            recommend: [],
+            item: []
         }
 
     }
 
     componentDidMount() {
+        RecommendService.getRecommendProduct().then((res) => {
+            this.setState({ recommend: res.data }); // 8개 딕셔너리 받아오면 
+            // for(var i=0; i<res.data.length; i++){
+
+            // }
+               
+        });
+
         
     }
 

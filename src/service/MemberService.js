@@ -1,6 +1,6 @@
 import axios from 'axios'; 
 
-const MEMBER_API_BASE_URL = "http://localhost:8080/api/auth/"; 
+const MEMBER_API_BASE_URL = "/api/auth/"; 
 
 class MemberService{
     login(id, password) {

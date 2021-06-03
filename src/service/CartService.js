@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const CART_API_BASE_URL = "http://localhost:8080/api/cart"; 
+const CART_API_BASE_URL = "/api/cart"; 
 
 class CartService{
     getCartItems(user_id) {
