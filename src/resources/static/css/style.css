@@ -65,14 +65,14 @@ a {
 a {
   text-decoration: none !important;
   outline: none;
-  color: #3d3d3d;
+  color: #2c6144;
 }
 a:hover,
 a:active,
 a:focus {
   text-decoration: none !important;
   outline: none;
-  color: #2d6c4a;
+  color: #2c6144;
 }
 input,
 button {
@@ -525,14 +525,55 @@ h4 strong {
 .btn .ico-right {
   margin-left: 8px;
 }
-.btn-primary {
-  background: #2d6c4a;
+
+.itemBtn{
+    background: rgb(226, 226, 226);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    
 }
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:focus {
-  background: #204e36 !important;
+
+/*----------- 주로 쓰는 기본 버튼 -----------*/
+.btn-main{
+  background: rgb(73,117,104);
+  border: none;
+  border-radius: 5px;
+  color:white;
+  font-family: 'NanumSquareB';
+  font-size: larger;
+  padding: 7px 25px;
 }
+
+.btn-main:hover,
+.btn-main:active,
+.btn-main:focus {
+  background: rgb(52, 83, 75);
+  color:white;
+}
+
+
+.btn-main-gray{
+    background: rgb(231, 231, 231);
+    border: none;
+    border-radius: 5px;
+    color:rgb(87,81,76);
+    font-family: 'NanumSquareR';
+    font-size: normal;
+    padding: 7px 25px;
+}
+
+.btn-main-gray:hover,
+.btn-main-gray:active,
+.btn-main-gray:focus {
+    background: rgb(214, 214, 214);
+}
+
+/*----------- 주로 쓰는 기본 버튼 -----------*/
+
+
 .btn-primary.btn-bordered {
   border-color: #3f9969;
   color: #3f9969;
@@ -798,8 +839,9 @@ Version 1.0
   /* margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 2em; */
-  padding-top: 2em;
+  padding: 2em;
   background-color: rgb(248, 248, 248);
+  font-family: 'NanumSquareR';
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -812,6 +854,7 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 10px 50px 0px 50px;
+  background-color: rgb(248, 248, 248);
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -988,6 +1031,7 @@ Version 1.0
   margin: 0px -20px 0px -20px;
   color: rgba(0, 0, 0, 0.7);
   height: 160px;
+  background-color: rgb(248, 248, 248);
 }
 .footer a {
   color: rgba(0, 0, 0, 0.7);
@@ -1752,7 +1796,7 @@ textarea.form-control {
   font-family: 'NanumSquareB';
 }
 
-.pagination > li > a {
+.pagination .page-item .page-link{
   background-color: rgb(248, 248, 248);
   color: #2d6c4a;
 }
@@ -1850,6 +1894,10 @@ table.mypage td {
   background: rgb(250, 250, 250);
 }
 
+table.mypage a {
+  color:rgb(87,81,76);
+}
+
 .postcropping {
   max-width: 500px;
   max-height: 500px;
@@ -1870,10 +1918,6 @@ table.mypage td {
   border: none;
   background-color: transparent;
   font-size: 25px;
-  color:rgb(247, 144, 144);
-}
-
-.reviewStar{
-  
+  color:rgb(255, 110, 110);
 }
 

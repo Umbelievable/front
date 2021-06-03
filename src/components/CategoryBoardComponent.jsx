@@ -74,7 +74,7 @@ class CategoryBoardComponent extends Component {
                 <div className="album py-5">
                 <div className="container">
 
-                <div style={{fontSize:'larger', fontWeight:'bolder'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>this.props.history.push(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span></div>
+                <div style={{fontSize:'larger', fontFamily:'NanumSquareB'}}>Category&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;<span className="categoryDiv" onClick={()=>this.props.history.push(`/category-board?cateNo=`+this.state.cateNo)}>{this.state.cateNo}</span></div>
                 <br/>
 
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">

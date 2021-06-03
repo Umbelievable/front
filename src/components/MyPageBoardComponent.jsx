@@ -210,7 +210,7 @@ class MyPageBoardComponent extends Component {
                     <div style={{textAlign:'center', paddingTop:'2em'}}>
                         <button className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
-                        <a style={{display:'inline', marginLeft:'2em'}} href="/member-update">회원 정보 수정</a>
+                        <a style={{display:'inline', marginLeft:'2em', color: 'rgb(87,81,76)'}} href="/member-update">회원 정보 수정</a>
                         <br/><br/>
                     </div>
                     <div style={{paddingLeft:'25%'}}>

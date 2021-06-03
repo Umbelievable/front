@@ -172,7 +172,7 @@ class ListBoardComponent extends Component {
                                 board => 
                                 <tr key = {board.qboardNo}>
                                     <td> {board.qboardNo} </td>
-                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
+                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
                                     {
                                         (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
                                     }
@@ -186,7 +186,7 @@ class ListBoardComponent extends Component {
                         </tbody>
                     </table>
                     <div className="btn_wrap text-right">
-                        <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
+                        <button className="btn-main" onClick={this.createBoard}>Write</button>
                     </div>
                 </div>
 

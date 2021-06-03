@@ -213,7 +213,7 @@ class UpdateMemberComponent extends Component {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block">회원정보 수정</button>
+                        <button className="btn-main" style={{width:'100%', height:'45px', fontFamily:'NanumSquareR'}}>회원정보 수정</button>
                     </div>
                 </div>
                 )}

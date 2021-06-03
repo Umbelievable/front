@@ -105,7 +105,7 @@ class OrderBoardComponent extends Component {
                                 <td style={{verticalAlign:'middle'}}>
                                 {
                                     (item.reviewWrite == 'Y') ? (<div>작성 완료</div>) : 
-                                    (<button className="btn waves-effect waves-light" onClick={()=>this.goToReview(item.purchaseNo)} style={{verticalAlign:'middle'}}>리뷰 작성</button>)
+                                    (<button className="btn-main-gray" onClick={()=>this.goToReview(item.purchaseNo)} style={{verticalAlign:'middle'}}>리뷰 작성</button>)
                                 }
                                 </td>
                             </tr>

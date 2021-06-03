@@ -163,18 +163,28 @@ class ReadBoardComponent extends Component {
    render() {
       const ColoredLine = ({ color }) => (<hr style={{ color: color, backgroundColor: color, height: '0.6px'}}/>);
       return (
-         <div style={{padding:'3em'}} className="main-content">
+         <div style={{padding:'2em 3em'}} className="main-content">
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
             <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
                <div className="card-content">
                   <ColoredLine color="black"/>
-                  <h3 style={{fontSize:'18px', display:'inline', padding:'0px 50px 0px 10px'}}>{this.state.board.qboardTitle}</h3>
-                  <h4 style={{fontSize:'14px', display:'inline', padding:'0px 50px 0px 0px'}}>{this.state.board.qboardWriter}</h4>
-                     
-                  <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.qboardInsertTime}</span>
+                  <div style={{display:'inline', padding:'0px 50px 0px 10px'}}>
+                     <p style={{fontSize:'18px', display:'inline', height:'20px'}}>{this.state.board.qboardTitle}</p>
+                     <p style={{fontSize:'14px', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardWriter}</p>
+                     <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardInsertTime}</p>
+                  </div>
 
+                  <div style={{display:'inline', float:'right'}}>
+                  {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                     <button className="btn btn-default" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>수정</button>
+                  )}
+                  {(this.state.currentUser.username == this.state.board.qboardWriter) && (
+                     <button className="btn btn-default" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제</button>            
+                  )}
+                  </div>
+                  
                   <ColoredLine color="lightgray"/>
                   {this.state.board.qboardFileUrl &&( //파일이 등록된 게시글이면 이미지도 함께 출력하기
                      <img className="postcropping" src={this.state.file}/>
@@ -182,17 +192,7 @@ class ReadBoardComponent extends Component {
 
                   <div style={{padding:'50px 100px 80px 30px'}}>
                      {this.state.board.qboardContent}
-                  </div>
-
-                  <div className="btn_wrap text-center">
-                     <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
-                     {(this.state.currentUser.username == this.state.board.qboardWriter) && (
-                        <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
-                     )}
-                     {(this.state.currentUser.username == this.state.board.qboardWriter) && (
-                        <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>
-                     )}        
-                  </div>
+                  </div>                  
                </div>
             </div>
 

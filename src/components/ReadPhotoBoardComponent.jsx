@@ -174,26 +174,26 @@ class ReadPhotoBoardComponent extends Component {
                 <div className="clearfix"><h4 className="box-title pull-left"></h4></div>
                     <div className="card-content">
                         <ColoredLine color="black"/>
-                        <h3 style={{fontSize:'18px', display:'inline', padding:'0px 50px 0px 10px'}}>{this.state.board.pboardTitle}</h3>
-                        <h4 style={{fontSize:'14px', display:'inline', padding:'0px 50px 0px 0px'}}>{this.state.board.pboardWriter}</h4>
+                        <div style={{display:'inline', padding:'0px 50px 0px 10px'}}>
+                            <p style={{fontSize:'18px', display:'inline', height:'20px'}}>{this.state.board.pboardTitle}</p>
+                            <p style={{fontSize:'14px', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.pboardWriter}</p>
+                            <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.pboardInsertTime}</p>
+                        </div>
                         
-                        <span style={{fontSize:'13px', color:'gray', display:'inline', float:'right'}}>{this.state.board.pboardInsertTime}</span>
-
+                        <div style={{display:'inline', float:'right'}}>
+                        {(this.state.currentUser.username == this.state.board.pboardWriter) && (
+                            <button className="btn btn-default" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>수정</button>
+                        )}
+                        {(this.state.currentUser.username == this.state.board.pboardWriter) && (
+                            <button className="btn btn-default" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제</button>            
+                        )}
+                        </div>
+                        
                         <ColoredLine color="lightgray"/>
                         <img className="postcropping" src={this.state.file}/>
                
                         <div style={{padding:'50px 100px 80px 30px'}}>
                             {this.state.board.pboardContent}
-                        </div>
-
-                        <div className="btn_wrap text-center">
-                            <button className="btn btn-default waves-effect waves-light" onClick={this.goToList.bind(this)} style={{marginLeft:"10px"}}>뒤로가기</button>
-                            {(this.state.currentUser.username == this.state.board.pboardWriter) && (
-                                <button className="btn btn-primary waves-effect waves-light" onClick={this.goToUpdate} style={{marginLeft:"10px"}}>글 수정</button>
-                            )}
-                            {(this.state.currentUser.username == this.state.board.pboardWriter) && (
-                                <button className="btn btn-danger waves-effect waves-light" onClick={() => this.deleteView()} style={{marginLeft:"10px"}}>삭제하기</button>            
-                            )}
                         </div>
                     </div>
                 </div>

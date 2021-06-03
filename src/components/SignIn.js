@@ -74,7 +74,7 @@ class SignIn extends Component {
                         </div>
 
                         <div className="form-group">
-                            <button className="btn btn-primary btn-block" disabled={this.state.loading}>
+                            <button className="btn-main" style={{width:'100%', height:'40px'}} disabled={this.state.loading}>
                                 {this.state.loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                                 )}

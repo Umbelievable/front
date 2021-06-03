@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 import MemberService from '../service/MemberService';
-import imageSrc from '../resources/image/dzbzlogo.PNG';
+import imageSrc from '../resources/image/dzbzlogo.png';
 
 class HeaderComponent extends Component {
     constructor(props) {

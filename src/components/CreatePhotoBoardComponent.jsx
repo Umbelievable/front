@@ -118,10 +118,9 @@ class CreatePhotoBoardComponent extends Component {
 				<div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
+
                 <div className="card-content">
-			    <form className="form-horizontal">
-
-
+			    <form className="form-horizontal" style={{paddingRight:'12em'}}>
 				    <div className="form-group">
 					    <label for="title" className="col-sm-2 control-label">제목</label>
 					        <div className="col-sm-10">
@@ -132,7 +131,7 @@ class CreatePhotoBoardComponent extends Component {
 				    <div className="form-group">
 					    <label for="content" className="col-sm-2 control-label">내용</label>
 					        <div className="col-sm-10">
-						        <textarea className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
+						        <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
 					        </div>
                     </div>
                 
@@ -142,12 +141,10 @@ class CreatePhotoBoardComponent extends Component {
                                 <input type="file" onChange={this.changeFileHandler} name="file" />
                             </div>    
                     </div>
-
-				    <div className="btn_wrap text-center">
-                        <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
-                        <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
-                    </div>
                 </form>
+                <div className="btn_wrap text-center">
+                    <button type="submit" className="btn btn-primary waves-effect waves-light" style={{fontSize:'larger', backgroundColor:'rgb(73,117,104)', padding:'7px 30px'}} onClick={this.createBoard}>저장하기</button>    
+                </div>
             </div>
                    
             </div>

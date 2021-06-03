@@ -127,7 +127,7 @@ class ReviewBoardComponent extends Component {
                 </div>
                 <div style={{ textAlign:'center', width:'100%', padding:'2em 0em 1em 0em', fontSize:'20px'}}>어떤 점이 좋았나요?</div>
                 <textarea className="form-control" onChange={this.changeContentHandler} placeholder="리뷰를 입력해주세요." style={{width:'700px', height:'200px', marginBottom:'3em'}}/>
-                <button className="btn btn-primary waves-effect waves-light" onClick={this.createReview} style={{marginBottom:'3em'}}>작성완료</button>
+                <button className="btn-main" onClick={this.createReview} style={{marginBottom:'3em'}}>작성완료</button>
             </div>
 
 

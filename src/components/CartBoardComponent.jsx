@@ -197,6 +197,7 @@ class CartBoardComponent extends Component {
 				<div className="box-content">
                     
                 <div className="col-sm-12">
+                    <br/>
                     <p style={{paddingLeft:'3em', fontSize:'20px', textAlign:'center'}}><b>{currentUser.id}</b>님의 장바구니&nbsp;<i className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i></p>
                     <div className="col-sm-2" style={{padding:'1em 0em 1em 4em'}}>
                         <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" id="checkAll" value="selectAll" onClick={this.selectAll} defaultChecked/></div>
@@ -233,7 +234,7 @@ class CartBoardComponent extends Component {
                         
                         </div>
                         <div style={{ textAlign:'center' }}>
-                            <button onClick={()=>this.deleteItem()} style={{ margin:'1em' }} className="btn waves-effect waves-light">선택 상품 삭제</button>  
+                            <button onClick={()=>this.deleteItem()} style={{ margin:'2em' , padding:'1em 2em'}} className="btn-main-gray">선택 상품 삭제</button>  
                         </div>
                     </div>
 
@@ -257,7 +258,7 @@ class CartBoardComponent extends Component {
                                 )
                             }
                         </div>
-                        <button onClick={this.goToOrder.bind(this)} style={{ padding:'1em 6em'}} className="btn btn-primary waves-effect waves-light">상품 주문하기</button>                      
+                        <button onClick={this.goToOrder.bind(this)} style={{ width:'250px', height:'50px', fontFamily:'NanumSquareR'}} className="btn-main">상품 주문하기</button>                      
                     </div>
                 </div>
 

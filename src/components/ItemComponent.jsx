@@ -343,9 +343,9 @@ class ItemComponent extends Component{
                         <button className="countBtn" onClick={this.up} style={{ margin: '0em 1em'}}>+</button>
                     </div>
                     {this.totalPrice()}
-                    <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.goToOrder.bind(this)} style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
+                    <button className="itemBtn" style={{left:'1em', bottom:'50px', position:'absolute'}} onClick={this.changeImg}>{this.showLike()}</button>
+                    <button className="btn-main" onClick={this.goToOrder.bind(this)} style={{left:'70px', bottom:'3em', position:'absolute', height:'50px'}}>BUY NOW</button>
+                    <button className="btn-main" onClick={this.addCart} style={{left:'203px', bottom:'3em', position:'absolute', height:'50px'}}>ADD CART</button>
                 </div>
 
                 <div style={{padding:'3em 5em', textAlign:'center'}}>

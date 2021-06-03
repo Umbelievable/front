@@ -206,7 +206,7 @@ class JoinMemberComponent extends Component {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block">가입하기</button>
+                        <button className="btn-main" style={{width:'100%', height:'45px', fontFamily:'NanumSquareR'}}>가입하기</button>
                     </div>
                 </div>
                 )}

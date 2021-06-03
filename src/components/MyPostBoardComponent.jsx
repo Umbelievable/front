@@ -87,7 +87,8 @@ class MyPostBoardComponent extends Component {
                 <TabPanel>
                     <div style={{padding:'3em'}} className="table-responsive clearfix">
                         <table className="table table-hover">
-                            <thead>                                    <tr>
+                            <thead>         
+                                <tr>
                                     <th>번호 </th>
                                     <th>제목 </th>
                                     <th>작성자 </th>
@@ -101,7 +102,7 @@ class MyPostBoardComponent extends Component {
                                     qnaboard => 
                                     <tr key = {qnaboard.qboardNo}>
                                         <td> {qnaboard.qboardNo} </td>
-                                        <td> <a href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
+                                        <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{color: 'rgb(87,81,76)'}} href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
                                         <td> {qnaboard.qboardWriter} </td>
                                         <td> {qnaboard.qboardInsertTime} </td>
                                         <td> {qnaboard.qboardViews} </td>
