@@ -48,38 +48,53 @@ class ListBoardComponent extends Component {
         var qnabtn = document.getElementById("qnabtn");
         var btns = header.getElementsByClassName("mybtn");
         for (var i = 0; i < btns.length; i++) {
-            btns[i].className = "mybtn"
+            btns[i].className = "mybtn";
         }
         qnabtn.className += " active";
     }
 
     createBoard() {
-        window.location.replace('/create-board/_create');
+        this.props.history.push('/create-board/_create');
     }
 
     readBoard(qboardNo) {
-        window.location.replace(`/read-board/${qboardNo}`);
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     goToUpdate = (event) => {
         event.preventDefault();
-        window.location.replace(`/create-board/${this.state.qboardNo}`);
+        this.props.history.push(`/create-board/${this.state.qboardNo}`);
     }
 
     listBoard(p_num) {
         console.log("pageNum : "+ p_num);
         BoardService.getBoards(p_num).then((res) => {
-            console.log(res.data);
+            this.setState({ finalboards: [] });
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
                 boards: res.data.list});
+                for(var j=0; j<res.data.list.length; j++){
+                    const board = res.data.list[j];
+                    CommentService.getComments(board.qboardNo).then(resul => {
+                        const qb = [{ "qboardNo": board.qboardNo, 
+                                        "qboardTitle": board.qboardTitle, 
+                                        "qboardWriter": board.qboardWriter, 
+                                        "qboardInsertTime": board.qboardInsertTime, 
+                                        "qboardViews": board.qboardViews,
+                                        "qboardFileUrl": board.qboardFileUrl, 
+                                        "comment": resul.data.length
+                                    }];
+                        this.setState({finalboards: this.state.finalboards.concat(qb).sort(function(a, b){ 
+                            return b.qboardNo - a.qboardNo
+                        })});
+                    });
+                }
         });
     }
 
     viewPaging() {
         const pageNums = [];
-
         for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
             pageNums.push(i);
         }
@@ -89,7 +104,6 @@ class ListBoardComponent extends Component {
             <a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>
         </li>
         ));
-        
     }
 
     isPagingPrev(){
@@ -141,64 +155,63 @@ class ListBoardComponent extends Component {
 				<div className="col-xs-12">                   
 				<div className="box-content">   
 
-            <div style={{padding:'0em 3em'}}className="table-responsive clearfix">
-			    <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>번호 </th>
-                            <th>제목 </th>
-                            <th>작성자 </th>
-                            <th>등록일 </th>
-                            <th>조회수 </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                        this.state.finalboards.map(
-                            board => 
-                            <tr key = {board.qboardNo}>
-                                <td> {board.qboardNo} </td>
-                                <td style={{textAlign:'left', paddingLeft:'3em'}}> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
-                                {
-                                    (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
-                                }
-                                </td>
-                                <td> {board.qboardWriter} </td>
-                                <td> {board.qboardInsertTime} </td>
-                                <td> {board.qboardViews} </td>
+                <div style={{padding:'0em 3em'}} className="table-responsive clearfix">
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>번호 </th>
+                                <th>제목 </th>
+                                <th>작성자 </th>
+                                <th>등록일 </th>
+                                <th>조회수 </th>
                             </tr>
-                        )
-                        }
-                    </tbody>
-                </table>
-                <div className="btn_wrap text-right">
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>Write</button>
-			    </div>
-            </div>
+                        </thead>
+                        <tbody>
+                            {
+                            this.state.finalboards.map(
+                                board => 
+                                <tr key = {board.qboardNo}>
+                                    <td> {board.qboardNo} </td>
+                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
+                                    {
+                                        (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
+                                    }
+                                    </td>
+                                    <td> {board.qboardWriter} </td>
+                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {board.qboardViews} </td>
+                                </tr>
+                            )
+                            }
+                        </tbody>
+                    </table>
+                    <div className="btn_wrap text-right">
+                        <button className="btn-main" onClick={this.createBoard}>Write</button>
+                    </div>
+                </div>
 
-            <div style={{textAlign:'center'}}>
-                <nav aria-label="Page navigation example">
-                    <ul className="pagination justify-content-center">
+                <div style={{textAlign:'center'}}>
+                    <nav aria-label="Page navigation example">
+                        <ul className="pagination justify-content-center">
 
-                        {
-                            this.isMoveToFirstPage()
-                        }
-                        {
-                            this.isPagingPrev()
-                        }
-                        {
-                            this.viewPaging()
-                        }
-                        {
-                            this.isPagingNext()
-                        }
-                        {
-                            this.isMoveToLastPage()
-                        }
-                    </ul>
-                </nav>
-            </div>
-
+                            {
+                                this.isMoveToFirstPage()
+                            }
+                            {
+                                this.isPagingPrev()
+                            }
+                            {
+                                this.viewPaging()
+                            }
+                            {
+                                this.isPagingNext()
+                            }
+                            {
+                                this.isMoveToLastPage()
+                            }
+                        </ul>
+                    </nav>
+                </div>
 
 				</div>
 				</div>

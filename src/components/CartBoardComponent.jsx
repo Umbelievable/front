@@ -58,7 +58,7 @@ class CartBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) {
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     goToOrder() { // 주문하기 버튼 눌렀을때
@@ -93,7 +93,7 @@ class CartBoardComponent extends Component {
 
 
         alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-        window.location.replace('/order-board'); // 주문 목록 페이지로 이동하기
+        window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
     }
 
     selectOne(){
@@ -118,7 +118,6 @@ class CartBoardComponent extends Component {
         for(i=0; i<checkboxes.length; i++){
             if(checkboxes[i].checked == true){ // 하나라도 false인거 있으면 flag 체크해두기
                 price = price + ordercart[i].totalPrice;
-                
             }
         }
         this.setState({ orderPrice: price });
@@ -160,7 +159,7 @@ class CartBoardComponent extends Component {
             }
         }
         alert("상품이 삭제되었습니다.\n");
-        window.location.replace('/cart-board');
+        this.props.history.push('/cart-board');
         
     }
 
@@ -175,7 +174,7 @@ class CartBoardComponent extends Component {
             }
         }
         alert("수량이 변경되었습니다.\n");
-        window.location.replace('/cart-board');
+        window.location.reload();
         
 
     }
@@ -198,7 +197,8 @@ class CartBoardComponent extends Component {
 				<div className="box-content">
                     
                 <div className="col-sm-12">
-                    <p style={{paddingLeft:'3em', fontSize:'20px', textAlign:'center'}}><b>{currentUser.id}</b>님의 장바구니</p>
+                    <br/>
+                    <p style={{paddingLeft:'3em', fontSize:'20px', textAlign:'center'}}><b>{currentUser.id}</b>님의 장바구니&nbsp;<i className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i></p>
                     <div className="col-sm-2" style={{padding:'1em 0em 1em 4em'}}>
                         <div style={{display:'inline', verticalAlign: 'top'}}><input type="checkbox" id="checkAll" value="selectAll" onClick={this.selectAll} defaultChecked/></div>
                         <p style={{display:'inline', paddingLeft:'1em'}}>전체 선택</p>
@@ -221,9 +221,9 @@ class CartBoardComponent extends Component {
                                         <div style={{display:'inline', verticalAlign: 'top', paddingRight:'1em'}}><input id={"ckId"+finalcart.finalCartId} onClick={()=> this.selectOne()} type="checkbox" name="check" defaultChecked/></div>
                                         <img className="cartcropping" src={finalcart.pdImg} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}/>
                                     </div>
-                                    <div className="col-sm-6" style={{padding:'1em 0em'}} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}>
-                                        <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}}>{finalcart.pdMall}</div>
-                                        <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}}>{finalcart.pdTitle}</div>
+                                    <div className="col-sm-6" style={{padding:'1em 0em'}}>
+                                        <div style={{ fontWeight:'bolder', fontSize:'5px', color:'gray'}} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}>{finalcart.pdMall}</div>
+                                        <div style={{ paddingTop:'5px', paddingBottom:'10px', fontSize:'normal', color:'black'}} onClick={()=> this.readItem(finalcart.pdNo, finalcart.categoryNo, finalcart.subcateNo)}>{finalcart.pdTitle}</div>
                                         <div style={{ fontSize:'normal', color:'black', display: 'inline'}}>수량 : </div><input id={"txtId"+finalcart.finalCartId} style={{display: 'inline', width:'30px', border:'1px solid gray'}} type="text" placeholder={finalcart.volume}/>
                                         <button style={{display: 'inline', border:'none', padding:'2px', margin:'0px 5px'}} onClick={()=>this.updateVol(finalcart.finalCartId)}>변경</button>
                                         <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'normal', color:'black'}}>{this.numberWithCommas(finalcart.totalPrice)}원</div>
@@ -234,15 +234,31 @@ class CartBoardComponent extends Component {
                         
                         </div>
                         <div style={{ textAlign:'center' }}>
-                            <button onClick={()=>this.deleteItem()} style={{ margin:'1em' }} className="btn waves-effect waves-light">선택 상품 삭제</button>  
+                            <button onClick={()=>this.deleteItem()} style={{ margin:'2em' , padding:'1em 2em'}} className="btn-main-gray">선택 상품 삭제</button>  
                         </div>
                     </div>
 
                     <div style={{padding:'3em 0em 3em 6em'}}>
                         <div style={{ paddingTop:'1em', paddingBottom:'3px', fontSize:'large', color:'black'}}>총 상품금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{this.numberWithCommas(this.state.orderPrice)}원</b></div>
-                        <div style={{ paddingTop:'1em', paddingBottom:'2em', fontSize:'large', color:'black'}}>총 배송비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>10,000원</b></div>
-                        <div style={{ paddingTop:'1em', paddingBottom:'1em', fontSize:'28px', color:'black'}}>결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{this.numberWithCommas(this.state.orderPrice+10000)}원</b></div>
-                        <button onClick={this.goToOrder.bind(this)} style={{ padding:'1em 6em'}} className="btn btn-primary waves-effect waves-light">상품 주문하기</button>                      
+                        <div style={{ paddingTop:'1em', paddingBottom:'2em', fontSize:'large', color:'black'}}>총 배송비&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {
+                                (this.state.orderPrice != 0) ? (
+                                    <b>10,000원</b>
+                                ) : (
+                                    <b>0원</b>
+                                )
+                            }
+                        </div>
+                        <div style={{ paddingTop:'1em', paddingBottom:'1em', fontSize:'28px', color:'black'}}>결제금액&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {
+                                (this.state.orderPrice != 0) ? (
+                                    <b>{this.numberWithCommas(this.state.orderPrice+10000)}원</b>
+                                ) : (
+                                    <b>0원</b>
+                                )
+                            }
+                        </div>
+                        <button onClick={this.goToOrder.bind(this)} style={{ width:'250px', height:'50px', fontFamily:'NanumSquareR'}} className="btn-main">상품 주문하기</button>                      
                     </div>
                 </div>
 

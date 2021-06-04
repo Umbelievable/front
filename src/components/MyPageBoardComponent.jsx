@@ -64,7 +64,7 @@ class MyPageBoardComponent extends Component {
     }
 
     readItem(pdNo, cateNo, subcateNo) {
-        window.location.replace(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
+        this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
     deleteLike(pdNo, cateNo, subcateNo) {
@@ -73,7 +73,7 @@ class MyPageBoardComponent extends Component {
                 if((likeItem[i].pdNo == pdNo) && (likeItem[i].categoryNo == cateNo) && (likeItem[i].subcateNo == subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
                         alert('관심상품 목록에서 삭제했습니다.');
-                        window.location.replace('/mypage-board');
+                        this.props.history.push('/mypage-board');
                     });
                 }
             }
@@ -207,14 +207,13 @@ class MyPageBoardComponent extends Component {
                 <div className="row row-inline-block small-spacing">
                 <div className="col-xs-12">
                 <div className="box-content">
-
-                <div className="row row-cols-1 row-cols-sm-2 g-2">
-                    <div style={{padding:'1em 4em 2em 3em', borderRight:'1px solid gray'}}>
+                    <div style={{textAlign:'center', paddingTop:'2em'}}>
                         <button className="btn btn-xl btn-circle" style={{height:'100px', width:'100px', display:'inline'}}><i style={{fontSize:'50px'}} className="glyphicon glyphicon-user" aria-hidden="true"></i></button>
                         <div style={{display:'inline', marginLeft:'1em', fontWeight:'bolder', fontSize:'20px'}}>{this.state.currentUser.id}</div>
-                        <a style={{display:'inline', marginLeft:'2em'}} href="/">회원 정보 수정</a>
+                        <a style={{display:'inline', marginLeft:'2em', color: 'rgb(87,81,76)'}} href="/member-update">회원 정보 수정</a>
                         <br/><br/>
-                        
+                    </div>
+                    <div style={{paddingLeft:'25%'}}>
                         <table className="mypage">
                             <thead>
                                 <tr>
@@ -235,34 +234,21 @@ class MyPageBoardComponent extends Component {
                             </tbody>
                         </table>
                     </div>
-                    
-                    <div style={{padding:'3em 5em', textAlign:'center'}}>
-                        <div style={{fontWeight:'bolder', textAlign:'center', fontSize:'20px'}}>{this.state.currentUser.id}님의 관심 해시태그</div>
-                        <br/><br/><br/>
-                        <div className="hashtag">#&nbsp;침대</div>
-                        <div className="hashtag">#&nbsp;엔틱</div>
-                        <div className="hashtag">#&nbsp;카펫</div>
-                   
-                    </div>
-                </div>
-
-                <br/><br/>
-                <div className="table-responsive clearfix">
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th colSpan='3' style={{width:'100%'}}>관심있는 상품</th>            
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.tableINFO()
-                            }
-                        </tbody>
-                    </table>
-                </div>        
-   
-
+                    <br/><br/>
+                    <div className="table-responsive clearfix">
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th colSpan='3' style={{width:'100%'}}>나의 관심 상품</th>            
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.tableINFO()
+                                }
+                            </tbody>
+                        </table>
+                    </div>        
                </div>
                </div>
                </div>

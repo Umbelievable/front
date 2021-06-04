@@ -48,7 +48,7 @@ class CreatePhotoBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            window.location.replace('/photo-board');
+            this.props.history.push('/photo-board');
         });
         
     }
@@ -77,21 +77,19 @@ class CreatePhotoBoardComponent extends Component {
 
         if (this.state.pboardNo === '_create') { // 새로 만들면
             PhotoBoardService.createBoard(board).then(res => {
-                window.location.replace('/photo-board');
+                this.props.history.push('/photo-board');
             });
         } else { // 있던 게시글 업데이트면
             // 파일 Url 글번호로 가져와서
             // qboardFileUrl 값 다시 주기
             PhotoBoardService.updateBoard(this.state.pboardNo, board).then(res => {
-
-                window.location.replace(`/read-photoboard/${this.state.pboardNo}`);
-
+                this.props.history.push(`/read-photoboard/${this.state.pboardNo}`);
             });
         }
     }
 
     cancel() {
-        window.location.replace('/photo-board');
+        this.props.history.push('/photo-board');
     }
 
  
@@ -120,10 +118,9 @@ class CreatePhotoBoardComponent extends Component {
 				<div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">
 				<div className="box-content">
+
                 <div className="card-content">
-			    <form className="form-horizontal">
-
-
+			    <form className="form-horizontal" style={{paddingRight:'12em'}}>
 				    <div className="form-group">
 					    <label for="title" className="col-sm-2 control-label">제목</label>
 					        <div className="col-sm-10">
@@ -134,7 +131,7 @@ class CreatePhotoBoardComponent extends Component {
 				    <div className="form-group">
 					    <label for="content" className="col-sm-2 control-label">내용</label>
 					        <div className="col-sm-10">
-						        <textarea className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
+						        <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
 					        </div>
                     </div>
                 
@@ -144,12 +141,10 @@ class CreatePhotoBoardComponent extends Component {
                                 <input type="file" onChange={this.changeFileHandler} name="file" />
                             </div>    
                     </div>
-
-				    <div className="btn_wrap text-center">
-                        <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
-                        <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
-                    </div>
                 </form>
+                <div className="btn_wrap text-center">
+                    <button type="submit" className="btn btn-primary waves-effect waves-light" style={{fontSize:'larger', backgroundColor:'rgb(73,117,104)', padding:'7px 30px'}} onClick={this.createBoard}>저장하기</button>    
+                </div>
             </div>
                    
             </div>

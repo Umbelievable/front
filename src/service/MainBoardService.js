@@ -2,7 +2,7 @@ import axios from 'axios';
 import authHeader from './auth-header';
 
 
-const MAIN_API_BASE_URL = "http://localhost:8080/api/main"; 
+const MAIN_API_BASE_URL = "/api/main"; 
 
 class MainBoardService{
     searchItems(searchKeyword){

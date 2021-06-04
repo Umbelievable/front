@@ -4,11 +4,8 @@ import React, { Component } from 'react';
 class CustomerServiceBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-           
         }
-
     }
 
     componentDidMount() {
@@ -23,7 +20,6 @@ class CustomerServiceBoardComponent extends Component {
             btns[i].className = "mybtn"
         }
         csbtn.className += " active";
-
     }
 
     actAns(liNum){
@@ -41,7 +37,7 @@ class CustomerServiceBoardComponent extends Component {
 
     render() {
         return (
-        <div className="main-content">
+        <div className="main-content" style={{padding:'3em'}}>
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">

@@ -1,7 +1,6 @@
 /* Include variables for LESS */
 /* Import file styles */
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-@import url(../fonts/font-awesome/css/font-awesome.min.css);
 @import url(../plugin/bootstrap/css/bootstrap.min.css);
 /* General css */
 /*
@@ -22,6 +21,8 @@ body {
   height: 100%;
   width: 100%;
   color: #505458;
+  font-family: 'NanumSquareR';
+  background-color: rgb(248, 248, 248);
 }
 #wrapper {
   position: relative;
@@ -64,14 +65,14 @@ a {
 a {
   text-decoration: none !important;
   outline: none;
-  color: #3d3d3d;
+  color: #2c6144;
 }
 a:hover,
 a:active,
 a:focus {
   text-decoration: none !important;
   outline: none;
-  color: #2d6c4a;
+  color: #2c6144;
 }
 input,
 button {
@@ -524,14 +525,55 @@ h4 strong {
 .btn .ico-right {
   margin-left: 8px;
 }
-.btn-primary {
-  background: #2d6c4a;
+
+.itemBtn{
+    background: rgb(226, 226, 226);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    
 }
-.btn-primary:hover,
-.btn-primary:active,
-.btn-primary:focus {
-  background: #204e36 !important;
+
+/*----------- 주로 쓰는 기본 버튼 -----------*/
+.btn-main{
+  background: rgb(73,117,104);
+  border: none;
+  border-radius: 5px;
+  color:white;
+  font-family: 'NanumSquareB';
+  font-size: larger;
+  padding: 7px 25px;
 }
+
+.btn-main:hover,
+.btn-main:active,
+.btn-main:focus {
+  background: rgb(52, 83, 75);
+  color:white;
+}
+
+
+.btn-main-gray{
+    background: rgb(231, 231, 231);
+    border: none;
+    border-radius: 5px;
+    color:rgb(87,81,76);
+    font-family: 'NanumSquareR';
+    font-size: normal;
+    padding: 7px 25px;
+}
+
+.btn-main-gray:hover,
+.btn-main-gray:active,
+.btn-main-gray:focus {
+    background: rgb(214, 214, 214);
+}
+
+/*----------- 주로 쓰는 기본 버튼 -----------*/
+
+
 .btn-primary.btn-bordered {
   border-color: #3f9969;
   color: #3f9969;
@@ -797,8 +839,9 @@ Version 1.0
   /* margin-left: 20px;
   margin-right: 20px;
   margin-bottom: 2em; */
-  padding-top: 2em;
+  padding: 2em;
   background-color: rgb(248, 248, 248);
+  font-family: 'NanumSquareR';
 }
 /*---------------------------------------------------------------------*/
 /*-----------------------------------------------------------------------
@@ -811,7 +854,7 @@ Version 1.0
   z-index: 20;
   right: 0px;
   padding: 10px 50px 0px 50px;
-  background: rgb(248, 248, 248);
+  background-color: rgb(248, 248, 248);
 }
 .fixed-navbar .searchform {
   opacity: 0;
@@ -981,6 +1024,8 @@ Version 1.0
 /*-----------------------------------------------------------------------
 1. Footer
 */
+
+
 .footer {
   padding: 20px 30px 20px 30px;
   margin: 0px -20px 0px -20px;
@@ -1237,6 +1282,7 @@ Version 1.0
 .table > thead > tr > th {
   padding: 9px;
   text-align: center;
+  font-family: 'NanumSquareR';
 }
 .table > tbody > tr > td.text-left,
 .table > tbody > tr > th.text-left,
@@ -1428,6 +1474,7 @@ textarea.form-control {
 #navbar {
   z-index: 12;
   background-color: rgb(213, 224, 220);
+  font-family: "NanumSquareB";
 
 }
 
@@ -1493,8 +1540,15 @@ textarea.form-control {
   text-align: center;
   display: inline-block;
 }
+
 .nounhashbtn:hover{
   background-color:  #a4ccb6;
+  color: rgb(87,81,76);
+}
+
+.nounhashbtn:active{
+  background-color:  #8cd1ab;
+  color: rgb(87,81,76);
 }
 
 .cropping,
@@ -1637,7 +1691,7 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .menucropping img {
@@ -1673,6 +1727,7 @@ textarea.form-control {
   color: rgb(87,81,76);
   border-left: 1px solid rgb(213, 224, 220);
   border-right: 1px solid rgb(213, 224, 220);
+  font-family: "NanumSquareB";
 }
 
 .dropdown {
@@ -1705,6 +1760,21 @@ textarea.form-control {
   background-color: rgb(238, 238, 238);
 }
 
+.dropdownBtn {
+  font-size: 14px;
+  background-color: rgb(248, 248, 248);
+  font-family: 'NanumSquareR';
+  text-align: left;
+  display: block;
+  width: 148px;
+  border: none;
+  padding: 14px;
+}
+
+.dropdownBtn:hover {
+  color: rgb(24, 179, 132);
+}
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -1723,9 +1793,10 @@ textarea.form-control {
   border-color: transparent;
   color: rgb(73, 73, 73);
   font-size: small;
+  font-family: 'NanumSquareB';
 }
 
-.pagination > li > a {
+.pagination .page-item .page-link{
   background-color: rgb(248, 248, 248);
   color: #2d6c4a;
 }
@@ -1748,7 +1819,6 @@ textarea.form-control {
   position: relative;
   align-items: center;
   justify-content: center;
-
 }
 
 .cartcropping {
@@ -1805,7 +1875,7 @@ table.mypage {
   text-align: center;
   line-height: 1.5;
   margin: 20px 10px;
-  width: 100%;
+  width: 65%;
 }
 
 table.mypage th {
@@ -1814,7 +1884,7 @@ table.mypage th {
   padding: 10px;
   vertical-align: top;
   color: #fff;
-  background: #2d6c4a;
+  background: rgb(73,117,104);
 }
 
 table.mypage td {
@@ -1822,6 +1892,10 @@ table.mypage td {
   padding: 10px;
   vertical-align: top;
   background: rgb(250, 250, 250);
+}
+
+table.mypage a {
+  color:rgb(87,81,76);
 }
 
 .postcropping {
@@ -1836,3 +1910,14 @@ table.mypage td {
 .categoryDiv:hover{
   color: rgb(120, 182, 171);
 }
+
+.heartBtn{
+  position: absolute;
+  top: 230px;
+  left : 220px;
+  border: none;
+  background-color: transparent;
+  font-size: 25px;
+  color:rgb(255, 110, 110);
+}
+

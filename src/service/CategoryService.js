@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const CATEGORY_API_BASE_URL = "http://localhost:8080/api/category"; 
+const CATEGORY_API_BASE_URL = "/api/category"; 
 
 class CategoryService {
 

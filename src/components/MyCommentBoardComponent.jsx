@@ -11,14 +11,12 @@ import 'react-tabs/style/react-tabs.css';
 class MyCommentBoardComponent extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             myqcomments: [],
             mypcomments: [],
             qnaBoards: [],
             photoBoards: []
         }
-
     }
 
     componentDidMount() { 
@@ -38,11 +36,11 @@ class MyCommentBoardComponent extends Component {
     }
 
     readBoard(qboardNo) {
-        window.location.replace(`/read-board/${qboardNo}`);
+        this.props.history.push(`/read-board/${qboardNo}`);
     }
 
     readPhotoBoard(pboardNo) {
-        window.location.replace(`/read-photoboard/${pboardNo}`);
+        this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
     findQNo(no){
@@ -113,10 +111,10 @@ class MyCommentBoardComponent extends Component {
                                             <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.qcommentInsertTime} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.qcommentContent} </div>
                                             { // 그 게시글에 내 댓글 하나밖에 없으면 // json 형식때문에 이렇게 나눔
-                                                (mycomment.qboardNo.qboardNo) && <a href={'/read-board/'+mycomment.qboardNo.qboardNo}> 원문&nbsp;:&nbsp;{mycomment.qboardNo.qboardTitle} </a>
+                                                (mycomment.qboardNo.qboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-board/'+mycomment.qboardNo.qboardNo}> 원문&nbsp;:&nbsp;{mycomment.qboardNo.qboardTitle} </a>
                                             }
                                             { // 한 게시글에 내 댓글 여러개면
-                                                !(mycomment.qboardNo.qboardNo) && <a href={'/read-board/'+this.findQNo(mycomment.qboardNo)}> 원문&nbsp;:&nbsp;{this.findQTitle(mycomment.qboardNo)} </a>
+                                                !(mycomment.qboardNo.qboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-board/'+this.findQNo(mycomment.qboardNo)}> 원문&nbsp;:&nbsp;{this.findQTitle(mycomment.qboardNo)} </a>
                                             }
 
                                         </td>
@@ -146,10 +144,10 @@ class MyCommentBoardComponent extends Component {
                                             <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.pcommentInsertTime} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.pcommentContent} </div>
                                             { 
-                                                (mycomment.pboardNo.pboardNo) && <a href={'/read-photoboard/'+mycomment.pboardNo.pboardNo}> 원문&nbsp;:&nbsp;{mycomment.pboardNo.pboardTitle} </a>
+                                                (mycomment.pboardNo.pboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-photoboard/'+mycomment.pboardNo.pboardNo}> 원문&nbsp;:&nbsp;{mycomment.pboardNo.pboardTitle} </a>
                                             }
                                             { 
-                                                !(mycomment.pboardNo.pboardNo) && <a href={'/read-photoboard/'+this.findPNo(mycomment.pboardNo)}> 원문&nbsp;:&nbsp;{this.findPTitle(mycomment.pboardNo)} </a>
+                                                !(mycomment.pboardNo.pboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-photoboard/'+this.findPNo(mycomment.pboardNo)}> 원문&nbsp;:&nbsp;{this.findPTitle(mycomment.pboardNo)} </a>
                                             }
                                         </td>
                                     </tr>

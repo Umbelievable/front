@@ -6,11 +6,12 @@ class AdminBoardComponent extends Component {
         super(props);
 
         this.state = {
-           
+            
         }
 
     }
 
+  
 
     render() {
         return (
@@ -18,8 +19,8 @@ class AdminBoardComponent extends Component {
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
-
-        
+            
+            
             </div>
             </div>
             </div>

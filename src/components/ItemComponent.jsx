@@ -6,6 +6,7 @@ import LikeService from '../service/LikeService';
 import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
+import PurchaseService from '../service/PurchaseService';
 
 
 
@@ -18,27 +19,37 @@ class ItemComponent extends Component{
         this.state = {
             p_num: 1,
             paging: {},
+            reviews: [],  //리뷰목록
             itemInfo: {},
             cateNo: query.cateNo,
             subcateNo: query.subcateNo,
             pdNo: query.pdNo,
             count: 1, // 구매수량
-            reviews: [],  //리뷰목록
             nounHash: [], //명사해시태그목록
             adjHash: [],  //형용사해시태그목록
             isClicked: false,
             currentUser: { id: "" },
-            likes: [] // 유저별 좋아요 목록
+            likes: [], // 유저별 좋아요 목록
+            showTable: 'all',
+            prevBtnId: '', // 이전에 눌린 버튼 아이디
+            prevBtnName: '', // 이전에 눌린 버튼 이름
+            hashReviews: [] // 해시태그별 리뷰목록
 
         }
-        this.up=this.up.bind(this);
-        this.down=this.down.bind(this);
-        this.changeImg=this.changeImg.bind(this);
-        this.addCart=this.addCart.bind(this);
 
+        this.up = this.up.bind(this);
+        this.down = this.down.bind(this);
+        this.changeImg = this.changeImg.bind(this);
+        this.addCart = this.addCart.bind(this);
     }
 
     componentDidMount(){
+        window.onpopstate = function(event){ // 아이템 상세페이지 보다가 뒤로가기 버튼 누르면 (back, true)로 저장해두고
+            sessionStorage.setItem("back", true);
+        }
+
+        document.body.style.height = "1000px";
+        window.scrollTo(0, 0);
         const currentUser = MemberService.getCurrentUser();
         this.setState({ currentUser: currentUser, userReady: true });
 
@@ -46,7 +57,6 @@ class ItemComponent extends Component{
             this.setState({itemInfo: res.data});
         });
 
-        
         // 리뷰가 있으면 (res.data.pagingData.currentPageNum != null) setState하고 없으면 그냥 넘기기
         ReviewService.getReviews(this.state.p_num, this.state.cateNo, this.state.subcateNo, this.state.pdNo).then( res => {
             this.setState({ 
@@ -92,7 +102,8 @@ class ItemComponent extends Component{
             this.setState({ 
                 p_num: res.data.pagingData.currentPageNum,
                 paging: res.data.pagingData,
-                reviews: res.data.list});
+                reviews: res.data.list})
+                
         });
     }
 
@@ -114,7 +125,7 @@ class ItemComponent extends Component{
         if (this.state.paging.prev) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabindex="-1">Previous</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabindex="-1">Previous</a>
                 </li>
             );
         }
@@ -124,7 +135,7 @@ class ItemComponent extends Component{
         if (this.state.paging.next) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1, this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">Next</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">Next</a>
                 </li>
             );
         }
@@ -144,7 +155,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != this.state.paging.pageNumCountTotal) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal,this.state.cateNo, this.state.subcateNo, this.state.pdNo) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                    <a className="page-link" onClick = {() => this.listBoard( this.state.paging.pageNumCountTotal, this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
                 </li>
             );
         }
@@ -159,6 +170,7 @@ class ItemComponent extends Component{
             this.setState({count: this.state.count-1});
         }  
     }
+
     showLike() {
         if(this.state.isClicked == false){
             return (
@@ -170,8 +182,8 @@ class ItemComponent extends Component{
                 <i style={{fontSize:'30px'}} className="glyphicon glyphicon-heart" aria-hidden="true"></i>
             );
         }
-        
     }
+
     changeImg() { // 하트 눌렀을때 불리는 함수
         if(!this.state.isClicked){ // 좋아요 안눌린상태면 // createLikeItem 호출
             let item = {
@@ -181,7 +193,7 @@ class ItemComponent extends Component{
                 categoryNo: this.state.cateNo
             };
             LikeService.createLikeItem(item).then(res => {
-                alert('관심상품 목록에 추가했습니다.');
+                window.location.reload();
             });
 
         }
@@ -190,7 +202,7 @@ class ItemComponent extends Component{
             for(var i=0; i<likeItem.length; i++){
                 if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
                     LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
-                        alert('관심상품 목록에서 삭제했습니다.');
+                        window.location.reload();
                     });
                 }
             }
@@ -216,6 +228,21 @@ class ItemComponent extends Component{
         
     }
 
+    goToOrder() { // buynow
+        // PurchaseService불러서 주문목록 post하고
+        let pur = {
+            userId: MemberService.getCurrentUser().id,
+            pdNo: this.state.pdNo,
+            categoryNo: this.state.cateNo,
+            subcateNo: this.state.subcateNo,
+            volume: this.state.count
+        };
+        PurchaseService.addPurchase(pur);
+
+        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+        window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
+    }
+
     addCart(){ //add cart 버튼 누르면 실행되는 함수
         let item = {
             userId: this.state.currentUser.id,
@@ -229,18 +256,73 @@ class ItemComponent extends Component{
         });
     }
 
-    reviewFilter=(event,id) => {    //nounhash 클릭시 호출되는 함수 수정중
-        alert(event.target.value.toString(),id);
-        return;
-        // var noun=this.state.nounHash.id;
-        // alert(noun);
+    showReview(review){
+        var reviewSplit = review.split(this.state.prevBtnName);
+        return(
+            <td style={{textAlign:'left'}}> {reviewSplit[0]}<b style={{backgroundColor:'#d0f0de'}}>{this.state.prevBtnName}</b>{reviewSplit[1]} </td>
+        );
+    }
 
+    reviewFilter(id, name) { // 해시태그 아이디랑 이름 받아서 // nounhash 클릭시 호출되는 함수 수정중
+        var pressbtn = document.getElementById(id); //이게 누른 버튼
+        var btns = document.getElementsByClassName("nounhashbtn"); // 명사 버튼 15개 다 가져오기
+
+        // 버튼이 이미 눌렸는데 한번 더 눌렀으면 
+        if (id == this.state.prevBtnId) {
+            this.setState({showTable: 'all', prevBtnId: '', prevBtnName: ''}); // 전체 리뷰 보여주고
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].className = "nounhashbtn";
+            }
+        }
+
+        // 다른 버튼이 눌린거면 해당 리뷰 보여주기
+        else {
+            for (var j = 0; j < btns.length; j++) {
+                btns[j].className = "nounhashbtn";
+            }
+            pressbtn.className += " active";
+            this.setState({showTable: 'hash', prevBtnId: id, prevBtnName: name});
+            ReviewService.getReviewsByHashtag(this.state.pdNo, this.state.subcateNo, this.state.cateNo, name).then( res => {
+                console.log(res.data);
+                this.setState({ hashReviews: res.data })
+                    
+            });
+        }
     };
+
+    showStar(star){
+        var arr=[];
+        for(var i=0;i<5;i++){
+            if(i<star){
+                arr.push(
+                    <i style={{color:'rgb(243, 201, 64)'}} className="glyphicon glyphicon-star" aria-hidden="true"></i>
+                );
+            }
+            else{
+                arr.push(
+                    <i style={{color:'rgb(243, 201, 64)'}} className="glyphicon glyphicon-star-empty" aria-hidden="true"></i>
+                );
+            }
+            
+        }
+        return arr;
         
-    
+    }
 
-
-
+    addStar(customerId){
+        var flag = 0;
+        var newId='';
+        for(var i=0; i<customerId.length; i++){
+            if(customerId[i] == '*')
+                flag=1;
+        }
+        if(flag == 0){ // *이 없다면 붙이고 // 있다면 네이버에서 가져온 리뷰니까 그대로 출력
+            newId = customerId.substring(0,4)+"****";
+            return newId;
+        }
+        return customerId;
+    }
+        
     render(){
         return (
             <div className="main-content" style={{padding:'0em 5em'}}> 
@@ -262,52 +344,43 @@ class ItemComponent extends Component{
                         {this.state.count}
                         <button className="countBtn" onClick={this.up} style={{ margin: '0em 1em'}}>+</button>
                     </div>
-                    
                     {this.totalPrice()}
-                    <button className="btn" style={{left:'1em', bottom:'3em', position:'absolute', padding:'5px 8px 0px 8px'}} onClick={this.changeImg}>{this.showLike()}</button>
-                    <button className="btn btn-primary waves-effect waves-light" style={{left:'5em', bottom:'3em', position:'absolute'}}>BUY NOW</button>
-                    <button className="btn btn-primary waves-effect waves-light" onClick={this.addCart} style={{marginLeft:"10px", left:'13em', bottom:'3em', position:'absolute'}}>ADD CART</button>
-                    
+                    <button className="itemBtn" style={{left:'1em', bottom:'50px', position:'absolute'}} onClick={this.changeImg}>{this.showLike()}</button>
+                    <button className="btn-main" onClick={this.goToOrder.bind(this)} style={{left:'70px', bottom:'3em', position:'absolute', height:'50px'}}>BUY NOW</button>
+                    <button className="btn-main" onClick={this.addCart} style={{left:'203px', bottom:'3em', position:'absolute', height:'50px'}}>ADD CART</button>
                 </div>
 
                 <div style={{padding:'3em 5em', textAlign:'center'}}>
-                <div >
-                    <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
-                        리뷰 분석 결과</div>
-            
-                  {
-                      this.state.adjHash.map(
-                          adjhash =>
-                          <div key={adjhash.id} style={{fontSize:'25px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
-                      )
-                  }
-                  <br></br>
-                  <br></br>
-                <div style={{fontSize:'15px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>
-                        이 상품을 직접 구매하신 고객님들의 의견입니다.</div>
-                        
-                          
+                    <div>
+                        <div style={{fontWeight:'bolder', fontSize:'27px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>리뷰 분석 결과</div>
+                        {
+                        this.state.adjHash.map(
+                            adjhash =>
+                            <div key={adjhash.id} style={{fontSize:'25px'}} className="hashtagrank">#&nbsp;{adjhash.name}</div>
+                        )}
+                        <br></br>
+                        <br></br>
+                        <div style={{fontSize:'15px', color:'black', textAlign:'center', paddingTop:'3px', paddingBottom:'1em'}}>이 상품을 직접 구매하신 고객님들의 의견입니다.</div>   
+                    </div> 
                 </div> 
-                </div> 
-                    
             </div>
-            <br/><br/>
-           {
-               this.state.nounHash.map(
-                   nounhash =>
-                   <button key={nounhash.id} className="nounhashbtn" onClick={(e)=>this.reviewFilter(e,nounhash.id)}>#&nbsp;{nounhash.name}</button>
-               )
-           }
-                    
+            <br/>
             {
-                (this.state.reviews) && ( // 리뷰가 있으면 리뷰 뽑고
+                this.state.nounHash.map(
+                    nounhash =>
+                    <button id={"hashbtnId"+nounhash.id} key={nounhash.id} className="nounhashbtn" onClick={()=>this.reviewFilter("hashbtnId"+nounhash.id,nounhash.name)}>#&nbsp;{nounhash.name}</button>
+                )
+            }
+            <br/><br/>    
+            {
+                (this.state.reviews) && (this.state.showTable == 'all') && ( // 리뷰가 있으면 리뷰 뽑고
                     <div>
                     <div className="table-responsive clearfix">
-                        <table className="table table-hover">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>별점</th>
+                                    <th style={{width: '8em'}}>별점</th>
                                     <th>아이디</th>
                                     <th>리뷰</th>
                                     <th>날짜</th>
@@ -319,9 +392,9 @@ class ItemComponent extends Component{
                                     review => 
                                     <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
                                         <td> {review.reviewNo} </td>
-                                        <td> {review.star} </td>
-                                        <td> {review.customerId} </td>
-                                        <td> {review.review} </td>
+                                        <td> {this.showStar(review.star)} </td>
+                                        <td> {this.addStar(review.customerId)} </td>
+                                        <td style={{textAlign:'left'}}> {review.review} </td>
                                         <td> {review.reviewDate} </td>
                                     </tr>
                                 )
@@ -355,9 +428,55 @@ class ItemComponent extends Component{
                 )
             }
             {
+                (this.state.reviews) && (this.state.showTable == 'hash') && ( // 해시태그 리뷰면 해시태그 리뷰 뽑고
+                    <div className="table-responsive clearfix">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th style={{width: '8em'}}>별점</th>
+                                    <th>아이디</th>
+                                    <th>리뷰</th>
+                                    <th>날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                this.state.hashReviews.map(
+                                    review => 
+                                    <tr key = {review.reviewNo, review.pdNo, review.subcate, review.cateNo}>
+                                        <td> {review.reviewNo} </td>
+                                        <td> {this.showStar(review.star)} </td>
+                                        <td> {this.addStar(review.customerId)} </td>
+                                        {this.showReview(review.review)}
+                                        <td> {review.reviewDate} </td>
+                                    </tr>
+                                )
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+            {
                 (!this.state.reviews) && ( // 없으면 없다고
-                    <div>
-                        작성된 리뷰가 없습니다.
+                    <div className="table-responsive clearfix">
+                        <table style={{ pointerEvents: 'none' }} className="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th style={{width: '4em'}}>별점</th>
+                                    <th>아이디</th>
+                                    <th>리뷰</th>
+                                    <th>날짜</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan='5' style={{fontSize:'20px', paddingTop:'1em'}}> 작성된 리뷰가 없습니다.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )
             }

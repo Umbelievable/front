@@ -45,13 +45,11 @@ class CreateBoardComponent extends Component {
             }
         }
         FileService.uploadFile(formData, config).then(res => {
-            window.location.replace('/qna-board');
+            this.props.history.push('/qna-board');
         });
         
     }
     //--file upload--//
-
-
 
     createBoard = (event) => {
         event.preventDefault();
@@ -76,18 +74,18 @@ class CreateBoardComponent extends Component {
 
         if (this.state.qboardNo === '_create') { // 새로 만들면
             BoardService.createBoard(board).then(res => {
-                window.location.replace('/qna-board');
+                this.props.history.push('/qna-board');
             });
 
         } else { 
             BoardService.updateBoard(this.state.qboardNo, board).then(res => {
-                window.location.replace(`/read-board/${this.state.qboardNo}`);
+                this.props.history.push(`/read-board/${this.state.qboardNo}`);
             });
         }
     }
 
     cancel() {
-        window.location.replace('/qna-board');
+        this.props.history.push('/qna-board');
     }
 
     componentDidMount() {
@@ -105,10 +103,8 @@ class CreateBoardComponent extends Component {
                 this.setState({
                     qboardTitle: board.qboardTitle,
                     qboardWriter: board.qboardWriter,
-
                     qboardContent: board.qboardContent,
                     qboardFileUrl: board.qboardFileUrl
-
                 });
             });
         }
@@ -120,40 +116,33 @@ class CreateBoardComponent extends Component {
 				<div className="col-xs-12">
 				<div className="box-content">
 
-            <div className="card-content">
-			    <form className="form-horizontal">
+                <div className="card-content" >
+                    <form className="form-horizontal" style={{paddingRight:'12em'}}>
+                        <div className="form-group">
+                            <label for="title" className="col-sm-2 control-label">제목</label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" placeholder="제목을 입력해 주세요." value={this.state.qboardTitle} onChange={this.changeTitleHandler}/>
+                                </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label for="content" className="col-sm-2 control-label">내용</label>
+                                <div className="col-sm-10">
+                                    <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.qboardContent} onChange={this.changeContentHandler}></textarea>
+                                </div>
+                        </div>
                     
-
-				    <div className="form-group">
-					    <label for="title" className="col-sm-2 control-label">제목</label>
-					        <div className="col-sm-10">
-						        <input type="text" className="form-control" placeholder="제목을 입력해 주세요." value={this.state.qboardTitle} onChange={this.changeTitleHandler}/>
-					        </div>
-				    </div>
-
-				    <div className="form-group">
-					    <label for="content" className="col-sm-2 control-label">내용</label>
-					        <div className="col-sm-10">
-						        <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.qboardContent} onChange={this.changeContentHandler}></textarea>
-					        </div>
+                        <div className="form-group">        
+                            <label for="file_0" className="col-sm-2 control-label">파일</label>
+                                <div className="col-sm-10">
+                                    <input type="file" onChange={this.changeFileHandler} name="file" />
+                                </div>    
+                        </div>
+                    </form>
+                    <div className="btn_wrap text-center">
+                        <button type="submit" className="btn btn-primary waves-effect waves-light" style={{fontSize:'larger', backgroundColor:'rgb(73,117,104)', padding:'7px 30px'}} onClick={this.createBoard}>저장하기</button>
                     </div>
-                
-                    <div className="form-group">        
-                        <label for="file_0" className="col-sm-2 control-label">파일</label>
-                            <div className="col-sm-10">
-                                <input type="file" onChange={this.changeFileHandler} name="file" />
-                            </div>    
-                    </div>
-
-				   
-				    <div className="btn_wrap text-center">
-                        <button type="submit" className="btn btn-primary waves-effect waves-light" onClick={this.createBoard}>저장하기</button>
-                        <button className="btn btn-default waves-effect waves-light" style={{marginLeft:"10px"}} onClick={this.cancel.bind(this)}>뒤로가기</button>
-					    
-                    </div>
-
-                </form>
-            </div>                                
+                </div>                                
             </div>
             </div>
             </div>

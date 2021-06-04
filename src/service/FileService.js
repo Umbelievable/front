@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const File_API_BASE_URL = "http://localhost:8080/api/file"; 
+const File_API_BASE_URL = "/api/file"; 
 
 class FileService {
 

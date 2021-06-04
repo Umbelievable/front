@@ -1,4 +1,4 @@
-import React,{component} from 'react';
+import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import MainBoardComponent from './components/MainBoardComponent';
@@ -12,6 +12,7 @@ import SearchPhotoBoardComponent from './components/SearchPhotoBoardComponent';
 import SearchMenuBoardComponent from './components/SearchMenuBoardComponent';
 import SearchAllBoardComponent from './components/SearchAllBoardComponent';
 import JoinMemberComponent from './components/member/JoinMemberComponent';
+import UpdateMemberComponent from './components/member/UpdateMemberComponent';
 import PhotoBoardComponent from './components/PhotoBoardComponent';
 import AdminBoardComponent from './components/AdminBoardComponent';
 import MenuBoardComponent from './components/MenuBoardComponent';
@@ -26,6 +27,8 @@ import ReadPhotoBoardComponent from './components/ReadPhotoBoardComponent';
 import CreatePhotoBoardComponent from './components/CreatePhotoBoardComponent';
 import CartBoardComponent from './components/CartBoardComponent';
 import OrderBoardComponent from './components/OrderBoardComponent';
+import ReviewBoardComponent from './components/ReviewBoardComponent';
+
 
 
 function App() {
@@ -57,12 +60,14 @@ function App() {
 
               <Route path = "/mypage-board" component = {MyPageBoardComponent}></Route>
               <Route path = "/order-board" component = {OrderBoardComponent}></Route>
+              <Route path = "/review-board/:purchaseNo" component = {ReviewBoardComponent}></Route>
               <Route path = "/mypost-board" component = {MyPostBoardComponent}></Route>
               <Route path = "/mycomment-board" component = {MyCommentBoardComponent}></Route>
 
               <Route path = "/cart-board" component = {CartBoardComponent}></Route>
 
               <Route path = "/member-join" component = {JoinMemberComponent}></Route>
+              <Route path = "/member-update" component = {UpdateMemberComponent}></Route>
               <Route path = "/admin-board" component = {AdminBoardComponent}></Route>
               <Route path = "/cs-board" component = {CustomerServiceBoardComponent}></Route>
               

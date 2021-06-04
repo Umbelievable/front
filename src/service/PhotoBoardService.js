@@ -1,7 +1,7 @@
 import axios from 'axios'; 
 import authHeader from './auth-header';
 
-const BOARD_API_BASE_URL = "http://localhost:8080/api/photo"; 
+const BOARD_API_BASE_URL = "/api/photo"; 
 
 class PhotoBoardService{
     getBoards(p_num) {
