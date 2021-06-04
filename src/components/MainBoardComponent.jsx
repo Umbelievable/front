@@ -17,7 +17,13 @@ class MainBoardComponent extends Component {
         }
     }
 
-    readItem(pdNo, cateNo, subcateNo) { 
+    readItem(pdNo, cateNo, subcateNo) {
+        var mem = MemberService.getCurrentUser();
+        if(mem){ // 로그인 한 사람이면 
+            sessionStorage.setItem("likePd", pdNo);
+            sessionStorage.setItem("likeCt", cateNo);
+            sessionStorage.setItem("likeSct", subcateNo);
+        } 
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
@@ -58,9 +64,21 @@ class MainBoardComponent extends Component {
         else{ // 로그인 했으면
             // 유저 좋아요 목록 가져오기 -> 좋아요 목록에 있는건 칠한 하트로 뽑아야하고 다시 눌렀을때 삭제도 할 수 있게
             LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
-                const pdNo = res.data[0].pdNo;
-                const cateNo = res.data[0].categoryNo;
-                const subcateNo = res.data[0].subcateNo; // 사용자가 좋아하는 상품의 첫번째
+                // 아예 처음이면 
+                var pdNo;
+                var cateNo;
+                var subcateNo; 
+
+                if(sessionStorage.getItem("likePd")) { // 메인에서 다른거 하나 누르고 왔으면 그 상품으로
+                    pdNo = sessionStorage.getItem("likePd");
+                    cateNo = sessionStorage.getItem("likeCt");
+                    subcateNo = sessionStorage.getItem("likeSct");
+                }
+                else { // 처음 누르는거면 // 사용자가 좋아하는 상품의 첫번째
+                    pdNo = res.data[0].pdNo;
+                    cateNo = res.data[0].categoryNo;
+                    subcateNo = res.data[0].subcateNo;
+                }
 
                 let item ={ // post로 보내기
                     pdNo: pdNo,
