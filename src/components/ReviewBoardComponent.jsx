@@ -3,7 +3,7 @@ import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import MemberService from '../service/MemberService';
 import PurchaseService from '../service/PurchaseService';
-
+import RecommendService from '../service/RecommendService';
 
 class ReviewBoardComponent extends Component {
     constructor(props) {
@@ -22,7 +22,6 @@ class ReviewBoardComponent extends Component {
             review: ''
         }
         this.changeContentHandler = this.changeContentHandler.bind(this);
-
     }
 
     changeContentHandler = (event) => {
@@ -84,7 +83,7 @@ class ReviewBoardComponent extends Component {
         
     }
 
-    createReview = (event) => {
+    createReview = (event) => { // 리뷰 작성 버튼 누를 때
         event.preventDefault();
 
         let review = {
@@ -93,10 +92,28 @@ class ReviewBoardComponent extends Component {
             customerId: MemberService.getCurrentUser().id
         };
 
-        ReviewService.createReview(this.state.cateNo, this.state.subcateNo, this.state.pdNo, review).then(res => {
-            alert('리뷰가 등록되었습니다.');
-            this.props.history.push('/order-board');
-        });
+        let preReview = { // predict 넘길 리뷰
+            pdNo: this.state.pdNo,
+            subcateNo: this.state.subcateNo,
+            categoryNo: this.state.cateNo,
+            review: this.state.review
+        }
+
+        if((this.state.pdNo==0 && this.state.subcateNo=='침대' && this.state.cateNo=='침실가구') || (this.state.pdNo==2 && this.state.subcateNo=='선반' && this.state.cateNo=='수납가구') ||
+            (this.state.pdNo==0 && this.state.subcateNo=='소파' && this.state.cateNo=='거실가구')){ // 모델 있는 애들 셋
+            RecommendService.reviewPredict(preReview).then(res => { // 긍부정 예측모델 넣고 
+                alert(res.data); // 결과 alert로 띄우고
+                ReviewService.createReview(this.state.cateNo, this.state.subcateNo, this.state.pdNo, review); // 리뷰 작성하고
+                window.location.href = '/order-board'; // 주문페이지로 돌아가기
+            });
+        }
+        else{ // 모델 없는 다른 애들
+            ReviewService.createReview(this.state.cateNo, this.state.subcateNo, this.state.pdNo, review).then(res => {
+                alert('리뷰가 등록되었습니다.');
+                window.location.href = '/order-board'; // 주문페이지로 돌아가기
+            });
+        }
+        
     }
 
 
@@ -115,8 +132,6 @@ class ReviewBoardComponent extends Component {
                     <div style={{ fontWeight:'bolder', paddingTop:'10px', paddingBottom:'3px', fontSize:'normal', color:'black'}}>총 주문금액: {this.numberWithCommas(this.state.totalPrice)}원</div>
                 </div>
 
-                
-                           
                 <div style={{ textAlign:'center', width:'100%', padding:'2em 0em 1em 0em', fontSize:'20px', fontFamily:'NanumSquareR' }}>상품은 만족하셨나요?</div>
                 <div style={{fontSize:'40px', color:'rgb(243, 201, 64)'}}>
                     <i id="star1" className="reviewStar glyphicon glyphicon-star-empty" aria-hidden="true" onClick={()=>this.setStar("star1")} onMouseOver={()=> this.moveStar("star1")}/>
@@ -129,8 +144,6 @@ class ReviewBoardComponent extends Component {
                 <textarea className="form-control" onChange={this.changeContentHandler} placeholder="리뷰를 입력해주세요." style={{width:'700px', height:'200px', marginBottom:'3em'}}/>
                 <button className="btn-main" onClick={this.createReview} style={{marginBottom:'3em'}}>작성완료</button>
             </div>
-
-
 
             </div>
             </div>
