@@ -9,7 +9,12 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "cors": "^2.8.5",
+<<<<<<< HEAD
     "http-proxy-middleware": "^0.18.0",
+=======
+    "d3": "^6.7.0",
+    "d3-cloud": "^1.2.5",
+>>>>>>> 3086c7adbe70063328564865c639ca21331cba0e
     "jquery": "^3.6.0",
     "js-base64": "^3.6.0",
     "query-string": "^4.3.4",

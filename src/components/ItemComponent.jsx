@@ -9,6 +9,8 @@ import HashtagService from '../service/HashtagService';
 import PurchaseService from '../service/PurchaseService';
 
 
+
+
 class ItemComponent extends Component{
     constructor(props){
         const query = queryString.parse(window.location.search);
