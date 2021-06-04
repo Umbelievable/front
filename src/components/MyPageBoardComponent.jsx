@@ -69,14 +69,14 @@ class MyPageBoardComponent extends Component {
 
     deleteLike(pdNo, cateNo, subcateNo) {
         const likeItem = this.state.likes;
-            for(var i=0; i<likeItem.length; i++){
-                if((likeItem[i].pdNo == pdNo) && (likeItem[i].categoryNo == cateNo) && (likeItem[i].subcateNo == subcateNo)) {
-                    LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
-                        alert('관심상품 목록에서 삭제했습니다.');
-                        this.props.history.push('/mypage-board');
-                    });
-                }
+        for(var i=0; i<likeItem.length; i++){
+            if((likeItem[i].pdNo == pdNo) && (likeItem[i].categoryNo == cateNo) && (likeItem[i].subcateNo == subcateNo)) {
+                LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
+                    alert('관심상품 목록에서 삭제했습니다.');
+                    this.props.history.push('/mypage-board');
+                });
             }
+        }
     }
 
 
@@ -201,7 +201,6 @@ class MyPageBoardComponent extends Component {
     }
 
     render() {
-        
         return (
             <div className="main-content">
                 <div className="row row-inline-block small-spacing">
