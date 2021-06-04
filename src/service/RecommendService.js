@@ -10,8 +10,8 @@ class RecommendService {
     }
 
     // certainItem
-    getRecommendProductById(){
-        return axios.post(RECOMMEND_API_BASE_URL + "/recommend", { headers: authHeader() });
+    getRecommendProductById(item){
+        return axios.post(RECOMMEND_API_BASE_URL + "/recommend", item, { headers: authHeader() });
     }
     
 
