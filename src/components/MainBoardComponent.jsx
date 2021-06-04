@@ -24,7 +24,7 @@ class MainBoardComponent extends Component {
 
     componentDidMount() {
         var i=0;
-        if(!MemberService.getCurrentUser().id){ // 로그인 안했으면 인기상품 8개
+        if(MemberService.getCurrentUser().id){ // 로그인 안했으면 인기상품 8개 // 지금은 반대
             RecommendService.getRecommendProduct().then((res) => {
                 for (var x in res.data) {
                     this.setState({recommend: this.state.recommend.concat(x).sort(function(a, b){ // 8개 딕셔너리 받아오면 
