@@ -403,7 +403,7 @@ class ItemComponent extends Component{
                             </tbody>
                         </table>
                     </div>
-                    <div className ="row">
+                    <div style={{textAlign:'center'}}>
                         <nav aria-label="Page navigation example">
                             <ul className="pagination justify-content-center">
 
