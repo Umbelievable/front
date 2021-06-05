@@ -43,7 +43,9 @@ class MainBoardComponent extends Component {
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr: this.state.arr.concat(
-                            <img onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)} style={{padding:'15px', height:'380px'}} className="d-inline w-25" src={resul.data.pdImg}/>
+                            <div className="mainCrop" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
+                                <img src={resul.data.pdImg}/>
+                            </div>
                         )});
                     });
                 }
@@ -53,7 +55,9 @@ class MainBoardComponent extends Component {
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr2: this.state.arr2.concat(
-                            <img onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)} style={{padding:'15px', height:'380px'}} className="d-inline w-25" src={resul.data.pdImg}/>
+                            <div className="mainCrop" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
+                                <img src={resul.data.pdImg}/>
+                            </div>
                         )});
                     });
                 }
@@ -98,7 +102,10 @@ class MainBoardComponent extends Component {
                         ItemService.getCertainItem(item[0], item[2], item[1]).then( result => {
                             this.setState({itemInfo: this.state.itemInfo.concat(result.data)});
                             this.setState({arr: this.state.arr.concat(
-                                <img onClick={()=>this.readItem(result.data.pdNo, result.data.cateNo, result.data.subcateNo)} style={{padding:'15px', height:'380px'}} className="d-inline w-25" src={result.data.pdImg}/>
+                                <div className="mainCrop" onClick={()=>this.readItem(result.data.pdNo, result.data.cateNo, result.data.subcateNo)}>
+                                    <img src={result.data.pdImg}/>
+                                </div>
+                                
                             )});
                         });
                     }
@@ -108,7 +115,9 @@ class MainBoardComponent extends Component {
                         ItemService.getCertainItem(item[0], item[2], item[1]).then( result => {
                             this.setState({itemInfo: this.state.itemInfo.concat(result.data)});
                             this.setState({arr2: this.state.arr2.concat(
-                                <img onClick={()=>this.readItem(result.data.pdNo, result.data.cateNo, result.data.subcateNo)} style={{padding:'15px', height:'380px'}} className="d-inline w-25" src={result.data.pdImg}/>
+                                <div className="mainCrop" onClick={()=>this.readItem(result.data.pdNo, result.data.cateNo, result.data.subcateNo)}>
+                                    <img src={result.data.pdImg}/>
+                                </div>
                             )});
                         });
                     }
@@ -122,9 +131,9 @@ class MainBoardComponent extends Component {
     viewItem(){
         var forArray = [];
         forArray.push(
-            <Carousel.Item interval={2000}> {this.state.arr} </Carousel.Item> );
+            <Carousel.Item style={{textAlign: 'center'}} interval={3000}> {this.state.arr} </Carousel.Item> );
         forArray.push(
-            <Carousel.Item interval={2000}> {this.state.arr2} </Carousel.Item> );
+            <Carousel.Item style={{textAlign: 'center'}} interval={3000}> {this.state.arr2} </Carousel.Item> );
         return forArray;
     }
 
