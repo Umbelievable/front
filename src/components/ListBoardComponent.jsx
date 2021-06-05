@@ -101,7 +101,10 @@ class ListBoardComponent extends Component {
 
         return (pageNums.map((page) => 
         <li className="page-item" key={page.toString()} >
-            <a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>
+            {
+                (this.state.p_num == page) ? (<a style={{backgroundColor:"rgb(213, 224, 220)"}} className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>)
+                : (<a className="page-link" onClick = {() => this.listBoard(page)}>{page}</a>)
+            }
         </li>
         ));
     }
@@ -110,7 +113,7 @@ class ListBoardComponent extends Component {
         if (this.state.paging.prev) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1) )} tabindex="-1">Previous</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1) )} tabindex="-1">&lt;</a>
                 </li>
             );
         }
@@ -120,7 +123,7 @@ class ListBoardComponent extends Component {
         if (this.state.paging.next) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1) )} tabIndex="-1">Next</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1) )} tabIndex="-1">&gt;</a>
                 </li>
             );
         }
@@ -130,7 +133,7 @@ class ListBoardComponent extends Component {
         if (this.state.p_num != 1) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard(1)} tabIndex="-1">Move to First Page</a>
+                    <a className="page-link" onClick = {() => this.listBoard(1)} tabIndex="-1">&lt;&lt;</a>
                 </li>
             );
         }
@@ -140,7 +143,7 @@ class ListBoardComponent extends Component {
         if (this.state.p_num != this.state.paging.pageNumCountTotal) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal) )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.pageNumCountTotal) )} tabIndex="-1">&gt;&gt;</a>
                 </li>
             );
         }

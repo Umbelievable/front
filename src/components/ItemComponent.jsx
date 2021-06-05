@@ -109,23 +109,24 @@ class ItemComponent extends Component{
 
     viewPaging() {
         const pageNums = [];
-
         for (let i = this.state.paging.pageNumStart; i <= this.state.paging.pageNumEnd; i++ ) {
             pageNums.push(i);
         }
         return (pageNums.map((page) => 
         <li className="page-item" key={page.toString()} >
-            <a className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.subcateNo, this.state.pdNo)}>{page}</a>
+            {
+                (this.state.p_num == page) ? (<a style={{backgroundColor:"rgb(213, 224, 220)"}} className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.subcateNo, this.state.pdNo)}>{page}</a>) 
+                : (<a className="page-link" onClick = {() => this.listBoard(page, this.state.cateNo, this.state.subcateNo, this.state.pdNo)}>{page}</a>)
+            }
         </li>
         ));
-        
     }
 
     isPagingPrev(){
         if (this.state.paging.prev) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabindex="-1">Previous</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum - 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabindex="-1">&lt;</a>
                 </li>
             );
         }
@@ -135,7 +136,7 @@ class ItemComponent extends Component{
         if (this.state.paging.next) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">Next</a>
+                    <a className="page-link" onClick = {() => this.listBoard( (this.state.paging.currentPageNum + 1), this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">&gt;</a>
                 </li>
             );
         }
@@ -145,7 +146,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != 1) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard(1, this.state.cateNo, this.state.subcateNo, this.state.pdNo)} tabIndex="-1">Move to First Page</a>
+                    <a className="page-link" onClick = {() => this.listBoard(1, this.state.cateNo, this.state.subcateNo, this.state.pdNo)} tabIndex="-1">&lt;&lt;</a>
                 </li>
             );
         }
@@ -155,7 +156,7 @@ class ItemComponent extends Component{
         if (this.state.p_num != this.state.paging.pageNumCountTotal) {
             return (
                 <li className="page-item">
-                    <a className="page-link" onClick = {() => this.listBoard( this.state.paging.pageNumCountTotal, this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">LastPage({this.state.paging.pageNumCountTotal})</a>
+                    <a className="page-link" onClick = {() => this.listBoard( this.state.paging.pageNumCountTotal, this.state.cateNo, this.state.subcateNo, this.state.pdNo )} tabIndex="-1">&gt;&gt;</a>
                 </li>
             );
         }
