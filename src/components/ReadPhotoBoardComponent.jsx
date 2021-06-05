@@ -80,7 +80,7 @@ class ReadPhotoBoardComponent extends Component {
         console.log("comment => "+ JSON.stringify(comment));
   
         PhotoCommentService.createComment(this.state.pboardNo, comment).then(res => {
-           this.props.history.push(`/read-photoboard/${this.state.pboardNo}`);
+            window.location.reload();
         });
         
     }
