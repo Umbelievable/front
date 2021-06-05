@@ -229,7 +229,7 @@ class ItemComponent extends Component{
         
     }
 
-    goToOrder() { // buynow
+    goToOrder = async function () { // buynow
         // PurchaseService불러서 주문목록 post하고
         let pur = {
             userId: MemberService.getCurrentUser().id,
@@ -238,10 +238,12 @@ class ItemComponent extends Component{
             subcateNo: this.state.subcateNo,
             volume: this.state.count
         };
-        PurchaseService.addPurchase(pur);
+        PurchaseService.addPurchase(pur).then(res => {
+            alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+            window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
+        });
 
-        alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-        window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
+        
     }
 
     addCart(){ //add cart 버튼 누르면 실행되는 함수
@@ -485,7 +487,7 @@ class ItemComponent extends Component{
             </div>
             </div>
             </div>
-            </div>	
+            </div>   
         );
     }
 
