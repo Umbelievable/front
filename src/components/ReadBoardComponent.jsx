@@ -76,7 +76,7 @@ class ReadBoardComponent extends Component {
       console.log("comment => "+ JSON.stringify(comment));
 
       CommentService.createComment(this.state.qboardNo, comment).then(res => {
-         this.props.history.push(`/read-board/${this.state.qboardNo}`);
+         window.location.reload();
       });
    }
 
