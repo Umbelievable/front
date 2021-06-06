@@ -81,7 +81,7 @@ class CategoryBoardComponent extends Component {
                     {
                         this.state.items.map(
                             item => 
-                            <div style={{paddingBottom: '2em'}} key = {item.pdNo} className="col">
+                            <div style={{paddingBottom: '2em'}} className="col">
                                 <div style={{paddingBottom: '2em'}}>
                                 <div className="menucropping">
                                     <img src={item.pdImg} onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}/>
