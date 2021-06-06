@@ -51,6 +51,7 @@ class MainBoardComponent extends Component {
                         this.setState({arr: this.state.arr.concat(
                             <div className="mainCrop" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
                                 <img src={resul.data.pdImg}/>
+                                <div className="mainItemInfo">{resul.data.pdTitle}</div>
                             </div>
                         )});
                     });
@@ -63,6 +64,7 @@ class MainBoardComponent extends Component {
                         this.setState({arr2: this.state.arr2.concat(
                             <div className="mainCrop" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
                                 <img src={resul.data.pdImg}/>
+                                <div className="mainItemInfo">{resul.data.pdTitle}</div>
                             </div>
                         )});
                     });
@@ -105,6 +107,7 @@ class MainBoardComponent extends Component {
                                 this.setState({arr: this.state.arr.concat(
                                     <div className="mainCrop" onClick={()=>this.readItem(res4.data.pdNo, res4.data.cateNo, res4.data.subcateNo)}>
                                         <img src={res4.data.pdImg}/>
+                                        <div className="mainItemInfo">{res4.data.pdTitle}</div>
                                     </div>
                                     
                                 )});
@@ -118,6 +121,7 @@ class MainBoardComponent extends Component {
                                 this.setState({arr2: this.state.arr2.concat(
                                     <div className="mainCrop" onClick={()=>this.readItem(res5.data.pdNo, res5.data.cateNo, res5.data.subcateNo)}>
                                         <img src={res5.data.pdImg}/>
+                                        <div className="mainItemInfo">{res5.data.pdTitle}</div>
                                     </div>
                                 )});
                             });
@@ -131,9 +135,9 @@ class MainBoardComponent extends Component {
     viewItem(){
         var forArray = [];
         forArray.push(
-            <Carousel.Item style={{textAlign: 'center'}} interval={3000}> {this.state.arr} </Carousel.Item> );
+            <Carousel.Item style={{textAlign: 'center'}} interval={3000}>{this.state.arr}</Carousel.Item> );
         forArray.push(
-            <Carousel.Item style={{textAlign: 'center'}} interval={3000}> {this.state.arr2} </Carousel.Item> );
+            <Carousel.Item style={{textAlign: 'center'}} interval={3000}>{this.state.arr2}</Carousel.Item> );
         return forArray;
     }
 
@@ -167,11 +171,12 @@ class MainBoardComponent extends Component {
 
             for(i=0; i<4; i++){
                 const item = this.state.recommend[i].split('_');
-                ItemService.getCertainItem(item[0], item[2], item[1]).then( res4 => {
-                    this.setState({itemInfo: this.state.itemInfo.concat(res4.data)});
+                ItemService.getCertainItem(item[0], item[2], item[1]).then( res1 => {
+                    this.setState({itemInfo: this.state.itemInfo.concat(res1.data)});
                     this.setState({arr: this.state.arr.concat(
-                        <div className="mainCrop" onClick={()=>this.readItem(res4.data.pdNo, res4.data.cateNo, res4.data.subcateNo)}>
-                            <img src={res4.data.pdImg}/>
+                        <div className="mainCrop" onClick={()=>this.readItem(res1.data.pdNo, res1.data.cateNo, res1.data.subcateNo)}>
+                            <img src={res1.data.pdImg}/>
+                            <div className="mainItemInfo">{res1.data.pdTitle}</div>
                         </div>
                         
                     )});
@@ -180,11 +185,12 @@ class MainBoardComponent extends Component {
 
             for(i=4; i<this.state.recommend.length; i++){
                 const item = this.state.recommend[i].split('_');
-                ItemService.getCertainItem(item[0], item[2], item[1]).then( res5 => {
-                    this.setState({itemInfo: this.state.itemInfo.concat(res5.data)});
+                ItemService.getCertainItem(item[0], item[2], item[1]).then( res2 => {
+                    this.setState({itemInfo: this.state.itemInfo.concat(res2.data)});
                     this.setState({arr2: this.state.arr2.concat(
-                        <div className="mainCrop" onClick={()=>this.readItem(res5.data.pdNo, res5.data.cateNo, res5.data.subcateNo)}>
-                            <img src={res5.data.pdImg}/>
+                        <div className="mainCrop" onClick={()=>this.readItem(res2.data.pdNo, res2.data.cateNo, res2.data.subcateNo)}>
+                            <img src={res2.data.pdImg}/>
+                            <div className="mainItemInfo">{res2.data.pdTitle}</div>
                         </div>
                     )});
                 });
@@ -198,22 +204,32 @@ class MainBoardComponent extends Component {
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
-
-            <div style={{textAlign: 'center', fontSize:'25px', fontFamily:'NanumSquareB', color:'rgb(87,81,76)'}}>{MemberService.getCurrentUser().id}님의 관심 상품</div>
-            <div style={{textAlign: 'center', padding:'5px 0em 2em 0em', color:'rgb(142,133,126)'}}>상품을 눌러보세요! 하단에 관련 상품들을 추천해드립니다.</div>
-
-            <div style={{float:'auto', textAlign: 'center', alignContent:'center', border:'3px solid rgb(59,95,85)', borderRadius:'30px', padding:'2em 0em 2em 0em', margin:'0em 15em 5em 15em'}}>
-                {
-                    this.state.itemList.map(
-                        item =>
-                        <div onClick={()=>this.changeRecommend(item.pdNo, item.cateNo, item.subcateNo)} className="mainCir">
-                            <img id={"cirId_"+item.pdNo+"_"+item.cateNo+"_"+item.subcateNo} src={item.pdImg} className="cirImg"/>
+            
+            {
+                (MemberService.getCurrentUser()) ? (
+                    <div>
+                        <div style={{textAlign: 'center', fontSize:'25px', fontFamily:'NanumSquareB', color:'rgb(87,81,76)'}}>{MemberService.getCurrentUser().id}님의 관심 상품</div>
+                        <div style={{textAlign: 'center', padding:'5px 0em 2em 0em', color:'rgb(142,133,126)'}}>상품을 눌러보세요! 하단에 관련 상품들을 추천해드립니다.</div>
+                        
+                        <div style={{float:'auto', textAlign: 'center', alignContent:'center', border:'3px solid rgb(59,95,85)', borderRadius:'30px', padding:'2em 0em 2em 0em', margin:'0em 15em 5em 15em'}}>
+                        {
+                            this.state.itemList.map(
+                                item =>
+                                <div onClick={()=>this.changeRecommend(item.pdNo, item.cateNo, item.subcateNo)} className="mainCir">
+                                    <img id={"cirId_"+item.pdNo+"_"+item.cateNo+"_"+item.subcateNo} src={item.pdImg} className="cirImg"/>
+                                </div>
+                            )
+                        }
                         </div>
-                    )
-                }
-                
-            </div>
-
+                    </div>
+                ) : (
+                    <div>
+                        <div style={{textAlign: 'center', fontSize:'25px', fontFamily:'NanumSquareB', color:'rgb(87,81,76)'}}>뒤집어집 인기 상품</div>
+                        <div style={{textAlign: 'center', padding:'1em 0em 2em 0em', color:'rgb(142,133,126)'}}>로그인 하시면 <b style={{color:'rgb(73,117,104)'}}>뒤집어집</b>에서 고객님께 딱! 맞는 제품을 추천해드립니다.</div>
+                    </div>
+                )
+            }
+            
             <Carousel>
             {
                 this.viewItem()

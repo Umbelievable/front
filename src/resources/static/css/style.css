@@ -1926,8 +1926,8 @@ table.mypage a {
 }
 
 .mainCrop{
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
   overflow: hidden;
   display: inline;
   position: relative;
@@ -1938,8 +1938,8 @@ table.mypage a {
 
 .mainCrop img {
   border-radius: 10px;
-  width: 340px;
-  height: 340px;
+  width: 320px;
+  height: 320px;
 }
 
 .mainCir{
@@ -1957,4 +1957,26 @@ table.mypage a {
   border-radius: 50%;
   width: 120px;
   height: 120px;
+}
+
+.mainItemInfo{
+  position: absolute;
+  z-index:1;
+  top: 130px;
+  left : 30px;
+  width: 290px;
+  height:20px;
+  overflow: hidden;
+  border: none;
+  font-size: 14px;
+  color:white;
+  font-family: 'NanumSquareB';
+  text-align: right;
+  opacity: 0.7;
+  filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+.mainCrop:hover .mainItemInfo{
+  opacity: 1.0;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
 }
