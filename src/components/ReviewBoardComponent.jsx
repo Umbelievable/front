@@ -141,7 +141,7 @@ class ReviewBoardComponent extends Component {
                     <i id="star5" className="reviewStar glyphicon glyphicon-star-empty" aria-hidden="true" onClick={()=>this.setStar("star5")} onMouseOver={()=> this.moveStar("star5")}/>
                 </div>
                 <div style={{ textAlign:'center', width:'100%', padding:'2em 0em 1em 0em', fontSize:'20px'}}>어떤 점이 좋았나요?</div>
-                <textarea className="form-control" onChange={this.changeContentHandler} placeholder="리뷰를 입력해주세요." style={{width:'700px', height:'200px', marginBottom:'3em'}}/>
+                <textarea className="form-control" onChange={this.changeContentHandler} placeholder="리뷰를 입력해주세요." style={{width:'700px', height:'200px', marginBottom:'3em', fontSize:'15px'}}/>
                 <button className="btn-main" onClick={this.createReview} style={{marginBottom:'3em'}}>작성완료</button>
             </div>
 
