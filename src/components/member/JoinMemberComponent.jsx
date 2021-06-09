@@ -141,39 +141,39 @@ class JoinMemberComponent extends Component {
                 {!this.state.successful && (
                 <div>
                     <div className="form-group">
-                        <label htmlFor="id">아이디</label>
-                        <input type="text" className="form-control" name="id" value={this.state.id} onChange={this.onChangeId} validations={[required, vid]}/>
+                        <label style={{fontSize:'16px'}} htmlFor="id">아이디</label>
+                        <input style={{height:'40px', fontSize:'16px'}} type="text" className="form-control" name="id" value={this.state.id} onChange={this.onChangeId} validations={[required, vid]}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">비밀번호</label>
-                        <input type="password" className="form-control" name="password" placeholder="새 비밀번호를 입력해주세요" value={this.state.password} onChange={this.onChangePassword} validations={[required, vpassword]}/>
+                        <label style={{fontSize:'16px'}} htmlFor="password">비밀번호</label>
+                        <input style={{height:'40px', fontSize:'16px'}} type="password" className="form-control" name="password" placeholder="새 비밀번호를 입력해주세요" value={this.state.password} onChange={this.onChangePassword} validations={[required, vpassword]}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="email">이메일</label>
-                        <Input type="text" className="form-control" name="email" value={this.state.email} onChange={this.onChangeEmail} validations={[required, email]}/>
+                        <label style={{fontSize:'16px'}} htmlFor="email">이메일</label>
+                        <Input style={{height:'40px', fontSize:'16px'}} type="text" className="form-control" name="email" value={this.state.email} onChange={this.onChangeEmail} validations={[required, email]}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="username">이름</label>
-                        <Input type="text" className="form-control" name="username" value={this.state.username} onChange={this.onChangeUsername}/>
+                        <label style={{fontSize:'16px'}} htmlFor="username">이름</label>
+                        <Input style={{height:'40px', fontSize:'16px'}} type="text" className="form-control" name="username" value={this.state.username} onChange={this.onChangeUsername}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="phone">전화번호</label>
-                        <Input type="text" className="form-control" name="phone" value={this.state.phone} onChange={this.onChangePhone}/>
+                        <label style={{fontSize:'16px'}} htmlFor="phone">전화번호</label>
+                        <Input style={{height:'40px', fontSize:'16px'}} type="text" className="form-control" name="phone" value={this.state.phone} onChange={this.onChangePhone}/>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="birthDate">생년월일</label>
+                        <label style={{fontSize:'16px'}} htmlFor="birthDate">생년월일</label>
                         <br/>
                         <div style={{display:'inline'}}>
-                            <input style={{display: 'inline-block', width: '180px',margin:'0px 30px 0px 0px'}} class="form-control" type="text" name="birY" placeholder="년(4자)"
+                            <input style={{height:'40px', fontSize:'16px', display: 'inline-block', width: '180px',margin:'0px 30px 0px 0px'}} class="form-control" type="text" name="birY" placeholder="년(4자)"
                             aria-label="년(4자)" maxLength="4" value={this.state.birY} onChange={this.onChangeBirY}/>
                         </div>
                         <div style={{display:'inline'}}>
-                            <select style={{display: 'inline-block', width: '180px',margin:'0px 0px 0px 0px'}} aial-label="월" name="birM" class="form-control" placeholder="년(4자)" onChange={this.onChangeBirM}>
+                            <select style={{height:'40px', fontSize:'16px', display: 'inline-block', width: '180px',margin:'0px 0px 0px 0px'}} aial-label="월" name="birM" class="form-control" placeholder="년(4자)" onChange={this.onChangeBirM}>
                                 <option value>월</option>
                                 <option value="01">1</option>
                                 <option value="02">2</option>
@@ -190,14 +190,14 @@ class JoinMemberComponent extends Component {
                             </select>
                         </div>
                         <div style={{display:'inline'}}>
-                            <input type="text" style={{display: 'inline-block', width: '180px',margin:'0px 0px 0px 30px'}} class="form-control" name="birD" placeholder="일" 
+                            <input type="text" style={{height:'40px', fontSize:'16px', display: 'inline-block', width: '180px',margin:'0px 0px 0px 30px'}} class="form-control" name="birD" placeholder="일" 
                             aria-label="일" maxLength="2" value={this.state.birD} onChange={this.onChangeBirD}/>
                         </div>
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="sex">성별</label>
-                        <select className="form-control" name="sex" aria-label="성별" value={this.state.sex} onChange={this.onChangeSex}>
+                        <label style={{fontSize:'16px'}} htmlFor="sex">성별</label>
+                        <select style={{height:'40px', fontSize:'16px'}} className="form-control" name="sex" aria-label="성별" value={this.state.sex} onChange={this.onChangeSex}>
                             <option value selected>성별</option>
                             <option value="Y">남자</option>
                             <option value="X">여자</option>
