@@ -15,6 +15,26 @@ Version 2.0
 /*-----------------------------------------------------------------------
 1. Globally Applied Styles
 */
+@font-face {
+  font-family: "NanumSquareB";    
+  src: url("/res/resources/static/fonts/NanumSquareRoundB.ttf");
+}
+
+@font-face {
+  font-family: "NanumSquareEB";   
+  src: url("/res/resources/static/fonts/NanumSquareEB.ttf");   
+}
+
+@font-face {
+  font-family: "NanumSquareL";
+  src: url("/res/resources/static/fonts/NanumSquareL.ttf");        
+}
+
+@font-face {
+  font-family: "NanumSquareR";
+  src: url("/res/resources/static/fonts/NanumSquareR.ttf");        
+}
+
 html,
 body {
   position: relative;
