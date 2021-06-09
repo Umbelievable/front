@@ -65,14 +65,17 @@ class CreatePhotoBoardComponent extends Component {
         };
         console.log("board => "+ JSON.stringify(board));
 
-        //--file upload--//
-        let file = {
-            file: this.state.file
-        };
-        console.log("file => "+ JSON.stringify(file));
+        if(this.state.file){
+            //--file upload--//
+            let file = {
+                file: this.state.file
+            };
+            console.log("file => "+ JSON.stringify(file));
+            
+            this.fileUpload(this.state.file);
+            //--file upload--//
+        }
         
-        this.fileUpload(this.state.file);
-        //--file upload--//
 
 
         if (this.state.pboardNo === '_create') { // 새로 만들면
@@ -122,28 +125,28 @@ class CreatePhotoBoardComponent extends Component {
                 <div className="card-content">
 			    <form className="form-horizontal" style={{paddingRight:'12em'}}>
 				    <div className="form-group">
-					    <label for="title" className="col-sm-2 control-label">제목</label>
+					    <label style={{fontSize:'14px'}} for="title" className="col-sm-2 control-label">제목</label>
 					        <div className="col-sm-10">
-						        <input type="text" className="form-control" placeholder="제목을 입력해 주세요." value={this.state.pboardTitle} onChange={this.changeTitleHandler}/>
+						        <input style={{fontSize:'14px', height:'30px'}} type="text" className="form-control" placeholder="제목을 입력해 주세요." value={this.state.pboardTitle} onChange={this.changeTitleHandler}/>
 					        </div>
 				    </div>
 
 				    <div className="form-group">
-					    <label for="content" className="col-sm-2 control-label">내용</label>
+					    <label style={{fontSize:'14px'}} for="content" className="col-sm-2 control-label">내용</label>
 					        <div className="col-sm-10">
-						        <textarea style={{height:'200px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
+						        <textarea style={{height:'200px', fontSize:'14px'}} className="form-control" placeholder="내용을 입력해 주세요." value={this.state.pboardContent} onChange={this.changeContentHandler}></textarea>
 					        </div>
                     </div>
                 
                     <div className="form-group">        
-                        <label for="file_0" className="col-sm-2 control-label">파일</label>
+                        <label style={{fontSize:'14px'}} for="file_0" className="col-sm-2 control-label">파일</label>
                             <div className="col-sm-10">
-                                <input type="file" onChange={this.changeFileHandler} name="file" />
+                                <input style={{fontSize:'14px', paddingTop:'5px'}} type="file" onChange={this.changeFileHandler} name="file" />
                             </div>    
                     </div>
                 </form>
                 <div className="btn_wrap text-center">
-                    <button type="submit" className="btn btn-primary waves-effect waves-light" style={{fontSize:'larger', backgroundColor:'rgb(73,117,104)', padding:'7px 30px'}} onClick={this.createBoard}>저장하기</button>    
+                    <button type="submit" className="btn-main" style={{fontSize:'larger', backgroundColor:'rgb(73,117,104)', padding:'7px 30px'}} onClick={this.createBoard}>저장하기</button>    
                 </div>
             </div>
                    
