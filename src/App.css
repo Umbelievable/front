@@ -39,20 +39,20 @@
 
 @font-face {
   font-family: "NanumSquareB";    
-  src: url("%PUBLIC_URL%/res/resources/static/fonts/NanumSquareRoundB.ttf");
+  src: url("/res/resources/static/fonts/NanumSquareRoundB.ttf");
 }
 
 @font-face {
   font-family: "NanumSquareEB";   
-  src: url("%PUBLIC_URL%/res/resources/static/fonts/NanumSquareEB.ttf");   
+  src: url("/res/resources/static/fonts/NanumSquareEB.ttf");   
 }
 
 @font-face {
   font-family: "NanumSquareL";
-  src: url("%PUBLIC_URL%/res/resources/static/fonts/NanumSquareL.ttf");        
+  src: url("/res/resources/static/fonts/NanumSquareL.ttf");        
 }
 
 @font-face {
   font-family: "NanumSquareR";
-  src: url("%PUBLIC_URL%/res/resources/static/fonts/NanumSquareR.ttf");        
+  src: url("/res/resources/static/fonts/NanumSquareR.ttf");        
 }

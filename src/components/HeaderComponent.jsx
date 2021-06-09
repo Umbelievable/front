@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 import MemberService from '../service/MemberService';
-import imageSrc from '../resources/image/dzbzlogo.png';
 
 class HeaderComponent extends Component {
     constructor(props) {
@@ -100,7 +99,7 @@ class HeaderComponent extends Component {
 
 			<div className="text-center">
 				<div style={{verticalAlign:'middle', fontSize:'36px', color:'rgb(73,117,104)'}} onClick = {this.goToList}>
-                    <img style={{width:'300px', height:'77px'}} src={imageSrc}/>
+                    <img style={{width:'300px', height:'77px'}} src={process.env.PUBLIC_URL + '/res/resources/image/dzbzlogo.png'}/>
                 </div><br/>
                 <div id="adv-search" className="input-group">
                     <form id="searchForm" style={{display:'inline-block'}} role="form">
