@@ -175,6 +175,7 @@ class ReadBoardComponent extends Component {
                      <p style={{fontSize:'18px', display:'inline', height:'20px'}}>{this.state.board.qboardTitle}</p>
                      <p style={{fontSize:'14px', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardWriter}</p>
                      <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardInsertTime}</p>
+                     <p style={{fontSize:'13px', color:'black', display:'inline', height:'20px', paddingLeft:'30px'}}>조회수: {this.state.board.qboardViews}</p>
                   </div>
 
                   <div style={{display:'inline', float:'right'}}>
