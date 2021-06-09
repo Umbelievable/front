@@ -37,22 +37,4 @@
   }
 }
 
-@font-face {
-  font-family: "NanumSquareB";        
-  src: url("./resources/static/fonts/NanumSquareRoundB.ttf");
-}
 
-@font-face {
-  font-family: "NanumSquareEB";        
-  src: url("./resources/static/fonts/NanumSquareRoundEB.ttf");
-}
-
-@font-face {
-  font-family: "NanumSquareL";        
-  src: url("./resources/static/fonts/NanumSquareRoundL.ttf");
-}
-
-@font-face {
-  font-family: "NanumSquareR";        
-  src: url("./resources/static/fonts/NanumSquareRoundR.ttf");
-}

@@ -15,6 +15,26 @@ Version 2.0
 /*-----------------------------------------------------------------------
 1. Globally Applied Styles
 */
+@font-face {
+  font-family: "NanumSquareB";    
+  src: url("/res/resources/static/fonts/NanumSquareRoundB.ttf");
+}
+
+@font-face {
+  font-family: "NanumSquareEB";   
+  src: url("/res/resources/static/fonts/NanumSquareEB.ttf");   
+}
+
+@font-face {
+  font-family: "NanumSquareL";
+  src: url("/res/resources/static/fonts/NanumSquareL.ttf");        
+}
+
+@font-face {
+  font-family: "NanumSquareR";
+  src: url("/res/resources/static/fonts/NanumSquareR.ttf");        
+}
+
 html,
 body {
   position: relative;
@@ -853,7 +873,7 @@ Version 1.0
   left: 0px;
   z-index: 20;
   right: 0px;
-  padding: 10px 50px 0px 50px;
+  padding: 10px 50px 20px 50px;
   background-color: rgb(248, 248, 248);
 }
 .fixed-navbar .searchform {
@@ -1504,6 +1524,7 @@ textarea.form-control {
   border-color: transparent;
   border: none;
   color: rgb(87,81,76);
+  font-size: 16px;
 }
 
 /* Style the active class (and buttons on mouse-over) */
@@ -1727,6 +1748,7 @@ textarea.form-control {
   border-left: 1px solid rgb(213, 224, 220);
   border-right: 1px solid rgb(213, 224, 220);
   font-family: "NanumSquareB";
+  font-size: 16px;
 }
 
 .dropdown {

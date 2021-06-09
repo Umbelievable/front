@@ -64,13 +64,13 @@ class SignIn extends Component {
                 <Modal.Body onClick={isOpen}>
                     <Form onSubmit={this.handleLogin} ref={c => {this.form = c;}}>
                         <div className="form-group">
-                            <label htmlFor="id">Id</label>
-                            <Input type="text" className="form-control" name="id" value={this.state.id} onChange={this.onChangeId} validations={[required]}/>
+                            <label style={{fontSize:'16px'}} htmlFor="id">Id</label>
+                            <Input type="text" style={{height:'40px', fontSize:'16px'}} className="form-control" name="id" value={this.state.id} onChange={this.onChangeId} validations={[required]}/>
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <Input type="password" className="form-control" name="password" value={this.state.password} onChange={this.onChangePassword} validations={[required]}/>
+                            <label style={{fontSize:'16px'}} htmlFor="password">Password</label>
+                            <Input type="password" style={{height:'40px', fontSize:'16px'}} className="form-control" name="password" value={this.state.password} onChange={this.onChangePassword} validations={[required]}/>
                         </div>
 
                         <div className="form-group">
@@ -78,7 +78,7 @@ class SignIn extends Component {
                                 {this.state.loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                                 )}
-                                <span>Login</span>
+                                <span style={{fontSize:'16px'}}>Login</span>
                             </button>
                         </div>
 

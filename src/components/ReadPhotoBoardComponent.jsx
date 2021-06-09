@@ -54,6 +54,7 @@ class ReadPhotoBoardComponent extends Component {
         newINPUT.setAttribute("class", "form-control");
         newINPUT.style.width = "1200px";
         newINPUT.style.height = "30px";
+        newINPUT.style.fontSize = "13px";
         newINPUT.style.display = "inline";
         newINPUT.value = commentSpan.innerHTML;
         newINPUT.onchange = this.changeCommentContentHandler;
@@ -167,7 +168,7 @@ class ReadPhotoBoardComponent extends Component {
     render() {
         const ColoredLine = ({ color }) => ( <hr style={{ color: color, backgroundColor: color, height: '0.6px' }}/>);
         return (
-            <div style={{padding:'2em 3em'}} className="main-content">
+            <div style={{padding:'4em'}} className="main-content">
                 <div className="row row-inline-block small-spacing">
                 <div className="col-xs-12">
                 <div className="box-content">
@@ -202,8 +203,8 @@ class ReadPhotoBoardComponent extends Component {
                     <div className="card-content">
                     <div className="clearfix"><h4 className="box-title pull-left">Comment</h4></div>
                     <form className="form-horizontal form-view">
-                        <div className="input-group margin-bottom-20">
-                            <input type="text" className="form-control" value={this.state.pcommentContent} style={{height:'45px'}} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
+                        <div className="input-group margin-bottom-20" style={{width:'1400px'}}>
+                            <input type="text" className="form-control" value={this.state.pcommentContent} style={{height:'45px', fontSize:'13px'}} onChange={this.changeContentHandler} placeholder="댓글을 입력해 주세요."/>
                             <div className="input-group-btn">
                             <button style={{height:'45px'}} type="button" className="btn waves-effect waves-light" onClick={this.createComment}><i className="glyphicon glyphicon-edit" aria-hidden="true"></i></button>
                             </div>
