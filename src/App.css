@@ -38,21 +38,21 @@
 }
 
 @font-face {
-  font-family: "NanumSquareB";        
-  src: url("./resources/static/fonts/NanumSquareRoundB.ttf");
+  font-family: "NanumSquareB";    
+  src: url("../public/res/resources/static/fonts/NanumSquareRoundB.ttf");
 }
 
 @font-face {
-  font-family: "NanumSquareEB";        
-  src: url("./resources/static/fonts/NanumSquareRoundEB.ttf");
+  font-family: "NanumSquareEB";   
+  src: url("../public/res/resources/static/fonts/NanumSquareRoundEB.ttf");     
 }
 
 @font-face {
-  font-family: "NanumSquareL";        
-  src: url("./resources/static/fonts/NanumSquareRoundL.ttf");
+  font-family: "NanumSquareL";
+  src: url("../public/res/resources/static/fonts/NanumSquareL.ttf");        
 }
 
 @font-face {
-  font-family: "NanumSquareR";        
-  src: url("./resources/static/fonts/NanumSquareRoundR.ttf");
+  font-family: "NanumSquareR";
+  src: url("../public/res/resources/static/fonts/NanumSquareR.ttf");        
 }
