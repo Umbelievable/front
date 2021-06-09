@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../public/res/resources/static/css/style.css';
+import '%PUBLIC_URL%/res/resources/static/css/style.css';
 
 
 ReactDOM.render(
