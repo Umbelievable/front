@@ -3,7 +3,6 @@ import ItemService from '../service/ItemService';
 import ReviewService from '../service/ReviewService';
 import MemberService from '../service/MemberService';
 import PurchaseService from '../service/PurchaseService';
-import RecommendService from '../service/RecommendService';
 
 class ReviewBoardComponent extends Component {
     constructor(props) {
@@ -92,18 +91,10 @@ class ReviewBoardComponent extends Component {
             customerId: MemberService.getCurrentUser().id
         };
 
-        let preReview = { // predict 넘길 리뷰
-            pdNo: this.state.pdNo,
-            subcateNo: this.state.subcateNo,
-            categoryNo: this.state.cateNo,
-            review: this.state.review
-        }
-
-        if((this.state.pdNo==0 && this.state.subcateNo=='침대' && this.state.cateNo=='침실가구') || (this.state.pdNo==2 && this.state.subcateNo=='선반' && this.state.cateNo=='수납가구') ||
-            (this.state.pdNo==0 && this.state.subcateNo=='소파' && this.state.cateNo=='거실가구')){ // 모델 있는 애들 셋
-            RecommendService.reviewPredict(preReview).then(res => { // 긍부정 예측모델 넣고 
-                alert(res.data); // 결과 alert로 띄우고
-                ReviewService.createReview(this.state.cateNo, this.state.subcateNo, this.state.pdNo, review); // 리뷰 작성하고
+        if((this.state.pdNo == 0 && this.state.subcateNo == '침대' && this.state.cateNo == '침실가구') || (this.state.pdNo == 2 && this.state.subcateNo == '선반' && this.state.cateNo == '수납가구') ||
+            (this.state.pdNo == 0 && this.state.subcateNo == '소파' && this.state.cateNo == '거실가구')){ // 모델 있는 애들 셋
+                ReviewService.createReview(this.state.cateNo, this.state.subcateNo, this.state.pdNo, review).then(res => { 
+                alert((res.data.predict).toString()); // 결과 alert로 띄우고
                 window.location.href = '/order-board'; // 주문페이지로 돌아가기
             });
         }

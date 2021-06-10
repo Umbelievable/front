@@ -38,15 +38,10 @@ class MainBoardComponent extends Component {
         var mem = MemberService.getCurrentUser();
         if(!mem){  // 로그인 안했으면
             RecommendService.getRecommendProduct().then((res) => {
-                for (var x in res.data) {
-                    this.setState({recommend: this.state.recommend.concat(x).sort(function(a, b){ // 8개 딕셔너리 받아오면 
-                        return a == b ? 0 : (a > b ? 1 : -1)
-                    })});
-                }
-    
+                this.setState({recommend: this.shuffleArray(res.data)});
                 for(i=0; i<3; i++){
-                    const item = this.state.recommend[i].split('_');
-                    ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
+                    const item = this.state.recommend[i];
+                    ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr: this.state.arr.concat(
                             <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
@@ -64,9 +59,9 @@ class MainBoardComponent extends Component {
                     });
                 }
     
-                for(i=3; i<this.state.recommend.length; i++){
-                    const item = this.state.recommend[i].split('_');
-                    ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
+                for(i=3; i<6; i++){
+                    const item = this.state.recommend[i];
+                    ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr2: this.state.arr2.concat(
                             <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
@@ -95,7 +90,7 @@ class MainBoardComponent extends Component {
                     this.setState({itemList: this.state.itemList.concat(res1.data)}); // 먼저 넣고
                     let item ={ // post로 보내려고
                         pdNo: r[0].pdNo,
-                        categoryNo: r[0].categoryNo,
+                        cateNo: r[0].categoryNo,
                         subcateNo: r[0].subcateNo  
                     };
                     for(var i=1; i<5; i++){ // 그리고 1~4번째 가져오기
@@ -105,18 +100,14 @@ class MainBoardComponent extends Component {
                     }
 
                     var first = document.getElementById("cirId_"+r[0].pdNo+"_"+r[0].categoryNo+"_"+r[0].subcateNo); // 첫번째 상품 클릭
-                    first.style.border = "5px solid rgb(255, 230, 159)";
+                    first.style.opacity = "1";
 
                     RecommendService.getRecommendProductById(item).then((res3) => { // 추천상품 받기
-                        for (var x in res3.data) {
-                            this.setState({recommend: this.state.recommend.concat(x).sort(function(a, b){ // 8개 딕셔너리 받아오면 
-                                return a == b ? 0 : (a > b ? 1 : -1)
-                            })});
-                        }
+                        this.setState({recommend: this.shuffleArray(res3.data)});
             
                         for(i=0; i<3; i++){
-                            const item = this.state.recommend[i].split('_');
-                            ItemService.getCertainItem(item[0], item[2], item[1]).then( res4 => {
+                            const item = this.state.recommend[i];
+                            ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( res4 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res4.data)});
                                 this.setState({arr: this.state.arr.concat(
                                     <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res4.data.pdNo, res4.data.cateNo, res4.data.subcateNo)}>
@@ -134,9 +125,9 @@ class MainBoardComponent extends Component {
                             });
                         }
             
-                        for(i=3; i<this.state.recommend.length; i++){
-                            const item = this.state.recommend[i].split('_');
-                            ItemService.getCertainItem(item[0], item[2], item[1]).then( res5 => {
+                        for(i=3; i<6; i++){
+                            const item = this.state.recommend[i];
+                            ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( res5 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res5.data)});
                                 this.setState({arr2: this.state.arr2.concat(
                                     <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res5.data.pdNo, res5.data.cateNo, res5.data.subcateNo)}>
@@ -173,10 +164,10 @@ class MainBoardComponent extends Component {
         var i = 0;
         var cirs = document.getElementsByClassName("cirImg"); // 다 비우고
         for (i = 0; i < cirs.length; i++) {
-            cirs[i].style.border = "none";
+            cirs[i].style.opacity = "0.4";
         }
         var tar = document.getElementById("cirId_"+pdNo+"_"+cateNo+"_"+subcateNo); 
-        tar.style.border = "5px solid rgb(255, 230, 159)"; // 누른애만
+        tar.style.opacity = "1"; // 누른애만
 
         this.setState({recommend: [], 
                         arr: [], 
@@ -185,20 +176,16 @@ class MainBoardComponent extends Component {
 
         let item ={ // 다시 post로 보낼 준비
             pdNo: pdNo,
-            categoryNo: cateNo,
+            cateNo: cateNo,
             subcateNo: subcateNo  
         };
         
         RecommendService.getRecommendProductById(item).then((res) => { // 추천상품 받기
-            for (var x in res.data) {
-                this.setState({recommend: this.state.recommend.concat(x).sort(function(a, b){ // 8개 딕셔너리 받아오면 
-                    return a == b ? 0 : (a > b ? 1 : -1)
-                })});
-            }
+            this.setState({recommend: this.shuffleArray(res.data)});
 
             for(i=0; i<3; i++){
-                const item = this.state.recommend[i].split('_');
-                ItemService.getCertainItem(item[0], item[2], item[1]).then( res1 => {
+                const item = this.state.recommend[i];
+                ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( res1 => {
                     this.setState({itemInfo: this.state.itemInfo.concat(res1.data)});
                     this.setState({arr: this.state.arr.concat(
                         <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res1.data.pdNo, res1.data.cateNo, res1.data.subcateNo)}>
@@ -217,9 +204,9 @@ class MainBoardComponent extends Component {
                 });
             }
 
-            for(i=3; i<this.state.recommend.length; i++){
-                const item = this.state.recommend[i].split('_');
-                ItemService.getCertainItem(item[0], item[2], item[1]).then( res2 => {
+            for(i=3; i<6; i++){
+                const item = this.state.recommend[i];
+                ItemService.getCertainItem(item.pdNo, item.cateNo, item.subcateNo).then( res2 => {
                     this.setState({itemInfo: this.state.itemInfo.concat(res2.data)});
                     this.setState({arr2: this.state.arr2.concat(
                         <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res2.data.pdNo, res2.data.cateNo, res2.data.subcateNo)}>
