@@ -111,7 +111,7 @@ class ReadPhotoBoardComponent extends Component {
 
         FileService.getOneFilePhoto(this.state.pboardNo).then(res => {
             const base64 = btoa( new Uint8Array(res.data).reduce((data, byte) => data + String.fromCharCode(byte), '', ),);
-        this.setState({ file: "data:;base64," + base64 });
+            this.setState({ file: "data:;base64," + base64 });
         });
 
         // 네비바에 현재 위치 표시하기 
