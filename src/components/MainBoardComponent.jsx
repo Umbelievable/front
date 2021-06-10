@@ -44,7 +44,7 @@ class MainBoardComponent extends Component {
                     })});
                 }
     
-                for(i=0; i<4; i++){
+                for(i=0; i<3; i++){
                     const item = this.state.recommend[i].split('_');
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
@@ -64,7 +64,7 @@ class MainBoardComponent extends Component {
                     });
                 }
     
-                for(i=4; i<this.state.recommend.length; i++){
+                for(i=3; i<this.state.recommend.length; i++){
                     const item = this.state.recommend[i].split('_');
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
@@ -114,7 +114,7 @@ class MainBoardComponent extends Component {
                             })});
                         }
             
-                        for(i=0; i<4; i++){
+                        for(i=0; i<3; i++){
                             const item = this.state.recommend[i].split('_');
                             ItemService.getCertainItem(item[0], item[2], item[1]).then( res4 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res4.data)});
@@ -134,7 +134,7 @@ class MainBoardComponent extends Component {
                             });
                         }
             
-                        for(i=4; i<this.state.recommend.length; i++){
+                        for(i=3; i<this.state.recommend.length; i++){
                             const item = this.state.recommend[i].split('_');
                             ItemService.getCertainItem(item[0], item[2], item[1]).then( res5 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res5.data)});
@@ -162,9 +162,9 @@ class MainBoardComponent extends Component {
     viewItem(){
         var forArray = [];
         forArray.push(
-            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">{this.state.arr}</div></Carousel.Item> );
+            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr}</div></Carousel.Item> );
         forArray.push(
-            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">{this.state.arr2}</div></Carousel.Item> );
+            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr2}</div></Carousel.Item> );
         return forArray;
     }
 
