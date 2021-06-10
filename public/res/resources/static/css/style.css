@@ -1946,23 +1946,6 @@ table.mypage a {
   background-color: rgb(248, 248, 248);
 }
 
-.mainCrop{
-  width: 320px;
-  height: 320px;
-  overflow: hidden;
-  display: inline;
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  padding:10px;
-}
-
-.mainCrop img {
-  border-radius: 10px;
-  width: 320px;
-  height: 320px;
-}
-
 .mainCir{
   width:120px;
   height:120px;
@@ -1980,43 +1963,21 @@ table.mypage a {
   height: 120px;
 }
 
-.mainItemInfo{
-  position: absolute;
-  z-index:1;
-  top: 130px;
-  left : 30px;
-  width: 290px;
-  height:20px;
-  overflow: hidden;
-  border: none;
-  font-size: 14px;
-  color:white;
-  font-family: 'NanumSquareB';
-  text-align: right;
-  opacity: 0.7;
-  filter: alpha(opacity=40); /* For IE8 and earlier */
-}
-
-.mainCrop:hover .mainItemInfo{
-  opacity: 1.0;
-  filter: alpha(opacity=100); /* For IE8 and earlier */
-}
-
-
 .maincropping {
-  width: 335px;
-  height: 335px;
+  width: 400px;
+  height: 400px;
   overflow: hidden;
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
+  text-align: center;
   border-radius: 10px;
 }
 
 .maincropping img {
-  width: 335px;
-  height: 335px;
+  width: 400px;
+  height: 400px;
   transition: transform 0.2s;
 }
 

@@ -49,16 +49,16 @@ class MainBoardComponent extends Component {
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr: this.state.arr.concat(
-                            <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
-                                <div style={{paddingBottom: '2em'}}>
+                            <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
+    
                                 <div className="maincropping">
                                     <img src={resul.data.pdImg}/>
                                 </div>
-                                <div className="card-body">
+                                <div style={{width:'400px', textAlign:'right'}} className="card-body">
                                     <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{resul.data.pdMall}</small>
                                     <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{resul.data.pdTitle}</small>
                                 </div>
-                                </div>
+
                             </div>
                         )});
                     });
@@ -69,16 +69,16 @@ class MainBoardComponent extends Component {
                     ItemService.getCertainItem(item[0], item[2], item[1]).then( resul => {
                         this.setState({itemInfo: this.state.itemInfo.concat(resul.data)});
                         this.setState({arr2: this.state.arr2.concat(
-                            <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
-                                <div style={{paddingBottom: '2em'}}>
-                                <div className="maincropping">
-                                    <img src={resul.data.pdImg}/>
-                                </div>
-                                <div className="card-body">
-                                    <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{resul.data.pdMall}</small>
-                                    <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{resul.data.pdTitle}</small>
-                                </div>
-                                </div>
+                            <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(resul.data.pdNo, resul.data.cateNo, resul.data.subcateNo)}>
+
+                                    <div className="maincropping">
+                                        <img src={resul.data.pdImg}/>
+                                    </div>
+                                    <div style={{width:'400px', textAlign:'right'}} className="card-body">
+                                        <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{resul.data.pdMall}</small>
+                                        <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{resul.data.pdTitle}</small>
+                                    </div>
+
                             </div>
                         )});
                     });
@@ -119,16 +119,16 @@ class MainBoardComponent extends Component {
                             ItemService.getCertainItem(item[0], item[2], item[1]).then( res4 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res4.data)});
                                 this.setState({arr: this.state.arr.concat(
-                                    <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(res4.data.pdNo, res4.data.cateNo, res4.data.subcateNo)}>
-                                        <div style={{paddingBottom: '2em'}}>
+                                    <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res4.data.pdNo, res4.data.cateNo, res4.data.subcateNo)}>
+                                        
                                         <div className="maincropping">
                                             <img src={res4.data.pdImg}/>
                                         </div>
-                                        <div className="card-body">
+                                        <div style={{width:'400px', textAlign:'right'}} className="card-body">
                                             <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{res4.data.pdMall}</small>
                                             <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{res4.data.pdTitle}</small>
                                         </div>
-                                        </div>
+                                        
                                     </div>
                                 )});
                             });
@@ -139,16 +139,16 @@ class MainBoardComponent extends Component {
                             ItemService.getCertainItem(item[0], item[2], item[1]).then( res5 => {
                                 this.setState({itemInfo: this.state.itemInfo.concat(res5.data)});
                                 this.setState({arr2: this.state.arr2.concat(
-                                    <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(res5.data.pdNo, res5.data.cateNo, res5.data.subcateNo)}>
-                                        <div style={{paddingBottom: '2em'}}>
+                                    <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res5.data.pdNo, res5.data.cateNo, res5.data.subcateNo)}>
+                                        
                                         <div className="maincropping">
                                             <img src={res5.data.pdImg}/>
                                         </div>
-                                        <div className="card-body">
+                                        <div style={{width:'400px', textAlign:'right'}} className="card-body">
                                             <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{res5.data.pdMall}</small>
                                             <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{res5.data.pdTitle}</small>
                                         </div>
-                                        </div>
+                                        
                                     </div>
                                 )});
                             });
@@ -162,9 +162,9 @@ class MainBoardComponent extends Component {
     viewItem(){
         var forArray = [];
         forArray.push(
-            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr}</div></Carousel.Item> );
+            <Carousel.Item interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr}</div></Carousel.Item> );
         forArray.push(
-            <Carousel.Item style={{textAlign:'right'}} interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr2}</div></Carousel.Item> );
+            <Carousel.Item interval={3000}><div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">{this.state.arr2}</div></Carousel.Item> );
         return forArray;
     }
 
@@ -196,42 +196,42 @@ class MainBoardComponent extends Component {
                 })});
             }
 
-            for(i=0; i<4; i++){
+            for(i=0; i<3; i++){
                 const item = this.state.recommend[i].split('_');
                 ItemService.getCertainItem(item[0], item[2], item[1]).then( res1 => {
                     this.setState({itemInfo: this.state.itemInfo.concat(res1.data)});
                     this.setState({arr: this.state.arr.concat(
-                        <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(res1.data.pdNo, res1.data.cateNo, res1.data.subcateNo)}>
-                            <div style={{paddingBottom: '2em'}}>
+                        <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res1.data.pdNo, res1.data.cateNo, res1.data.subcateNo)}>
+ 
                             <div className="maincropping">
                                 <img src={res1.data.pdImg}/>
                             </div>
-                            <div className="card-body">
+                            <div style={{width:'400px', textAlign:'right'}} className="card-body">
                                 <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{res1.data.pdMall}</small>
                                 <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{res1.data.pdTitle}</small>
                             </div>
-                            </div>
+
                         </div>
                         
                     )});
                 });
             }
 
-            for(i=4; i<this.state.recommend.length; i++){
+            for(i=3; i<this.state.recommend.length; i++){
                 const item = this.state.recommend[i].split('_');
                 ItemService.getCertainItem(item[0], item[2], item[1]).then( res2 => {
                     this.setState({itemInfo: this.state.itemInfo.concat(res2.data)});
                     this.setState({arr2: this.state.arr2.concat(
-                        <div style={{paddingBottom: '2em'}} className="col" onClick={()=>this.readItem(res2.data.pdNo, res2.data.cateNo, res2.data.subcateNo)}>
-                            <div style={{paddingBottom: '2em'}}>
+                        <div style={{paddingBottom: '2em', textAlign:'center'}} className="col" onClick={()=>this.readItem(res2.data.pdNo, res2.data.cateNo, res2.data.subcateNo)}>
+
                             <div className="maincropping">
                                 <img src={res2.data.pdImg}/>
                             </div>
-                            <div className="card-body">
+                            <div style={{width:'400px', textAlign:'right'}} className="card-body">
                                 <small className="card-text" style={{fontSize:'12px', fontWeight:'bold', color:'rgb(178, 178, 178)'}}>{res2.data.pdMall}</small>
                                 <small className="card-text" style={{display:'block', fontWeight:'bold', color:'rgb(73,117,104)', fontSize:'13px', height:'62px'}}>{res2.data.pdTitle}</small>
                             </div>
-                            </div>
+  
                         </div>
                     )});
                 });
@@ -270,7 +270,7 @@ class MainBoardComponent extends Component {
                     </div>
                 )
             }
-            <Carousel>
+            <Carousel style={{paddingLeft:'4em'}}>
             {
                 this.viewItem()
             }
