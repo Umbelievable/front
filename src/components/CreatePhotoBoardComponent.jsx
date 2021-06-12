@@ -47,9 +47,7 @@ class CreatePhotoBoardComponent extends Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        FileService.uploadFile(formData, config).then(res => {
-            this.props.history.push('/photo-board');
-        });
+        FileService.uploadFile(formData, config);
         
     }
     //--file upload--//
@@ -75,12 +73,14 @@ class CreatePhotoBoardComponent extends Component {
             this.fileUpload(this.state.file);
             //--file upload--//
         }
+
         
 
 
         if (this.state.pboardNo === '_create') { // 새로 만들면
             PhotoBoardService.createBoard(board).then(res => {
-                this.props.history.push('/photo-board');
+                //this.props.history.push('/photo-board');
+                window.location.href = '/photo-board';
             });
         } else { // 있던 게시글 업데이트면
             // 파일 Url 글번호로 가져와서
@@ -91,11 +91,6 @@ class CreatePhotoBoardComponent extends Component {
         }
     }
 
-    cancel() {
-        this.props.history.push('/photo-board');
-    }
-
- 
     
     componentDidMount() {
         if (this.state.pboardNo === '_create') {

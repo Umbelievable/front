@@ -13,7 +13,7 @@ class CreateBoardComponent extends Component {
             qboardWriter: MemberService.getCurrentUser().username,
             qboardContent: '',
             qboardFileUrl: '',
-            file: null
+            file: ' '
         }
 
         this.changeTitleHandler = this.changeTitleHandler.bind(this);
@@ -44,9 +44,7 @@ class CreateBoardComponent extends Component {
                 'content-type': 'multipart/form-data'
             }
         }
-        FileService.uploadFile(formData, config).then(res => {
-            this.props.history.push('/qna-board');
-        });
+        FileService.uploadFile(formData, config);
         
     }
     //--file upload--//
@@ -62,19 +60,22 @@ class CreateBoardComponent extends Component {
         };
         console.log("board => "+ JSON.stringify(board));
 
-        //--file upload--//
-        let file = {
-            file: this.state.file
-        };
-        console.log("file => "+ JSON.stringify(file));
-        
-        this.fileUpload(this.state.file);
-        //--file upload--//
+        if(this.state.file != ' '){
+            //--file upload--//
+            let file = {
+                file: this.state.file
+            };
+            console.log("file => "+ JSON.stringify(file));
+            
+            this.fileUpload(this.state.file);
+            //--file upload--//
+        }
 
 
         if (this.state.qboardNo === '_create') { // 새로 만들면
             BoardService.createBoard(board).then(res => {
-                this.props.history.push('/qna-board');
+                //this.props.history.push('/qna-board');
+                window.location.href = '/qna-board';
             });
 
         } else { 
@@ -82,10 +83,6 @@ class CreateBoardComponent extends Component {
                 this.props.history.push(`/read-board/${this.state.qboardNo}`);
             });
         }
-    }
-
-    cancel() {
-        this.props.history.push('/qna-board');
     }
 
     componentDidMount() {
