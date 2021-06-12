@@ -36,7 +36,8 @@ class ReviewBoardComponent extends Component {
 
             ItemService.getCertainItem(pdNo, categoryNo, subcateNo).then( resul => { // 아이템 정보 출력
                 this.setState({item: resul.data});
-                const itemPrice = (resul.data.pdPrice).replace(/,/g, "").substring(0, resul.data.pdPrice.length-2);
+                const itemP = (resul.data.pdPrice).replace(/,/g, "");
+                const itemPrice = itemP.substring(0, itemP.length-1);
                 this.setState({totalPrice: itemPrice * this.state.volume});
             });
         });

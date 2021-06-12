@@ -83,7 +83,7 @@ class ReadBoardComponent extends Component {
 
    updateComment = async function (qcommentNo) {
       let comment = {
-            qcommentContent: this.state.newComment,
+         qcommentContent: this.state.newComment,
          qcommentWriter: this.state.currentUser.username,
       };
       console.log("comment => "+ JSON.stringify(comment));
@@ -160,9 +160,14 @@ class ReadBoardComponent extends Component {
       }
    }
 
+   showDate(date){
+      return (date).replace('T', " ");
+   }
+
 
    render() {
       const ColoredLine = ({ color }) => (<hr style={{ color: color, backgroundColor: color, height: '0.6px'}}/>);
+
       return (
          <div style={{padding:'4em'}} className="main-content">
             <div className="row row-inline-block small-spacing">
@@ -174,7 +179,7 @@ class ReadBoardComponent extends Component {
                   <div style={{display:'inline', padding:'0px 50px 0px 10px'}}>
                      <p style={{fontSize:'18px', display:'inline', height:'20px'}}>{this.state.board.qboardTitle}</p>
                      <p style={{fontSize:'14px', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardWriter}</p>
-                     <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.qboardInsertTime}</p>
+                     <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.showDate(String(this.state.board.qboardInsertTime))}</p>
                      <p style={{fontSize:'13px', color:'black', display:'inline', height:'20px', paddingLeft:'30px'}}>조회수: {this.state.board.qboardViews}</p>
                   </div>
 

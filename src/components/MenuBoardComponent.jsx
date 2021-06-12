@@ -22,13 +22,16 @@ class MenuBoardComponent extends Component {
             this.setState({items: res.data});
         });
 
-        LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
-            this.setState({likes: res.data}); // 리스트에 넣고 
-        });
+        if(MemberService.getCurrentUser()){
+            LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
+                this.setState({likes: res.data}); // 리스트에 넣고 
+            });
+        }
 
         if(sessionStorage.getItem("back") == true) { // 아이템 보다가 뒤로 온 상황이면 스크롤 유지하고
             window.scrollTo(0,sessionStorage.getItem("scrollPos"));
         }
+
         else { // 네비바로 들어온거면 처음부터 보여주기
             window.scrollTo(0,0);
         }
@@ -44,29 +47,31 @@ class MenuBoardComponent extends Component {
     }
 
     addOrDel(pdNO, cateNO, subcateNO){ // 일단 받고 추가할지 삭제할지 정하기
-        LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
-            for(var i=0;i<res.data.length; i++){
-                const likeno = res.data[i].likeNo;
-                const pdno = res.data[i].pdNo;
-                const cateno = res.data[i].categoryNo;
-                const subcateno = res.data[i].subcateNo;
-                if(pdNO == pdno && cateNO == cateno && subcateNO == subcateno){ // 이미 좋아요 목록에 추가된거라면 
-                    LikeService.deleteLikeItem(likeno).then(resul => { //삭제하고
-                        window.location.reload();
-                    });
+        if(MemberService.getCurrentUser()){
+            LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
+                for(var i=0;i<res.data.length; i++){
+                    const likeno = res.data[i].likeNo;
+                    const pdno = res.data[i].pdNo;
+                    const cateno = res.data[i].categoryNo;
+                    const subcateno = res.data[i].subcateNo;
+                    if(pdNO == pdno && cateNO == cateno && subcateNO == subcateno){ // 이미 좋아요 목록에 추가된거라면 
+                        LikeService.deleteLikeItem(likeno).then(resul => { //삭제하고
+                            window.location.reload();
+                        });
+                    }
                 }
-            }
-            let item = { // 반복문 다 돌았는데도 없다 -> 이제 좋아요 추가 해야된다
-                userId: MemberService.getCurrentUser().id,
-                pdNo: pdNO,
-                subcateNo: subcateNO,
-                categoryNo: cateNO
-            }; //json
-            LikeService.createLikeItem(item).then(resul => { //넘기기
-                window.location.reload();
+                let item = { // 반복문 다 돌았는데도 없다 -> 이제 좋아요 추가 해야된다
+                    userId: MemberService.getCurrentUser().id,
+                    pdNo: pdNO,
+                    subcateNo: subcateNO,
+                    categoryNo: cateNO
+                }; //json
+                LikeService.createLikeItem(item).then(resul => { //넘기기
+                    window.location.reload();
+                });
+                
             });
-            
-        });
+        }
     }
 
     render() {
@@ -93,7 +98,7 @@ class MenuBoardComponent extends Component {
                                 <div className="menucropping">
                                     <img src={item.pdImg}  onClick={()=>this.readItem(item.pdNo, item.cateNo, item.subcateNo)}/>
                                     {
-                                        this.state.likes.map( // 좋아요 한 아이템이면 꽉찬하트 // 꽉찬하트 눌렀을때 좋아요 목록 삭제하는 함수 호출
+                                        (MemberService.getCurrentUser()) && this.state.likes.map( // 좋아요 한 아이템이면 꽉찬하트 // 꽉찬하트 눌렀을때 좋아요 목록 삭제하는 함수 호출
                                             like =>
                                             (like.pdNo == item.pdNo && like.categoryNo == item.cateNo && like.subcateNo == item.subcateNo) ? (
                                                 <button className="heartBtn" onClick={()=>this.addOrDel(item.pdNo, item.cateNo, item.subcateNo)}><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></button>

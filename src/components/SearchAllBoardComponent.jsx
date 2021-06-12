@@ -3,6 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import queryString from 'query-string';
 import BoardService from '../service/BoardService';
+import CommentService from '../service/CommentService';
 import PhotoBoardService from '../service/PhotoBoardService';
 import ItemService from '../service/ItemService';
 import FileService from '../service/FileService';
@@ -15,6 +16,7 @@ class SearchAllBoardComponent extends Component {
         super(props);
         this.state = {
             searchKeyword: query.searchKeyword,
+            boards: [],
             qnaBoards: [],
             photoBoards: [],
             finalphotoBoards: [],
@@ -34,7 +36,23 @@ class SearchAllBoardComponent extends Component {
 
         // qna게시글 가져오기
         BoardService.searchBoards(this.state.searchKeyword).then((res) => {
-            this.setState({ qnaBoards: res.data});
+            this.setState({ boards: res.data});
+            for(var j=0; j<res.data.length; j++){
+                const board = res.data[j];
+                CommentService.getComments(board.qboardNo).then(resul => {
+                    const qb = [{ "qboardNo": board.qboardNo, 
+                                    "qboardTitle": board.qboardTitle, 
+                                    "qboardWriter": board.qboardWriter, 
+                                    "qboardInsertTime": board.qboardInsertTime, 
+                                    "qboardViews": board.qboardViews,
+                                    "qboardFileUrl": board.qboardFileUrl, 
+                                    "comment": resul.data.length
+                                }];
+                    this.setState({qnaBoards: this.state.qnaBoards.concat(qb).sort(function(a, b){ 
+                        return b.qboardNo - a.qboardNo
+                    })});
+                });
+            }
         });
 
         // photo게시글 가져오기
@@ -88,6 +106,10 @@ class SearchAllBoardComponent extends Component {
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
     render() {
         return (
             <div className="main-content" style={{padding:'3em'}}>
@@ -121,9 +143,14 @@ class SearchAllBoardComponent extends Component {
                                         qnaboard => 
                                         <tr key = {qnaboard.qboardNo}>
                                             <td> {qnaboard.qboardNo} </td>
-                                            <td> <a href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
+                                            <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle}&nbsp;
+                                            {
+                                                (qnaboard.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
+                                            }
+                                            &nbsp;[{qnaboard.comment}]&nbsp;</a>
+                                            </td>
                                             <td> {qnaboard.qboardWriter} </td>
-                                            <td> {qnaboard.qboardInsertTime} </td>
+                                            <td> {this.showDate(qnaboard.qboardInsertTime)} </td>
                                             <td> {qnaboard.qboardViews} </td>
                                         </tr>
                                     )

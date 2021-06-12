@@ -27,7 +27,8 @@ class OrderBoardComponent extends Component {
 
                 ItemService.getCertainItem(res.data[i].pdNo, res.data[i].categoryNo, res.data[i].subcateNo).then( resul => {
                     const item = resul.data;
-                    const itemPrice = (item.pdPrice).replace(/,/g, "").substring(0,item.pdPrice.length-2);
+                    const itemP = (item.pdPrice).replace(/,/g, "");
+                    const itemPrice = itemP.substring(0, itemP.length-1);
                     const orderItem = [{ "purchaseNo": purchaseNo, // 주문 번호
                                         "purchaseDate": purchaseDate, // 구매 날짜
                                         "volume": volume, //아이템 수량
@@ -60,6 +61,10 @@ class OrderBoardComponent extends Component {
 
     goToReview(purchaseNo){
         this.props.history.push('/review-board/'+purchaseNo);
+    }
+
+    showDate(date){
+        return (date).replace('T', " ");
     }
 
 
@@ -99,7 +104,7 @@ class OrderBoardComponent extends Component {
                                         <div style={{ paddingLeft:'15px', fontSize:'small', color:'black', display: 'inline-block'}}><b>수량</b>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{item.volume}개</div>
                                     </div>
                                 </td>
-                                <td  style={{verticalAlign:'middle'}}>{item.purchaseDate}</td>
+                                <td  style={{verticalAlign:'middle'}}>{this.showDate(item.purchaseDate)}</td>
                                 <td  style={{verticalAlign:'middle'}}>{this.numberWithCommas(item.totalPrice+10000)}원</td>
                                 <td  style={{verticalAlign:'middle'}}>구매 확정</td>
                                 <td style={{verticalAlign:'middle'}}>

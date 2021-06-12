@@ -34,7 +34,8 @@ class CartBoardComponent extends Component {
                     const item = resul.data;
                     
                     // 아이템에서 가져온 가격 원 빼고 콤마 빼야됨 -> 최종 가격 출력하기위해
-                    const itemPrice = (item.pdPrice).replace(/,/g, "").substring(0,item.pdPrice.length-2);
+                    const itemP = (item.pdPrice).replace(/,/g, "");
+                    const itemPrice = itemP.substring(0, itemP.length-1);
                     const cartItem = [{ "finalCartId": cartNo,
                                         "pdMall": item.pdMall,
                                         "pdNo": item.pdNo,
@@ -146,7 +147,7 @@ class CartBoardComponent extends Component {
         }
     }
 
-    deleteItem(){ // 선택 상품 삭제 함수
+    deleteItem = async function () { // 선택 상품 삭제 함수
         // 카트서비스에서 삭제 부르려면 cartNo를 인자로 넘겨야함
         var checkboxes = document.getElementsByName('check'); // 체크박스 리스트 가져오기
         const ordercart = this.state.finalcarts; 
@@ -159,7 +160,7 @@ class CartBoardComponent extends Component {
             }
         }
         alert("상품이 삭제되었습니다.\n");
-        this.props.history.push('/cart-board');
+        window.location.reload();
         
     }
 

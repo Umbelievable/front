@@ -165,6 +165,10 @@ class ReadPhotoBoardComponent extends Component {
         }
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
     render() {
         const ColoredLine = ({ color }) => ( <hr style={{ color: color, backgroundColor: color, height: '0.6px' }}/>);
         return (
@@ -178,7 +182,7 @@ class ReadPhotoBoardComponent extends Component {
                         <div style={{display:'inline', padding:'0px 50px 0px 10px'}}>
                             <p style={{fontSize:'18px', display:'inline', height:'20px'}}>{this.state.board.pboardTitle}</p>
                             <p style={{fontSize:'14px', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.pboardWriter}</p>
-                            <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.state.board.pboardInsertTime}</p>
+                            <p style={{fontSize:'13px', color:'gray', display:'inline', height:'20px', paddingLeft:'30px'}}>{this.showDate(String(this.state.board.pboardInsertTime))}</p>
                             <p style={{fontSize:'13px', color:'black', display:'inline', height:'20px', paddingLeft:'30px'}}>조회수: {this.state.board.pboardViews}</p>
                         </div>
                         

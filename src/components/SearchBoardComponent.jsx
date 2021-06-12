@@ -1,6 +1,6 @@
-import { Dropdown } from 'bootstrap';
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
+import CommentService from '../service/CommentService';
 import queryString from 'query-string';
 
 
@@ -11,6 +11,7 @@ class SearchBoardComponent extends Component {
         super(props)
         this.state = { 
             boards: [],
+            finalboards: [],
             searchKeyword: query.searchKeyword
         }
         this.changeKeywordHandler = this.changeKeywordHandler.bind(this);	
@@ -23,6 +24,27 @@ class SearchBoardComponent extends Component {
     componentDidMount() { 
         BoardService.searchBoards(this.state.searchKeyword).then((res) => {
             this.setState({ boards: res.data});
+            // 제목 옆에 댓글 수 표시하기 
+            for(var j=0; j<res.data.length; j++){
+                const board = res.data[j];
+                CommentService.getComments(board.qboardNo).then(resul => {
+                    const qb = [{ "qboardNo": board.qboardNo, 
+                                    "qboardTitle": board.qboardTitle, 
+                                    "qboardWriter": board.qboardWriter, 
+                                    "qboardInsertTime": board.qboardInsertTime, 
+                                    "qboardViews": board.qboardViews,
+                                    "qboardFileUrl": board.qboardFileUrl, 
+                                    "comment": resul.data.length
+                                }];
+                    this.setState({finalboards: this.state.finalboards.concat(qb).sort(function(a, b){ 
+                        return b.qboardNo - a.qboardNo
+                    })});
+                });
+            }
+
+
+
+
         });
         //qna 통합 검색
         var searchBar = document.getElementById("searchBar");
@@ -31,6 +53,10 @@ class SearchBoardComponent extends Component {
 
     readBoard(qboardNo) {
         this.props.history.push(`/read-board/${qboardNo}`);
+    }
+
+    showDate(date){
+        return (date).replace('T', " ");
     }
 
     render() {
@@ -55,13 +81,18 @@ class SearchBoardComponent extends Component {
                         </thead>
                         <tbody>
                             {
-                            this.state.boards.map(
+                            this.state.finalboards.map(
                                 board => 
                                 <tr key = {board.qboardNo}>
                                     <td> {board.qboardNo} </td>
-                                    <td> <a href={'/read-board/'+board.qboardNo}>{board.qboardTitle} </a> </td>
+                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle}&nbsp;
+                                    {
+                                        (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
+                                    }
+                                    &nbsp;[{board.comment}]&nbsp;</a>
+                                    </td>
                                     <td> {board.qboardWriter} </td>
-                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {this.showDate(board.qboardInsertTime)} </td>
                                     <td> {board.qboardViews} </td>
                                 </tr>
                             )

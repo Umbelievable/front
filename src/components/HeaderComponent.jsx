@@ -44,29 +44,36 @@ class HeaderComponent extends Component {
 
     searchBoard = (event) => {
         event.preventDefault();
-        var searchBoardType = this.state.searchBoardType;
-        var searchKeyword = this.state.searchKeyword;
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            var searchBoardType = this.state.searchBoardType;
+            var searchKeyword = this.state.searchKeyword;
 
-        // searchBoard는 사용자 위치 반환      
-        // qna에 있는지 // photo에 있는지 // main에서 전체 검색할건지(커뮤 두 개+아이템 전체) // 소카테고리(침실가구-침대) 들어가서 걔만 찾을건지 
-        // 게시판 타입마다 렌더링 다르게 해줘야 하기 때문에 searchBoardComponent 여러개 구현
+            // searchBoard는 사용자 위치 반환      
+            // qna에 있는지 // photo에 있는지 // main에서 전체 검색할건지(커뮤 두 개+아이템 전체) // 소카테고리(침실가구-침대) 들어가서 걔만 찾을건지 
+            // 게시판 타입마다 렌더링 다르게 해줘야 하기 때문에 searchBoardComponent 여러개 구현
 
-        if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
-            window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
+            if(searchBoardType=='/main-board' || searchBoardType=='/search-allboard'){
+                window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
+            }
+            if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
+                window.location.href = `/search-board?searchKeyword=${searchKeyword}`;
+            }
+            else if(searchBoardType=='/photo-board' || searchBoardType=='/search-photoboard'){
+                window.location.href = `/search-photoboard?searchKeyword=${searchKeyword}`;
+            }
+            else if(searchBoardType=='/menu-board' || searchBoardType=='/search-menuboard'){ // subCate
+                const params = new URLSearchParams(window.location.search);
+                window.location.href = `/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`;
+            }
+            else {
+                window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
+            }
         }
-        if(searchBoardType=='/qna-board' || searchBoardType=='/search-board'){
-            window.location.href = `/search-board?searchKeyword=${searchKeyword}`;
-        }
-        else if(searchBoardType=='/photo-board' || searchBoardType=='/search-photoboard'){
-            window.location.href = `/search-photoboard?searchKeyword=${searchKeyword}`;
-        }
-        else if(searchBoardType=='/menu-board' || searchBoardType=='/search-menuboard'){ // subCate
-            const params = new URLSearchParams(window.location.search);
-            window.location.href = `/search-menuboard?searchKeyword=${searchKeyword}&cateNo=${params.get('cateNo')}&subcateNo=${params.get('subcateNo')}`;
-        }
-        else {
-            window.location.href = `/search-allboard?searchKeyword=${searchKeyword}`;
-        }
+        
     }
 
     goToList() {

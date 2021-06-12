@@ -79,6 +79,10 @@ class MyCommentBoardComponent extends Component {
         }
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
 
     render() {
         return (
@@ -108,7 +112,7 @@ class MyCommentBoardComponent extends Component {
                                     <tr key = {mycomment.qcommentNo} style={{padding:'2em 3em'}}>
                                         
                                         <td style={{textAlign:'left', padding:'2em'}}>
-                                            <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.qcommentInsertTime} </div> 
+                                            <div style={{fontSize:'smaller', color:'gray'}}>{this.showDate(mycomment.qcommentInsertTime)} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.qcommentContent} </div>
                                             { // 그 게시글에 내 댓글 하나밖에 없으면 // json 형식때문에 이렇게 나눔
                                                 (mycomment.qboardNo.qboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-board/'+mycomment.qboardNo.qboardNo}> 원문&nbsp;:&nbsp;{mycomment.qboardNo.qboardTitle} </a>
@@ -141,7 +145,7 @@ class MyCommentBoardComponent extends Component {
                                     <tr key = {mycomment.pcommentNo} style={{padding:'2em 3em'}}>
                                         
                                         <td style={{textAlign:'left', padding:'2em'}}>
-                                            <div style={{fontSize:'smaller', color:'gray'}}>{mycomment.pcommentInsertTime} </div> 
+                                            <div style={{fontSize:'smaller', color:'gray'}}>{this.showDate(mycomment.pcommentInsertTime)} </div> 
                                             <div style={{fontSize:'large', padding:'10px 0px'}}>{mycomment.pcommentContent} </div>
                                             { 
                                                 (mycomment.pboardNo.pboardNo) && <a style={{color: 'rgb(87,81,76)'}} href={'/read-photoboard/'+mycomment.pboardNo.pboardNo}> 원문&nbsp;:&nbsp;{mycomment.pboardNo.pboardTitle} </a>
