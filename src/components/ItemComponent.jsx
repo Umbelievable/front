@@ -71,20 +71,23 @@ class ItemComponent extends Component{
         });
 
         // 유저 좋아요 목록 가져오기 -> 좋아요 목록에 있는건 칠한 하트로 뽑아야하고 다시 눌렀을때 삭제도 할 수 있게
-        LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
-            this.setState({likes: res.data}); // 리스트에 넣고 
-            
-            for(var i=0; i<res.data.length; i++){ // 리스트 길이만큼 돌기 
-                const pdNo = res.data[i].pdNo;
-                const cateNo = res.data[i].categoryNo;
-                const subcateNo = res.data[i].subcateNo;
-
-                if((this.state.pdNo == pdNo) && (this.state.cateNo == cateNo) && (this.state.subcateNo == subcateNo)){ // 이미 좋아요를 누른 상태라면
-                    this.setState({isClicked: true}); // 하트 칠해서 출력하기
-                }
+        if(MemberService.getCurrentUser()){
+            LikeService.getLikelist(MemberService.getCurrentUser().id).then((res) => { // 좋아요 목록 가져와서
+                this.setState({likes: res.data}); // 리스트에 넣고 
                 
-            }
-        });
+                for(var i=0; i<res.data.length; i++){ // 리스트 길이만큼 돌기 
+                    const pdNo = res.data[i].pdNo;
+                    const cateNo = res.data[i].categoryNo;
+                    const subcateNo = res.data[i].subcateNo;
+    
+                    if((this.state.pdNo == pdNo) && (this.state.cateNo == cateNo) && (this.state.subcateNo == subcateNo)){ // 이미 좋아요를 누른 상태라면
+                        this.setState({isClicked: true}); // 하트 칠해서 출력하기
+                    }
+                    
+                }
+            });
+        }
+        
 
         HashtagService.getNounTop5(this.state.pdNo,this.state.subcateNo,this.state.cateNo).then( res => {
             this.setState({ nounHash: res.data});
@@ -232,7 +235,7 @@ class ItemComponent extends Component{
     goToOrder = async function () { // buynow
         // PurchaseService불러서 주문목록 post하고
         let pur = {
-            userId: MemberService.getCurrentUser().id,
+            userId: this.state.currentUser.id,
             pdNo: this.state.pdNo,
             categoryNo: this.state.cateNo,
             subcateNo: this.state.subcateNo,

@@ -175,10 +175,11 @@ class ListBoardComponent extends Component {
                                 board => 
                                 <tr key = {board.qboardNo}>
                                     <td> {board.qboardNo} </td>
-                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle} &nbsp;[{board.comment}]&nbsp;</a>
+                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle}&nbsp;
                                     {
                                         (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
                                     }
+                                    &nbsp;[{board.comment}]&nbsp;</a>
                                     </td>
                                     <td> {board.qboardWriter} </td>
                                     <td> {board.qboardInsertTime} </td>
