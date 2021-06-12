@@ -106,6 +106,10 @@ class SearchAllBoardComponent extends Component {
         this.props.history.push(`/read-item?pdNo=${pdNo}&cateNo=${cateNo}&subcateNo=${subcateNo}`);
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
     render() {
         return (
             <div className="main-content" style={{padding:'3em'}}>
@@ -146,7 +150,7 @@ class SearchAllBoardComponent extends Component {
                                             &nbsp;[{qnaboard.comment}]&nbsp;</a>
                                             </td>
                                             <td> {qnaboard.qboardWriter} </td>
-                                            <td> {qnaboard.qboardInsertTime} </td>
+                                            <td> {this.showDate(qnaboard.qboardInsertTime)} </td>
                                             <td> {qnaboard.qboardViews} </td>
                                         </tr>
                                     )

@@ -71,6 +71,10 @@ class MyPostBoardComponent extends Component {
         this.props.history.push(`/read-photoboard/${pboardNo}`);
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
 
     render() {
         return (
@@ -104,7 +108,7 @@ class MyPostBoardComponent extends Component {
                                         <td> {qnaboard.qboardNo} </td>
                                         <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{color: 'rgb(87,81,76)'}} href={'/read-board/'+qnaboard.qboardNo}>{qnaboard.qboardTitle} </a> </td>
                                         <td> {qnaboard.qboardWriter} </td>
-                                        <td> {qnaboard.qboardInsertTime} </td>
+                                        <td> {this.showDate(qnaboard.qboardInsertTime)} </td>
                                         <td> {qnaboard.qboardViews} </td>
                                     </tr>
                                 )

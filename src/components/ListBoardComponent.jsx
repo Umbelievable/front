@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import BoardService from '../service/BoardService';
 import CommentService from '../service/CommentService';
+import MemberService from '../service/MemberService';
+import SignIn from "./SignIn";
 
 class ListBoardComponent extends Component {
     constructor(props) {
         super(props)
         this.state = { 
+            isModalOpen: false,
             p_num: 1,
             paging: {},
             boards: [],
@@ -53,12 +56,33 @@ class ListBoardComponent extends Component {
         qnabtn.className += " active";
     }
 
+    openModal = (event) => {
+        this.setState({ isModalOpen: true });
+    }
+    closeModal = (event) => {
+        this.setState({ isModalOpen: false });
+    }
+
     createBoard() {
-        this.props.history.push('/create-board/_create');
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            this.props.history.push('/create-board/_create');
+        }
+        
     }
 
     readBoard(qboardNo) {
-        this.props.history.push(`/read-board/${qboardNo}`);
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            this.props.history.push(`/read-board/${qboardNo}`);
+        }
+        
     }
 
     goToUpdate = (event) => {
@@ -149,6 +173,10 @@ class ListBoardComponent extends Component {
         }
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
 
   
     render() {
@@ -156,7 +184,8 @@ class ListBoardComponent extends Component {
             <div className="main-content"> 
                 <div className="row row-inline-block small-spacing">
 				<div className="col-xs-12">                   
-				<div className="box-content">   
+				<div className="box-content">
+                <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />   
 
                 <div style={{padding:'0em 3em'}} className="table-responsive clearfix">
                     <table className="table table-hover">
@@ -175,14 +204,14 @@ class ListBoardComponent extends Component {
                                 board => 
                                 <tr key = {board.qboardNo}>
                                     <td> {board.qboardNo} </td>
-                                    <td style={{textAlign:'left', paddingLeft:'3em'}}> <a style={{ color: 'rgb(87,81,76)' }} href={'/read-board/'+board.qboardNo}>{board.qboardTitle}&nbsp;
+                                    <td onClick={()=>this.readBoard(board.qboardNo)} style={{textAlign:'left', paddingLeft:'3em', color: 'rgb(87,81,76)'}}>{board.qboardTitle}&nbsp;
                                     {
                                         (board.qboardFileUrl) && (<span style={{color: "gray"}} className="glyphicon glyphicon-picture" aria-hidden="true"></span>)
                                     }
-                                    &nbsp;[{board.comment}]&nbsp;</a>
+                                    &nbsp;[{board.comment}]&nbsp;
                                     </td>
                                     <td> {board.qboardWriter} </td>
-                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {this.showDate(board.qboardInsertTime)} </td>
                                     <td> {board.qboardViews} </td>
                                 </tr>
                             )

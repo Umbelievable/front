@@ -7,6 +7,7 @@ import CartService from '../service/CartService';
 import MemberService from '../service/MemberService';
 import HashtagService from '../service/HashtagService';
 import PurchaseService from '../service/PurchaseService';
+import SignIn from "./SignIn";
 
 
 
@@ -17,6 +18,7 @@ class ItemComponent extends Component{
 
         super(props)
         this.state = {
+            isModalOpen: false,
             p_num: 1,
             paging: {},
             reviews: [],  //리뷰목록
@@ -97,6 +99,12 @@ class ItemComponent extends Component{
         });
     }
 
+    openModal = (event) => {
+        this.setState({ isModalOpen: true });
+    }
+    closeModal = (event) => {
+        this.setState({ isModalOpen: false });
+    }
 
     listBoard(p_num, cateNo, subcateNo, pdNo) {
         console.log("pageNum : "+ p_num);
@@ -189,29 +197,36 @@ class ItemComponent extends Component{
     }
 
     changeImg() { // 하트 눌렀을때 불리는 함수
-        if(!this.state.isClicked){ // 좋아요 안눌린상태면 // createLikeItem 호출
-            let item = {
-                userId: this.state.currentUser.id,
-                pdNo: this.state.pdNo,
-                subcateNo: this.state.subcateNo,
-                categoryNo: this.state.cateNo
-            };
-            LikeService.createLikeItem(item).then(res => {
-                window.location.reload();
-            });
-
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
         }
-        else { // 눌린상태면 // deleteLikeItem 호출
-            const likeItem = this.state.likes;
-            for(var i=0; i<likeItem.length; i++){
-                if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
-                    LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
-                        window.location.reload();
-                    });
+        else{
+            if(!this.state.isClicked){ // 좋아요 안눌린상태면 // createLikeItem 호출
+                let item = {
+                    userId: this.state.currentUser.id,
+                    pdNo: this.state.pdNo,
+                    subcateNo: this.state.subcateNo,
+                    categoryNo: this.state.cateNo
+                };
+                LikeService.createLikeItem(item).then(res => {
+                    window.location.reload();
+                });
+    
+            }
+            else { // 눌린상태면 // deleteLikeItem 호출
+                const likeItem = this.state.likes;
+                for(var i=0; i<likeItem.length; i++){
+                    if((likeItem[i].pdNo == this.state.pdNo) && (likeItem[i].categoryNo == this.state.cateNo) && (likeItem[i].subcateNo == this.state.subcateNo)) {
+                        LikeService.deleteLikeItem(likeItem[i].likeNo).then(res => {
+                            window.location.reload();
+                        });
+                    }
                 }
             }
+            this.setState({isClicked: !this.state.isClicked,}); // 지금 상태랑 반대인 그림으로 바꾸기
         }
-        this.setState({isClicked: !this.state.isClicked,}); // 지금 상태랑 반대인 그림으로 바꾸기
+        
     }
 
     numberWithCommas(x) { // 콤마 정규식
@@ -233,33 +248,45 @@ class ItemComponent extends Component{
     }
 
     goToOrder = async function () { // buynow
-        // PurchaseService불러서 주문목록 post하고
-        let pur = {
-            userId: this.state.currentUser.id,
-            pdNo: this.state.pdNo,
-            categoryNo: this.state.cateNo,
-            subcateNo: this.state.subcateNo,
-            volume: this.state.count
-        };
-        PurchaseService.addPurchase(pur).then(res => {
-            alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
-            window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
-        });
-
-        
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            // PurchaseService불러서 주문목록 post하고
+            let pur = {
+                userId: this.state.currentUser.id,
+                pdNo: this.state.pdNo,
+                categoryNo: this.state.cateNo,
+                subcateNo: this.state.subcateNo,
+                volume: this.state.count
+            };
+            PurchaseService.addPurchase(pur).then(res => {
+                alert("주문이 완료되었습니다.\n"); // 주문 완료되었다는 alert창 띄우고
+                window.location.href = '/order-board'; // 주문 목록 페이지로 이동하기
+            });
+        }
     }
 
     addCart(){ //add cart 버튼 누르면 실행되는 함수
-        let item = {
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            let item = {
             userId: this.state.currentUser.id,
             pdNo: this.state.pdNo,
             subcateNo: this.state.subcateNo,
             categoryNo: this.state.cateNo,
             volume: this.state.count
-        };
-        CartService.addItem(item).then(res => {
-            alert('장바구니에 상품을 추가했습니다.');
-        });
+            };
+
+            CartService.addItem(item).then(res => {
+                alert('장바구니에 상품을 추가했습니다.');
+            });
+        }
+        
     }
 
     showReview(review){
@@ -328,6 +355,10 @@ class ItemComponent extends Component{
         }
         return customerId;
     }
+
+    reviewDate(review){
+        return review.substring(0, review.length-1);
+    }
         
     render(){
         return (
@@ -335,8 +366,8 @@ class ItemComponent extends Component{
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">                   
             <div className="box-content">
+            <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 
-         
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3">
                 <div style={{padding:'3em 0em 3em 3em'}}>
                     <img className="itemcropping" src={this.state.itemInfo.pdImg}/>
@@ -401,7 +432,7 @@ class ItemComponent extends Component{
                                         <td> {this.showStar(review.star)} </td>
                                         <td> {this.addStar(review.customerId)} </td>
                                         <td style={{textAlign:'left'}}> {review.review} </td>
-                                        <td> {review.reviewDate} </td>
+                                        <td> {this.reviewDate(review.reviewDate)} </td>
                                     </tr>
                                 )
                                 }

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import PhotoBoardService from '../service/PhotoBoardService';
 import FileService from '../service/FileService';
+import MemberService from '../service/MemberService';
+import SignIn from "./SignIn";
 
 class PhotoBoardComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isModalOpen: false,
             boards: [],
             finalboards: []
         }
@@ -58,12 +61,33 @@ class PhotoBoardComponent extends Component {
         photobtn.className += " active";
     }
 
+    openModal = (event) => {
+        this.setState({ isModalOpen: true });
+    }
+    closeModal = (event) => {
+        this.setState({ isModalOpen: false });
+    }
+
     createBoard() {
-        this.props.history.push('/create-photoboard/_create');
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            this.props.history.push('/create-photoboard/_create');
+        }
+        
     }
 
     readPhotoBoard(pboardNo) {
-        this.props.history.push(`/read-photoboard/${pboardNo}`);
+        if(!MemberService.getCurrentUser()){
+            alert('로그인 후 이용 가능합니다.');
+            this.openModal();
+        }
+        else{
+            this.props.history.push(`/read-photoboard/${pboardNo}`);
+        }
+        
     }
 
     goToUpdate = (event) => {
@@ -77,6 +101,7 @@ class PhotoBoardComponent extends Component {
             <div className="row row-inline-block small-spacing">
             <div className="col-xs-12">
             <div className="box-content">
+            <SignIn isOpen={this.state.isModalOpen} close={this.closeModal} />
 
             <br/>
             <div style={{paddingRight:'13em'}} className="btn_wrap text-right">

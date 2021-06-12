@@ -55,6 +55,10 @@ class SearchBoardComponent extends Component {
         this.props.history.push(`/read-board/${qboardNo}`);
     }
 
+    showDate(date){
+        return (date).replace('T', " ");
+    }
+
     render() {
         return (
             <div className="main-content">
@@ -88,7 +92,7 @@ class SearchBoardComponent extends Component {
                                     &nbsp;[{board.comment}]&nbsp;</a>
                                     </td>
                                     <td> {board.qboardWriter} </td>
-                                    <td> {board.qboardInsertTime} </td>
+                                    <td> {this.showDate(board.qboardInsertTime)} </td>
                                     <td> {board.qboardViews} </td>
                                 </tr>
                             )
