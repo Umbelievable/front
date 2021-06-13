@@ -357,7 +357,12 @@ class ItemComponent extends Component{
     }
 
     reviewDate(review){
-        return review.substring(0, review.length-1);
+        if(review.length == 9){
+            return review.substring(0, review.length-1);
+        }
+        else{
+            return review;
+        }
     }
         
     render(){
@@ -486,7 +491,7 @@ class ItemComponent extends Component{
                                         <td> {this.showStar(review.star)} </td>
                                         <td> {this.addStar(review.customerId)} </td>
                                         {this.showReview(review.review)}
-                                        <td> {review.reviewDate} </td>
+                                        <td> {this.reviewDate(review.reviewDate)} </td>
                                     </tr>
                                 )
                                 }

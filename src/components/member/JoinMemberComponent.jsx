@@ -83,7 +83,7 @@ class JoinMemberComponent extends Component {
     }
 
       // 새로 추가한 함수 6개
-      onChangeUsername(e) {
+    onChangeUsername(e) {
         this.setState({username: e.target.value});
     }
     
