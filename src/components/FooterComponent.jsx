@@ -12,8 +12,8 @@ class FooterComponent extends Component {
         return (
             <div>
                 <footer className="footer">
-                    <a href='/cs-board' style={{float:'left'}} id="csbtn" className="text-muted" href="/cs-board">Customer&nbsp;Service</a>            
-                    <a href='/admin-board' style={{float:'right', padding:'14px'}} className="text-muted">UMbelievable</a>
+                    <a href='/cs-board' style={{float:'left', fontSize:'16px'}} id="csbtn" className="text-muted" href="/cs-board">Customer&nbsp;Service</a>            
+                    <a href='/admin-board' style={{float:'right', padding:'14px', fontSize:'16px'}} className="text-muted">UMbelievable</a>
                 </footer>
             </div>
         );
